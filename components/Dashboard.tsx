@@ -18,6 +18,8 @@ import {
   House,
   LayoutDashboard,
   Menu,
+  Pencil,
+  Plus,
   RefreshCw,
   Search,
   Sheet,
@@ -319,23 +321,35 @@ function Home({
 }
 
 type SurveyInputProps = {
+  surveys: Survey[];
   onCancel: () => void;
 };
 
+type FormMode = "create" | "edit";
+
 function SurveyInput({
+  surveys,
   onCancel,
 }: SurveyInputProps) {
+  const [formMode, setFormMode] =
+    useState<FormMode>("create");
+
+  const [selectedSurveyId, setSelectedSurveyId] =
+    useState("");
+
   const [id, setId] = useState("");
   const [category, setCategory] = useState("");
   const [name, setName] = useState("");
   const [period, setPeriod] = useState("");
   const [owner, setOwner] = useState("");
+
   const [monthIndex, setMonthIndex] = useState(
     new Date().getMonth(),
   );
+
   const [target, setTarget] = useState("");
   const [realization, setRealization] =
-    useState("0");
+    useState("");
 
   const [submitting, setSubmitting] =
     useState(false);
@@ -343,39 +357,148 @@ function SurveyInput({
   const [message, setMessage] = useState("");
   const [success, setSuccess] = useState(false);
 
+  const selectedSurvey = useMemo(() => {
+    return (
+      surveys.find(
+        (survey) =>
+          survey.id === selectedSurveyId,
+      ) ?? null
+    );
+  }, [selectedSurveyId, surveys]);
+
+  function clearForm() {
+    setSelectedSurveyId("");
+    setId("");
+    setCategory("");
+    setName("");
+    setPeriod("");
+    setOwner("");
+    setMonthIndex(new Date().getMonth());
+    setTarget("");
+    setRealization("");
+    setMessage("");
+    setSuccess(false);
+  }
+
+  function changeMode(mode: FormMode) {
+    setFormMode(mode);
+    clearForm();
+  }
+
+  function loadSurvey(
+    surveyId: string,
+    selectedMonth = monthIndex,
+  ) {
+    setSelectedSurveyId(surveyId);
+    setMessage("");
+    setSuccess(false);
+
+    const survey = surveys.find(
+      (item) => item.id === surveyId,
+    );
+
+    if (!survey) {
+      setId("");
+      setCategory("");
+      setName("");
+      setPeriod("");
+      setOwner("");
+      setTarget("");
+      setRealization("");
+      return;
+    }
+
+    const monthData =
+      survey.months[selectedMonth];
+
+    setId(survey.id);
+    setCategory(survey.category);
+    setName(survey.name);
+    setPeriod(survey.period);
+    setOwner(survey.owner);
+
+    setTarget(
+      String(monthData?.target ?? 0),
+    );
+
+    setRealization(
+      String(monthData?.realization ?? 0),
+    );
+  }
+
+  function changeMonth(nextMonthIndex: number) {
+    setMonthIndex(nextMonthIndex);
+
+    if (formMode === "edit" && selectedSurvey) {
+      const monthData =
+        selectedSurvey.months[nextMonthIndex];
+
+      setTarget(
+        String(monthData?.target ?? 0),
+      );
+
+      setRealization(
+        String(monthData?.realization ?? 0),
+      );
+    }
+  }
+
   async function handleSubmit(
     event: FormEvent<HTMLFormElement>,
   ) {
     event.preventDefault();
+
+    if (
+      formMode === "edit" &&
+      !selectedSurveyId
+    ) {
+      setSuccess(false);
+      setMessage(
+        "Pilih kegiatan yang akan diedit",
+      );
+      return;
+    }
+
+    if (
+      target === "" ||
+      realization === ""
+    ) {
+      setSuccess(false);
+      setMessage(
+        "Target dan realisasi wajib diisi",
+      );
+      return;
+    }
 
     setSubmitting(true);
     setMessage("");
     setSuccess(false);
 
     try {
-      const response = await fetch("/api/surveys", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      const response = await fetch(
+        "/api/surveys",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type":
+              "application/json",
+          },
+          body: JSON.stringify({
+            id: id.trim(),
+            category: category.trim(),
+            name: name.trim(),
+            period: period.trim(),
+            owner: owner.trim(),
+            monthIndex,
+            target: Number(target),
+            realization:
+              Number(realization),
+          }),
         },
-        body: JSON.stringify({
-          id: id.trim(),
-          category: category.trim(),
-          name: name.trim(),
-          period: period.trim(),
-          owner: owner.trim(),
-          monthIndex,
-          target: Number(target),
-          realization: Number(realization),
-        }),
-      });
+      );
 
-      const responseText = await response.text();
-
-      let result: {
-        success?: boolean;
-        message?: string;
-      };
+      const responseText =
+        await response.text();
 
       if (!responseText.trim()) {
         throw new Error(
@@ -383,32 +506,48 @@ function SurveyInput({
         );
       }
 
+      let result: {
+        success?: boolean;
+        message?: string;
+        action?: "created" | "updated";
+      };
+
       try {
         result = JSON.parse(responseText) as {
           success?: boolean;
           message?: string;
+          action?: "created" | "updated";
         };
       } catch {
-        console.error("Respons server:", responseText);
+        console.error(
+          "Respons server:",
+          responseText,
+        );
 
         throw new Error(
           `Respons server bukan JSON (${response.status})`,
         );
       }
 
-      if (!response.ok || !result.success) {
+      if (
+        !response.ok ||
+        !result.success
+      ) {
         throw new Error(
-          result.message ?? "Data gagal ditambahkan",
+          result.message ??
+          "Data gagal disimpan",
         );
       }
 
       setSuccess(true);
-      setMessage("Data berhasil ditambahkan");
 
-      /*
-        Simpan view Dashboard agar setelah reload
-        langsung membuka Dashboard.
-      */
+      setMessage(
+        result.message ??
+          (result.action === "updated"
+            ? "Perubahan berhasil disimpan"
+            : "Kegiatan baru berhasil ditambahkan"),
+      );
+
       localStorage.setItem(
         "simi-last-view",
         "dashboard",
@@ -416,8 +555,10 @@ function SurveyInput({
 
       window.setTimeout(() => {
         window.location.reload();
-      }, 900);
+      }, 1000);
     } catch (error) {
+      setSuccess(false);
+
       setMessage(
         error instanceof Error
           ? error.message
@@ -428,19 +569,24 @@ function SurveyInput({
     }
   }
 
+  const isEditing = formMode === "edit";
+
+  const formDisabled =
+    isEditing && !selectedSurvey;
+
   return (
     <section className="inputPanel">
       <div className="inputPanelHead">
         <div>
           <p className="eyebrow">
-            INPUT SPREADSHEET
+            KELOLA SPREADSHEET
           </p>
 
-          <h2>Tambah Kegiatan Survei</h2>
+          <h2>Kelola Kegiatan Survei</h2>
 
           <p>
-            Data yang disimpan akan langsung
-            ditambahkan ke Google Spreadsheet.
+            Tambahkan kegiatan baru atau
+            perbarui kegiatan yang sudah ada.
           </p>
         </div>
 
@@ -452,6 +598,84 @@ function SurveyInput({
           Kembali
         </button>
       </div>
+
+      <div className="surveyModeTabs">
+        <button
+          type="button"
+          className={
+            formMode === "create"
+              ? "active"
+              : ""
+          }
+          onClick={() =>
+            changeMode("create")
+          }
+        >
+          <Plus />
+          Tambah Kegiatan
+        </button>
+
+        <button
+          type="button"
+          className={
+            formMode === "edit"
+              ? "active"
+              : ""
+          }
+          onClick={() =>
+            changeMode("edit")
+          }
+        >
+          <Pencil />
+          Edit Kegiatan
+        </button>
+      </div>
+
+      {isEditing && (
+        <div className="surveySelector">
+          <label>
+            <span>
+              Pilih kegiatan yang akan diedit
+            </span>
+
+            <select
+              value={selectedSurveyId}
+              onChange={(event) =>
+                loadSurvey(
+                  event.target.value,
+                )
+              }
+            >
+              <option value="">
+                Pilih kegiatan
+              </option>
+
+              {surveys.map((survey) => (
+                <option
+                  value={survey.id}
+                  key={survey.id}
+                >
+                  {survey.id} — {survey.name}
+                </option>
+              ))}
+            </select>
+          </label>
+
+          {selectedSurvey && (
+            <div className="selectedSurveyInfo">
+              <strong>
+                {selectedSurvey.name}
+              </strong>
+
+              <span>
+                {selectedSurvey.category}
+                {" · "}
+                {selectedSurvey.owner}
+              </span>
+            </div>
+          )}
+        </div>
+      )}
 
       <form
         className="surveyInputForm"
@@ -466,8 +690,18 @@ function SurveyInput({
               setId(event.target.value)
             }
             placeholder="Contoh: s6"
+            readOnly={isEditing}
+            disabled={formDisabled}
             required
           />
+
+          {isEditing &&
+            selectedSurvey && (
+              <small className="fieldHint">
+                ID tidak dapat diubah saat
+                mengedit.
+              </small>
+            )}
         </label>
 
         <label>
@@ -476,9 +710,12 @@ function SurveyInput({
           <input
             value={category}
             onChange={(event) =>
-              setCategory(event.target.value)
+              setCategory(
+                event.target.value,
+              )
             }
             placeholder="Contoh: STATISTIK SOSIAL"
+            disabled={formDisabled}
             required
           />
         </label>
@@ -492,6 +729,7 @@ function SurveyInput({
               setName(event.target.value)
             }
             placeholder="Nama kegiatan survei"
+            disabled={formDisabled}
             required
           />
         </label>
@@ -502,25 +740,33 @@ function SurveyInput({
           <select
             value={period}
             onChange={(event) =>
-              setPeriod(event.target.value)
+              setPeriod(
+                event.target.value,
+              )
             }
+            disabled={formDisabled}
             required
           >
             <option value="">
               Pilih periode
             </option>
+
             <option value="Bulanan">
               Bulanan
             </option>
+
             <option value="Triwulan">
               Triwulan
             </option>
+
             <option value="Semester">
               Semester
             </option>
+
             <option value="Tahunan">
               Tahunan
             </option>
+
             <option value="Subround">
               Subround
             </option>
@@ -533,9 +779,12 @@ function SurveyInput({
           <input
             value={owner}
             onChange={(event) =>
-              setOwner(event.target.value)
+              setOwner(
+                event.target.value,
+              )
             }
             placeholder="Contoh: Tim Produksi"
+            disabled={formDisabled}
             required
           />
         </label>
@@ -546,19 +795,24 @@ function SurveyInput({
           <select
             value={monthIndex}
             onChange={(event) =>
-              setMonthIndex(
-                Number(event.target.value),
+              changeMonth(
+                Number(
+                  event.target.value,
+                ),
               )
             }
+            disabled={formDisabled}
           >
-            {months.map((month, index) => (
-              <option
-                value={index}
-                key={month}
-              >
-                {month}
-              </option>
-            ))}
+            {months.map(
+              (month, index) => (
+                <option
+                  value={index}
+                  key={month}
+                >
+                  {month}
+                </option>
+              ),
+            )}
           </select>
         </label>
 
@@ -570,9 +824,12 @@ function SurveyInput({
             min="0"
             value={target}
             onChange={(event) =>
-              setTarget(event.target.value)
+              setTarget(
+                event.target.value,
+              )
             }
             placeholder="0"
+            disabled={formDisabled}
             required
           />
         </label>
@@ -589,6 +846,8 @@ function SurveyInput({
                 event.target.value,
               )
             }
+            placeholder="0"
+            disabled={formDisabled}
             required
           />
         </label>
@@ -609,22 +868,37 @@ function SurveyInput({
           <button
             type="button"
             className="inputCancel"
-            onClick={onCancel}
             disabled={submitting}
+            onClick={
+              isEditing
+                ? clearForm
+                : onCancel
+            }
           >
-            Batal
+            {isEditing
+              ? "Batal Edit"
+              : "Batal"}
           </button>
 
           <button
             type="submit"
             className="inputSubmit"
-            disabled={submitting}
+            disabled={
+              submitting ||
+              formDisabled
+            }
           >
-            <Sheet />
+            {isEditing ? (
+              <Pencil />
+            ) : (
+              <Sheet />
+            )}
 
             {submitting
               ? "Menyimpan..."
-              : "Simpan ke Spreadsheet"}
+              : isEditing
+                ? "Simpan Perubahan"
+                : "Simpan ke Spreadsheet"}
           </button>
         </div>
       </form>
@@ -797,12 +1071,12 @@ export default function Dashboard({
               setSidebarOpen(false);
             }
           }}
-          title="Tambah data Spreadsheet"
+          title="Kelola data Spreadsheet"
         >
           <Sheet />
 
           <span className="menu-label">
-            Input Data
+            Kelola Data
           </span>
         </button>
 
@@ -852,6 +1126,7 @@ export default function Dashboard({
         <div className="content">
           {view === "input" ? (
             <SurveyInput
+              surveys={initial}
               onCancel={() => setView("dashboard")}
             />
           ) : view === "home" ? (
