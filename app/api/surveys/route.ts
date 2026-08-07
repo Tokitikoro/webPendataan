@@ -1,0 +1,170 @@
+import { NextResponse } from "next/server";
+import { getSurveys } from "@/lib/sheet";
+
+export async function GET() {
+  return NextResponse.json(await getSurveys());
+}
+
+type AddSurveyPayload = {
+  id?: string;
+  category?: string;
+  name?: string;
+  period?: string;
+  owner?: string;
+  monthIndex?: number;
+  target?: number;
+  realization?: number;
+};
+
+export async function POST(request: Request) {
+  try {
+    const appsScriptUrl =
+      process.env.GOOGLE_SHEET_CSV_URL;
+
+    const writeToken =
+      process.env.SHEET_WRITE_TOKEN;
+
+    if (!appsScriptUrl || !writeToken) {
+      return NextResponse.json(
+        {
+          success: false,
+          message:
+            "Konfigurasi Spreadsheet belum lengkap",
+        },
+        {
+          status: 500,
+        },
+      );
+    }
+
+    const body =
+      (await request.json()) as AddSurveyPayload;
+
+    const requiredTextFields = [
+      body.id,
+      body.category,
+      body.name,
+      body.period,
+      body.owner,
+    ];
+
+    if (
+      requiredTextFields.some(
+        (value) =>
+          typeof value !== "string" ||
+          value.trim() === "",
+      )
+    ) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Semua kolom wajib harus diisi",
+        },
+        {
+          status: 400,
+        },
+      );
+    }
+
+    if (
+      typeof body.monthIndex !== "number" ||
+      body.monthIndex < 0 ||
+      body.monthIndex > 11
+    ) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Bulan tidak valid",
+        },
+        {
+          status: 400,
+        },
+      );
+    }
+
+    if (
+      typeof body.target !== "number" ||
+      typeof body.realization !== "number" ||
+      body.target < 0 ||
+      body.realization < 0
+    ) {
+      return NextResponse.json(
+        {
+          success: false,
+          message:
+            "Target dan realisasi harus berupa angka positif",
+        },
+        {
+          status: 400,
+        },
+      );
+    }
+
+    const response = await fetch(appsScriptUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "text/plain;charset=utf-8",
+      },
+      body: JSON.stringify({
+        ...body,
+        token: writeToken,
+      }),
+      redirect: "follow",
+      cache: "no-store",
+    });
+
+    const responseText = await response.text();
+
+    let result: {
+      success?: boolean;
+      message?: string;
+    };
+
+    try {
+      result = JSON.parse(responseText);
+    } catch {
+      return NextResponse.json(
+        {
+          success: false,
+          message:
+            "Respons Apps Script tidak dapat dibaca",
+        },
+        {
+          status: 502,
+        },
+      );
+    }
+
+    if (!response.ok || !result.success) {
+      return NextResponse.json(
+        {
+          success: false,
+          message:
+            result.message ??
+            "Gagal menyimpan data ke Spreadsheet",
+        },
+        {
+          status: 502,
+        },
+      );
+    }
+
+    return NextResponse.json({
+      success: true,
+      message: "Data berhasil ditambahkan",
+    });
+  } catch (error) {
+    return NextResponse.json(
+      {
+        success: false,
+        message:
+          error instanceof Error
+            ? error.message
+            : "Terjadi kesalahan",
+      },
+      {
+        status: 500,
+      },
+    );
+  }
+}
