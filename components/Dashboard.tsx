@@ -218,97 +218,144 @@ function Calendar({ surveys }: { surveys: Survey[] }) {
         </div>
       </div>
 
-      <div className="calendar">
-        <div className="week">
-          {["Min", "Sen", "Sel", "Rab", "Kam", "Jum", "Sab"].map((day) => (
-            <b key={day}>{day}</b>
-          ))}
+      {editingEventId && (
+        <div className="calendarLabelEditor">
+          <div className="calendarLabelEditorInfo">
+            <p className="eyebrow">
+              EDIT LABEL ACARA
+            </p>
+
+            <strong>
+              {
+                surveys.find(
+                  (survey) =>
+                    survey.id === editingEventId,
+                )?.name
+              }
+            </strong>
+
+            <small>
+              Nama yang diperbarui akan berubah pada semua label
+              kegiatan yang sama.
+            </small>
+          </div>
+
+          <div className="calendarLabelEditorControl">
+            <input
+              value={editingEventName}
+              onChange={(event) =>
+                setEditingEventName(event.target.value)
+              }
+              onKeyDown={(event) => {
+                const selectedSurvey = surveys.find(
+                  (survey) =>
+                    survey.id === editingEventId,
+                );
+
+                if (
+                  event.key === "Enter" &&
+                  selectedSurvey
+                ) {
+                  event.preventDefault();
+                  void saveEventName(selectedSurvey);
+                }
+
+                if (event.key === "Escape") {
+                  cancelEditingEvent();
+                }
+              }}
+              placeholder="Nama label acara"
+              autoFocus
+              disabled={savingEventId !== null}
+            />
+
+            <button
+              type="button"
+              className="calendarLabelCancel"
+              onClick={cancelEditingEvent}
+              disabled={savingEventId !== null}
+            >
+              Batal
+            </button>
+
+            <button
+              type="button"
+              className="calendarLabelSave"
+              onClick={() => {
+                const selectedSurvey = surveys.find(
+                  (survey) =>
+                    survey.id === editingEventId,
+                );
+
+                if (selectedSurvey) {
+                  void saveEventName(selectedSurvey);
+                }
+              }}
+              disabled={
+                savingEventId !== null ||
+                editingEventName.trim() === ""
+              }
+            >
+              <Pencil />
+
+              {savingEventId
+                ? "Menyimpan..."
+                : "Update Label"}
+            </button>
+          </div>
         </div>
+      )}
 
-        <div className="days">
-          {Array.from({ length: firstDay }).map((_, index) => (
-            <span className="blank" key={`blank-${index}`} />
-          ))}
+        <div className="calendar">
+          <div className="week">
+            {["Min", "Sen", "Sel", "Rab", "Kam", "Jum", "Sab"].map((day) => (
+              <b key={day}>{day}</b>
+            ))}
+          </div>
 
-          {Array.from({ length: totalDays }, (_, index) => index + 1).map(
-            (day) => (
-              <div
-                className={isToday(day) ? "day today" : "day"}
-                key={day}
-              >
-                <span>{day}</span>
+          <div className="days">
+            {Array.from({ length: firstDay }).map((_, index) => (
+              <span className="blank" key={`blank-${index}`} />
+            ))}
 
-                {events.slice(0, 2).map((event, index) => {
-                  const isEditing = editingEventId === event.id;
-                  const isSaving = savingEventId === event.id;
+            {Array.from({ length: totalDays }, (_, index) => index + 1).map(
+              (day) => (
+                <div
+                  className={isToday(day) ? "day today" : "day"}
+                  key={day}
+                >
+                  <span>{day}</span>
 
-                  if (isEditing) {
-                    return (
-                      <div
-                        className={`eventInlineEdit e${index}`}
-                        key={event.id}
-                      >
-                        <input
-                          value={editingEventName}
-                          onChange={(inputEvent) =>
-                            setEditingEventName(inputEvent.target.value)
-                          }
-                          onKeyDown={(keyboardEvent) => {
-                            if (keyboardEvent.key === "Enter") {
-                              keyboardEvent.preventDefault();
-                              void saveEventName(event);
-                            }
-
-                            if (keyboardEvent.key === "Escape") {
-                              cancelEditingEvent();
-                            }
-                          }}
-                          autoFocus
-                          disabled={isSaving}
-                        />
-
-                        <button
-                          type="button"
-                          onClick={() => void saveEventName(event)}
-                          disabled={isSaving}
-                          title="Simpan"
-                        >
-                          {isSaving ? "..." : "✓"}
-                        </button>
-
-                        <button
-                          type="button"
-                          onClick={cancelEditingEvent}
-                          disabled={isSaving}
-                          title="Batal"
-                        >
-
-                        </button>
-                      </div>
-                    );
-                  }
-
-                  return (
-                    <button
-                      type="button"
-                      key={event.id}
-                      className={`event e${index}`}
-                      title={`${event.name} — klik untuk mengedit`}
-                      onClick={() => startEditingEvent(event)}
+                  {events.slice(0, 2).map((event, index) => (
+                    <div
+                      className={`calendarEventRow e${index}`}
+                      key={`${event.id}-${day}`}
                       style={{
                         borderLeftColor:
-                          event.eventColor || "#19c5a6",
+                          event.eventColor ||
+                          (index === 0 ? "#19c5a6" : "#1c9aea"),
                       }}
                     >
-                      {event.name}
-                    </button>
-                  );
-                })}
-              </div>
-            ),
-          )}
+                      <span title={event.name}>
+                        {event.name}
+                      </span>
+
+                      <button
+                        type="button"
+                        className="calendarEventEditButton"
+                        onClick={() => startEditingEvent(event)}
+                        title={`Edit label ${event.name}`}
+                        aria-label={`Edit label ${event.name}`}
+                      >
+                        <Pencil />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              ),
+            )}
+          </div>
         </div>
-      </div>
     </section>
   );
 }
