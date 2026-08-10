@@ -2184,3 +2184,189 @@ aside:not(.open) .sidebarGroup.active .sidebarManageButton {
     flex: 1;
   }
 }
+
+/* ========================================
+   FORM TAMBAH ACARA DI KALENDER
+======================================== */
+
+.calendarAddEditor {
+  margin: 16px 18px 0;
+  padding: 16px;
+  border: 1px solid #cfe5eb;
+  border-radius: 15px;
+  background: #f4fbfc;
+
+  display: grid;
+  grid-template-columns:
+    minmax(200px, 0.5fr)
+    minmax(500px, 1fr);
+  align-items: center;
+  gap: 18px;
+
+  box-shadow:
+    0 8px 22px rgba(7, 87, 116, 0.08);
+}
+
+.calendarAddEditorInfo {
+  min-width: 0;
+}
+
+.calendarAddEditorInfo strong,
+.calendarAddEditorInfo small {
+  display: block;
+}
+
+.calendarAddEditorInfo strong {
+  color: #123047;
+  font-size: 14px;
+}
+
+.calendarAddEditorInfo small {
+  margin-top: 5px;
+  color: #6d8997;
+  font-size: 10px;
+  line-height: 1.4;
+}
+
+.calendarAddEditorFields {
+  min-width: 0;
+  display: grid;
+  grid-template-columns:
+    minmax(190px, 1fr)
+    155px
+    48px
+    auto
+    auto;
+  align-items: center;
+  gap: 8px;
+}
+
+.calendarAddEditorFields input {
+  width: 100%;
+  min-width: 0;
+  height: 43px;
+  padding: 0 12px;
+  outline: 0;
+  border: 1px solid #cbdfe6;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #123047;
+  font-family: inherit;
+  font-size: 13px;
+}
+
+.calendarAddEditorFields input:focus {
+  border-color: #0aaec1;
+  box-shadow:
+    0 0 0 4px rgba(10, 174, 193, 0.12);
+}
+
+/* Kotak pemilih warna */
+
+.calendarAddEditorFields input[type="color"] {
+  width: 48px;
+  min-width: 48px;
+  padding: 4px;
+  cursor: pointer;
+}
+
+/* Tombol Batal dan Tambah Acara */
+
+.calendarAddEditorFields .calendarLabelCancel,
+.calendarAddEditorFields .calendarLabelSave {
+  width: auto;
+  min-height: 43px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 10px;
+  font-family: inherit;
+  font-weight: 800;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.calendarAddEditorFields .calendarLabelCancel {
+  color: #496a7d;
+  background: #e5eef2;
+}
+
+.calendarAddEditorFields .calendarLabelCancel:hover {
+  background: #d9e6eb;
+}
+
+.calendarAddEditorFields .calendarLabelSave {
+  color: #ffffff;
+  background: linear-gradient(
+    120deg,
+    #0782b6,
+    #0db9b5
+  );
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+}
+
+.calendarAddEditorFields .calendarLabelSave:hover {
+  background: linear-gradient(
+    120deg,
+    #066f9d,
+    #0aa7a4
+  );
+}
+
+.calendarAddEditorFields .calendarLabelSave svg {
+  width: 15px;
+  height: 15px;
+}
+
+.calendarAddEditorFields button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Pesan hasil penyimpanan */
+
+.calendarAddMessage {
+  grid-column: 1 / -1;
+  padding: 10px 12px;
+  border-radius: 9px;
+  background: #dcf9f2;
+  color: #08765f;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+/* Responsif */
+
+@media (max-width: 1100px) {
+  .calendarAddEditor {
+    grid-template-columns: 1fr;
+  }
+
+  .calendarAddEditorFields {
+    grid-template-columns:
+      minmax(0, 1fr)
+      155px
+      48px
+      auto
+      auto;
+  }
+}
+
+@media (max-width: 750px) {
+  .calendarAddEditor {
+    margin: 14px;
+  }
+
+  .calendarAddEditorFields {
+    grid-template-columns: 1fr;
+  }
+
+  .calendarAddEditorFields input[type="color"],
+  .calendarAddEditorFields .calendarLabelCancel,
+  .calendarAddEditorFields .calendarLabelSave {
+    width: 100%;
+  }
+}
