@@ -1852,3 +1852,73 @@ aside.open .sidebarArrow > svg {
 aside.open .sidebarArrow.open > svg {
   transform: translate(0, 0) rotate(180deg);
 }
+
+/* ========================================
+   SAMAKAN POSISI KELOLA DATA SAAT TERTUTUP
+======================================== */
+
+aside:not(.open) .sidebarGroup {
+  width: 48px;
+  height: 48px;
+  min-height: 48px;
+  margin: 0;
+  padding: 0;
+  gap: 0;
+  align-self: center;
+  display: block;
+}
+
+aside:not(.open) .sidebarGroupRow {
+  width: 48px;
+  height: 48px;
+  min-height: 48px;
+  margin: 0;
+  padding: 0;
+  border-radius: 14px;
+  display: block;
+  background: transparent;
+}
+
+aside:not(.open) .sidebarManageButton {
+  width: 48px;
+  min-width: 48px;
+  height: 48px;
+  min-height: 48px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 14px;
+  background: transparent;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Background aktif dipasang langsung pada tombol */
+aside:not(.open) .sidebarGroup.active .sidebarGroupRow {
+  background: transparent;
+}
+
+aside:not(.open) .sidebarGroup.active .sidebarManageButton {
+  color: #ffffff;
+  background: #0e5876;
+}
+
+/* Ikon Spreadsheet tepat di tengah background */
+aside:not(.open) .sidebarManageButton > svg {
+  width: 22px;
+  height: 22px;
+  margin: 0;
+  padding: 0;
+  flex: 0 0 22px;
+  display: block;
+  position: static;
+  transform: none;
+}
+
+/* Panah dan submenu benar-benar tidak memengaruhi ukuran */
+aside:not(.open) .sidebarArrow,
+aside:not(.open) .sidebarSubmenu {
+  display: none !important;
+}
