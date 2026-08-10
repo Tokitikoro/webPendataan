@@ -1656,3 +1656,160 @@ aside:not(.open) > button:hover {
     grid-template-columns: 1fr;
   }
 }
+
+/* ========================================
+   SUBMENU KELOLA DATA
+======================================== */
+
+.sidebarGroup {
+  width: 48px;
+  display: grid;
+  gap: 6px;
+}
+
+.sidebarGroupRow {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.sidebarManageButton {
+  flex-shrink: 0;
+}
+
+.sidebarArrow {
+  display: none;
+}
+
+.sidebarSubmenu {
+  display: none;
+}
+
+/* Sidebar terbuka */
+
+aside.open .sidebarGroup {
+  width: 100%;
+}
+
+aside.open .sidebarGroupRow {
+  width: 100%;
+  min-height: 48px;
+  padding-right: 5px;
+  border-radius: 14px;
+}
+
+aside.open .sidebarGroup.active
+.sidebarGroupRow {
+  background: #0e5876;
+  color: #ffffff;
+}
+
+aside.open .sidebarManageButton {
+  width: auto;
+  min-width: 0;
+  height: 48px;
+  padding: 0 14px;
+  margin: 0;
+  background: transparent;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 14px;
+}
+
+aside.open .sidebarManageButton:hover {
+  background: transparent;
+}
+
+aside.open .sidebarArrow {
+  width: 36px;
+  min-width: 36px;
+  height: 36px;
+  padding: 0;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  display: grid;
+  place-items: center;
+}
+
+aside.open .sidebarArrow:hover {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+aside.open .sidebarArrow svg {
+  width: 17px;
+  height: 17px;
+  transition: transform 0.25s ease;
+}
+
+aside.open .sidebarArrow.open svg {
+  transform: rotate(180deg);
+}
+
+/* Submenu */
+
+aside.open .sidebarSubmenu {
+  padding: 2px 0 3px 17px;
+  display: grid;
+  gap: 5px;
+}
+
+aside.open .sidebarSubmenu button {
+  width: 100%;
+  min-width: 0;
+  height: 40px;
+  padding: 0 12px;
+  border-radius: 11px;
+  background: transparent;
+  color: #9ccbdd;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 11px;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  text-align: left;
+}
+
+aside.open .sidebarSubmenu button:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+aside.open .sidebarSubmenu button.active {
+  color: #ffffff;
+  background: #0e5876;
+}
+
+aside.open .sidebarSubmenu button svg {
+  width: 17px;
+  height: 17px;
+  flex: 0 0 17px;
+}
+
+/* Sidebar tertutup tetap menampilkan ikon Kelola Data */
+
+aside:not(.open) .sidebarGroup {
+  width: 48px;
+}
+
+aside:not(.open) .sidebarManageButton {
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+}
+
+aside:not(.open) .sidebarGroup.active
+.sidebarManageButton {
+  color: #ffffff;
+  background: #0e5876;
+}
+
+aside:not(.open) .sidebarArrow,
+aside:not(.open) .sidebarSubmenu {
+  display: none;
+}
