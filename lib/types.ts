@@ -5,5 +5,9 @@ export type Survey = {
   name: string;
   period: string;
   owner: string;
-  months: MonthValue[];
+  eventColor: string;
+  months: {
+    target: number;
+    realization: number;
+  }[];
 };
