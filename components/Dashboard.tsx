@@ -1146,25 +1146,6 @@ export default function Dashboard({
           <span className="menu-label">Kalender</span>
         </button>
 
-        <button
-          type="button"
-          className={view === "input" ? "active" : ""}
-          onClick={() => {
-            setView("input");
-
-            if (window.innerWidth <= 650) {
-              setSidebarOpen(false);
-            }
-          }}
-          title="Kelola data Spreadsheet"
-        >
-          <Sheet />
-
-          <span className="menu-label">
-            Kelola Data
-          </span>
-        </button>
-
         <div className="spacer" />
 
         <small className="sidebar-version">v1.0</small>
