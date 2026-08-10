@@ -58,7 +58,15 @@ function sum(survey: Survey) {
   );
 }
 
-function Calendar({ surveys }: { surveys: Survey[] }) {
+type CalendarProps = {
+  surveys: Survey[];
+  onAddEvent: () => void;
+};
+
+function Calendar({
+  surveys,
+  onAddEvent,
+}: CalendarProps) {
   const [cursor, setCursor] = useState(new Date());
 
   const [editingEventId, setEditingEventId] =
@@ -198,6 +206,15 @@ function Calendar({ surveys }: { surveys: Survey[] }) {
         <div className="calNav">
           <button
             type="button"
+            className="addCalendarEvent"
+            onClick={onAddEvent}
+          >
+            <Plus />
+            Tambah Acara
+          </button>
+
+          <button
+            type="button"
             onClick={goToPreviousMonth}
             aria-label="Bulan sebelumnya"
           >
@@ -306,56 +323,56 @@ function Calendar({ surveys }: { surveys: Survey[] }) {
         </div>
       )}
 
-        <div className="calendar">
-          <div className="week">
-            {["Min", "Sen", "Sel", "Rab", "Kam", "Jum", "Sab"].map((day) => (
-              <b key={day}>{day}</b>
-            ))}
-          </div>
-
-          <div className="days">
-            {Array.from({ length: firstDay }).map((_, index) => (
-              <span className="blank" key={`blank-${index}`} />
-            ))}
-
-            {Array.from({ length: totalDays }, (_, index) => index + 1).map(
-              (day) => (
-                <div
-                  className={isToday(day) ? "day today" : "day"}
-                  key={day}
-                >
-                  <span>{day}</span>
-
-                  {events.slice(0, 2).map((event, index) => (
-                    <div
-                      className={`calendarEventRow e${index}`}
-                      key={`${event.id}-${day}`}
-                      style={{
-                        borderLeftColor:
-                          event.eventColor ||
-                          (index === 0 ? "#19c5a6" : "#1c9aea"),
-                      }}
-                    >
-                      <span title={event.name}>
-                        {event.name}
-                      </span>
-
-                      <button
-                        type="button"
-                        className="calendarEventEditButton"
-                        onClick={() => startEditingEvent(event)}
-                        title={`Edit label ${event.name}`}
-                        aria-label={`Edit label ${event.name}`}
-                      >
-                        <Pencil />
-                      </button>
-                    </div>
-                  ))}
-                </div>
-              ),
-            )}
-          </div>
+      <div className="calendar">
+        <div className="week">
+          {["Min", "Sen", "Sel", "Rab", "Kam", "Jum", "Sab"].map((day) => (
+            <b key={day}>{day}</b>
+          ))}
         </div>
+
+        <div className="days">
+          {Array.from({ length: firstDay }).map((_, index) => (
+            <span className="blank" key={`blank-${index}`} />
+          ))}
+
+          {Array.from({ length: totalDays }, (_, index) => index + 1).map(
+            (day) => (
+              <div
+                className={isToday(day) ? "day today" : "day"}
+                key={day}
+              >
+                <span>{day}</span>
+
+                {events.slice(0, 2).map((event, index) => (
+                  <div
+                    className={`calendarEventRow e${index}`}
+                    key={`${event.id}-${day}`}
+                    style={{
+                      borderLeftColor:
+                        event.eventColor ||
+                        (index === 0 ? "#19c5a6" : "#1c9aea"),
+                    }}
+                  >
+                    <span title={event.name}>
+                      {event.name}
+                    </span>
+
+                    <button
+                      type="button"
+                      className="calendarEventEditButton"
+                      onClick={() => startEditingEvent(event)}
+                      title={`Edit label ${event.name}`}
+                      aria-label={`Edit label ${event.name}`}
+                    >
+                      <Pencil />
+                    </button>
+                  </div>
+                ))}
+              </div>
+            ),
+          )}
+        </div>
+      </div>
     </section>
   );
 }
@@ -1435,7 +1452,14 @@ export default function Dashboard({
               }}
             />
           ) : view === "calendar" ? (
-            <Calendar surveys={filtered} />
+            <Calendar
+              surveys={filtered}
+              onAddEvent={() => {
+                setInputMode("create");
+                setView("input");
+                setManageMenuOpen(true);
+              }}
+            />
           ) : (
             <>
               <section className="hero">
