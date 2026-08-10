@@ -61,6 +61,15 @@ function sum(survey: Survey) {
 function Calendar({ surveys }: { surveys: Survey[] }) {
   const [cursor, setCursor] = useState(new Date());
 
+  const [editingEventId, setEditingEventId] =
+    useState<string | null>(null);
+
+  const [editingEventName, setEditingEventName] =
+    useState("");
+
+  const [savingEventId, setSavingEventId] =
+    useState<string | null>(null);
+
   const year = cursor.getFullYear();
   const monthIndex = cursor.getMonth();
 
@@ -91,6 +100,89 @@ function Calendar({ surveys }: { surveys: Survey[] }) {
       monthIndex === currentDate.getMonth() &&
       year === currentDate.getFullYear()
     );
+  }
+
+  function startEditingEvent(survey: Survey) {
+    setEditingEventId(survey.id);
+    setEditingEventName(survey.name);
+  }
+
+  function cancelEditingEvent() {
+    setEditingEventId(null);
+    setEditingEventName("");
+  }
+
+  async function saveEventName(survey: Survey) {
+    const newName = editingEventName.trim();
+
+    if (!newName) {
+      window.alert("Nama acara tidak boleh kosong");
+      return;
+    }
+
+    if (newName === survey.name) {
+      cancelEditingEvent();
+      return;
+    }
+
+    const monthData = survey.months[monthIndex] ?? {
+      target: 0,
+      realization: 0,
+    };
+
+    setSavingEventId(survey.id);
+
+    try {
+      const response = await fetch("/api/surveys", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: survey.id,
+          category: survey.category,
+          name: newName,
+          period: survey.period,
+          owner: survey.owner,
+          eventColor: survey.eventColor || "#19c5a6",
+          monthIndex,
+          target: monthData.target,
+          realization: monthData.realization,
+        }),
+      });
+
+      const responseText = await response.text();
+
+      if (!responseText.trim()) {
+        throw new Error(
+          `Server tidak memberikan respons (${response.status})`,
+        );
+      }
+
+      const result = JSON.parse(responseText) as {
+        success?: boolean;
+        message?: string;
+      };
+
+      if (!response.ok || !result.success) {
+        throw new Error(
+          result.message ?? "Nama acara gagal diperbarui",
+        );
+      }
+
+      setEditingEventId(null);
+      setEditingEventName("");
+
+      window.location.reload();
+    } catch (error) {
+      window.alert(
+        error instanceof Error
+          ? error.message
+          : "Nama acara gagal diperbarui",
+      );
+    } finally {
+      setSavingEventId(null);
+    }
   }
 
   return (
@@ -146,15 +238,72 @@ function Calendar({ surveys }: { surveys: Survey[] }) {
               >
                 <span>{day}</span>
 
-                {events.slice(0, 2).map((event, index) => (
-                  <i
-                    key={event.id}
-                    className={`event e${index}`}
-                    title={event.name}
-                  >
-                    {event.name.slice(0, 18)}
-                  </i>
-                ))}
+                {events.slice(0, 2).map((event, index) => {
+                  const isEditing = editingEventId === event.id;
+                  const isSaving = savingEventId === event.id;
+
+                  if (isEditing) {
+                    return (
+                      <div
+                        className={`eventInlineEdit e${index}`}
+                        key={event.id}
+                      >
+                        <input
+                          value={editingEventName}
+                          onChange={(inputEvent) =>
+                            setEditingEventName(inputEvent.target.value)
+                          }
+                          onKeyDown={(keyboardEvent) => {
+                            if (keyboardEvent.key === "Enter") {
+                              keyboardEvent.preventDefault();
+                              void saveEventName(event);
+                            }
+
+                            if (keyboardEvent.key === "Escape") {
+                              cancelEditingEvent();
+                            }
+                          }}
+                          autoFocus
+                          disabled={isSaving}
+                        />
+
+                        <button
+                          type="button"
+                          onClick={() => void saveEventName(event)}
+                          disabled={isSaving}
+                          title="Simpan"
+                        >
+                          {isSaving ? "..." : "✓"}
+                        </button>
+
+                        <button
+                          type="button"
+                          onClick={cancelEditingEvent}
+                          disabled={isSaving}
+                          title="Batal"
+                        >
+
+                        </button>
+                      </div>
+                    );
+                  }
+
+                  return (
+                    <button
+                      type="button"
+                      key={event.id}
+                      className={`event e${index}`}
+                      title={`${event.name} — klik untuk mengedit`}
+                      onClick={() => startEditingEvent(event)}
+                      style={{
+                        borderLeftColor:
+                          event.eventColor || "#19c5a6",
+                      }}
+                    >
+                      {event.name}
+                    </button>
+                  );
+                })}
               </div>
             ),
           )}
