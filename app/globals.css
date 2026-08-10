@@ -2022,9 +2022,9 @@ button.event:hover {
   opacity: 0.6;
 }
 
-/* ==*==================================*==
+/* ========================================
    LABEL ACARA DAN TOMBOL EDIT
-*==================================*==== */
+======================================== */
 
 .calendarEventRow {
   width: 100%;
@@ -2033,7 +2033,7 @@ button.event:hover {
   margin-top: 5px;
   padding: 0 4px 0 7px;
   overflow: hidd*n;
-  border-left: 3px solid #19c5a1;
+  border-left: 3px solid #19c5a6;
   border-radius: 5px;
   background: #dcf8f5;
   color: #087a70;
@@ -2047,12 +2047,12 @@ button.event:hover {
 .calendarEventRow.e1 {
   border-left-color: #1c9aea;
   background: #def1ff;
-  *color: #096690;
+  color: #096690;
 }
 
-/* Tulisan teta* satu baris dan dipotong dengan ..* */
+/* Tulisan tetap satu baris dan dipotong dengan titik tiga */
 
-.calendarEventRow>span {
+.calendarEventRow > span {
   min-width: 0;
   overflow: hidden;
   white-space: nowrap;
@@ -2061,7 +2061,7 @@ button.event:hover {
   font-style: normal;
 }
 
-/* Tombol pen*il di kanan label */
+/* Tombol pensil di kanan label */
 
 .calendarEventEditButton {
   width: 22px;
@@ -2088,19 +2088,19 @@ button.event:hover {
   height: 12px;
 }
 
-/* Pensil muncu* saat baris diarahkan pointer */
+/* Pensil muncul ketika pointer diarahkan ke label */
 
-*calendarEventRow:hover .calendarEventEditButton {
+.calendarEventRow:hover .calendarEventEditButton {
   opacity: 1;
 }
 
 .calendarEventEditButton:hover {
-  background: rgba(255, 255, 255, 0.75)
+  background: rgba(255, 255, 255, 0.75);
 }
 
-/* Pada perangkat layar sentuh* pensil selalu terlihat */
+/* Pada layar sentuh, tombol pensil selalu terlihat */
 
-@media(hover: none) {
+@media (hover: none) {
   .calendarEventEditButton {
     opacity: 1;
   }
@@ -2118,8 +2118,7 @@ button.event:hover {
   background: #f4fbfc;
 
   display: grid;
-  grid-template-columns:
-    minmax(220px, 0.7fr) minmax(350px, 1fr);
+  grid-template-columns: minmax(220px, 0.7fr) minmax(350px, 1fr);
   align-items: center;
   gap: 18px;
 
@@ -2169,4 +2168,67 @@ button.event:hover {
   background: #ffffff;
   color: #123047;
   font-family: inherit;
+  font-size: 13px;
+}
+
+.calendarLabelEditorControl input:focus {
+  border-color: #0aaec1;
+  box-shadow: 0 0 0 4px rgba(10, 174, 193, 0.12);
+}
+
+.calendarLabelCancel,
+.calendarLabelSave {
+  min-height: 43px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 10px;
+  font-family: inherit;
+  font-weight: 800;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.calendarLabelCancel {
+  color: #496a7d;
+  background: #e5eef2;
+}
+
+.calendarLabelSave {
+  color: #ffffff;
+  background: linear-gradient(
+    120deg,
+    #0782b6,
+    #0db9b5
+  );
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+}
+
+.calendarLabelSave svg {
+  width: 15px;
+  height: 15px;
+}
+
+.calendarLabelCancel:disabled,
+.calendarLabelSave:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+@media (max-width: 850px) {
+  .calendarLabelEditor {
+    grid-template-columns: 1fr;
+  }
+
+  .calendarLabelEditorControl {
+    grid-template-columns: 1fr;
+  }
+
+  .calendarLabelCancel,
+  .calendarLabelSave {
+    width: 100%;
+  }
 }
