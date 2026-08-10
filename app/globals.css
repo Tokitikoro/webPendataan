@@ -1922,3 +1922,22 @@ aside:not(.open) .sidebarArrow,
 aside:not(.open) .sidebarSubmenu {
   display: none !important;
 }
+
+/* Hover Kelola Data saat sidebar tertutup */
+aside:not(.open) .sidebarManageButton:hover {
+  color: #ffffff;
+  background: #0e5876;
+}
+
+/* Hover Kelola Data saat sidebar terbuka */
+aside.open .sidebarGroup:not(.active) .sidebarGroupRow:hover {
+  color: #ffffff;
+  background: #0e5876;
+}
+
+/* Saat aktif, background tetap terlihat */
+aside.open .sidebarGroup.active .sidebarGroupRow,
+aside:not(.open) .sidebarGroup.active .sidebarManageButton {
+  color: #ffffff;
+  background: #0e5876;
+}
