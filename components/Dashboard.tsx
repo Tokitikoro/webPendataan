@@ -929,10 +929,10 @@ export default function Dashboard({
 
   const [searchQuery, setSearchQuery] = useState("");
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  
+
   const [inputMode, setInputMode] =
     useState<FormMode>("create");
-  
+
   const [manageMenuOpen, setManageMenuOpen] =
     useState(false);
 
@@ -1011,439 +1011,336 @@ export default function Dashboard({
         className={sidebarOpen ? "open" : ""}
       >
         <div className="brand-wrapper">
-          <div className="brand">
-            <span>BPS</span>
-          </div>
-
-          <div className="brand-name">
-            <strong>Badan Pusat Statistik</strong>
-            <small>Monitoring Survei</small>
-          </div>
-        </div>
-
-        <div
-  className={`sidebarGroup ${
-    view === "input" ? "active" : ""
-  }`}
->
-  <div className="sidebarGroupRow">
-    <button
-      type="button"
-      className="sidebarManageButton"
-      onClick={() => {
-        setView("input");
-
-        if (!sidebarOpen) {
-          setSidebarOpen(true);
-        }
-      }}
-      title="Kelola Data"
-    >
-      <Sheet />
-
-      <span className="menu-label">
-        Kelola Data
-      </span>
-    </button>
-
-    <button
-      type="button"
-      className={`sidebarArrow ${
-        manageMenuOpen ? "open" : ""
-      }`}
-      onClick={() =>
-        setManageMenuOpen(
-          (current) => !current,
-        )
-      }
-      aria-label={
-        manageMenuOpen
-          ? "Tutup submenu Kelola Data"
-          : "Buka submenu Kelola Data"
-      }
-      aria-expanded={manageMenuOpen}
-    >
-      <ChevronDown />
-    </button>
+  <div className="brand">
+    <span>BPS</span>
   </div>
 
-  {manageMenuOpen && (
-    <div className="sidebarSubmenu">
-      <button
-        type="button"
-        className={
-          view === "input" &&
-          inputMode === "create"
-            ? "active"
-            : ""
-        }
-        onClick={() => {
-          setInputMode("create");
-          setView("input");
-
-          if (window.innerWidth <= 650) {
-            setSidebarOpen(false);
-          }
-        }}
-      >
-        <Plus />
-        <span>Tambah Data</span>
-      </button>
-
-      <button
-        type="button"
-        className={
-          view === "input" &&
-          inputMode === "edit"
-            ? "active"
-            : ""
-        }
-        onClick={() => {
-          setInputMode("edit");
-          setView("input");
-
-          if (window.innerWidth <= 650) {
-            setSidebarOpen(false);
-          }
-        }}
-      >
-        <Pencil />
-        <span>Edit Data</span>
-      </button>
-    </div>
-  )}
+  <div className="brand-name">
+    <strong>Badan Pusat Statistik</strong>
+    <small>Monitoring Survei</small>
+  </div>
 </div>
 
-        <button
-          type="button"
-          className={view === "dashboard" ? "active" : ""}
-          onClick={() => {
-            setView("dashboard");
+{/* BERANDA */}
+<button
+  type="button"
+  className={view === "home" ? "active" : ""}
+  onClick={() => {
+    setView("home");
+    setManageMenuOpen(false);
 
-            if (window.innerWidth <= 650) {
-              setSidebarOpen(false);
-            }
-          }}
-          title="Dashboard"
-        >
-          <LayoutDashboard />
-          <span className="menu-label">Dashboard</span>
-        </button>
+    if (window.innerWidth <= 650) {
+      setSidebarOpen(false);
+    }
+  }}
+  title="Beranda"
+>
+  <House />
+  <span className="menu-label">Beranda</span>
+</button>
 
-        <button
-          type="button"
-          className={view === "calendar" ? "active" : ""}
-          onClick={() => {
-            setView("calendar");
+<div className="spacer" />
 
-            if (window.innerWidth <= 650) {
-              setSidebarOpen(false);
-            }
-          }}
-          title="Kalender"
-        >
-          <CalendarDays />
-          <span className="menu-label">Kalender</span>
-        </button>
+<small className="sidebar-version">v1.0</small>
 
-        <div className="spacer" />
+            <div className="spacer" />
 
-        <small className="sidebar-version">v1.0</small>
-      </aside>
+            <small className="sidebar-version">v1.0</small>
+          </aside>
 
-      <button
-        type="button"
-        className={`sidebar-overlay ${sidebarOpen ? "show" : ""}`}
-        onClick={() => setSidebarOpen(false)}
-        aria-label="Tutup menu samping"
-      />
-
-      <main>
-        <header>
           <button
             type="button"
-            className="icon"
-            onClick={() => setSidebarOpen((current) => !current)}
-            aria-label={sidebarOpen ? "Tutup menu" : "Buka menu"}
-            aria-expanded={sidebarOpen}
-            aria-controls="dashboard-sidebar"
-          >
-            <Menu />
-          </button>
-
-          <div className="search">
-            <Search />
-
-            <input
-              value={searchQuery}
-              onChange={(event) => setSearchQuery(event.target.value)}
-              placeholder="Cari kegiatan, kategori, atau tim..."
-            />
-          </div>
-
-          <div className="source">
-            <span />
-            {source}
-          </div>
-
-          <div className="avatar">JK</div>
-        </header>
-
-        <div className="content">
-          {view === "input" ? (
-            <SurveyInput
-            surveys={initial}
-            formMode={inputMode}
-            onFormModeChange={setInputMode}
-            onCancel={() => setView("dashboard")}
+            className={`sidebar-overlay ${sidebarOpen ? "show" : ""}`}
+            onClick={() => setSidebarOpen(false)}
+            aria-label="Tutup menu samping"
           />
-          ) : view === "home" ? (
-            <Home
-              percentage={percentage}
-              totalTarget={totals.t}
-              realization={totals.r}
-              onOpenDashboard={() => setView("dashboard")}
-              onOpenCalendar={() => setView("calendar")}
-            />
-          ) : view === "calendar" ? (
-            <Calendar surveys={filtered} />
-          ) : (
-            <>
-              <section className="hero">
-                <div>
-                  <p className="eyebrow">SISTEM MONITORING TERPADU</p>
-                  <h1>Ringkasan Kegiatan Survei</h1>
-                  <p>
-                    Pantau target, realisasi, dan agenda dari satu dashboard.
-                  </p>
-                </div>
 
-                <div className="heroStat">
-                  <BarChart3 />
+          <main>
+            <header>
+              <button
+                type="button"
+                className="icon"
+                onClick={() => setSidebarOpen((current) => !current)}
+                aria-label={sidebarOpen ? "Tutup menu" : "Buka menu"}
+                aria-expanded={sidebarOpen}
+                aria-controls="dashboard-sidebar"
+              >
+                <Menu />
+              </button>
 
-                  <div>
-                    <b>{percentage}%</b>
-                    <span>Capaian keseluruhan</span>
-                  </div>
-                </div>
-              </section>
+              <div className="search">
+                <Search />
 
-              <section className="metrics">
-                <article>
-                  <span>Total target</span>
-                  <b>{totals.t}</b>
-                  <small>Seluruh periode</small>
-                </article>
+                <input
+                  value={searchQuery}
+                  onChange={(event) => setSearchQuery(event.target.value)}
+                  placeholder="Cari kegiatan, kategori, atau tim..."
+                />
+              </div>
 
-                <article>
-                  <span>Realisasi</span>
-                  <b>{totals.r}</b>
-                  <small>Data terkumpul</small>
-                </article>
+              <div className="source">
+                <span />
+                {source}
+              </div>
 
-                <article>
-                  <span>Kegiatan aktif</span>
-                  <b>{filtered.length}</b>
-                  <small>Lintas kategori</small>
-                </article>
+              <div className="avatar">JK</div>
+            </header>
 
-                <article>
-                  <span>Sisa target</span>
-                  <b>{Math.max(0, totals.t - totals.r)}</b>
-                  <small>Perlu ditindaklanjuti</small>
-                </article>
-              </section>
+            <div className="content">
+              {view === "input" ? (
+                <SurveyInput
+                  surveys={initial}
+                  formMode={inputMode}
+                  onFormModeChange={setInputMode}
+                  onCancel={() => setView("dashboard")}
+                />
+              ) : view === "home" ? (
+                <Home
+                  percentage={percentage}
+                  totalTarget={totals.t}
+                  realization={totals.r}
+                  onOpenDashboard={() => setView("dashboard")}
+                  onOpenCalendar={() => setView("calendar")}
+                />
+              ) : view === "calendar" ? (
+                <Calendar surveys={filtered} />
+              ) : (
+                <>
+                  <section className="hero">
+                    <div>
+                      <p className="eyebrow">SISTEM MONITORING TERPADU</p>
+                      <h1>Ringkasan Kegiatan Survei</h1>
+                      <p>
+                        Pantau target, realisasi, dan agenda dari satu dashboard.
+                      </p>
+                    </div>
 
-              <section className="cards">
-                {cards.map((survey) => {
-                  const surveyTotal = sum(survey);
+                    <div className="heroStat">
+                      <BarChart3 />
 
-                  const surveyPercentage =
-                    surveyTotal.t > 0
-                      ? Math.min(
-                        100,
-                        Math.round(
-                          (surveyTotal.r / surveyTotal.t) * 100,
-                        ),
-                      )
-                      : 0;
-
-                  return (
-                    <article
-                      className="surveyCard"
-                      key={survey.id}
-                    >
-                      <div className="cardTop">
-                        <span>{survey.category}</span>
-                        <em>{survey.period}</em>
+                      <div>
+                        <b>{percentage}%</b>
+                        <span>Capaian keseluruhan</span>
                       </div>
+                    </div>
+                  </section>
 
-                      <h3>{survey.name}</h3>
-
-                      <div className="big">
-                        <b>{surveyPercentage}%</b>
-
-                        <small>
-                          {surveyTotal.r} dari {surveyTotal.t} target
-                        </small>
-                      </div>
-
-                      <div className="progress">
-                        <i
-                          style={{
-                            width: `${surveyPercentage}%`,
-                          }}
-                        />
-                      </div>
-
-                      <footer>
-                        <span>
-                          Belum:{" "}
-                          {Math.max(
-                            0,
-                            surveyTotal.t - surveyTotal.r,
-                          )}
-                        </span>
-
-                        <span className="done">
-                          Selesai: {surveyTotal.r}
-                        </span>
-                      </footer>
+                  <section className="metrics">
+                    <article>
+                      <span>Total target</span>
+                      <b>{totals.t}</b>
+                      <small>Seluruh periode</small>
                     </article>
-                  );
-                })}
-              </section>
 
-              <section className="panel">
-                <div className="panelHead">
-                  <div>
-                    <p className="eyebrow">MONITORING BULANAN</p>
-                    <h2>Target dan Realisasi</h2>
-                  </div>
+                    <article>
+                      <span>Realisasi</span>
+                      <b>{totals.r}</b>
+                      <small>Data terkumpul</small>
+                    </article>
 
-                  <button type="button" className="soft">
-                    <RefreshCw />
-                    Sinkron 5 menit
-                  </button>
-                </div>
+                    <article>
+                      <span>Kegiatan aktif</span>
+                      <b>{filtered.length}</b>
+                      <small>Lintas kategori</small>
+                    </article>
 
-                <div className="tableWrap">
-                  <table
-                    style={{
-                      width: "100%",
-                      minWidth: "1488px",
-                      tableLayout: "fixed",
-                    }}
-                  >
-                    <colgroup>
-                      <col style={{ width: "390px" }} />
-                      <col style={{ width: "90px" }} />
+                    <article>
+                      <span>Sisa target</span>
+                      <b>{Math.max(0, totals.t - totals.r)}</b>
+                      <small>Perlu ditindaklanjuti</small>
+                    </article>
+                  </section>
 
-                      {months.flatMap((month) => [
-                        <col
-                          key={`${month}-target-column`}
-                          style={{ width: "42px" }}
-                        />,
-                        <col
-                          key={`${month}-realization-column`}
-                          style={{ width: "42px" }}
-                        />,
-                      ])}
-                    </colgroup>
+                  <section className="cards">
+                    {cards.map((survey) => {
+                      const surveyTotal = sum(survey);
 
-                    <thead>
-                      <tr>
-                        <th rowSpan={2}>Kegiatan survei</th>
-                        <th rowSpan={2}>Periode</th>
+                      const surveyPercentage =
+                        surveyTotal.t > 0
+                          ? Math.min(
+                            100,
+                            Math.round(
+                              (surveyTotal.r / surveyTotal.t) * 100,
+                            ),
+                          )
+                          : 0;
 
-                        {months.map((month) => (
-                          <th
-                            colSpan={2}
-                            key={month}
-                            style={{
-                              width: "84px",
-                              minWidth: "84px",
-                              maxWidth: "84px",
-                            }}
-                          >
-                            {month.slice(0, 3)}
-                          </th>
-                        ))}
-                      </tr>
+                      return (
+                        <article
+                          className="surveyCard"
+                          key={survey.id}
+                        >
+                          <div className="cardTop">
+                            <span>{survey.category}</span>
+                            <em>{survey.period}</em>
+                          </div>
 
-                      <tr>
-                        {months.flatMap((month) => [
-                          <th
-                            key={`${month}-target-header`}
-                            style={{
-                              width: "42px",
-                              minWidth: "42px",
-                              maxWidth: "42px",
-                            }}
-                          >
-                            T
-                          </th>,
+                          <h3>{survey.name}</h3>
 
-                          <th
-                            key={`${month}-realization-header`}
-                            style={{
-                              width: "42px",
-                              minWidth: "42px",
-                              maxWidth: "42px",
-                            }}
-                          >
-                            R
-                          </th>,
-                        ])}
-                      </tr>
-                    </thead>
-
-                    <tbody>
-                      {filtered.map((survey) => (
-                        <tr key={survey.id}>
-                          <td>
-                            <strong>{survey.name}</strong>
+                          <div className="big">
+                            <b>{surveyPercentage}%</b>
 
                             <small>
-                              {survey.category} · {survey.owner}
+                              {surveyTotal.r} dari {surveyTotal.t} target
                             </small>
-                          </td>
+                          </div>
 
-                          <td>{survey.period}</td>
+                          <div className="progress">
+                            <i
+                              style={{
+                                width: `${surveyPercentage}%`,
+                              }}
+                            />
+                          </div>
 
-                          {survey.months.flatMap((month, index) => [
-                            <td
-                              key={`${survey.id}-${index}-target`}
-                              className={
-                                month.target > 0 ? "target" : ""
-                              }
-                            >
-                              {month.target || ""}
-                            </td>,
+                          <footer>
+                            <span>
+                              Belum:{" "}
+                              {Math.max(
+                                0,
+                                surveyTotal.t - surveyTotal.r,
+                              )}
+                            </span>
 
-                            <td
-                              key={`${survey.id}-${index}-realization`}
-                              className={
-                                month.realization > 0
-                                  ? month.realization >= month.target
-                                    ? "ok"
-                                    : "warn"
-                                  : ""
-                              }
-                            >
-                              {month.realization || ""}
-                            </td>,
+                            <span className="done">
+                              Selesai: {surveyTotal.r}
+                            </span>
+                          </footer>
+                        </article>
+                      );
+                    })}
+                  </section>
+
+                  <section className="panel">
+                    <div className="panelHead">
+                      <div>
+                        <p className="eyebrow">MONITORING BULANAN</p>
+                        <h2>Target dan Realisasi</h2>
+                      </div>
+
+                      <button type="button" className="soft">
+                        <RefreshCw />
+                        Sinkron 5 menit
+                      </button>
+                    </div>
+
+                    <div className="tableWrap">
+                      <table
+                        style={{
+                          width: "100%",
+                          minWidth: "1488px",
+                          tableLayout: "fixed",
+                        }}
+                      >
+                        <colgroup>
+                          <col style={{ width: "390px" }} />
+                          <col style={{ width: "90px" }} />
+
+                          {months.flatMap((month) => [
+                            <col
+                              key={`${month}-target-column`}
+                              style={{ width: "42px" }}
+                            />,
+                            <col
+                              key={`${month}-realization-column`}
+                              style={{ width: "42px" }}
+                            />,
                           ])}
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </section>
-            </>
-          )}
+                        </colgroup>
+
+                        <thead>
+                          <tr>
+                            <th rowSpan={2}>Kegiatan survei</th>
+                            <th rowSpan={2}>Periode</th>
+
+                            {months.map((month) => (
+                              <th
+                                colSpan={2}
+                                key={month}
+                                style={{
+                                  width: "84px",
+                                  minWidth: "84px",
+                                  maxWidth: "84px",
+                                }}
+                              >
+                                {month.slice(0, 3)}
+                              </th>
+                            ))}
+                          </tr>
+
+                          <tr>
+                            {months.flatMap((month) => [
+                              <th
+                                key={`${month}-target-header`}
+                                style={{
+                                  width: "42px",
+                                  minWidth: "42px",
+                                  maxWidth: "42px",
+                                }}
+                              >
+                                T
+                              </th>,
+
+                              <th
+                                key={`${month}-realization-header`}
+                                style={{
+                                  width: "42px",
+                                  minWidth: "42px",
+                                  maxWidth: "42px",
+                                }}
+                              >
+                                R
+                              </th>,
+                            ])}
+                          </tr>
+                        </thead>
+
+                        <tbody>
+                          {filtered.map((survey) => (
+                            <tr key={survey.id}>
+                              <td>
+                                <strong>{survey.name}</strong>
+
+                                <small>
+                                  {survey.category} · {survey.owner}
+                                </small>
+                              </td>
+
+                              <td>{survey.period}</td>
+
+                              {survey.months.flatMap((month, index) => [
+                                <td
+                                  key={`${survey.id}-${index}-target`}
+                                  className={
+                                    month.target > 0 ? "target" : ""
+                                  }
+                                >
+                                  {month.target || ""}
+                                </td>,
+
+                                <td
+                                  key={`${survey.id}-${index}-realization`}
+                                  className={
+                                    month.realization > 0
+                                      ? month.realization >= month.target
+                                        ? "ok"
+                                        : "warn"
+                                      : ""
+                                  }
+                                >
+                                  {month.realization || ""}
+                                </td>,
+                              ])}
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </section>
+                </>
+              )}
+            </div>
+          </main>
         </div>
-      </main>
-    </div>
-  );
+        );
 }
