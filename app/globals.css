@@ -1813,3 +1813,42 @@ aside:not(.open) .sidebarArrow,
 aside:not(.open) .sidebarSubmenu {
   display: none;
 }
+
+/* Paksa tombol panah dan ikonnya benar-benar simetris */
+
+aside.open .sidebarArrow {
+  width: 32px;
+  min-width: 32px;
+  height: 32px;
+  min-height: 32px;
+
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  line-height: 0;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+aside.open .sidebarArrow > svg {
+  display: block;
+  width: 16px;
+  height: 16px;
+
+  margin: 0;
+  padding: 0;
+  flex: 0 0 16px;
+
+  position: static;
+  transform: translate(0, 0) rotate(0deg);
+  transform-origin: center;
+}
+
+aside.open .sidebarArrow.open > svg {
+  transform: translate(0, 0) rotate(180deg);
+}
