@@ -170,6 +170,7 @@ type HomeProps = {
   realization: number;
   onOpenDashboard: () => void;
   onOpenCalendar: () => void;
+  onOpenSpreadsheet: () => void;
 };
 
 function Home({
@@ -178,6 +179,7 @@ function Home({
   realization,
   onOpenDashboard,
   onOpenCalendar,
+  onOpenSpreadsheet,
 }: HomeProps) {
   return (
     <section className="homePage">
@@ -308,12 +310,15 @@ function Home({
           </span>
         </button>
 
-        <button type="button">
+        <button
+          type="button"
+          onClick={onOpenSpreadsheet}
+        >
           <Sheet />
 
           <span>
             <strong>Spreadsheet</strong>
-            <small>Sumber data monitoring</small>
+            <small>Kelola data monitoring</small>
           </span>
         </button>
       </div>
@@ -1227,6 +1232,11 @@ export default function Dashboard({
               realization={totals.r}
               onOpenDashboard={() => setView("dashboard")}
               onOpenCalendar={() => setView("calendar")}
+              onOpenSpreadsheet={() => {
+                setInputMode("create");
+                setView("input");
+                setManageMenuOpen(true);
+              }}
             />
           ) : view === "calendar" ? (
             <Calendar surveys={filtered} />
