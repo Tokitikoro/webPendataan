@@ -60,14 +60,24 @@ function sum(survey: Survey) {
 
 type CalendarProps = {
   surveys: Survey[];
-  onAddEvent: () => void;
 };
 
 function Calendar({
   surveys,
-  onAddEvent,
 }: CalendarProps) {
   const [cursor, setCursor] = useState(new Date());
+
+  const [addingEvent, setAddingEvent] = useState(false);
+  const [newEventName, setNewEventName] = useState("");
+  const [newEventDate, setNewEventDate] = useState("");
+  const [newEventColor, setNewEventColor] =
+    useState("#19c5a6");
+
+  const [savingNewEvent, setSavingNewEvent] =
+    useState(false);
+
+  const [newEventMessage, setNewEventMessage] =
+    useState("");
 
   const [editingEventId, setEditingEventId] =
     useState<string | null>(null);
@@ -193,6 +203,108 @@ function Calendar({
     }
   }
 
+  async function saveNewCalendarEvent() {
+    const eventName = newEventName.trim();
+
+    if (!eventName || !newEventDate) {
+      setNewEventMessage(
+        "Nama dan tanggal acara wajib diisi",
+      );
+      return;
+    }
+
+    const [, selectedMonth] =
+      newEventDate.split("-").map(Number);
+
+    const selectedMonthIndex =
+      selectedMonth - 1;
+
+    setSavingNewEvent(true);
+    setNewEventMessage("");
+
+    try {
+      const response = await fetch(
+        "/api/surveys",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type":
+              "application/json",
+          },
+          body: JSON.stringify({
+            id: `agenda-${Date.now()}`,
+            category: "AGENDA",
+            name: eventName,
+            period: "Agenda",
+            owner: "Kalender",
+            eventDate: newEventDate,
+            eventColor: newEventColor,
+            monthIndex: selectedMonthIndex,
+            target: 1,
+            realization: 0,
+          }),
+        },
+      );
+
+      const responseText =
+        await response.text();
+
+      if (!responseText.trim()) {
+        throw new Error(
+          `Server tidak memberikan respons (${response.status})`,
+        );
+      }
+
+      let result: {
+        success?: boolean;
+        message?: string;
+      };
+
+      try {
+        result = JSON.parse(responseText) as {
+          success?: boolean;
+          message?: string;
+        };
+      } catch {
+        console.error(
+          "Respons server:",
+          responseText,
+        );
+
+        throw new Error(
+          `Respons server bukan JSON (${response.status})`,
+        );
+      }
+
+      if (
+        !response.ok ||
+        !result.success
+      ) {
+        throw new Error(
+          result.message ??
+          "Acara gagal ditambahkan",
+        );
+      }
+
+      setNewEventMessage(
+        result.message ??
+        "Acara berhasil ditambahkan",
+      );
+
+      window.setTimeout(() => {
+        window.location.reload();
+      }, 700);
+    } catch (error) {
+      setNewEventMessage(
+        error instanceof Error
+          ? error.message
+          : "Acara gagal ditambahkan",
+      );
+    } finally {
+      setSavingNewEvent(false);
+    }
+  }
+
   return (
     <section className="panel calendarPanel">
       <div className="panelHead">
@@ -207,7 +319,18 @@ function Calendar({
           <button
             type="button"
             className="addCalendarEvent"
-            onClick={onAddEvent}
+            onClick={() => {
+              const defaultDate = `${year}-${String(
+                monthIndex + 1,
+              ).padStart(2, "0")}-01`;
+
+              setAddingEvent(true);
+              setNewEventName("");
+              setNewEventDate(defaultDate);
+              setNewEventColor("#19c5a6");
+              setNewEventMessage("");
+              cancelEditingEvent();
+            }}
           >
             <Plus />
             Tambah Acara
@@ -234,6 +357,100 @@ function Calendar({
           </button>
         </div>
       </div>
+
+      {addingEvent && (
+        <div className="calendarAddEditor">
+          <div className="calendarAddEditorInfo">
+            <p className="eyebrow">
+              TAMBAH ACARA
+            </p>
+
+            <strong>Acara Kalender Baru</strong>
+
+            <small>
+              Isi nama, tanggal, dan warna acara.
+            </small>
+          </div>
+
+          <div className="calendarAddEditorFields">
+            <input
+              value={newEventName}
+              onChange={(event) =>
+                setNewEventName(event.target.value)
+              }
+              onKeyDown={(event) => {
+                if (event.key === "Enter") {
+                  event.preventDefault();
+                  void saveNewCalendarEvent();
+                }
+
+                if (event.key === "Escape") {
+                  setAddingEvent(false);
+                }
+              }}
+              placeholder="Nama acara"
+              autoFocus
+              disabled={savingNewEvent}
+            />
+
+            <input
+              type="date"
+              value={newEventDate}
+              onChange={(event) =>
+                setNewEventDate(event.target.value)
+              }
+              disabled={savingNewEvent}
+            />
+
+            <input
+              type="color"
+              value={newEventColor}
+              onChange={(event) =>
+                setNewEventColor(event.target.value)
+              }
+              title="Pilih warna acara"
+              disabled={savingNewEvent}
+            />
+
+            <button
+              type="button"
+              className="calendarLabelCancel"
+              onClick={() => {
+                setAddingEvent(false);
+                setNewEventMessage("");
+              }}
+              disabled={savingNewEvent}
+            >
+              Batal
+            </button>
+
+            <button
+              type="button"
+              className="calendarLabelSave"
+              onClick={() =>
+                void saveNewCalendarEvent()
+              }
+              disabled={
+                savingNewEvent ||
+                newEventName.trim() === "" ||
+                newEventDate === ""
+              }
+            >
+              <Plus />
+
+              {savingNewEvent
+                ? "Menyimpan..."
+                : "Tambah Acara"}
+            </button>
+          </div>
+
+          {newEventMessage && (
+            <div className="calendarAddMessage">
+              {newEventMessage}
+            </div>
+          )}
+        </div>
+      )}
 
       {editingEventId && (
         <div className="calendarLabelEditor">
@@ -1452,14 +1669,7 @@ export default function Dashboard({
               }}
             />
           ) : view === "calendar" ? (
-            <Calendar
-              surveys={filtered}
-              onAddEvent={() => {
-                setInputMode("create");
-                setView("input");
-                setManageMenuOpen(true);
-              }}
-            />
+            <Calendar surveys={filtered} />
           ) : (
             <>
               <section className="hero">
