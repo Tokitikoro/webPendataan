@@ -12,6 +12,7 @@ import {
   BriefcaseBusiness,
   CalendarClock,
   CalendarDays,
+  ChevronDown,
   ChevronLeft,
   ChevronRight,
   Database,
@@ -320,19 +321,21 @@ function Home({
   );
 }
 
+type FormMode = "create" | "edit";
+
 type SurveyInputProps = {
   surveys: Survey[];
+  formMode: FormMode;
+  onFormModeChange: (mode: FormMode) => void;
   onCancel: () => void;
 };
 
-type FormMode = "create" | "edit";
-
 function SurveyInput({
   surveys,
+  formMode,
+  onFormModeChange,
   onCancel,
 }: SurveyInputProps) {
-  const [formMode, setFormMode] =
-    useState<FormMode>("create");
 
   const [selectedSurveyId, setSelectedSurveyId] =
     useState("");
@@ -381,7 +384,7 @@ function SurveyInput({
   }
 
   function changeMode(mode: FormMode) {
-    setFormMode(mode);
+    onFormModeChange(mode);
     clearForm();
   }
 
@@ -543,9 +546,9 @@ function SurveyInput({
 
       setMessage(
         result.message ??
-          (result.action === "updated"
-            ? "Perubahan berhasil disimpan"
-            : "Kegiatan baru berhasil ditambahkan"),
+        (result.action === "updated"
+          ? "Perubahan berhasil disimpan"
+          : "Kegiatan baru berhasil ditambahkan"),
       );
 
       localStorage.setItem(
@@ -926,6 +929,12 @@ export default function Dashboard({
 
   const [searchQuery, setSearchQuery] = useState("");
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  
+  const [inputMode, setInputMode] =
+    useState<FormMode>("create");
+  
+  const [manageMenuOpen, setManageMenuOpen] =
+    useState(false);
 
   useEffect(() => {
     const savedView = localStorage.getItem("simi-last-view");
@@ -1012,22 +1021,98 @@ export default function Dashboard({
           </div>
         </div>
 
-        <button
-          type="button"
-          className={view === "home" ? "active" : ""}
-          onClick={() => {
-            setView("home");
+        <div
+  className={`sidebarGroup ${
+    view === "input" ? "active" : ""
+  }`}
+>
+  <div className="sidebarGroupRow">
+    <button
+      type="button"
+      className="sidebarManageButton"
+      onClick={() => {
+        setView("input");
 
-            if (window.innerWidth <= 650) {
-              setSidebarOpen(false);
-            }
-          }}
-          title="Beranda"
-          aria-label="Buka Beranda"
-        >
-          <House />
-          <span className="menu-label">Beranda</span>
-        </button>
+        if (!sidebarOpen) {
+          setSidebarOpen(true);
+        }
+      }}
+      title="Kelola Data"
+    >
+      <Sheet />
+
+      <span className="menu-label">
+        Kelola Data
+      </span>
+    </button>
+
+    <button
+      type="button"
+      className={`sidebarArrow ${
+        manageMenuOpen ? "open" : ""
+      }`}
+      onClick={() =>
+        setManageMenuOpen(
+          (current) => !current,
+        )
+      }
+      aria-label={
+        manageMenuOpen
+          ? "Tutup submenu Kelola Data"
+          : "Buka submenu Kelola Data"
+      }
+      aria-expanded={manageMenuOpen}
+    >
+      <ChevronDown />
+    </button>
+  </div>
+
+  {manageMenuOpen && (
+    <div className="sidebarSubmenu">
+      <button
+        type="button"
+        className={
+          view === "input" &&
+          inputMode === "create"
+            ? "active"
+            : ""
+        }
+        onClick={() => {
+          setInputMode("create");
+          setView("input");
+
+          if (window.innerWidth <= 650) {
+            setSidebarOpen(false);
+          }
+        }}
+      >
+        <Plus />
+        <span>Tambah Data</span>
+      </button>
+
+      <button
+        type="button"
+        className={
+          view === "input" &&
+          inputMode === "edit"
+            ? "active"
+            : ""
+        }
+        onClick={() => {
+          setInputMode("edit");
+          setView("input");
+
+          if (window.innerWidth <= 650) {
+            setSidebarOpen(false);
+          }
+        }}
+      >
+        <Pencil />
+        <span>Edit Data</span>
+      </button>
+    </div>
+  )}
+</div>
 
         <button
           type="button"
@@ -1126,9 +1211,11 @@ export default function Dashboard({
         <div className="content">
           {view === "input" ? (
             <SurveyInput
-              surveys={initial}
-              onCancel={() => setView("dashboard")}
-            />
+            surveys={initial}
+            formMode={inputMode}
+            onFormModeChange={setInputMode}
+            onCancel={() => setView("dashboard")}
+          />
           ) : view === "home" ? (
             <Home
               percentage={percentage}
