@@ -2139,3 +2139,48 @@ aside:not(.open) .sidebarGroup.active .sidebarManageButton {
     width: 100%;
   }
 }
+
+/* Tombol Tambah Acara pada Kalender */
+
+.calNav .addCalendarEvent {
+  padding: 10px 15px;
+  color: #ffffff;
+  background: linear-gradient(
+    120deg,
+    #0782b6,
+    #0db9b5
+  );
+  box-shadow: 0 6px 16px rgba(7, 130, 182, 0.18);
+}
+
+.calNav .addCalendarEvent:hover {
+  color: #ffffff;
+  background: linear-gradient(
+    120deg,
+    #066f9d,
+    #0aa7a4
+  );
+  transform: translateY(-1px);
+}
+
+.calNav .addCalendarEvent svg {
+  width: 16px;
+  height: 16px;
+}
+
+@media (max-width: 650px) {
+  .panelHead {
+    align-items: flex-start;
+    gap: 14px;
+    flex-direction: column;
+  }
+
+  .calNav {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .calNav .addCalendarEvent {
+    flex: 1;
+  }
+}
