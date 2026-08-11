@@ -2513,3 +2513,22 @@ aside:not(.open) .sidebarArrow {
     width: 100%;
   }
 }
+
+/* Tombol tampilkan lebih lanjut khusus tabel */
+
+.tableExpandActions {
+  padding: 14px 18px 18px;
+  border-top: 1px solid #e2eef2;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #ffffff;
+}
+
+@media (max-width: 650px) {
+  .tableExpandActions .surveyExpandButton {
+    width: 100%;
+  }
+}
