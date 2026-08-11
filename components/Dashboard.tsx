@@ -1449,44 +1449,7 @@ function SurveyInput({
           </button>
         </div>
 
-      <div className="formActions formWide">
-        <button
-          type="button"
-          className="inputCancel"
-          disabled={submitting}
-          onClick={
-            isEditing
-              ? clearForm
-              : onCancel
-          }
-        >
-          {isEditing
-            ? "Batal Edit"
-            : "Batal"}
-        </button>
-
-        <button
-          type="submit"
-          className="inputSubmit"
-          disabled={
-            submitting ||
-            formDisabled
-          }
-        >
-          {isEditing ? (
-            <Pencil />
-          ) : (
-            <Sheet />
-          )}
-
-          {submitting
-            ? "Menyimpan..."
-            : isEditing
-              ? "Simpan Perubahan"
-              : "Simpan ke Spreadsheet"}
-        </button>
-      </div>
-    </form>
+      </form>
     </section >
   );
 }
