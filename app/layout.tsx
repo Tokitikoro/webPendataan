@@ -1,10 +1,21 @@
-import type { Metadata } from "next";
+import type {
+  Metadata,
+  Viewport,
+} from "next";
+
 import type { ReactNode } from "react";
+
 import "./globals.css";
 
 export const metadata: Metadata = {
   title: "SIMI Aqua",
-  description: "Dashboard monitoring kegiatan survei",
+  description:
+    "Dashboard monitoring kegiatan survei",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
 };
 
 type RootLayoutProps = {
