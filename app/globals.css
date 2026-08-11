@@ -2459,3 +2459,26 @@ aside:not(.open) .sidebarArrow {
     z-index: 3;
   }
 }
+
+@media (max-width: 420px) {
+  header {
+    padding-right: 58px;
+    gap: 7px;
+  }
+
+  header > .avatar {
+    right: 9px;
+    width: 36px;
+    min-width: 36px;
+    height: 36px;
+    font-size: 12px;
+  }
+
+  header > .search {
+    height: 40px;
+  }
+
+  header > .search input::placeholder {
+    font-size: 11px;
+  }
+}
