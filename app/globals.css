@@ -2404,3 +2404,58 @@ aside:not(.open) .sidebarArrow {
   }
 }
 
+/* ========================================
+   HEADER MOBILE: AVATAR DI UJUNG KANAN
+======================================== */
+
+@media (max-width: 650px) {
+  header {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 76px;
+    padding: 0 64px 0 12px;
+    gap: 10px;
+  }
+
+  header>.icon {
+    width: 42px;
+    min-width: 42px;
+    height: 42px;
+    flex: 0 0 42px;
+  }
+
+  header>.search {
+    width: auto;
+    min-width: 0;
+    max-width: none;
+    flex: 1 1 auto;
+  }
+
+  header>.search input {
+    min-width: 0;
+  }
+
+  /* Sembunyikan teks Google Spreadsheet di HP */
+  header>.source {
+    display: none;
+  }
+
+  /* Kunci avatar di ujung kanan */
+  header>.avatar {
+    position: absolute;
+    top: 50%;
+    right: 12px;
+
+    display: grid;
+    place-items: center;
+
+    width: 40px;
+    min-width: 40px;
+    height: 40px;
+    margin: 0;
+
+    transform: translateY(-50%);
+    z-index: 3;
+  }
+}
