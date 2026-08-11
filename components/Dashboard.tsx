@@ -1432,7 +1432,7 @@ export default function Dashboard({
       ? Math.min(100, Math.round((totals.r / totals.t) * 100))
       : 0;
 
-  const cards = filtered.slice(0, 5);
+  const cards = filtered;
 
   if (view === null) {
     return (
