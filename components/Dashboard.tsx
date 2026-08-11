@@ -990,7 +990,7 @@ function SurveyInput({
           : "Kegiatan baru berhasil ditambahkan"),
       );
 
-      localStorage.setItem(
+      sessionStorage.setItem(
         "simi-last-view",
         "dashboard",
       );
@@ -1078,7 +1078,7 @@ function SurveyInput({
         "Kegiatan berhasil dihapus",
       );
 
-      localStorage.setItem(
+      sessionStorage.setItem(
         "simi-last-view",
         "dashboard",
       );
@@ -1488,28 +1488,29 @@ export default function Dashboard({
     useState(false);
 
   useEffect(() => {
-    const savedView = localStorage.getItem("simi-last-view");
+    const savedView =
+      sessionStorage.getItem("simi-last-view");
 
     if (
       savedView === "home" ||
       savedView === "dashboard" ||
-      savedView === "calendar"
+      savedView === "calendar" ||
+      savedView === "input"
     ) {
       setView(savedView);
     } else {
       setView("home");
     }
   }, []);
-
   useEffect(() => {
-    if (
-      view === "home" ||
-      view === "dashboard" ||
-      view === "calendar"
-    ) {
-      localStorage.setItem("simi-last-view", view);
+    if (view !== null) {
+      sessionStorage.setItem(
+        "simi-last-view",
+        view,
+      );
     }
   }, [view]);
+
 
   const filtered = useMemo(() => {
     const keyword = searchQuery.toLowerCase();
