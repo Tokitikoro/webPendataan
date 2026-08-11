@@ -1462,12 +1462,8 @@ export default function Dashboard({
           type="button"
           className={view === "home" ? "active" : ""}
           onClick={() => {
-            setView("home");
-            setManageMenuOpen(false);
-
-            if (window.innerWidth <= 650) {
-              setSidebarOpen(false);
-            }
+            setView("input");
+            setInputMode("create");
           }}
           title="Beranda"
         >
@@ -1522,10 +1518,14 @@ export default function Dashboard({
               className="sidebarManageButton"
               onClick={() => {
                 setView("input");
-                setManageMenuOpen(true);
+                setInputMode("create");
 
-                if (!sidebarOpen) {
-                  setSidebarOpen(true);
+                if (sidebarOpen) {
+                  setManageMenuOpen(true);
+
+                  if (!sidebarOpen) {
+                    setSidebarOpen(true);
+                  }
                 }
               }}
               title="Kelola Data"
@@ -1665,7 +1665,8 @@ export default function Dashboard({
               onOpenSpreadsheet={() => {
                 setInputMode("create");
                 setView("input");
-                setManageMenuOpen(true);
+                setManageMenuOpen(false);
+                setSidebarOpen(false);
               }}
             />
           ) : view === "calendar" ? (
