@@ -1371,6 +1371,9 @@ export default function Dashboard({
   const [manageMenuOpen, setManageMenuOpen] =
     useState(false);
 
+  const [showAllSurveys, setShowAllSurveys] =
+    useState(false);
+
   useEffect(() => {
     const savedView = localStorage.getItem("simi-last-view");
 
@@ -1432,7 +1435,18 @@ export default function Dashboard({
       ? Math.min(100, Math.round((totals.r / totals.t) * 100))
       : 0;
 
-  const cards = filtered;
+  const visibleSurveys = showAllSurveys
+    ? filtered
+    : filtered.slice(0, 6);
+
+  const hasMoreSurveys = filtered.length > 6;
+
+  const hiddenSurveyCount = Math.max(
+    0,
+    filtered.length - 6,
+  );
+
+  const cards = visibleSurveys;
 
   if (view === null) {
     return (
@@ -1787,11 +1801,38 @@ export default function Dashboard({
                 })}
               </section>
 
+              {hasMoreSurveys && (
+                <div className="surveyExpandActions">
+                  <button
+                    type="button"
+                    className="surveyExpandButton"
+                    onClick={() => {
+                      setShowAllSurveys(
+                        (current) => !current,
+                      );
+                    }}
+                    aria-expanded={showAllSurveys}
+                  >
+                    {showAllSurveys
+                      ? "Tampilkan lebih sedikit"
+                      : `Tampilkan lebih lanjut (${hiddenSurveyCount})`}
+                  </button>
+                </div>
+              )}
+
               <section className="panel">
                 <div className="panelHead">
                   <div>
-                    <p className="eyebrow">MONITORING BULANAN</p>
+                    <p className="eyebrow">
+                      MONITORING BULANAN
+                    </p>
+
                     <h2>Target dan Realisasi</h2>
+
+                    <small className="tableResultInfo">
+                      Menampilkan {visibleSurveys.length} dari{" "}
+                      {filtered.length} kegiatan
+                    </small>
                   </div>
 
                   <button type="button" className="soft">
@@ -1799,7 +1840,6 @@ export default function Dashboard({
                     Sinkron 5 menit
                   </button>
                 </div>
-
                 <div className="tableWrap">
                   <table
                     style={{
@@ -1872,7 +1912,7 @@ export default function Dashboard({
                     </thead>
 
                     <tbody>
-                      {filtered.map((survey) => (
+                      {visibleSurveys.map((survey) => (
                         <tr key={survey.id}>
                           <td>
                             <strong>{survey.name}</strong>
@@ -1916,7 +1956,7 @@ export default function Dashboard({
             </>
           )}
         </div>
-      </main>
-    </div>
+      </main >
+    </div >
   );
 }
