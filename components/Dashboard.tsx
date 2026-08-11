@@ -1465,10 +1465,15 @@ export default function Dashboard({
           type="button"
           className={view === "home" ? "active" : ""}
           onClick={() => {
-            setView("input");
-            setInputMode("create");
+            setView("home");
+            setManageMenuOpen(false);
+
+            if (window.innerWidth <= 650) {
+              setSidebarOpen(false);
+            }
           }}
           title="Beranda"
+          aria-label="Buka Beranda"
         >
           <House />
           <span className="menu-label">Beranda</span>
@@ -1520,7 +1525,7 @@ export default function Dashboard({
               type="button"
               className="sidebarManageButton"
               onClick={() => {
-                setView("input");
+                setView("home");
                 setInputMode("create");
 
                 if (sidebarOpen) {
