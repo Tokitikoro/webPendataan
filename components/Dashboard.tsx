@@ -1411,51 +1411,10 @@ function SurveyInput({
             </button>
           )}
 
-          <div className="formActionsRight">
-            <button
-              type="button"
-              className="inputCancel"
-              disabled={submitting || deleting}
-              onClick={
-                isEditing
-                  ? clearForm
-                  : onCancel
-              }
-            >
-              {isEditing
-                ? "Batal Edit"
-                : "Batal"}
-            </button>
-
-            <button
-              type="submit"
-              className="inputSubmit"
-              disabled={
-                submitting ||
-                deleting ||
-                formDisabled
-              }
-            >
-              {isEditing ? (
-                <Pencil />
-              ) : (
-                <Sheet />
-              )}
-
-              {submitting
-                ? "Menyimpan..."
-                : isEditing
-                  ? "Simpan Perubahan"
-                  : "Simpan ke Spreadsheet"}
-            </button>
-          </div>
-        </div>
-
-        <div className="formActions formWide">
           <button
             type="button"
             className="inputCancel"
-            disabled={submitting}
+            disabled={submitting || deleting}
             onClick={
               isEditing
                 ? clearForm
@@ -1472,6 +1431,7 @@ function SurveyInput({
             className="inputSubmit"
             disabled={
               submitting ||
+              deleting ||
               formDisabled
             }
           >
@@ -1488,8 +1448,46 @@ function SurveyInput({
                 : "Simpan ke Spreadsheet"}
           </button>
         </div>
-      </form>
-    </section>
+
+      <div className="formActions formWide">
+        <button
+          type="button"
+          className="inputCancel"
+          disabled={submitting}
+          onClick={
+            isEditing
+              ? clearForm
+              : onCancel
+          }
+        >
+          {isEditing
+            ? "Batal Edit"
+            : "Batal"}
+        </button>
+
+        <button
+          type="submit"
+          className="inputSubmit"
+          disabled={
+            submitting ||
+            formDisabled
+          }
+        >
+          {isEditing ? (
+            <Pencil />
+          ) : (
+            <Sheet />
+          )}
+
+          {submitting
+            ? "Menyimpan..."
+            : isEditing
+              ? "Simpan Perubahan"
+              : "Simpan ke Spreadsheet"}
+        </button>
+      </div>
+    </form>
+    </section >
   );
 }
 
