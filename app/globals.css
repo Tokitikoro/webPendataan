@@ -2610,6 +2610,7 @@ aside:not(.open) .sidebarArrow {
 ======================================== */
 
 @media screen and (max-width: 1100px) and (pointer: coarse) {
+
   /* Sidebar diperkecil */
   aside {
     width: 52px;
@@ -2638,7 +2639,7 @@ aside:not(.open) .sidebarArrow {
   }
 
   /* Semua tombol sidebar */
-  aside:not(.open) > button,
+  aside:not(.open)>button,
   aside:not(.open) .sidebarGroup,
   aside:not(.open) .sidebarGroupRow,
   aside:not(.open) .sidebarManageButton {
@@ -2651,15 +2652,15 @@ aside:not(.open) .sidebarArrow {
     border-radius: 11px;
   }
 
-  aside:not(.open) > button {
+  aside:not(.open)>button {
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
   /* Ukuran ikon sidebar */
-  aside:not(.open) > button svg,
-  aside:not(.open) .sidebarManageButton > svg {
+  aside:not(.open)>button svg,
+  aside:not(.open) .sidebarManageButton>svg {
     width: 19px;
     height: 19px;
     flex: 0 0 19px;
@@ -2685,7 +2686,7 @@ aside:not(.open) .sidebarArrow {
     gap: 7px;
   }
 
-  header > .icon {
+  header>.icon {
     width: 36px;
     min-width: 36px;
     height: 36px;
@@ -2693,12 +2694,12 @@ aside:not(.open) .sidebarArrow {
     border-radius: 11px;
   }
 
-  header > .icon svg {
+  header>.icon svg {
     width: 19px;
     height: 19px;
   }
 
-  header > .search {
+  header>.search {
     width: min(62%, 280px);
     min-width: 120px;
     max-width: 280px;
@@ -2709,25 +2710,25 @@ aside:not(.open) .sidebarArrow {
     flex: 0 1 280px;
   }
 
-  header > .search svg {
+  header>.search svg {
     width: 18px;
     height: 18px;
   }
 
-  header > .search input {
+  header>.search input {
     min-width: 0;
     font-size: 12px;
   }
 
-  header > .search input::placeholder {
+  header>.search input::placeholder {
     font-size: 12px;
   }
 
-  header > .source {
+  header>.source {
     display: none;
   }
 
-  header > .avatar {
+  header>.avatar {
     position: absolute;
     top: 50%;
     right: 8px;
@@ -2760,7 +2761,7 @@ aside:not(.open) .sidebarArrow {
     font-size: 21px;
   }
 
-  .inputPanelHead > div > p:last-child {
+  .inputPanelHead>div>p:last-child {
     font-size: 12px;
   }
 
@@ -2793,7 +2794,7 @@ aside:not(.open) .sidebarArrow {
     gap: 6px;
   }
 
-  .surveyInputForm label > span {
+  .surveyInputForm label>span {
     font-size: 11px;
   }
 
@@ -2832,7 +2833,7 @@ aside:not(.open) .sidebarArrow {
     font-size: 10px;
   }
 
-  aside:not(.open) > button,
+  aside:not(.open)>button,
   aside:not(.open) .sidebarGroup,
   aside:not(.open) .sidebarGroupRow,
   aside:not(.open) .sidebarManageButton {
@@ -2842,8 +2843,8 @@ aside:not(.open) .sidebarArrow {
     min-height: 34px;
   }
 
-  aside:not(.open) > button svg,
-  aside:not(.open) .sidebarManageButton > svg {
+  aside:not(.open)>button svg,
+  aside:not(.open) .sidebarManageButton>svg {
     width: 17px;
     height: 17px;
     flex-basis: 17px;
@@ -2855,7 +2856,7 @@ aside:not(.open) .sidebarArrow {
     margin-left: 46px;
   }
 
-  header > .search {
+  header>.search {
     width: 58%;
     min-width: 105px;
     max-width: 220px;
@@ -2935,5 +2936,178 @@ aside:not(.open) .sidebarArrow {
   aside:not(.open) .brand-wrapper .brand span {
     font-size: 10px;
     letter-spacing: -0.8px;
+  }
+}
+
+/* ========================================
+   PENYESUAIAN FINAL TAMPILAN HP
+======================================== */
+
+@media screen and (max-width: 480px) {
+
+  /* Sidebar lebih ramping */
+  aside {
+    width: 48px;
+    padding: 10px 4px;
+    gap: 8px;
+  }
+
+  aside:not(.open) .brand-wrapper {
+    width: 100%;
+    height: 36px;
+    min-height: 36px;
+    margin: 0 0 13px;
+    padding: 0;
+    display: grid;
+    place-items: center;
+  }
+
+  aside:not(.open) .brand-wrapper .brand {
+    width: 34px;
+    min-width: 34px;
+    height: 34px;
+    margin: 0;
+    padding: 0;
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+  }
+
+  aside:not(.open) .brand-wrapper .brand span {
+    margin: 0;
+    font-size: 9px;
+    line-height: 1;
+    letter-spacing: -0.7px;
+    text-align: center;
+    transform: none;
+  }
+
+  /* Tombol dan ikon sidebar */
+  aside:not(.open)>button,
+  aside:not(.open) .sidebarGroup,
+  aside:not(.open) .sidebarGroupRow,
+  aside:not(.open) .sidebarManageButton {
+    width: 34px;
+    min-width: 34px;
+    height: 34px;
+    min-height: 34px;
+    margin: 0 auto;
+    padding: 0;
+    border-radius: 10px;
+  }
+
+  aside:not(.open)>button svg,
+  aside:not(.open) .sidebarManageButton>svg {
+    width: 17px;
+    height: 17px;
+    flex: 0 0 17px;
+  }
+
+  /* Konten mengikuti sidebar yang lebih kecil */
+  main,
+  .shell.sidebar-open main {
+    width: calc(100% - 48px);
+    margin-left: 48px;
+  }
+
+  /* Header lebih ringkas */
+  header {
+    height: 58px;
+    padding: 0 48px 0 7px;
+    gap: 6px;
+  }
+
+  header>.icon {
+    width: 34px;
+    min-width: 34px;
+    height: 34px;
+    flex: 0 0 34px;
+  }
+
+  header>.search {
+    width: auto;
+    min-width: 0;
+    max-width: none;
+    height: 34px;
+    flex: 1 1 auto;
+    padding: 0 9px;
+  }
+
+  header>.search svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  header>.search input {
+    min-width: 0;
+    font-size: 11px;
+  }
+
+  header>.search input::placeholder {
+    font-size: 11px;
+  }
+
+  header>.avatar {
+    right: 7px;
+    width: 32px;
+    min-width: 32px;
+    height: 32px;
+    font-size: 11px;
+  }
+
+  /* Konten halaman */
+  .content {
+    padding: 8px;
+  }
+
+  /* Hero dibuat lebih ringkas */
+  .homeHero {
+    min-height: auto;
+    padding: 24px 20px;
+    gap: 22px;
+    border-radius: 18px;
+  }
+
+  .homeHero h1 {
+    margin-bottom: 12px;
+    font-size: 34px;
+    line-height: 1.08;
+  }
+
+  .homeIntro>p:not(.eyebrow) {
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
+  .homeAction {
+    min-height: 43px;
+    margin-top: 18px;
+    padding: 0 15px;
+    font-size: 12px;
+  }
+
+  .homeSummary {
+    width: 100%;
+    min-width: 0;
+    padding: 20px;
+    border-radius: 18px;
+  }
+
+  .homeSummary strong {
+    font-size: 42px;
+  }
+
+  /* Versi sidebar */
+  .sidebar-version {
+    font-size: 9px;
+  }
+}
+
+/* Ukuran judul Beranda khusus HP */
+@media screen and (max-width: 480px) {
+  .homeHero h1 {
+    margin-bottom: 10px;
+    font-size: 29px;
+    line-height: 1.12;
   }
 }
