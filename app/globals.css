@@ -746,7 +746,7 @@ header {
   padding: 8px
 }
 
-.day > span:first-child {
+.day>span:first-child {
   display: grid;
   place-items: center;
   width: 27px;
@@ -754,7 +754,7 @@ header {
   font-size: 12px;
 }
 
-.day.today > span:first-child {
+.day.today>span:first-child {
   background: #0aaec1;
   color: #ffffff;
   border-radius: 9px;
@@ -1960,7 +1960,7 @@ aside:not(.open) .sidebarGroup.active .sidebarManageButton {
   color: #096690;
 }
 
-.calendarEventRow > span {
+.calendarEventRow>span {
   display: block;
   width: auto;
   min-width: 0;
@@ -2102,11 +2102,9 @@ aside:not(.open) .sidebarGroup.active .sidebarManageButton {
 
 .calendarLabelSave {
   color: #ffffff;
-  background: linear-gradient(
-    120deg,
-    #0782b6,
-    #0db9b5
-  );
+  background: linear-gradient(120deg,
+      #0782b6,
+      #0db9b5);
 
   display: inline-flex;
   align-items: center;
@@ -2145,21 +2143,17 @@ aside:not(.open) .sidebarGroup.active .sidebarManageButton {
 .calNav .addCalendarEvent {
   padding: 10px 15px;
   color: #ffffff;
-  background: linear-gradient(
-    120deg,
-    #0782b6,
-    #0db9b5
-  );
+  background: linear-gradient(120deg,
+      #0782b6,
+      #0db9b5);
   box-shadow: 0 6px 16px rgba(7, 130, 182, 0.18);
 }
 
 .calNav .addCalendarEvent:hover {
   color: #ffffff;
-  background: linear-gradient(
-    120deg,
-    #066f9d,
-    #0aa7a4
-  );
+  background: linear-gradient(120deg,
+      #066f9d,
+      #0aa7a4);
   transform: translateY(-1px);
 }
 
@@ -2198,8 +2192,7 @@ aside:not(.open) .sidebarGroup.active .sidebarManageButton {
 
   display: grid;
   grid-template-columns:
-    minmax(200px, 0.5fr)
-    minmax(500px, 1fr);
+    minmax(200px, 0.5fr) minmax(500px, 1fr);
   align-items: center;
   gap: 18px;
 
@@ -2232,11 +2225,7 @@ aside:not(.open) .sidebarGroup.active .sidebarManageButton {
   min-width: 0;
   display: grid;
   grid-template-columns:
-    minmax(190px, 1fr)
-    155px
-    48px
-    auto
-    auto;
+    minmax(190px, 1fr) 155px 48px auto auto;
   align-items: center;
   gap: 8px;
 }
@@ -2296,11 +2285,9 @@ aside:not(.open) .sidebarGroup.active .sidebarManageButton {
 
 .calendarAddEditorFields .calendarLabelSave {
   color: #ffffff;
-  background: linear-gradient(
-    120deg,
-    #0782b6,
-    #0db9b5
-  );
+  background: linear-gradient(120deg,
+      #0782b6,
+      #0db9b5);
 
   display: inline-flex;
   align-items: center;
@@ -2309,11 +2296,9 @@ aside:not(.open) .sidebarGroup.active .sidebarManageButton {
 }
 
 .calendarAddEditorFields .calendarLabelSave:hover {
-  background: linear-gradient(
-    120deg,
-    #066f9d,
-    #0aa7a4
-  );
+  background: linear-gradient(120deg,
+      #066f9d,
+      #0aa7a4);
 }
 
 .calendarAddEditorFields .calendarLabelSave svg {
@@ -2347,11 +2332,7 @@ aside:not(.open) .sidebarGroup.active .sidebarManageButton {
 
   .calendarAddEditorFields {
     grid-template-columns:
-      minmax(0, 1fr)
-      155px
-      48px
-      auto
-      auto;
+      minmax(0, 1fr) 155px 48px auto auto;
   }
 }
 
@@ -2369,4 +2350,21 @@ aside:not(.open) .sidebarGroup.active .sidebarManageButton {
   .calendarAddEditorFields .calendarLabelSave {
     width: 100%;
   }
+}
+
+.sidebarGroup,
+.sidebarGroupRow,
+.sidebarManageButton {
+  pointer-events: auto;
+}
+
+aside:not(.open) .sidebarManageButton {
+  position: relative;
+  z-index: 2;
+  cursor: pointer;
+}
+
+aside:not(.open) .sidebarArrow {
+  display: none !important;
+  pointer-events: none;
 }
