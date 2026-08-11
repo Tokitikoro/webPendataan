@@ -2419,3 +2419,28 @@ aside:not(.open) .sidebarArrow {
     z-index: 50;
   }
 }
+
+/* Header HP: batasi panjang kolom pencarian */
+@media screen and (max-width: 1100px) and (pointer: coarse) {
+  header {
+    position: sticky;
+    top: 0;
+    padding: 0 58px 0 10px;
+  }
+
+  header > .search {
+    width: 58%;
+    max-width: 360px;
+    min-width: 150px;
+    flex: 0 1 360px;
+    margin-right: auto;
+  }
+
+  header > .avatar {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    left: auto;
+    transform: translateY(-50%);
+  }
+}
