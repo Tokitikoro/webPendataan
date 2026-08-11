@@ -2377,14 +2377,14 @@ aside:not(.open) .sidebarArrow {
     gap: 8px;
   }
 
-  header > .icon {
+  header>.icon {
     width: 40px;
     min-width: 40px;
     height: 40px;
     flex: 0 0 40px;
   }
 
-  header > .search {
+  header>.search {
     width: auto;
     min-width: 0;
     max-width: none;
@@ -2392,16 +2392,16 @@ aside:not(.open) .sidebarArrow {
     flex: 1 1 auto;
   }
 
-  header > .search input {
+  header>.search input {
     width: 100%;
     min-width: 0;
   }
 
-  header > .source {
+  header>.source {
     display: none;
   }
 
-  header > .avatar {
+  header>.avatar {
     position: absolute;
     top: 50%;
     right: 10px;
@@ -2428,7 +2428,7 @@ aside:not(.open) .sidebarArrow {
     padding: 0 58px 0 10px;
   }
 
-  header > .search {
+  header>.search {
     width: 58%;
     max-width: 360px;
     min-width: 150px;
@@ -2436,7 +2436,7 @@ aside:not(.open) .sidebarArrow {
     margin-right: auto;
   }
 
-  header > .avatar {
+  header>.avatar {
     position: absolute;
     top: 50%;
     right: 10px;
@@ -2486,11 +2486,9 @@ aside:not(.open) .sidebarArrow {
 .surveyExpandButton:hover {
   color: #ffffff;
   border-color: transparent;
-  background: linear-gradient(
-    120deg,
-    #0782b6,
-    #0db9b5
-  );
+  background: linear-gradient(120deg,
+      #0782b6,
+      #0db9b5);
   transform: translateY(-1px);
   box-shadow:
     0 10px 24px rgba(7, 130, 182, 0.18);
@@ -2530,5 +2528,79 @@ aside:not(.open) .sidebarArrow {
 @media (max-width: 650px) {
   .tableExpandActions .surveyExpandButton {
     width: 100%;
+  }
+}
+
+/* ========================================
+   TOMBOL HAPUS KEGIATAN
+======================================== */
+
+.inputDelete {
+  min-height: 45px;
+  margin-right: 12px;
+  padding: 0 17px;
+  border: 1px solid #efb5b0;
+  border-radius: 11px;
+  background: #fff1ef;
+  color: #b83d32;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 800;
+  white-space: nowrap;
+  cursor: pointer;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.inputDelete svg {
+  width: 17px;
+  height: 17px;
+  flex: 0 0 17px;
+}
+
+.inputDelete:hover {
+  color: #ffffff;
+  border-color: #c94338;
+  background: #c94338;
+  transform: translateY(-1px);
+}
+
+.inputDelete:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+  transform: none;
+}
+
+/* Posisi tombol bawah form */
+
+.formActions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+/* Tampilan HP */
+
+@media (max-width: 700px) {
+  .formActions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .inputDelete,
+  .formActions .inputCancel,
+  .formActions .inputSubmit {
+    width: 100%;
+    margin-right: 0;
   }
 }
