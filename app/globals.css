@@ -2444,3 +2444,72 @@ aside:not(.open) .sidebarArrow {
     transform: translateY(-50%);
   }
 }
+
+/* ========================================
+   TOMBOL TAMPILKAN LEBIH LANJUT
+======================================== */
+
+.surveyExpandActions {
+  margin: -2px 0 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.surveyExpandButton {
+  min-height: 44px;
+  padding: 0 18px;
+  border: 1px solid #b9dce6;
+  border-radius: 12px;
+  background: #ffffff;
+  color: #08758a;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow:
+    0 7px 18px rgba(7, 93, 130, 0.08);
+
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.surveyExpandButton:hover {
+  color: #ffffff;
+  border-color: transparent;
+  background: linear-gradient(
+    120deg,
+    #0782b6,
+    #0db9b5
+  );
+  transform: translateY(-1px);
+  box-shadow:
+    0 10px 24px rgba(7, 130, 182, 0.18);
+}
+
+.tableResultInfo {
+  display: block;
+  margin-top: 5px;
+  color: #78909c;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+@media (max-width: 650px) {
+  .surveyExpandActions {
+    margin-bottom: 14px;
+  }
+
+  .surveyExpandButton {
+    width: 100%;
+  }
+}
