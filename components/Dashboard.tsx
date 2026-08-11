@@ -1377,8 +1377,7 @@ export default function Dashboard({
     if (
       savedView === "home" ||
       savedView === "dashboard" ||
-      savedView === "calendar" ||
-      savedView === "input"
+      savedView === "calendar"
     ) {
       setView(savedView);
     } else {
@@ -1387,7 +1386,11 @@ export default function Dashboard({
   }, []);
 
   useEffect(() => {
-    if (view !== null) {
+    if (
+      view === "home" ||
+      view === "dashboard" ||
+      view === "calendar"
+    ) {
       localStorage.setItem("simi-last-view", view);
     }
   }, [view]);
@@ -1522,10 +1525,6 @@ export default function Dashboard({
 
                 if (sidebarOpen) {
                   setManageMenuOpen(true);
-
-                  if (!sidebarOpen) {
-                    setSidebarOpen(true);
-                  }
                 }
               }}
               title="Kelola Data"
