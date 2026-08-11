@@ -2604,3 +2604,264 @@ aside:not(.open) .sidebarArrow {
     margin-right: 0;
   }
 }
+
+/* ========================================
+   SIDEBAR DAN FORM COMPACT UNTUK HP
+======================================== */
+
+@media screen and (max-width: 1100px) and (pointer: coarse) {
+  /* Sidebar diperkecil */
+  aside {
+    width: 52px;
+    padding: 12px 6px;
+    gap: 8px;
+  }
+
+  /* Logo BPS diperkecil */
+  aside .brand-wrapper {
+    width: 40px;
+    margin-bottom: 14px;
+    justify-content: center;
+  }
+
+  aside .brand {
+    width: 38px;
+    height: 38px;
+    flex: 0 0 38px;
+    margin: 0;
+    border-radius: 12px;
+    font-size: 11px;
+  }
+
+  aside .brand span {
+    letter-spacing: -1px;
+  }
+
+  /* Semua tombol sidebar */
+  aside:not(.open) > button,
+  aside:not(.open) .sidebarGroup,
+  aside:not(.open) .sidebarGroupRow,
+  aside:not(.open) .sidebarManageButton {
+    width: 38px;
+    min-width: 38px;
+    height: 38px;
+    min-height: 38px;
+    margin: 0 auto;
+    padding: 0;
+    border-radius: 11px;
+  }
+
+  aside:not(.open) > button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Ukuran ikon sidebar */
+  aside:not(.open) > button svg,
+  aside:not(.open) .sidebarManageButton > svg {
+    width: 19px;
+    height: 19px;
+    flex: 0 0 19px;
+    margin: 0;
+  }
+
+  /* Konten mengikuti lebar sidebar baru */
+  main {
+    width: calc(100% - 52px);
+    margin-left: 52px;
+  }
+
+  .shell.sidebar-open main {
+    width: calc(100% - 52px);
+    margin-left: 52px;
+  }
+
+  /* Header dibuat lebih ringkas */
+  header {
+    left: 0;
+    height: 60px;
+    padding: 0 52px 0 8px;
+    gap: 7px;
+  }
+
+  header > .icon {
+    width: 36px;
+    min-width: 36px;
+    height: 36px;
+    flex: 0 0 36px;
+    border-radius: 11px;
+  }
+
+  header > .icon svg {
+    width: 19px;
+    height: 19px;
+  }
+
+  header > .search {
+    width: min(62%, 280px);
+    min-width: 120px;
+    max-width: 280px;
+    height: 36px;
+    padding: 0 10px;
+    gap: 7px;
+    border-radius: 11px;
+    flex: 0 1 280px;
+  }
+
+  header > .search svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  header > .search input {
+    min-width: 0;
+    font-size: 12px;
+  }
+
+  header > .search input::placeholder {
+    font-size: 12px;
+  }
+
+  header > .source {
+    display: none;
+  }
+
+  header > .avatar {
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    left: auto;
+    width: 34px;
+    min-width: 34px;
+    height: 34px;
+    margin: 0;
+    font-size: 12px;
+    transform: translateY(-50%);
+  }
+
+  /* Ruang konten diperkecil */
+  .content {
+    width: 100%;
+    padding: 10px;
+  }
+
+  /* Panel form */
+  .inputPanel {
+    border-radius: 15px;
+  }
+
+  .inputPanelHead {
+    padding: 17px;
+    gap: 12px;
+  }
+
+  .inputPanelHead h2 {
+    font-size: 21px;
+  }
+
+  .inputPanelHead > div > p:last-child {
+    font-size: 12px;
+  }
+
+  /* Tab Tambah dan Edit */
+  .surveyModeTabs {
+    padding: 12px 12px 0;
+    gap: 7px;
+  }
+
+  .surveyModeTabs button {
+    min-height: 38px;
+    padding: 0 10px;
+    border-radius: 10px;
+    font-size: 11px;
+    gap: 6px;
+  }
+
+  .surveyModeTabs button svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  /* Form lebih ringkas */
+  .surveyInputForm {
+    padding: 14px;
+    gap: 14px;
+  }
+
+  .surveyInputForm label {
+    gap: 6px;
+  }
+
+  .surveyInputForm label > span {
+    font-size: 11px;
+  }
+
+  .surveyInputForm input,
+  .surveyInputForm select {
+    min-height: 41px;
+    padding: 0 11px;
+    border-radius: 10px;
+    font-size: 13px;
+  }
+
+  /* Tombol bawah */
+  .inputCancel,
+  .inputSubmit,
+  .inputDelete {
+    min-height: 41px;
+    padding: 0 12px;
+    font-size: 11px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  aside {
+    width: 46px;
+    padding: 10px 4px;
+  }
+
+  aside .brand-wrapper,
+  aside .brand {
+    width: 34px;
+  }
+
+  aside .brand {
+    height: 34px;
+    flex-basis: 34px;
+    font-size: 10px;
+  }
+
+  aside:not(.open) > button,
+  aside:not(.open) .sidebarGroup,
+  aside:not(.open) .sidebarGroupRow,
+  aside:not(.open) .sidebarManageButton {
+    width: 34px;
+    min-width: 34px;
+    height: 34px;
+    min-height: 34px;
+  }
+
+  aside:not(.open) > button svg,
+  aside:not(.open) .sidebarManageButton > svg {
+    width: 17px;
+    height: 17px;
+    flex-basis: 17px;
+  }
+
+  main,
+  .shell.sidebar-open main {
+    width: calc(100% - 46px);
+    margin-left: 46px;
+  }
+
+  header > .search {
+    width: 58%;
+    min-width: 105px;
+    max-width: 220px;
+  }
+
+  .content {
+    padding: 8px;
+  }
+}
