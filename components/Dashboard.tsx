@@ -1524,18 +1524,23 @@ export default function Dashboard({
             <button
               type="button"
               className="sidebarManageButton"
-              onClick={() => {
-                setView("home");
-                setInputMode("create");
+              onClick={(event) => {
+                event.preventDefault();
+                event.stopPropagation();
 
-                if (sidebarOpen) {
-                  setManageMenuOpen(true);
-                }
+                setInputMode("create");
+                setView("input");
+                setManageMenuOpen(false);
+                setSidebarOpen(false);
               }}
               title="Kelola Data"
+              aria-label="Buka Kelola Data"
             >
               <Sheet />
-              <span className="menu-label">Kelola Data</span>
+
+              <span className="menu-label">
+                Kelola Data
+              </span>
             </button>
 
             <button
