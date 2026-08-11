@@ -24,6 +24,7 @@ import {
   RefreshCw,
   Search,
   Sheet,
+  Trash2,
   TrendingDown,
   TrendingUp,
 } from "lucide-react";
@@ -792,6 +793,9 @@ function SurveyInput({
   const [submitting, setSubmitting] =
     useState(false);
 
+  const [deleting, setDeleting] =
+    useState(false);
+
   const [message, setMessage] = useState("");
   const [success, setSuccess] = useState(false);
 
@@ -1004,6 +1008,93 @@ function SurveyInput({
       );
     } finally {
       setSubmitting(false);
+    }
+  }
+
+  async function handleDeleteSurvey() {
+    if (!selectedSurvey) {
+      setSuccess(false);
+      setMessage(
+        "Pilih kegiatan yang akan dihapus",
+      );
+      return;
+    }
+
+    const confirmed = window.confirm(
+      `Hapus kegiatan "${selectedSurvey.name}"?\n\n` +
+      "Seluruh target dan realisasi kegiatan ini akan ikut dihapus. " +
+      "Tindakan ini tidak dapat dibatalkan.",
+    );
+
+    if (!confirmed) {
+      return;
+    }
+
+    setDeleting(true);
+    setSuccess(false);
+    setMessage("");
+
+    try {
+      const response = await fetch(
+        "/api/surveys",
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type":
+              "application/json",
+          },
+          body: JSON.stringify({
+            id: selectedSurvey.id,
+          }),
+        },
+      );
+
+      const responseText =
+        await response.text();
+
+      if (!responseText.trim()) {
+        throw new Error(
+          `Server tidak memberikan respons (${response.status})`,
+        );
+      }
+
+      const result = JSON.parse(
+        responseText,
+      ) as {
+        success?: boolean;
+        message?: string;
+      };
+
+      if (!response.ok || !result.success) {
+        throw new Error(
+          result.message ??
+          "Kegiatan gagal dihapus",
+        );
+      }
+
+      setSuccess(true);
+      setMessage(
+        result.message ??
+        "Kegiatan berhasil dihapus",
+      );
+
+      localStorage.setItem(
+        "simi-last-view",
+        "dashboard",
+      );
+
+      window.setTimeout(() => {
+        window.location.reload();
+      }, 900);
+    } catch (error) {
+      setSuccess(false);
+      setMessage(
+        error instanceof Error
+          ? error.message
+          : "Kegiatan gagal dihapus",
+      );
+    } finally {
+      setDeleting(false);
     }
   }
 
@@ -1301,6 +1392,64 @@ function SurveyInput({
             {message}
           </div>
         )}
+
+        <div className="formActions formWide">
+          {isEditing && selectedSurvey && (
+            <button
+              type="button"
+              className="inputDelete"
+              onClick={() =>
+                void handleDeleteSurvey()
+              }
+              disabled={submitting || deleting}
+            >
+              <Trash2 />
+
+              {deleting
+                ? "Menghapus..."
+                : "Hapus Kegiatan"}
+            </button>
+          )}
+
+          <div className="formActionsRight">
+            <button
+              type="button"
+              className="inputCancel"
+              disabled={submitting || deleting}
+              onClick={
+                isEditing
+                  ? clearForm
+                  : onCancel
+              }
+            >
+              {isEditing
+                ? "Batal Edit"
+                : "Batal"}
+            </button>
+
+            <button
+              type="submit"
+              className="inputSubmit"
+              disabled={
+                submitting ||
+                deleting ||
+                formDisabled
+              }
+            >
+              {isEditing ? (
+                <Pencil />
+              ) : (
+                <Sheet />
+              )}
+
+              {submitting
+                ? "Menyimpan..."
+                : isEditing
+                  ? "Simpan Perubahan"
+                  : "Simpan ke Spreadsheet"}
+            </button>
+          </div>
+        </div>
 
         <div className="formActions formWide">
           <button
