@@ -33,9 +33,7 @@ export async function getSurveys(): Promise<{
 
   try {
     const res = await fetch(url, {
-      next: {
-        revalidate: 300,
-      },
+      cache: "no-store",
     });
 
     if (!res.ok) {
@@ -74,7 +72,7 @@ export async function getSurveys(): Promise<{
             ),
             realization: Number(
               row[
-                `${monthKey}_realisasi`
+              `${monthKey}_realisasi`
               ] || 0,
             ),
           }),
