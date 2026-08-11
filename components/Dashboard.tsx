@@ -1371,7 +1371,10 @@ export default function Dashboard({
   const [manageMenuOpen, setManageMenuOpen] =
     useState(false);
 
-  const [showAllSurveys, setShowAllSurveys] =
+  const [showAllCards, setShowAllCards] =
+    useState(false);
+
+  const [showAllTable, setShowAllTable] =
     useState(false);
 
   useEffect(() => {
@@ -1435,7 +1438,11 @@ export default function Dashboard({
       ? Math.min(100, Math.round((totals.r / totals.t) * 100))
       : 0;
 
-  const visibleSurveys = showAllSurveys
+  const cards = showAllCards
+    ? filtered
+    : filtered.slice(0, 6);
+
+  const visibleTableSurveys = showAllTable
     ? filtered
     : filtered.slice(0, 6);
 
@@ -1445,8 +1452,6 @@ export default function Dashboard({
     0,
     filtered.length - 6,
   );
-
-  const cards = visibleSurveys;
 
   if (view === null) {
     return (
@@ -1806,14 +1811,12 @@ export default function Dashboard({
                   <button
                     type="button"
                     className="surveyExpandButton"
-                    onClick={() => {
-                      setShowAllSurveys(
-                        (current) => !current,
-                      );
-                    }}
-                    aria-expanded={showAllSurveys}
+                    onClick={() =>
+                      setShowAllCards((current) => !current)
+                    }
+                    aria-expanded={showAllCards}
                   >
-                    {showAllSurveys
+                    {showAllCards
                       ? "Tampilkan lebih sedikit"
                       : `Tampilkan lebih lanjut (${hiddenSurveyCount})`}
                   </button>
@@ -1830,7 +1833,7 @@ export default function Dashboard({
                     <h2>Target dan Realisasi</h2>
 
                     <small className="tableResultInfo">
-                      Menampilkan {visibleSurveys.length} dari{" "}
+                      Menampilkan {visibleTableSurveys.length} dari{" "}
                       {filtered.length} kegiatan
                     </small>
                   </div>
@@ -1912,7 +1915,7 @@ export default function Dashboard({
                     </thead>
 
                     <tbody>
-                      {visibleSurveys.map((survey) => (
+                      {visibleTableSurveys.map((survey) => (
                         <tr key={survey.id}>
                           <td>
                             <strong>{survey.name}</strong>
@@ -1952,11 +1955,28 @@ export default function Dashboard({
                     </tbody>
                   </table>
                 </div>
+
+                {hasMoreSurveys && (
+                  <div className="tableExpandActions">
+                    <button
+                      type="button"
+                      className="surveyExpandButton"
+                      onClick={() =>
+                        setShowAllTable((current) => !current)
+                      }
+                      aria-expanded={showAllTable}
+                    >
+                      {showAllTable
+                        ? "Tampilkan lebih sedikit"
+                        : `Tampilkan lebih lanjut (${hiddenSurveyCount})`}
+                    </button>
+                  </div>
+                )}
               </section>
             </>
           )}
         </div>
-      </main >
-    </div >
+      </main>
+    </div>
   );
 }
