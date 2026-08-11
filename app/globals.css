@@ -2368,3 +2368,39 @@ aside:not(.open) .sidebarArrow {
   display: none !important;
   pointer-events: none;
 }
+
+/* ========================================
+   POSISI AVATAR HEADER DI HP
+======================================== */
+
+@media (max-width: 650px) {
+  header {
+    width: 100%;
+    padding: 0 12px;
+    gap: 10px;
+  }
+
+  header>.icon {
+    flex: 0 0 42px;
+  }
+
+  header>.search {
+    min-width: 0;
+    max-width: none;
+    flex: 1 1 auto;
+  }
+
+  header>.source {
+    display: none;
+  }
+
+  header>.avatar {
+    display: grid;
+    width: 40px;
+    min-width: 40px;
+    height: 40px;
+    margin-left: auto;
+    flex: 0 0 40px;
+  }
+}
+
