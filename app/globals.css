@@ -841,9 +841,6 @@ header {
     max-width: none;
   }
 
-  .avatar {
-    display: none;
-  }
 }
 
 aside button svg {
@@ -2370,82 +2367,48 @@ aside:not(.open) .sidebarArrow {
 }
 
 /* ========================================
-   POSISI AVATAR HEADER DI HP
+   HEADER MOBILE FINAL
 ======================================== */
 
-@media (max-width: 650px) {
-  header {
-    width: 100%;
-    padding: 0 12px;
-    gap: 10px;
-  }
-
-  header>.icon {
-    flex: 0 0 42px;
-  }
-
-  header>.search {
-    min-width: 0;
-    max-width: none;
-    flex: 1 1 auto;
-  }
-
-  header>.source {
-    display: none;
-  }
-
-  header>.avatar {
-    display: grid;
-    width: 40px;
-    min-width: 40px;
-    height: 40px;
-    margin-left: auto;
-    flex: 0 0 40px;
-  }
-}
-
-/* ========================================
-   HEADER MOBILE: AVATAR DI UJUNG KANAN
-======================================== */
-
-@media (max-width: 650px) {
+@media screen and (max-width: 650px) {
   header {
     position: sticky;
     top: 0;
     width: 100%;
-    height: 76px;
-    padding: 0 64px 0 12px;
-    gap: 10px;
+    height: 68px;
+    padding: 0 60px 0 10px;
+    gap: 8px;
   }
 
   header>.icon {
-    width: 42px;
-    min-width: 42px;
-    height: 42px;
-    flex: 0 0 42px;
+    width: 40px;
+    min-width: 40px;
+    height: 40px;
+    flex: 0 0 40px;
   }
 
   header>.search {
     width: auto;
     min-width: 0;
     max-width: none;
+    height: 40px;
     flex: 1 1 auto;
   }
 
   header>.search input {
+    width: 100%;
     min-width: 0;
   }
 
-  /* Sembunyikan teks Google Spreadsheet di HP */
   header>.source {
     display: none;
   }
 
-  /* Kunci avatar di ujung kanan */
   header>.avatar {
-    position: absolute;
-    top: 50%;
-    right: 12px;
+    position: fixed;
+    top: 14px;
+    right: 10px;
+    left: auto;
 
     display: grid;
     place-items: center;
@@ -2455,30 +2418,26 @@ aside:not(.open) .sidebarArrow {
     height: 40px;
     margin: 0;
 
-    transform: translateY(-50%);
-    z-index: 3;
+    transform: none;
+    z-index: 50;
   }
 }
 
-@media (max-width: 420px) {
+@media screen and (max-width: 420px) {
   header {
-    padding-right: 58px;
-    gap: 7px;
+    padding-right: 56px;
   }
 
-  header > .avatar {
-    right: 9px;
+  header>.avatar {
+    top: 16px;
+    right: 8px;
     width: 36px;
     min-width: 36px;
     height: 36px;
     font-size: 12px;
   }
 
-  header > .search {
-    height: 40px;
-  }
-
-  header > .search input::placeholder {
+  header>.search input::placeholder {
     font-size: 11px;
   }
 }
