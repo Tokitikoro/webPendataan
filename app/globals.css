@@ -2925,4 +2925,15 @@ aside:not(.open) .sidebarArrow {
     margin-bottom: 12px;
   }
 
-  aside:not(.open) .brand-wrapper
+  aside:not(.open) .brand-wrapper .brand {
+    width: 34px;
+    min-width: 34px;
+    height: 34px;
+    border-radius: 10px;
+  }
+
+  aside:not(.open) .brand-wrapper .brand span {
+    font-size: 10px;
+    letter-spacing: -0.8px;
+  }
+}
