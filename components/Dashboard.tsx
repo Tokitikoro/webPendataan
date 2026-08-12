@@ -1472,8 +1472,14 @@ export default function Dashboard({
     null
   >(null);
 
-  const [searchQuery, setSearchQuery] = useState("");
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [searchQuery, setSearchQuery] =
+    useState("");
+
+  const [sidebarOpen, setSidebarOpen] =
+    useState(false);
+
+  const [profileMenuOpen, setProfileMenuOpen] =
+    useState(false);
 
   const [inputMode, setInputMode] =
     useState<FormMode>("create");
@@ -1783,7 +1789,58 @@ export default function Dashboard({
             {source}
           </div>
 
-          <div className="avatar">JK</div>
+          <div className="profileMenu">
+            <button
+              type="button"
+              className="avatarButton"
+              onClick={() =>
+                setProfileMenuOpen(
+                  (current) => !current,
+                )
+              }
+              aria-label="Buka menu akun"
+              aria-expanded={profileMenuOpen}
+            >
+              JK
+            </button>
+
+            {profileMenuOpen && (
+              <div className="profileDropdown">
+                <div className="profileDropdownIdentity">
+                  <strong>JK</strong>
+                  <small>Administrator</small>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    setProfileMenuOpen(false);
+
+                    /*
+                     * Nanti diarahkan ke halaman
+                     * pengaturan akun.
+                     */
+                  }}
+                >
+                  Pengaturan Akun
+                </button>
+
+                <button
+                  type="button"
+                  className="profileLogoutButton"
+                  onClick={() => {
+                    setProfileMenuOpen(false);
+
+                    /*
+                     * Nanti diisi fungsi logout.
+                     */
+                  }}
+                >
+                  Keluar
+                </button>
+              </div>
+            )}
+          </div>
         </header>
 
         <div className="content">
