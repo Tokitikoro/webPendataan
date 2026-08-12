@@ -1831,15 +1831,33 @@ export default function Dashboard({
                   onClick={async () => {
                     setProfileMenuOpen(false);
 
-                    await fetch("/api/auth/logout", {
-                      method: "POST",
-                    });
+                    try {
+                      const response = await fetch(
+                        "/api/auth/logout",
+                        {
+                          method: "POST",
+                          credentials: "same-origin",
+                        },
+                      );
 
-                    sessionStorage.removeItem(
-                      "simi-last-view",
-                    );
+                      if (!response.ok) {
+                        throw new Error(
+                          "Logout gagal diproses",
+                        );
+                      }
 
-                    window.location.href = "/login";
+                      sessionStorage.removeItem(
+                        "simi-last-view",
+                      );
+
+                      window.location.replace("/login");
+                    } catch (error) {
+                      window.alert(
+                        error instanceof Error
+                          ? error.message
+                          : "Logout gagal diproses",
+                      );
+                    }
                   }}
                 >
                   Keluar
