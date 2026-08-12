@@ -3254,3 +3254,225 @@ aside:not(.open) .sidebarArrow {
     width: 205px;
   }
 }
+
+/* ========================================
+   HALAMAN LOGIN
+======================================== */
+
+.loginPage {
+  width: 100%;
+  min-height: 100vh;
+  padding: 24px;
+  background:
+    radial-gradient(circle at top right,
+      rgba(35, 211, 197, 0.22),
+      transparent 35%),
+    linear-gradient(135deg,
+      #062d46,
+      #075985 55%,
+      #0db9b5);
+
+  display: grid;
+  place-items: center;
+}
+
+.loginCard {
+  width: min(100%, 460px);
+  padding: 34px;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.97);
+
+  box-shadow:
+    0 28px 70px rgba(3, 29, 47, 0.28);
+}
+
+.loginBrand {
+  display: grid;
+  grid-template-columns: 58px 1fr;
+  align-items: center;
+  gap: 16px;
+}
+
+.loginLogo {
+  width: 58px;
+  height: 58px;
+  border-radius: 17px;
+  background:
+    linear-gradient(135deg,
+      #22d3c5,
+      #1f96ef);
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 900;
+
+  display: grid;
+  place-items: center;
+
+  box-shadow:
+    0 10px 25px rgba(0, 184, 212, 0.3);
+}
+
+.loginBrand h1 {
+  margin: 0 0 6px;
+  color: #123047;
+  font-size: 24px;
+}
+
+.loginBrand>div:last-child>p:last-child {
+  margin: 0;
+  color: #6d8997;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.loginForm {
+  margin-top: 28px;
+  display: grid;
+  gap: 17px;
+}
+
+.loginForm label {
+  display: grid;
+  gap: 8px;
+}
+
+.loginForm label>span {
+  color: #385d70;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.loginInput {
+  min-height: 48px;
+  padding: 0 13px;
+  border: 1px solid #d4e6ec;
+  border-radius: 12px;
+  background: #f8fcfd;
+  color: #70a1b6;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.loginInput:focus-within {
+  border-color: #18aabd;
+  background: #ffffff;
+  box-shadow:
+    0 0 0 4px rgba(24, 170, 189, 0.12);
+}
+
+.loginInput svg {
+  width: 18px;
+  height: 18px;
+}
+
+.loginInput input {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #123047;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+.loginMessage {
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: #ffebe8;
+  color: #a03a30;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.loginSubmit {
+  min-height: 48px;
+  border: 0;
+  border-radius: 12px;
+  background:
+    linear-gradient(120deg,
+      #0782b6,
+      #0db9b5);
+  color: #ffffff;
+  font-family: inherit;
+  font-weight: 800;
+  cursor: pointer;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+}
+
+.loginSubmit svg {
+  width: 18px;
+  height: 18px;
+}
+
+.loginSubmit:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+.loginFooter {
+  display: block;
+  margin-top: 22px;
+  color: #78909c;
+  text-align: center;
+  font-size: 10px;
+}
+
+@media (max-width: 480px) {
+  .loginPage {
+    padding: 15px;
+  }
+
+  .loginCard {
+    padding: 24px 20px;
+    border-radius: 20px;
+  }
+
+  .loginBrand {
+    grid-template-columns: 48px 1fr;
+    gap: 12px;
+  }
+
+  .loginLogo {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    font-size: 12px;
+  }
+
+  .loginBrand h1 {
+    font-size: 20px;
+  }
+}
+
+.loginPasswordToggle {
+  width: 34px;
+  min-width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: #6f93a4;
+  cursor: pointer;
+
+  display: grid;
+  place-items: center;
+}
+
+.loginPasswordToggle:hover {
+  color: #08758a;
+  background: #e8f6f8;
+}
+
+.loginPasswordToggle svg {
+  width: 17px;
+  height: 17px;
+}

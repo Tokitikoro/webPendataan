@@ -1828,12 +1828,18 @@ export default function Dashboard({
                 <button
                   type="button"
                   className="profileLogoutButton"
-                  onClick={() => {
+                  onClick={async () => {
                     setProfileMenuOpen(false);
 
-                    /*
-                     * Nanti diisi fungsi logout.
-                     */
+                    await fetch("/api/auth/logout", {
+                      method: "POST",
+                    });
+
+                    sessionStorage.removeItem(
+                      "simi-last-view",
+                    );
+
+                    window.location.href = "/login";
                   }}
                 >
                   Keluar
