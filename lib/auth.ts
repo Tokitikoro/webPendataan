@@ -2,7 +2,7 @@ export const SESSION_COOKIE_NAME =
     "simi-session";
 
 const SESSION_DURATION_SECONDS =
-    60 * 60 * 8;
+    60 * 60 * 3;
 
 type SessionPayload = {
     username: string;
