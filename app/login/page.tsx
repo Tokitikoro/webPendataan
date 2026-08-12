@@ -42,6 +42,7 @@ export default function LoginPage() {
                 "/api/auth/login",
                 {
                     method: "POST",
+                    credentials: "same-origin",
                     headers: {
                         "Content-Type":
                             "application/json",
@@ -64,7 +65,12 @@ export default function LoginPage() {
                 );
             }
 
-            window.location.href = "/";
+            sessionStorage.setItem(
+                "simi-last-view",
+                "home",
+            );
+
+            window.location.replace("/");
         } catch (error) {
             setMessage(
                 error instanceof Error
