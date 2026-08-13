@@ -654,8 +654,8 @@ function Home({
           <h1>Sistem Monitoring Survei</h1>
 
           <p>
-            Kelola kegiatan, pantau target dan realisasi, serta lihat agenda
-            survei dalam satu sistem terpadu.
+            Kelola Kegiatan, Pantau Target dan Realisasi, Serta Lihat Agenda
+            Survei Dalam Satu Sistem Terpadu.
           </p>
 
           <button
@@ -2198,7 +2198,7 @@ export default function Dashboard({
                   <p className="eyebrow">SISTEM MONITORING TERPADU</p>
                   <h1>Ringkasan Kegiatan Survei</h1>
                   <p>
-                    Pantau target, realisasi, dan agenda dari satu dashboard.
+                    Pantau Target, Realisasi, Dan Agenda Dari Satu Dashboard.
                   </p>
                 </div>
 
@@ -2207,34 +2207,34 @@ export default function Dashboard({
 
                   <div>
                     <b>{percentage}%</b>
-                    <span>Capaian keseluruhan</span>
+                    <span>Capaian Keseluruhan</span>
                   </div>
                 </div>
               </section>
 
               <section className="metrics">
                 <article>
-                  <span>Total target</span>
+                  <span>Total Target</span>
                   <b>{totals.t}</b>
-                  <small>Seluruh periode</small>
+                  <small>Seluruh Periode</small>
                 </article>
 
                 <article>
                   <span>Realisasi</span>
                   <b>{totals.r}</b>
-                  <small>Data terkumpul</small>
+                  <small>Data Terkumpul</small>
                 </article>
 
                 <article>
-                  <span>Kegiatan aktif</span>
+                  <span>Kegiatan Aktif</span>
                   <b>{filtered.length}</b>
-                  <small>Lintas kategori</small>
+                  <small>Lintas Kategori</small>
                 </article>
 
                 <article>
-                  <span>Sisa target</span>
+                  <span>Sisa Target</span>
                   <b>{Math.max(0, totals.t - totals.r)}</b>
-                  <small>Perlu ditindaklanjuti</small>
+                  <small>Perlu Ditindaklanjuti</small>
                 </article>
               </section>
 
@@ -2326,7 +2326,7 @@ export default function Dashboard({
 
                     <small className="tableResultInfo">
                       Menampilkan {visibleTableSurveys.length} dari{" "}
-                      {filtered.length} kegiatan
+                      {filtered.length} Kegiatan
                     </small>
                   </div>
                   <button
