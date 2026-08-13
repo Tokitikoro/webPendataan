@@ -4665,6 +4665,7 @@ aside:not(.open) .sidebarArrow {
   cursor: wait;
   opacity: 0.7;
 }
+
 /* ========================================
    MOBILE COMPACT FINAL
    Hanya untuk HP
@@ -4696,7 +4697,7 @@ aside:not(.open) .sidebarArrow {
     font-size: 8px;
   }
 
-  aside:not(.open) > button,
+  aside:not(.open)>button,
   aside:not(.open) .sidebarGroup,
   aside:not(.open) .sidebarGroupRow,
   aside:not(.open) .sidebarManageButton {
@@ -4709,8 +4710,8 @@ aside:not(.open) .sidebarArrow {
     border-radius: 9px;
   }
 
-  aside:not(.open) > button svg,
-  aside:not(.open) .sidebarManageButton > svg {
+  aside:not(.open)>button svg,
+  aside:not(.open) .sidebarManageButton>svg {
     width: 16px;
     height: 16px;
     flex: 0 0 16px;
@@ -4737,7 +4738,7 @@ aside:not(.open) .sidebarArrow {
     gap: 5px;
   }
 
-  header > .icon {
+  header>.icon {
     width: 31px;
     min-width: 31px;
     height: 31px;
@@ -4745,12 +4746,12 @@ aside:not(.open) .sidebarArrow {
     border-radius: 9px;
   }
 
-  header > .icon svg {
+  header>.icon svg {
     width: 17px;
     height: 17px;
   }
 
-  header > .search {
+  header>.search {
     width: auto;
     min-width: 0;
     max-width: none;
@@ -4761,22 +4762,22 @@ aside:not(.open) .sidebarArrow {
     border-radius: 10px;
   }
 
-  header > .search svg {
+  header>.search svg {
     width: 15px;
     height: 15px;
     flex: 0 0 15px;
   }
 
-  header > .search input {
+  header>.search input {
     min-width: 0;
     font-size: 10px;
   }
 
-  header > .search input::placeholder {
+  header>.search input::placeholder {
     font-size: 10px;
   }
 
-  header > .profileMenu {
+  header>.profileMenu {
     right: 6px;
   }
 
@@ -4820,7 +4821,7 @@ aside:not(.open) .sidebarArrow {
     line-height: 1.08;
   }
 
-  .homeIntro > p:not(.eyebrow) {
+  .homeIntro>p:not(.eyebrow) {
     font-size: 11px;
     line-height: 1.45;
   }
@@ -4908,7 +4909,7 @@ aside:not(.open) .sidebarArrow {
     font-size: 25px;
   }
 
-  .indicatorValue > span {
+  .indicatorValue>span {
     margin-top: 2px;
     font-size: 9px;
   }
@@ -4918,7 +4919,7 @@ aside:not(.open) .sidebarArrow {
     padding-top: 8px;
   }
 
-  .indicatorLabels > span {
+  .indicatorLabels>span {
     font-size: 9px;
     gap: 4px;
   }
@@ -4942,7 +4943,7 @@ aside:not(.open) .sidebarArrow {
     gap: 10px;
   }
 
-  .homeQuickMenu button > svg {
+  .homeQuickMenu button>svg {
     width: 35px;
     height: 35px;
     padding: 8px;
@@ -5042,7 +5043,7 @@ aside:not(.open) .sidebarArrow {
     font-size: 19px;
   }
 
-  .settingsHead > div > p:last-child {
+  .settingsHead>div>p:last-child {
     font-size: 10px;
   }
 
@@ -5058,7 +5059,7 @@ aside:not(.open) .sidebarArrow {
     gap: 9px;
   }
 
-  .settingsThemeCard > svg {
+  .settingsThemeCard>svg {
     width: 32px;
     height: 32px;
     padding: 7px;
@@ -5072,4 +5073,33 @@ aside:not(.open) .sidebarArrow {
   .settingsThemeCard small {
     font-size: 9px;
   }
+}
+
+/* ========================================
+   WARNA STATUS TABEL TEMA DEFAULT
+   Harus berada paling akhir globals.css
+======================================== */
+
+/* Target */
+
+:root[data-theme="default"] .tableWrap tbody td.target {
+  color: #174f68;
+  background: #dcecf8;
+  font-weight: 800;
+}
+
+/* Realisasi belum mencapai target */
+
+:root[data-theme="default"] .tableWrap tbody td.warn {
+  color: #593200;
+  background: #ffb44d;
+  font-weight: 900;
+}
+
+/* Realisasi sudah mencapai target */
+
+:root[data-theme="default"] .tableWrap tbody td.ok {
+  color: #ffffff;
+  background: #17c69a;
+  font-weight: 900;
 }
