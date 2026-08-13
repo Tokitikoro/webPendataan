@@ -4665,3 +4665,411 @@ aside:not(.open) .sidebarArrow {
   cursor: wait;
   opacity: 0.7;
 }
+/* ========================================
+   MOBILE COMPACT FINAL
+   Hanya untuk HP
+======================================== */
+
+@media screen and (max-width: 650px) and (pointer: coarse) {
+  /* Sidebar lebih ramping */
+
+  aside,
+  aside:not(.open) {
+    width: 44px;
+    padding: 8px 4px;
+    gap: 6px;
+  }
+
+  aside:not(.open) .brand-wrapper {
+    width: 100%;
+    height: 32px;
+    min-height: 32px;
+    margin: 0 0 8px;
+    padding: 0;
+  }
+
+  aside:not(.open) .brand-wrapper .brand {
+    width: 30px;
+    min-width: 30px;
+    height: 30px;
+    border-radius: 9px;
+    font-size: 8px;
+  }
+
+  aside:not(.open) > button,
+  aside:not(.open) .sidebarGroup,
+  aside:not(.open) .sidebarGroupRow,
+  aside:not(.open) .sidebarManageButton {
+    width: 32px;
+    min-width: 32px;
+    height: 32px;
+    min-height: 32px;
+    margin: 0 auto;
+    padding: 0;
+    border-radius: 9px;
+  }
+
+  aside:not(.open) > button svg,
+  aside:not(.open) .sidebarManageButton > svg {
+    width: 16px;
+    height: 16px;
+    flex: 0 0 16px;
+  }
+
+  .sidebar-version {
+    font-size: 8px;
+  }
+
+  /* Area utama mengikuti sidebar */
+
+  main,
+  .shell.sidebar-open main {
+    width: calc(100% - 44px);
+    margin-left: 44px;
+  }
+
+  /* Header dibuat lebih pendek */
+
+  header {
+    width: 100%;
+    height: 52px;
+    padding: 0 42px 0 6px;
+    gap: 5px;
+  }
+
+  header > .icon {
+    width: 31px;
+    min-width: 31px;
+    height: 31px;
+    flex: 0 0 31px;
+    border-radius: 9px;
+  }
+
+  header > .icon svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  header > .search {
+    width: auto;
+    min-width: 0;
+    max-width: none;
+    height: 32px;
+    padding: 0 8px;
+    gap: 6px;
+    flex: 1 1 auto;
+    border-radius: 10px;
+  }
+
+  header > .search svg {
+    width: 15px;
+    height: 15px;
+    flex: 0 0 15px;
+  }
+
+  header > .search input {
+    min-width: 0;
+    font-size: 10px;
+  }
+
+  header > .search input::placeholder {
+    font-size: 10px;
+  }
+
+  header > .profileMenu {
+    right: 6px;
+  }
+
+  .avatarButton {
+    width: 30px;
+    min-width: 30px;
+    height: 30px;
+    font-size: 10px;
+  }
+
+  /* Ruang halaman */
+
+  .content {
+    width: 100%;
+    padding: 7px;
+  }
+
+  .homePage {
+    gap: 10px;
+  }
+
+  /* Hero Beranda dibuat jauh lebih ringkas */
+
+  .homeHero {
+    min-height: 0;
+    padding: 18px 15px;
+    gap: 14px;
+    border-radius: 16px;
+    align-items: stretch;
+  }
+
+  .homeHero .eyebrow {
+    margin-bottom: 6px;
+    font-size: 8px;
+    letter-spacing: 1px;
+  }
+
+  .homeHero h1 {
+    margin: 0 0 8px;
+    font-size: 25px;
+    line-height: 1.08;
+  }
+
+  .homeIntro > p:not(.eyebrow) {
+    font-size: 11px;
+    line-height: 1.45;
+  }
+
+  .homeAction {
+    min-height: 36px;
+    margin-top: 12px;
+    padding: 0 12px;
+    border-radius: 10px;
+    font-size: 10px;
+    gap: 6px;
+  }
+
+  .homeAction svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  /* Ringkasan capaian dibuat horizontal dan pendek */
+
+  .homeSummary {
+    width: 100%;
+    min-width: 0;
+    padding: 13px 14px;
+    border-radius: 14px;
+  }
+
+  .homeSummary span {
+    font-size: 9px;
+  }
+
+  .homeSummary strong {
+    margin: 5px 0;
+    font-size: 32px;
+  }
+
+  .homeSummary small {
+    font-size: 9px;
+    line-height: 1.35;
+  }
+
+  /* Kartu indikator tidak lagi setinggi layar */
+
+  .homeIndicators {
+    gap: 9px;
+  }
+
+  .indicatorCard {
+    min-height: 0;
+    padding: 14px 12px;
+    border-radius: 15px;
+  }
+
+  .indicatorCard::before {
+    width: 70px;
+    height: 70px;
+    top: -34px;
+    right: -30px;
+  }
+
+  .indicatorIcon {
+    width: 38px;
+    height: 38px;
+    margin: 0 auto 9px;
+    border-radius: 11px;
+  }
+
+  .indicatorIcon svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .indicatorCard h3 {
+    min-height: 0;
+    margin: 0 0 8px;
+    font-size: 12px;
+    line-height: 1.3;
+  }
+
+  .indicatorValue {
+    margin-bottom: 9px;
+  }
+
+  .indicatorValue strong {
+    font-size: 25px;
+  }
+
+  .indicatorValue > span {
+    margin-top: 2px;
+    font-size: 9px;
+  }
+
+  .indicatorLabels {
+    gap: 4px;
+    padding-top: 8px;
+  }
+
+  .indicatorLabels > span {
+    font-size: 9px;
+    gap: 4px;
+  }
+
+  .indicatorLabels svg {
+    width: 11px;
+    height: 11px;
+    flex: 0 0 11px;
+  }
+
+  /* Menu cepat menjadi lebih pendek */
+
+  .homeQuickMenu {
+    gap: 8px;
+  }
+
+  .homeQuickMenu button {
+    min-height: 68px;
+    padding: 11px;
+    border-radius: 14px;
+    gap: 10px;
+  }
+
+  .homeQuickMenu button > svg {
+    width: 35px;
+    height: 35px;
+    padding: 8px;
+    border-radius: 10px;
+    flex: 0 0 35px;
+  }
+
+  .homeQuickMenu strong {
+    margin-bottom: 2px;
+    font-size: 11px;
+  }
+
+  .homeQuickMenu small {
+    font-size: 9px;
+    line-height: 1.35;
+  }
+
+  /* Panel Dashboard */
+
+  .hero {
+    padding: 17px 15px;
+    border-radius: 15px;
+  }
+
+  .hero h1 {
+    font-size: 21px;
+  }
+
+  .hero p {
+    font-size: 10px;
+    line-height: 1.4;
+  }
+
+  .metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 7px;
+    margin: 9px 0;
+  }
+
+  .metrics article {
+    padding: 11px;
+    border-radius: 13px;
+  }
+
+  .metrics span,
+  .metrics small {
+    font-size: 9px;
+  }
+
+  .metrics b {
+    margin: 3px 0;
+    font-size: 21px;
+  }
+
+  .cards {
+    gap: 8px;
+    margin-bottom: 9px;
+  }
+
+  .surveyCard {
+    padding: 12px;
+    border-radius: 14px;
+  }
+
+  .surveyCard h3 {
+    min-height: 0;
+    margin: 9px 0;
+    font-size: 12px;
+  }
+
+  .big b {
+    font-size: 23px;
+  }
+
+  .big small,
+  .surveyCard footer {
+    font-size: 9px;
+  }
+
+  /* Halaman Settings */
+
+  .settingsPage {
+    gap: 9px;
+  }
+
+  .settingsHead,
+  .settingsPanel {
+    padding: 14px;
+    border-radius: 15px;
+  }
+
+  .settingsHead {
+    gap: 10px;
+  }
+
+  .settingsHead h1 {
+    font-size: 19px;
+  }
+
+  .settingsHead > div > p:last-child {
+    font-size: 10px;
+  }
+
+  .settingsThemeGrid {
+    margin-top: 12px;
+    gap: 7px;
+  }
+
+  .settingsThemeCard {
+    min-height: 67px;
+    padding: 10px;
+    border-radius: 12px;
+    gap: 9px;
+  }
+
+  .settingsThemeCard > svg {
+    width: 32px;
+    height: 32px;
+    padding: 7px;
+    flex: 0 0 32px;
+  }
+
+  .settingsThemeCard strong {
+    font-size: 11px;
+  }
+
+  .settingsThemeCard small {
+    font-size: 9px;
+  }
+}
