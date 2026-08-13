@@ -5286,33 +5286,210 @@ aside:not(.open) .sidebarArrow {
     background-position: center !important;
 
     /* Kotak warna lebih pendek dari tinggi baris */
-    background-size:
-      calc(100% - 5px) calc(100% - 12px) !important;
 
     font-size: 10px;
     line-height: 42px;
     text-align: center;
     vertical-align: middle;
   }
+}
 
-  /* Target */
-  .tableWrap tbody td.target {
-    color: #174f68 !important;
-    background-image:
-      linear-gradient(#dcecf8, #dcecf8) !important;
+/* ========================================
+   TABEL MOBILE FINAL
+   Header bulan sejajar dan warna konsisten
+======================================== */
+
+@media screen and (max-width: 650px) {
+  .tableWrap {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
   }
 
-  /* Realisasi belum mencapai target */
-  .tableWrap tbody td.warn {
-    color: #593200 !important;
-    background-image:
-      linear-gradient(#ffb44d, #ffb44d) !important;
+  /*
+   * Total tabel:
+   * Kegiatan = 210px
+   * Periode  = 78px
+   * 24 kolom T/R x 38px
+   */
+  .tableWrap table {
+    width: 1200px !important;
+    min-width: 1200px !important;
+    table-layout: fixed !important;
+    border-collapse: separate;
+    border-spacing: 0;
   }
 
-  /* Realisasi sudah mencapai target */
+  /* Kolom Kegiatan Survei */
+
+  .tableWrap col:first-child,
+  .tableWrap thead tr:first-child th:first-child,
+  .tableWrap tbody td:first-child {
+    width: 210px !important;
+    min-width: 210px !important;
+    max-width: 210px !important;
+  }
+
+  /* Kolom Periode */
+
+  .tableWrap col:nth-child(2),
+  .tableWrap thead tr:first-child th:nth-child(2),
+  .tableWrap tbody td:nth-child(2) {
+    width: 78px !important;
+    min-width: 78px !important;
+    max-width: 78px !important;
+  }
+
+  /* Semua kolom T dan R */
+
+  .tableWrap col:nth-child(n + 3),
+  .tableWrap thead tr:nth-child(2) th,
+  .tableWrap tbody td:nth-child(n + 3) {
+    width: 38px !important;
+    min-width: 38px !important;
+    max-width: 38px !important;
+  }
+
+  /* Satu bulan terdiri dari T + R = 76px */
+
+  .tableWrap thead tr:first-child th[colspan="2"] {
+    width: 76px !important;
+    min-width: 76px !important;
+    max-width: 76px !important;
+  }
+
+  /* Semua kolom berjalan bersama */
+
+  .tableWrap thead tr:first-child th:first-child,
+  .tableWrap thead tr:first-child th:nth-child(2),
+  .tableWrap tbody td:first-child,
+  .tableWrap tbody td:nth-child(2) {
+    position: static !important;
+    left: auto !important;
+    z-index: auto !important;
+  }
+
+  /* Ukuran header */
+
+  .tableWrap thead tr:first-child th {
+    height: 32px;
+    padding: 5px 2px !important;
+    font-size: 9px;
+    line-height: 1;
+    vertical-align: middle;
+  }
+
+  .tableWrap thead tr:nth-child(2) th {
+    height: 28px;
+    padding: 4px 1px !important;
+    font-size: 9px;
+    line-height: 1;
+    vertical-align: middle;
+  }
+
+  /* Tinggi baris isi */
+
+  .tableWrap tbody tr {
+    height: 44px;
+  }
+
+  .tableWrap tbody td {
+    height: 44px !important;
+    padding: 6px 2px !important;
+    font-size: 10px;
+    line-height: 1.15;
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  /* Nama kegiatan */
+
+  .tableWrap tbody td:first-child {
+    padding: 6px 7px !important;
+    text-align: left;
+  }
+
+  .tableWrap tbody td:first-child strong {
+    overflow: hidden;
+    margin: 0;
+    font-size: 10px;
+    line-height: 1.2;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .tableWrap tbody td:first-child small {
+    overflow: hidden;
+    margin-top: 2px;
+    font-size: 7px;
+    line-height: 1.1;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .tableWrap tbody td:nth-child(2) {
+    font-size: 8px;
+  }
+
+  /* Hilangkan eksperimen kotak kecil */
+
+  .tableWrap tbody td.target,
+  .tableWrap tbody td.warn,
   .tableWrap tbody td.ok {
+    padding: 6px 2px !important;
+    border-radius: 0 !important;
+    background-image: none !important;
+    background-size: auto !important;
+    background-position: initial !important;
+    background-repeat: initial !important;
+    line-height: 1.15 !important;
+    font-weight: 900;
+  }
+}
+
+/* ========================================
+   WARNA STATUS TABEL TEMA GELAP
+======================================== */
+
+@media screen and (max-width: 650px) {
+  :root[data-theme="dark"] .tableWrap tbody td.target {
+    color: #d8edf7 !important;
+    background: #19445c !important;
+  }
+
+  :root[data-theme="dark"] .tableWrap tbody td.warn {
+    color: #392400 !important;
+    background: #e5a23f !important;
+  }
+
+  :root[data-theme="dark"] .tableWrap tbody td.ok {
     color: #ffffff !important;
-    background-image:
-      linear-gradient(#17c69a, #17c69a) !important;
+    background: #119b79 !important;
+  }
+}
+
+/* Status tabel tema Default dan Terang */
+
+@media screen and (max-width: 650px) {
+
+  :root[data-theme="default"] .tableWrap tbody td.target,
+  :root[data-theme="light"] .tableWrap tbody td.target {
+    color: #174f68 !important;
+    background: #dcecf8 !important;
+  }
+
+  :root[data-theme="default"] .tableWrap tbody td.warn,
+  :root[data-theme="light"] .tableWrap tbody td.warn {
+    color: #593200 !important;
+    background: #ffb44d !important;
+  }
+
+  :root[data-theme="default"] .tableWrap tbody td.ok,
+  :root[data-theme="light"] .tableWrap tbody td.ok {
+    color: #ffffff !important;
+    background: #17c69a !important;
   }
 }
