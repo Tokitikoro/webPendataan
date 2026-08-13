@@ -5,7 +5,10 @@ import {
   useEffect,
   useMemo,
   useState,
+  useTransition,
 } from "react";
+
+import { useRouter } from "next/navigation";
 
 import {
   BarChart3,
@@ -19,11 +22,15 @@ import {
   House,
   LayoutDashboard,
   Menu,
+  Monitor,
+  Moon,
   Pencil,
   Plus,
   RefreshCw,
   Search,
+  Settings as SettingsIcon,
   Sheet,
+  Sun,
   Trash2,
   TrendingDown,
   TrendingUp,
@@ -45,6 +52,32 @@ const months = [
   "November",
   "Desember",
 ];
+
+type ThemeMode =
+  | "default"
+  | "light"
+  | "dark"
+  | "system";
+
+function applyTheme(mode: ThemeMode) {
+  const systemPrefersDark =
+    window.matchMedia(
+      "(prefers-color-scheme: dark)",
+    ).matches;
+
+  const resolvedTheme =
+    mode === "system"
+      ? systemPrefersDark
+        ? "dark"
+        : "light"
+      : mode;
+
+  document.documentElement.dataset.theme =
+    resolvedTheme;
+
+  document.documentElement.dataset.themeMode =
+    mode;
+}
 
 function sum(survey: Survey) {
   return survey.months.reduce(
@@ -990,7 +1023,7 @@ function SurveyInput({
           : "Kegiatan baru berhasil ditambahkan"),
       );
 
-      sessionStorage.setItem(
+      localStorage.setItem(
         "simi-last-view",
         "dashboard",
       );
@@ -1078,7 +1111,7 @@ function SurveyInput({
         "Kegiatan berhasil dihapus",
       );
 
-      sessionStorage.setItem(
+      localStorage.setItem(
         "simi-last-view",
         "dashboard",
       );
@@ -1411,46 +1444,195 @@ function SurveyInput({
             </button>
           )}
 
-          <button
-            type="button"
-            className="inputCancel"
-            disabled={submitting || deleting}
-            onClick={
-              isEditing
-                ? clearForm
-                : onCancel
-            }
-          >
-            {isEditing
-              ? "Batal Edit"
-              : "Batal"}
-          </button>
+          <div className="formActionsRight">
+            <button
+              type="button"
+              className="inputCancel"
+              disabled={submitting || deleting}
+              onClick={
+                isEditing
+                  ? clearForm
+                  : onCancel
+              }
+            >
+              {isEditing
+                ? "Batal Edit"
+                : "Batal"}
+            </button>
 
-          <button
-            type="submit"
-            className="inputSubmit"
-            disabled={
-              submitting ||
-              deleting ||
-              formDisabled
-            }
-          >
-            {isEditing ? (
-              <Pencil />
-            ) : (
-              <Sheet />
-            )}
+            <button
+              type="submit"
+              className="inputSubmit"
+              disabled={
+                submitting ||
+                deleting ||
+                formDisabled
+              }
+            >
+              {isEditing ? (
+                <Pencil />
+              ) : (
+                <Sheet />
+              )}
 
-            {submitting
-              ? "Menyimpan..."
-              : isEditing
-                ? "Simpan Perubahan"
-                : "Simpan ke Spreadsheet"}
-          </button>
+              {submitting
+                ? "Menyimpan..."
+                : isEditing
+                  ? "Simpan Perubahan"
+                  : "Simpan ke Spreadsheet"}
+            </button>
+          </div>
+        </div>
+      </form>
+    </section>
+  );
+}
+
+type SettingsProps = {
+  themeMode: ThemeMode;
+  onThemeChange: (mode: ThemeMode) => void;
+  onBack: () => void;
+};
+
+function Settings({
+  themeMode,
+  onThemeChange,
+  onBack,
+}: SettingsProps) {
+  return (
+    <section className="settingsPage">
+      <div className="settingsHead">
+        <div>
+          <p className="eyebrow">
+            PENGATURAN
+          </p>
+
+          <h1>Pengaturan Tampilan</h1>
+
+          <p>
+            Pilih tema yang ingin digunakan pada
+            SIMI Aqua.
+          </p>
         </div>
 
-      </form>
-    </section >
+        <button
+          type="button"
+          className="settingsBackButton"
+          onClick={onBack}
+        >
+          Kembali
+        </button>
+      </div>
+
+      <section className="settingsPanel">
+        <div className="settingsSectionHead">
+          <h2>Tema Aplikasi</h2>
+
+          <p>
+            Pengaturan tema akan tersimpan pada
+            perangkat yang sedang digunakan.
+          </p>
+        </div>
+
+        <div className="settingsThemeGrid">
+          <button
+            type="button"
+            className={
+              themeMode === "default"
+                ? "settingsThemeCard active"
+                : "settingsThemeCard"
+            }
+            onClick={() =>
+              onThemeChange("default")
+            }
+            aria-pressed={
+              themeMode === "default"
+            }
+          >
+            <LayoutDashboard />
+
+            <span>
+              <strong>Default</strong>
+              <small>
+                Tampilan asli SIMI Aqua
+              </small>
+            </span>
+          </button>
+
+          <button
+            type="button"
+            className={
+              themeMode === "light"
+                ? "settingsThemeCard active"
+                : "settingsThemeCard"
+            }
+            onClick={() =>
+              onThemeChange("light")
+            }
+            aria-pressed={
+              themeMode === "light"
+            }
+          >
+            <Sun />
+
+            <span>
+              <strong>Terang</strong>
+              <small>
+                Tampilan putih dan cerah
+              </small>
+            </span>
+          </button>
+
+          <button
+            type="button"
+            className={
+              themeMode === "dark"
+                ? "settingsThemeCard active"
+                : "settingsThemeCard"
+            }
+            onClick={() =>
+              onThemeChange("dark")
+            }
+            aria-pressed={
+              themeMode === "dark"
+            }
+          >
+            <Moon />
+
+            <span>
+              <strong>Gelap</strong>
+              <small>
+                Nyaman digunakan pada malam hari
+              </small>
+            </span>
+          </button>
+
+          <button
+            type="button"
+            className={
+              themeMode === "system"
+                ? "settingsThemeCard active"
+                : "settingsThemeCard"
+            }
+            onClick={() =>
+              onThemeChange("system")
+            }
+            aria-pressed={
+              themeMode === "system"
+            }
+          >
+            <Monitor />
+
+            <span>
+              <strong>Ikuti Sistem</strong>
+              <small>
+                Mengikuti tema perangkat
+              </small>
+            </span>
+          </button>
+        </div>
+      </section>
+    </section>
   );
 }
 
@@ -1464,11 +1646,17 @@ export default function Dashboard({
   initial,
   source,
 }: DashboardProps) {
+  const router = useRouter();
+
+  const [refreshing, startRefresh] =
+    useTransition();
+
   const [view, setView] = useState<
     "home" |
     "dashboard" |
     "calendar" |
     "input" |
+    "settings" |
     null
   >(null);
 
@@ -1480,6 +1668,9 @@ export default function Dashboard({
 
   const [profileMenuOpen, setProfileMenuOpen] =
     useState(false);
+
+  const [themeMode, setThemeMode] =
+    useState<ThemeMode>("default");
 
   const [inputMode, setInputMode] =
     useState<FormMode>("create");
@@ -1493,30 +1684,84 @@ export default function Dashboard({
   const [showAllTable, setShowAllTable] =
     useState(false);
 
+  function changeTheme(mode: ThemeMode) {
+    setThemeMode(mode);
+
+    localStorage.setItem(
+      "simi-theme",
+      mode,
+    );
+
+    applyTheme(mode);
+  }
+
   useEffect(() => {
-    const savedView =
-      sessionStorage.getItem("simi-last-view");
+    const savedTheme =
+      localStorage.getItem("simi-theme");
+
+    const initialTheme: ThemeMode =
+      savedTheme === "default" ||
+        savedTheme === "light" ||
+        savedTheme === "dark" ||
+        savedTheme === "system"
+        ? savedTheme
+        : "default";
+
+    applyTheme(initialTheme);
+
+    window.setTimeout(() => {
+      setThemeMode(initialTheme);
+    }, 0);
+
+    const systemTheme = window.matchMedia(
+      "(prefers-color-scheme: dark)",
+    );
+
+    function handleSystemThemeChange() {
+      const currentTheme =
+        localStorage.getItem("simi-theme");
+
+      if (currentTheme === "system") {
+        applyTheme("system");
+      }
+    }
+
+    systemTheme.addEventListener(
+      "change",
+      handleSystemThemeChange,
+    );
+
+    return () => {
+      systemTheme.removeEventListener(
+        "change",
+        handleSystemThemeChange,
+      );
+    };
+  }, []);
+
+  useEffect(() => {
+    const savedView = localStorage.getItem("simi-last-view");
 
     if (
       savedView === "home" ||
       savedView === "dashboard" ||
-      savedView === "calendar" ||
-      savedView === "input"
+      savedView === "calendar"
     ) {
       setView(savedView);
     } else {
       setView("home");
     }
   }, []);
+
   useEffect(() => {
-    if (view !== null) {
-      sessionStorage.setItem(
-        "simi-last-view",
-        view,
-      );
+    if (
+      view === "home" ||
+      view === "dashboard" ||
+      view === "calendar"
+    ) {
+      localStorage.setItem("simi-last-view", view);
     }
   }, [view]);
-
 
   const filtered = useMemo(() => {
     const keyword = searchQuery.toLowerCase();
@@ -1666,8 +1911,18 @@ export default function Dashboard({
 
                 setInputMode("create");
                 setView("input");
-                setManageMenuOpen(false);
-                setSidebarOpen(false);
+
+                /*
+                 * Komputer:
+                 * sidebar tetap pada kondisi sekarang.
+                 *
+                 * HP:
+                 * sidebar ditutup setelah menu dipilih.
+                 */
+                if (window.innerWidth <= 650) {
+                  setManageMenuOpen(false);
+                  setSidebarOpen(false);
+                }
               }}
               title="Kelola Data"
               aria-label="Buka Kelola Data"
@@ -1748,6 +2003,32 @@ export default function Dashboard({
           )}
         </div>
 
+        {/* PENGATURAN */}
+        <button
+          type="button"
+          className={
+            view === "settings"
+              ? "active"
+              : ""
+          }
+          onClick={() => {
+            setView("settings");
+            setManageMenuOpen(false);
+
+            if (window.innerWidth <= 650) {
+              setSidebarOpen(false);
+            }
+          }}
+          title="Pengaturan"
+          aria-label="Buka Pengaturan"
+        >
+          <SettingsIcon />
+
+          <span className="menu-label">
+            Pengaturan
+          </span>
+        </button>
+
         {/* PENDORONG VERSI KE BAWAH */}
         <div className="spacer" />
 
@@ -1815,11 +2096,7 @@ export default function Dashboard({
                   type="button"
                   onClick={() => {
                     setProfileMenuOpen(false);
-
-                    /*
-                     * Nanti diarahkan ke halaman
-                     * pengaturan akun.
-                     */
+                    setView("settings");
                   }}
                 >
                   Pengaturan Akun
@@ -1837,11 +2114,22 @@ export default function Dashboard({
                         {
                           method: "POST",
                           credentials: "same-origin",
+                          cache: "no-store",
                         },
                       );
 
-                      if (!response.ok) {
+                      const result =
+                        (await response.json()) as {
+                          success?: boolean;
+                          message?: string;
+                        };
+
+                      if (
+                        !response.ok ||
+                        !result.success
+                      ) {
                         throw new Error(
+                          result.message ??
                           "Logout gagal diproses",
                         );
                       }
@@ -1850,7 +2138,13 @@ export default function Dashboard({
                         "simi-last-view",
                       );
 
-                      window.location.replace("/login");
+                      localStorage.removeItem(
+                        "simi-last-view",
+                      );
+
+                      window.location.replace(
+                        "/login",
+                      );
                     } catch (error) {
                       window.alert(
                         error instanceof Error
@@ -1868,7 +2162,13 @@ export default function Dashboard({
         </header>
 
         <div className="content">
-          {view === "input" ? (
+          {view === "settings" ? (
+            <Settings
+              themeMode={themeMode}
+              onThemeChange={changeTheme}
+              onBack={() => setView("home")}
+            />
+          ) : view === "input" ? (
             <SurveyInput
               surveys={initial}
               formMode={inputMode}
@@ -2029,10 +2329,27 @@ export default function Dashboard({
                       {filtered.length} kegiatan
                     </small>
                   </div>
+                  <button
+                    type="button"
+                    className="soft"
+                    onClick={() => {
+                      startRefresh(() => {
+                        router.refresh();
+                      });
+                    }}
+                    disabled={refreshing}
+                    title="Muat ulang data dari Spreadsheet"
+                    aria-label="Refresh data Spreadsheet"
+                  >
+                    <RefreshCw
+                      className={
+                        refreshing ? "refreshSpin" : ""
+                      }
+                    />
 
-                  <button type="button" className="soft">
-                    <RefreshCw />
-                    Sinkron 5 menit
+                    {refreshing
+                      ? "Memuat..."
+                      : "Refresh"}
                   </button>
                 </div>
                 <div className="tableWrap">

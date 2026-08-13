@@ -1522,8 +1522,7 @@ aside:not(.open)>button:hover {
     linear-gradient(120deg,
       #0782b6,
       #0db9b5);
-  box-shadow:
-    0 7px 18px rgba(6, 142, 167, 0.2);
+  box-shadow: none;
 }
 
 /* Pemilih kegiatan */
@@ -3475,4 +3474,1194 @@ aside:not(.open) .sidebarArrow {
 .loginPasswordToggle svg {
   width: 17px;
   height: 17px;
+}
+
+/* ========================================
+   HALAMAN PENGATURAN TEMA
+======================================== */
+
+.settingsPage {
+  display: grid;
+  gap: 18px;
+}
+
+.settingsHead {
+  padding: 25px 27px;
+  border: 1px solid #dcebf0;
+  border-radius: 20px;
+  background: #ffffff;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+
+  box-shadow:
+    0 8px 25px rgba(10, 96, 116, 0.06);
+}
+
+.settingsHead h1 {
+  margin: 0 0 7px;
+  color: #123047;
+  font-size: 25px;
+}
+
+.settingsHead>div>p:last-child {
+  margin: 0;
+  color: #6d8997;
+  font-size: 13px;
+}
+
+.settingsBackButton {
+  min-height: 43px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 11px;
+  background: #eaf2f5;
+  color: #496a7d;
+  font-family: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.settingsBackButton:hover {
+  color: #08758a;
+  background: #dff3f6;
+}
+
+.settingsPanel {
+  padding: 25px;
+  border: 1px solid #dcebf0;
+  border-radius: 20px;
+  background: #ffffff;
+
+  box-shadow:
+    0 8px 25px rgba(10, 96, 116, 0.06);
+}
+
+.settingsSectionHead h2 {
+  margin: 0 0 6px;
+  color: #123047;
+  font-size: 19px;
+}
+
+.settingsSectionHead p {
+  margin: 0;
+  color: #6d8997;
+  font-size: 12px;
+}
+
+.settingsThemeGrid {
+  margin-top: 20px;
+
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+  gap: 13px;
+}
+
+.settingsThemeCard {
+  min-height: 100px;
+  padding: 17px;
+  border: 1px solid #d8e8ed;
+  border-radius: 15px;
+  background: #f8fcfd;
+  color: #587384;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.settingsThemeCard:hover {
+  color: #08758a;
+  border-color: #8fd5de;
+  background: #effafb;
+  transform: translateY(-2px);
+}
+
+.settingsThemeCard.active {
+  color: #ffffff;
+  border-color: transparent;
+  background:
+    linear-gradient(120deg,
+      #0782b6,
+      #0db9b5);
+
+  box-shadow:
+    0 10px 24px rgba(7, 130, 182, 0.2);
+}
+
+.settingsThemeCard>svg {
+  width: 40px;
+  height: 40px;
+  padding: 9px;
+  border-radius: 12px;
+  background: rgba(7, 130, 182, 0.1);
+  flex: 0 0 40px;
+}
+
+.settingsThemeCard.active>svg {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.settingsThemeCard span,
+.settingsThemeCard strong,
+.settingsThemeCard small {
+  display: block;
+}
+
+.settingsThemeCard strong {
+  margin-bottom: 5px;
+  color: #123047;
+  font-size: 14px;
+}
+
+.settingsThemeCard.active strong {
+  color: #ffffff;
+}
+
+.settingsThemeCard small {
+  color: #78909c;
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.settingsThemeCard.active small {
+  color: #e7fbff;
+}
+
+@media (max-width: 650px) {
+  .settingsHead {
+    padding: 19px;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .settingsBackButton {
+    width: 100%;
+  }
+
+  .settingsPanel {
+    padding: 18px;
+  }
+
+  .settingsThemeGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ========================================
+   TEMA DEFAULT
+======================================== */
+
+:root[data-theme="default"] {
+  color-scheme: light;
+}
+
+/*
+  Tema Default tidak membutuhkan override.
+  Tema ini memakai tampilan asli SIMI Aqua.
+*/
+
+
+/* ========================================
+   TEMA TERANG
+======================================== */
+
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+:root[data-theme="light"] body,
+:root[data-theme="light"] main,
+:root[data-theme="light"] .content {
+  color: #173441;
+  background: #ffffff;
+}
+
+:root[data-theme="light"] header {
+  background: #ffffff;
+  border-bottom-color: #e0e8ec;
+}
+
+:root[data-theme="light"] .search {
+  color: #6f96a7;
+  border-color: #dae5e9;
+  background: #f7fafb;
+}
+
+:root[data-theme="light"] .search input {
+  color: #173441;
+}
+
+:root[data-theme="light"] .panel,
+:root[data-theme="light"] .surveyCard,
+:root[data-theme="light"] .metrics article,
+:root[data-theme="light"] .indicatorCard,
+:root[data-theme="light"] .inputPanel,
+:root[data-theme="light"] .homeQuickMenu button,
+:root[data-theme="light"] .settingsHead,
+:root[data-theme="light"] .settingsPanel {
+  color: #173441;
+  border-color: #e0e8ec;
+  background: #ffffff;
+
+  box-shadow:
+    0 8px 24px rgba(20, 57, 74, 0.06);
+}
+
+:root[data-theme="light"] .panelHead,
+:root[data-theme="light"] .inputPanelHead {
+  border-bottom-color: #e2e9ed;
+  background: #ffffff;
+}
+
+:root[data-theme="light"] .surveySelector,
+:root[data-theme="light"] .calendarAddEditor,
+:root[data-theme="light"] .calendarLabelEditor {
+  border-color: #dce7eb;
+  background: #fafcfd;
+}
+
+:root[data-theme="light"] .surveyInputForm input,
+:root[data-theme="light"] .surveyInputForm select,
+:root[data-theme="light"] .surveySelector select,
+:root[data-theme="light"] .calendarAddEditorFields input,
+:root[data-theme="light"] .calendarLabelEditorControl input {
+  color: #173441;
+  border-color: #d6e3e8;
+  background: #ffffff;
+}
+
+/* ========================================
+   TEMA GELAP
+======================================== */
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+:root[data-theme="dark"] body,
+:root[data-theme="dark"] main,
+:root[data-theme="dark"] .content {
+  color: #e4f2f6;
+  background: #061923;
+}
+
+:root[data-theme="dark"] header {
+  background: #0a2532;
+  border-bottom-color: #1b3e4d;
+}
+
+:root[data-theme="dark"] .icon {
+  color: #a6c8d4;
+  background: #123441;
+}
+
+:root[data-theme="dark"] .search {
+  color: #84aeba;
+  border-color: #254957;
+  background: #102f3c;
+}
+
+:root[data-theme="dark"] .search input {
+  color: #edf8fa;
+}
+
+:root[data-theme="dark"] .search input::placeholder {
+  color: #7e9eaa;
+}
+
+:root[data-theme="dark"] .source {
+  color: #a5c0ca;
+}
+
+/* Panel dan kartu */
+
+:root[data-theme="dark"] .panel,
+:root[data-theme="dark"] .surveyCard,
+:root[data-theme="dark"] .metrics article,
+:root[data-theme="dark"] .indicatorCard,
+:root[data-theme="dark"] .inputPanel,
+:root[data-theme="dark"] .homeQuickMenu button,
+:root[data-theme="dark"] .settingsHead,
+:root[data-theme="dark"] .settingsPanel {
+  color: #e4f2f6;
+  border-color: #1c4050;
+  background: #0c2734;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+:root[data-theme="dark"] .panelHead,
+:root[data-theme="dark"] .inputPanelHead {
+  border-bottom-color: #1c4050;
+  background: #0d2b38;
+}
+
+:root[data-theme="dark"] .panelHead h2,
+:root[data-theme="dark"] .inputPanelHead h2,
+:root[data-theme="dark"] .surveyCard h3,
+:root[data-theme="dark"] .indicatorCard h3,
+:root[data-theme="dark"] .homeQuickMenu strong,
+:root[data-theme="dark"] .settingsHead h1,
+:root[data-theme="dark"] .settingsSectionHead h2 {
+  color: #edf8fa;
+}
+
+:root[data-theme="dark"] .settingsHead>div>p:last-child,
+:root[data-theme="dark"] .settingsSectionHead p {
+  color: #93afb9;
+}
+
+/* Pilihan tema */
+
+:root[data-theme="dark"] .settingsThemeCard {
+  color: #b6d0d9;
+  border-color: #254b5b;
+  background: #102f3d;
+}
+
+:root[data-theme="dark"] .settingsThemeCard:hover {
+  color: #ffffff;
+  border-color: #3e7588;
+  background: #153b49;
+}
+
+:root[data-theme="dark"] .settingsThemeCard strong {
+  color: #edf8fa;
+}
+
+:root[data-theme="dark"] .settingsThemeCard small {
+  color: #91adb7;
+}
+
+:root[data-theme="dark"] .settingsThemeCard>svg {
+  color: #79dce7;
+  background: #173e4c;
+}
+
+:root[data-theme="dark"] .settingsThemeCard.active {
+  color: #ffffff;
+  border-color: transparent;
+  background: linear-gradient(120deg,
+      #0782b6,
+      #0db9b5);
+}
+
+:root[data-theme="dark"] .settingsThemeCard.active strong {
+  color: #ffffff;
+}
+
+:root[data-theme="dark"] .settingsThemeCard.active small {
+  color: #e7fbff;
+}
+
+/* Form */
+
+:root[data-theme="dark"] .surveySelector,
+:root[data-theme="dark"] .selectedSurveyInfo,
+:root[data-theme="dark"] .calendarAddEditor,
+:root[data-theme="dark"] .calendarLabelEditor {
+  color: #e4f2f6;
+  border-color: #224858;
+  background: #102d39;
+}
+
+:root[data-theme="dark"] .surveyInputForm input,
+:root[data-theme="dark"] .surveyInputForm select,
+:root[data-theme="dark"] .surveySelector select,
+:root[data-theme="dark"] .calendarAddEditorFields input,
+:root[data-theme="dark"] .calendarLabelEditorControl input {
+  color: #edf8fa;
+  border-color: #254b5b;
+  background: #102f3d;
+}
+
+:root[data-theme="dark"] .surveyInputForm input::placeholder,
+:root[data-theme="dark"] .calendarAddEditorFields input::placeholder,
+:root[data-theme="dark"] .calendarLabelEditorControl input::placeholder {
+  color: #789aa7;
+}
+
+:root[data-theme="dark"] .surveyModeTabs {
+  background: #0c2734;
+}
+
+:root[data-theme="dark"] .surveyModeTabs button:not(.active) {
+  border: 1px solid #cfe3e7;
+  box-shadow: none;
+  outline: none;
+}
+
+/* Tabel */
+
+:root[data-theme="dark"] .tableWrap th {
+  color: #cee5ec;
+  border-color: #214350;
+  background: #153746;
+}
+
+:root[data-theme="dark"] .tableWrap td {
+  color: #d9edf2;
+  border-color: #214350;
+  background: #0c2734;
+}
+
+:root[data-theme="dark"] .tableWrap tbody td:first-child {
+  background: #0c2734;
+}
+
+:root[data-theme="dark"] .tableWrap .target {
+  color: #d9edff;
+  background: #17394f;
+}
+
+:root[data-theme="dark"] .tableExpandActions {
+  border-top-color: #214350;
+  background: #0c2734;
+}
+
+/* Kalender */
+
+:root[data-theme="dark"] .day,
+:root[data-theme="dark"] .blank {
+  color: #d9edf2;
+  border-color: #214350;
+  background: #0c2734;
+}
+
+:root[data-theme="dark"] .week b {
+  color: #a8c5d0;
+}
+
+/* Tombol */
+
+:root[data-theme="dark"] .inputCancel,
+:root[data-theme="dark"] .calendarLabelCancel,
+:root[data-theme="dark"] .settingsBackButton {
+  color: #c0d6de;
+  background: #183947;
+}
+
+:root[data-theme="dark"] .big b,
+:root[data-theme="dark"] .metrics b {
+  color: #71dce9;
+}
+
+:root[data-theme="dark"] .big small,
+:root[data-theme="dark"] .metrics span,
+:root[data-theme="dark"] .metrics small,
+:root[data-theme="dark"] .tableResultInfo,
+:root[data-theme="dark"] .fieldHint {
+  color: #91adb7;
+}
+
+/* ========================================
+   HERO KHUSUS TEMA GELAP
+======================================== */
+
+:root[data-theme="dark"] .homeHero,
+:root[data-theme="dark"] .hero {
+  background:
+    linear-gradient(120deg,
+      #08344a,
+      #07516b 55%,
+      #087f83);
+
+  box-shadow:
+    0 18px 35px rgba(0, 0, 0, 0.28);
+}
+
+:root[data-theme="dark"] .homeHero .eyebrow,
+:root[data-theme="dark"] .hero .eyebrow {
+  color: #62eae0;
+}
+
+:root[data-theme="dark"] .homeHero h1,
+:root[data-theme="dark"] .hero h1 {
+  color: #ffffff;
+}
+
+:root[data-theme="dark"] .homeIntro>p:not(.eyebrow),
+:root[data-theme="dark"] .hero p {
+  color: #d1edf2;
+}
+
+:root[data-theme="dark"] .homeSummary {
+  border-color: rgba(255, 255, 255, 0.16);
+  background: rgba(4, 28, 39, 0.28);
+}
+
+:root[data-theme="dark"] .homeAction {
+  color: #d9f7fa;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(6, 35, 48, 0.72);
+}
+
+:root[data-theme="dark"] .homeAction:hover {
+  color: #ffffff;
+  background: rgba(8, 56, 70, 0.9);
+}
+
+/* Label kalender khusus tema gelap */
+
+:root[data-theme="dark"] .calendarEventRow {
+  color: #9ce9df;
+  background: #124a4c;
+}
+
+:root[data-theme="dark"] .calendarEventRow.e1 {
+  color: #a8d8ee;
+  background: #173f56;
+}
+
+:root[data-theme="dark"] .calendarEventEditButton:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Triwulan, Tahunan, Belum, dan Selesai */
+
+:root[data-theme="dark"] .cardTop em {
+  color: #a8e5ec;
+  background: #174250;
+}
+
+:root[data-theme="dark"] .surveyCard footer span {
+  color: #b5cbd3;
+  background: #173743;
+}
+
+:root[data-theme="dark"] .surveyCard footer .done {
+  color: #8ce6d1;
+  background: #12483e;
+}
+
+:root[data-theme="dark"] .progress {
+  background: #244754;
+}
+
+/* ========================================
+   IKON INDIKATOR PADA TEMA GELAP
+======================================== */
+
+:root[data-theme="dark"] .indicatorBlue {
+  color: #4fc3f7;
+}
+
+:root[data-theme="dark"] .indicatorGreen {
+  color: #51d6ad;
+}
+
+:root[data-theme="dark"] .indicatorOrange {
+  color: #ffb45f;
+}
+
+/* Latar ikon dibuat gelap agar ikon terlihat */
+
+:root[data-theme="dark"] .indicatorBlue .indicatorIcon {
+  background: #153e54;
+}
+
+:root[data-theme="dark"] .indicatorGreen .indicatorIcon {
+  background: #123f38;
+}
+
+:root[data-theme="dark"] .indicatorOrange .indicatorIcon {
+  background: #4a3523;
+}
+
+/* Paksa warna SVG agar tidak tertimpa */
+
+:root[data-theme="dark"] .indicatorBlue .indicatorIcon svg {
+  color: #4fc3f7;
+  stroke: #4fc3f7;
+}
+
+:root[data-theme="dark"] .indicatorGreen .indicatorIcon svg {
+  color: #51d6ad;
+  stroke: #51d6ad;
+}
+
+:root[data-theme="dark"] .indicatorOrange .indicatorIcon svg {
+  color: #ffb45f;
+  stroke: #ffb45f;
+}
+
+/* ========================================
+   MENU CEPAT BERANDA PADA TEMA GELAP
+======================================== */
+
+:root[data-theme="dark"] .homeQuickMenu button>svg {
+  color: #55d9e7;
+  background: #153e4c;
+}
+
+:root[data-theme="dark"] .homeQuickMenu button:hover>svg {
+  color: #8cecf3;
+  background: #1b5060;
+}
+
+:root[data-theme="dark"] .homeQuickMenu button {
+  border-color: #214857;
+  background: #0c2734;
+}
+
+:root[data-theme="dark"] .homeQuickMenu button:hover {
+  border-color: #347184;
+  background: #102f3d;
+  box-shadow:
+    0 14px 30px rgba(0, 0, 0, 0.22);
+}
+
+:root[data-theme="dark"] .homeQuickMenu strong {
+  color: #edf8fa;
+}
+
+:root[data-theme="dark"] .homeQuickMenu small {
+  color: #91adb7;
+}
+
+/* ========================================
+   TEMA DEFAULT - AQUA LEMBUT
+======================================== */
+
+:root[data-theme="default"] .panel,
+:root[data-theme="default"] .surveyCard,
+:root[data-theme="default"] .metrics article,
+:root[data-theme="default"] .indicatorCard,
+:root[data-theme="default"] .inputPanel,
+:root[data-theme="default"] .homeQuickMenu button,
+:root[data-theme="default"] .settingsHead,
+:root[data-theme="default"] .settingsPanel {
+  border-color: #d1e7e8;
+
+  background: linear-gradient(135deg,
+      #f8fcfd 0%,
+      #f1fafa 50%,
+      #eaf7f5 100%);
+
+  box-shadow:
+    0 9px 25px rgba(7, 105, 115, 0.06);
+}
+
+:root[data-theme="default"] .surveyCard {
+  background: linear-gradient(135deg,
+      #f8fcfd 0%,
+      #f1fafa 50%,
+      #eaf7f5 100%);
+}
+
+:root[data-theme="default"] .surveyCard:hover {
+  border-color: #86d2d3;
+
+  background: linear-gradient(135deg,
+      #f4fbfc 0%,
+      #eaf8f7 50%,
+      #e1f4f1 100%);
+}
+
+:root[data-theme="default"] .metrics article {
+  background: linear-gradient(135deg,
+      #fbfdfe 0%,
+      #f3fafa 50%,
+      #edf8f6 100%);
+}
+
+:root[data-theme="default"] .cardTop em {
+  color: #08758a;
+
+  background: linear-gradient(135deg,
+      #e8f7f7,
+      #dcf3ee);
+}
+
+:root[data-theme="default"] .surveyCard footer span {
+  color: #587584;
+  background: #edf5f5;
+}
+
+:root[data-theme="default"] .surveyCard footer .done {
+  color: #08765f;
+
+  background: linear-gradient(135deg,
+      #dcf8f0,
+      #d1f3e7);
+}
+
+:root[data-theme="default"] .progress {
+  background: #dcefee;
+}
+
+:root[data-theme="default"] .progress i {
+  background: linear-gradient(90deg,
+      #18c6ba,
+      #1d9bea);
+}
+
+:root[data-theme="default"] .panelHead,
+:root[data-theme="default"] .inputPanelHead {
+  border-bottom-color: #d6e9ea;
+
+  background: linear-gradient(135deg,
+      #f9fcfd,
+      #edf8f6);
+}
+
+:root[data-theme="default"] .tableWrap th {
+  color: #285d68;
+
+  background: linear-gradient(135deg,
+      #e7f5f7,
+      #e1f3ef);
+}
+
+:root[data-theme="default"] .tableWrap td {
+  background: #f9fcfc;
+}
+
+:root[data-theme="default"] .tableWrap tbody td:first-child {
+  background: linear-gradient(90deg,
+      #f9fcfd,
+      #eff8f6);
+}
+
+:root[data-theme="default"] .day,
+:root[data-theme="default"] .blank {
+  border-color: #d8e9ea;
+
+  background: linear-gradient(135deg,
+      #fbfdfe 0%,
+      #f6fbfb 50%,
+      #eff8f6 100%);
+}
+
+/* ========================================
+   TEMA TERANG - KARTU PUTIH POLOS
+======================================== */
+
+:root[data-theme="light"] .panel,
+:root[data-theme="light"] .surveyCard,
+:root[data-theme="light"] .matrics article,
+:root[data-theme="light"] .indicatorCard,
+:root[data-theme="light"] .inputPanel,
+:root[data-theme="light"] .homeQuickMenu button,
+:root[data-theme="light"] .settingsHead,
+:root[data-theme="light"] .settingsPanel,
+:root[data-theme="light"] .settingsThemeCard,
+:root[data-theme="light"] .day,
+:root[data-theme="light"] .blank {
+  background: #ffffff;
+}
+
+:root[data-theme="light"] .panelHead,
+:root[data-theme="light"] .inputPanelHead {
+  background: #ffffff;
+}
+
+:root[data-theme="light"] .settingsThemeCard.active {
+  color: #ffffff;
+  border-color: transparent;
+
+  background:
+    linear-gradient(120deg,
+      #0782b6,
+      #0db9b5);
+}
+
+@media (max-width: 700px) {
+  .surveyModeTabs {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding: 12px;
+    gap: 8px;
+  }
+
+  .surveyModeTabs button {
+    width: 100%;
+  }
+}
+
+/* ========================================
+   BERSIHKAN BAYANGAN TAB TAMBAH DAN EDIT
+======================================== */
+
+.surveyModeTabs button {
+  outline: none;
+  box-shadow: none;
+  transform: none;
+}
+
+.surveyModeTabs button:hover {
+  box-shadow: none;
+  transform: none;
+}
+
+.surveyModeTabs button.active {
+  border-color: transparent;
+  outline: none;
+  box-shadow: none;
+  transform: none;
+}
+
+.surveyModeTabs button:not(.active) {
+  border-color: #cfe3e7;
+  outline: none;
+  box-shadow: none;
+}
+
+/* Tombol tab aktif tanpa sisi gelap */
+
+.surveyModeTabs button.active {
+  color: #ffffff;
+  border: 1px solid #0aa6b4;
+  outline: none;
+  background: #0aa6b4;
+  box-shadow: none;
+  transform: none;
+}
+
+/* ========================================
+   TOMBOL SEKUNDER TEMA DEFAULT
+======================================== */
+
+/* Tombol Kembali */
+
+:root[data-theme="default"] .inputCancel,
+:root[data-theme="default"] .settingsBackButton {
+  color: #24556a;
+  border: 1px solid #b9dce0;
+  background: #e7f3f4;
+  box-shadow: none;
+}
+
+:root[data-theme="default"] .inputCancel:hover,
+:root[data-theme="default"] .settingsBackButton:hover {
+  color: #ffffff;
+  border-color: #078da0;
+  background: #078da0;
+}
+
+/* Tombol Hari ini dan navigasi kalender */
+
+:root[data-theme="default"] .calNav button {
+  color: #086b7c;
+  border: 1px solid #b8dfe2;
+  background: #e3f4f5;
+  box-shadow: none;
+}
+
+:root[data-theme="default"] .calNav button:hover {
+  color: #ffffff;
+  border-color: #078da0;
+  background: #078da0;
+}
+
+/* Tombol Tambah Acara tetap menjadi aksi utama */
+
+:root[data-theme="default"] .calNav .addCalendarEvent {
+  color: #ffffff;
+  border-color: transparent;
+  background: linear-gradient(120deg,
+      #0782b6,
+      #0db9b5);
+}
+
+:root[data-theme="default"] .calNav .addCalendarEvent:hover {
+  color: #ffffff;
+  border-color: transparent;
+  background: linear-gradient(120deg,
+      #066f9d,
+      #0aa7a4);
+}
+
+:root[data-theme="default"] .formActions .inputCancel {
+  color: #24556a;
+  border: 1px solid #b9dce0;
+  background: #e7f3f4;
+}
+
+:root[data-theme="default"] .formActions .inputCancel:hover {
+  color: #ffffff;
+  border-color: #078da0;
+  background: #078da0;
+}
+
+/* ========================================
+   CERAHKAN DATA INDIKATOR TEMA GELAP
+======================================== */
+
+/* Angka utama */
+
+:root[data-theme="dark"] .indicatorValue strong {
+  color: #d8edf3;
+}
+
+/* Satuan Persen */
+
+:root[data-theme="dark"] .indicatorValue>span {
+  color: #9fc2cd;
+}
+
+/* Garis pemisah */
+
+:root[data-theme="dark"] .indicatorLabels {
+  border-top-color: #315766;
+}
+
+/* Tanggal dan Data BPS */
+
+:root[data-theme="dark"] .indicatorLabels>span {
+  color: #a6c5cf;
+}
+
+/* Ikon tanggal */
+
+:root[data-theme="dark"] .indicatorLabels>span:first-child svg {
+  color: #45c9f5;
+  stroke: #45c9f5;
+}
+
+/* Ikon Data BPS */
+
+:root[data-theme="dark"] .indicatorLabels>span:last-child svg {
+  color: #41d6a6;
+  stroke: #41d6a6;
+}
+
+/* ========================================
+   TOMBOL SEKUNDER PADA TEMA GELAP
+======================================== */
+
+/* Refresh */
+
+:root[data-theme="dark"] .soft {
+  color: #a9dce6;
+  border: 1px solid #285366;
+  background: #153847;
+  box-shadow: none;
+}
+
+:root[data-theme="dark"] .soft:hover {
+  color: #ffffff;
+  border-color: #168fa2;
+  background: #137f91;
+}
+
+:root[data-theme="dark"] .soft svg {
+  color: currentColor;
+  stroke: currentColor;
+}
+
+/* Navigasi kalender:
+   panah kiri, Hari ini, dan panah kanan */
+
+:root[data-theme="dark"] .calNav button:not(.addCalendarEvent) {
+  color: #a9dce6;
+  border: 1px solid #285366;
+  background: #153847;
+  box-shadow: none;
+}
+
+:root[data-theme="dark"] .calNav button:not(.addCalendarEvent):hover {
+  color: #ffffff;
+  border-color: #168fa2;
+  background: #137f91;
+}
+
+:root[data-theme="dark"] .calNav button:not(.addCalendarEvent) svg {
+  color: currentColor;
+  stroke: currentColor;
+}
+
+/* Tambah Acara tetap menjadi tombol utama */
+
+:root[data-theme="dark"] .calNav .addCalendarEvent {
+  color: #ffffff;
+  border: 1px solid transparent;
+  background: linear-gradient(120deg,
+      #0782b6,
+      #0db9b5);
+}
+
+:root[data-theme="dark"] .calNav .addCalendarEvent:hover {
+  color: #ffffff;
+  border-color: transparent;
+  background: linear-gradient(120deg,
+      #066f9d,
+      #0aa7a4);
+}
+
+/* Tab Tambah/Edit yang sedang tidak aktif */
+
+:root[data-theme="dark"] .surveyModeTabs button:not(.active) {
+  color: #b4d1da;
+  border: 1px solid #2b5261;
+  background: #153847;
+  box-shadow: none;
+}
+
+:root[data-theme="dark"] .surveyModeTabs button:not(.active):hover {
+  color: #ffffff;
+  border-color: #168fa2;
+  background: #176071;
+}
+
+/* Tab aktif tetap toska */
+
+:root[data-theme="dark"] .surveyModeTabs button.active {
+  color: #ffffff;
+  border: 1px solid transparent;
+  background: #0aa6b4;
+  box-shadow: none;
+}
+
+/* Tombol Kembali dan Batal */
+
+:root[data-theme="dark"] .inputCancel,
+:root[data-theme="dark"] .settingsBackButton,
+:root[data-theme="dark"] .calendarLabelCancel {
+  color: #b4d1da;
+  border: 1px solid #2b5261;
+  background: #153847;
+  box-shadow: none;
+}
+
+:root[data-theme="dark"] .inputCancel:hover,
+:root[data-theme="dark"] .settingsBackButton:hover,
+:root[data-theme="dark"] .calendarLabelCancel:hover {
+  color: #ffffff;
+  border-color: #168fa2;
+  background: #137f91;
+}
+
+/* Kondisi fokus agar tidak kembali putih */
+
+:root[data-theme="dark"] .soft:focus-visible,
+:root[data-theme="dark"] .calNav button:focus-visible,
+:root[data-theme="dark"] .surveyModeTabs button:focus-visible,
+:root[data-theme="dark"] .inputCancel:focus-visible,
+:root[data-theme="dark"] .settingsBackButton:focus-visible {
+  outline: 2px solid #4fd6e2;
+  outline-offset: 2px;
+}
+
+/* ========================================
+   JARAK TOMBOL AKSI FORM
+======================================== */
+
+.formActionsRight {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.formActionsRight .inputCancel,
+.formActionsRight .inputSubmit {
+  margin: 0;
+  flex: 0 0 auto;
+}
+
+.formActions {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.formActions:has(.inputDelete) {
+  justify-content: space-between;
+}
+
+@media (max-width: 700px) {
+
+  .formActions,
+  .formActionsRight {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 9px;
+  }
+
+  .formActionsRight .inputCancel,
+  .formActionsRight .inputSubmit,
+  .formActions .inputDelete {
+    width: 100%;
+    margin: 0;
+  }
+}
+
+/* ========================================
+   POSISI FINAL TOMBOL FORM
+======================================== */
+
+.formActions,
+.formActions:has(.inputDelete) {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.formActionsRight {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.formActions .inputDelete,
+.formActionsRight .inputCancel,
+.formActionsRight .inputSubmit {
+  margin: 0;
+  flex: 0 0 auto;
+}
+
+@media (max-width: 700px) {
+
+  .formActions,
+  .formActions:has(.inputDelete),
+  .formActionsRight {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 9px;
+  }
+
+  .formActions .inputDelete,
+  .formActionsRight .inputCancel,
+  .formActionsRight .inputSubmit {
+    width: 100%;
+    margin: 0;
+  }
+}
+
+/* Animasi tombol Refresh */
+
+.refreshSpin {
+  animation: refreshButtonSpin 0.75s linear infinite;
+}
+
+@keyframes refreshButtonSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.soft:disabled {
+  cursor: wait;
+  opacity: 0.7;
 }
