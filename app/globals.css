@@ -5195,3 +5195,71 @@ aside:not(.open) .sidebarArrow {
     background: inherit;
   }
 }
+
+/* ========================================
+   RAPATKAN BARIS TABEL DI HP
+======================================== */
+
+@media screen and (max-width: 650px) {
+
+  .tableWrap th,
+  .tableWrap td {
+    height: auto !important;
+    min-height: 0 !important;
+    padding-top: 4px !important;
+    padding-bottom: 4px !important;
+    line-height: 1.15;
+  }
+
+  /* Baris isi tabel */
+  .tableWrap tbody tr {
+    height: 32px;
+  }
+
+  /* Nama kegiatan */
+  .tableWrap tbody td:first-child {
+    padding: 5px 6px !important;
+  }
+
+  .tableWrap tbody td:first-child strong {
+    margin: 0;
+    font-size: 9px;
+    line-height: 1.15;
+  }
+
+  .tableWrap tbody td:first-child small {
+    margin-top: 2px;
+    font-size: 7px;
+    line-height: 1.1;
+  }
+
+  /* Kolom periode */
+  .tableWrap tbody td:nth-child(2) {
+    padding: 4px 2px !important;
+    font-size: 8px;
+  }
+
+  /* Kolom angka bulanan */
+  .tableWrap tbody td:nth-child(n + 3) {
+    height: 32px !important;
+    padding: 3px 1px !important;
+    font-size: 9px;
+    line-height: 1;
+  }
+
+  /* Header bulan dan T/R */
+  .tableWrap thead th {
+    height: auto !important;
+    padding: 5px 2px !important;
+  }
+
+  .tableWrap thead tr:first-child th {
+    height: 28px;
+  }
+
+  .tableWrap thead tr:nth-child(2) th {
+    top: 28px;
+    height: 24px;
+    padding: 4px 1px !important;
+  }
+}
