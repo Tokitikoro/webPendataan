@@ -5105,105 +5105,52 @@ aside:not(.open) .sidebarArrow {
 }
 
 /* ========================================
-   TABEL TARGET & REALISASI KHUSUS HP
+   FIX SCROLL TABEL HP
+   Semua kolom bergerak bersama
 ======================================== */
 
 @media screen and (max-width: 650px) {
-
-  /* Hanya pembungkus ini yang boleh bergeser */
   .tableWrap {
     position: relative;
     width: 100%;
     max-width: 100%;
-    max-height: 68vh;
-    overflow: auto;
-    overscroll-behavior: contain;
+    overflow-x: auto;
+    overflow-y: auto;
     -webkit-overflow-scrolling: touch;
-  }
-
-  /* Header dan isi memakai tabel yang sama */
-  .tableWrap table {
-    width: max-content !important;
-    min-width: 1110px !important;
-    table-layout: fixed !important;
-    border-collapse: separate;
-    border-spacing: 0;
+    overscroll-behavior: contain;
   }
 
   /*
-   * Kolom kegiatan diperkecil dari 390px menjadi 190px.
-   * Dengan begitu angka Januari langsung terlihat.
+   * Matikan sticky horizontal pada
+   * Kegiatan Survei dan Periode.
    */
-  .tableWrap col:first-child {
-    width: 190px !important;
+  .tableWrap thead tr:first-child th:first-child,
+  .tableWrap thead tr:first-child th:nth-child(2),
+  .tableWrap tbody td:first-child,
+  .tableWrap tbody td:nth-child(2) {
+    position: static !important;
+    left: auto !important;
+    z-index: auto !important;
   }
 
-  .tableWrap col:nth-child(2) {
-    width: 68px !important;
-  }
+  /* Lebar kolom kegiatan dan periode */
 
-  /* Setiap kolom Target dan Realisasi */
-  .tableWrap col:nth-child(n + 3) {
-    width: 35px !important;
-  }
-
-  /* Header tabel tetap terlihat saat digeser ke bawah */
-  .tableWrap thead {
-    position: static;
-  }
-
-  .tableWrap thead th {
-    position: sticky;
-    top: 0;
-    z-index: 4;
-  }
-
-  /*
-   * Baris kedua header berada di bawah baris bulan.
-   * Sesuaikan dengan tinggi header pertama.
-   */
-  .tableWrap thead tr:nth-child(2) th {
-    top: 31px;
-    z-index: 5;
-  }
-
-  /* Dua kolom kiri tetap terlihat saat geser horizontal */
   .tableWrap thead tr:first-child th:first-child,
   .tableWrap tbody td:first-child {
-    position: sticky;
-    left: 0;
     width: 190px !important;
     min-width: 190px !important;
     max-width: 190px !important;
   }
 
-  .tableWrap thead tr:first-child th:first-child {
-    z-index: 8;
-  }
-
-  .tableWrap tbody td:first-child {
-    z-index: 3;
-  }
-
   .tableWrap thead tr:first-child th:nth-child(2),
   .tableWrap tbody td:nth-child(2) {
-    position: sticky;
-    left: 190px;
     width: 68px !important;
     min-width: 68px !important;
     max-width: 68px !important;
   }
 
-  .tableWrap thead tr:first-child th:nth-child(2) {
-    z-index: 8;
-  }
+  /* Semua kolom bulan mengikuti satu tabel */
 
-  .tableWrap tbody td:nth-child(2) {
-    z-index: 3;
-    background: inherit;
-  }
-
-  /* Ukuran kolom bulan */
   .tableWrap thead tr:first-child th[colspan="2"] {
     width: 70px !important;
     min-width: 70px !important;
@@ -5217,51 +5164,34 @@ aside:not(.open) .sidebarArrow {
     max-width: 35px !important;
   }
 
-  /* Isi sel dibuat terbaca */
-  .tableWrap th {
-    padding: 7px 2px;
-    font-size: 8px;
+  /*
+   * Header vertikal tetap menempel saat
+   * digulir ke bawah, tetapi ikut bergerak
+   * saat tabel digeser ke kanan/kiri.
+   */
+
+  .tableWrap thead {
+    position: static !important;
   }
 
-  .tableWrap td {
-    height: 38px;
-    padding: 6px 2px;
-    font-size: 10px;
-    line-height: 1;
-    text-align: center;
-    vertical-align: middle;
+  .tableWrap thead th {
+    position: sticky !important;
+    top: 0;
+    z-index: 5;
   }
 
-  .tableWrap tbody td:first-child {
-    padding: 7px;
-    text-align: left;
+  .tableWrap thead tr:nth-child(2) th {
+    top: 29px;
+    z-index: 6;
   }
 
-  .tableWrap tbody td:first-child strong {
-    overflow: hidden;
-    font-size: 10px;
-    line-height: 1.25;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-  }
+  /*
+   * Pastikan sel kiri memiliki latar jelas,
+   * tetapi tidak menutupi angka bulan.
+   */
 
-  .tableWrap tbody td:first-child small {
-    overflow: hidden;
-    font-size: 7px;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-  }
-
+  .tableWrap tbody td:first-child,
   .tableWrap tbody td:nth-child(2) {
-    font-size: 8px;
-  }
-
-  /* Pastikan angka bulanan tidak hilang */
-  .tableWrap tbody td.target,
-  .tableWrap tbody td.ok,
-  .tableWrap tbody td.warn {
-    font-size: 10px;
-    font-weight: 900;
-    opacity: 1;
+    background: inherit;
   }
 }
