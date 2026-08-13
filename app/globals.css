@@ -5263,3 +5263,56 @@ aside:not(.open) .sidebarArrow {
     padding: 4px 1px !important;
   }
 }
+
+/* ========================================
+   KOTAK ANGKA BULAN LEBIH KECIL DI HP
+======================================== */
+
+@media screen and (max-width: 650px) {
+
+  /* Baris tetap lega */
+  .tableWrap tbody tr,
+  .tableWrap tbody td {
+    height: 42px !important;
+  }
+
+  /* Sel angka tidak diberi background penuh */
+  .tableWrap tbody td.target,
+  .tableWrap tbody td.warn,
+  .tableWrap tbody td.ok {
+    padding: 0 2px !important;
+    background-color: transparent !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+
+    /* Kotak warna lebih pendek dari tinggi baris */
+    background-size:
+      calc(100% - 5px) calc(100% - 12px) !important;
+
+    font-size: 10px;
+    line-height: 42px;
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  /* Target */
+  .tableWrap tbody td.target {
+    color: #174f68 !important;
+    background-image:
+      linear-gradient(#dcecf8, #dcecf8) !important;
+  }
+
+  /* Realisasi belum mencapai target */
+  .tableWrap tbody td.warn {
+    color: #593200 !important;
+    background-image:
+      linear-gradient(#ffb44d, #ffb44d) !important;
+  }
+
+  /* Realisasi sudah mencapai target */
+  .tableWrap tbody td.ok {
+    color: #ffffff !important;
+    background-image:
+      linear-gradient(#17c69a, #17c69a) !important;
+  }
+}
