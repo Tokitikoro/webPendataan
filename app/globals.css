@@ -5470,3 +5470,26 @@ aside:not(.open) .sidebarArrow {
     background: #11634f !important;
   }
 }
+
+/* ========================================
+   STATUS TABEL TEMA GELAP
+   BERLAKU DI KOMPUTER DAN HP
+======================================== */
+
+:root[data-theme="dark"] .tableWrap tbody td.target {
+  color: #d7edf5 !important;
+  background: #1d4b63 !important;
+  font-weight: 800;
+}
+
+:root[data-theme="dark"] .tableWrap tbody td.warn {
+  color: #ffe0a3 !important;
+  background: #815d20 !important;
+  font-weight: 900;
+}
+
+:root[data-theme="dark"] .tableWrap tbody td.ok {
+  color: #baf4df !important;
+  background: #11634f !important;
+  font-weight: 900;
+}
