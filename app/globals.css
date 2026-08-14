@@ -5493,3 +5493,53 @@ aside:not(.open) .sidebarArrow {
   background: #11634f !important;
   font-weight: 900;
 }
+
+/* ========================================
+   HILANGKAN JARAK HEADER BULAN DAN T/R DI HP
+======================================== */
+
+@media screen and (max-width: 650px) {
+  .tableWrap table {
+    border-collapse: separate !important;
+    border-spacing: 0 !important;
+  }
+
+  /*
+   * Matikan sticky vertikal pada header HP.
+   * Semua bagian tabel tetap bergeser bersama.
+   */
+  .tableWrap thead,
+  .tableWrap thead tr,
+  .tableWrap thead th {
+    position: static !important;
+    top: auto !important;
+  }
+
+  /* Baris nama bulan */
+
+  .tableWrap thead tr:first-child th {
+    height: 32px !important;
+    padding: 5px 2px !important;
+    line-height: 1 !important;
+    vertical-align: middle;
+  }
+
+  /* Baris T dan R langsung menempel di bawah bulan */
+
+  .tableWrap thead tr:nth-child(2) th {
+    position: static !important;
+    top: auto !important;
+    height: 28px !important;
+    padding: 4px 1px !important;
+    line-height: 1 !important;
+    vertical-align: middle;
+  }
+
+  /* Hilangkan celah tambahan antarbaris header */
+
+  .tableWrap thead tr:first-child,
+  .tableWrap thead tr:nth-child(2) {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+}
