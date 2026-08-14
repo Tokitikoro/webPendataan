@@ -59,6 +59,11 @@ type ThemeMode =
   | "dark"
   | "system";
 
+type LanguageMode =
+  | "id"
+  | "en"
+  | "system";
+
 function applyTheme(mode: ThemeMode) {
   const systemPrefersDark =
     window.matchMedia(
@@ -795,7 +800,9 @@ type FormMode = "create" | "edit";
 type SurveyInputProps = {
   surveys: Survey[];
   formMode: FormMode;
-  onFormModeChange: (mode: FormMode) => void;
+  onFormModeChange: (
+    mode: FormMode,
+  ) => void;
   onCancel: () => void;
 };
 
@@ -1490,13 +1497,24 @@ function SurveyInput({
 
 type SettingsProps = {
   themeMode: ThemeMode;
-  onThemeChange: (mode: ThemeMode) => void;
+  languageMode: LanguageMode;
+
+  onThemeChange: (
+    mode: ThemeMode,
+  ) => void;
+
+  onLanguageChange: (
+    mode: LanguageMode,
+  ) => void;
+
   onBack: () => void;
 };
 
 function Settings({
   themeMode,
+  languageMode,
   onThemeChange,
+  onLanguageChange,
   onBack,
 }: SettingsProps) {
   return (
@@ -1632,52 +1650,85 @@ function Settings({
           </button>
         </div>
       </section>
+
+      <section className="settingsPanel">
+        <div className="settingsSectionHead">
+          <h2>Bahasa Aplikasi</h2>
+
+          <p>
+            Pilih bahasa yang digunakan pada
+            tampilan SIMI Aqua.
+          </p>
+        </div>
+
+        <div className="settingsLanguageList">
+          <button
+            type="button"
+            className={
+              languageMode === "id"
+                ? "settingsLanguageCard active"
+                : "settingsLanguageCard"
+            }
+            onClick={() =>
+              onLanguageChange("id")
+            }
+            aria-pressed={
+              languageMode === "id"
+            }
+          >
+            <strong>
+              Bahasa Indonesia
+            </strong>
+
+            <small>
+              Gunakan Bahasa Indonesia
+            </small>
+          </button>
+
+          <button
+            type="button"
+            className={
+              languageMode === "en"
+                ? "settingsLanguageCard active"
+                : "settingsLanguageCard"
+            }
+            onClick={() =>
+              onLanguageChange("en")
+            }
+            aria-pressed={
+              languageMode === "en"
+            }
+          >
+            <strong>English</strong>
+            <small>Use English</small>
+          </button>
+
+          <button
+            type="button"
+            className={
+              languageMode === "system"
+                ? "settingsLanguageCard active"
+                : "settingsLanguageCard"
+            }
+            onClick={() =>
+              onLanguageChange("system")
+            }
+            aria-pressed={
+              languageMode === "system"
+            }
+          >
+            <strong>Otomatis</strong>
+
+            <small>
+              Mengikuti bahasa perangkat
+            </small>
+          </button>
+        </div>
+      </section>
+
     </section>
   );
 }
-
-<section className="settingsPanel">
-  <div className="settingsSectionHead">
-    <h2>Bahasa Aplikasi</h2>
-
-    <p>
-      Pilih bahasa yang digunakan pada tampilan
-      SIMI Aqua.
-    </p>
-  </div>
-
-  <div className="settingsLanguageList">
-    <button
-      type="button"
-      className="settingsLanguageCard active"
-    >
-      <strong>Bahasa Indonesia</strong>
-      <small>
-        Gunakan Bahasa Indonesia
-      </small>
-    </button>
-
-    <button
-      type="button"
-      className="settingsLanguageCard"
-    >
-      <strong>English</strong>
-      <small>
-        Use English
-      </small>
-    </button>
-
-    <button
-      type="button"
-      className="settingsLanguageCard"
-    >
-      <strong>Otomatis</strong>
-      <small>
-        Mengikuti bahasa perangkat
-      </small>
-    </button>
-  </div>
-</section>
 
 type DashboardProps = {
   initial: Survey[];
@@ -1715,6 +1766,9 @@ export default function Dashboard({
   const [themeMode, setThemeMode] =
     useState<ThemeMode>("default");
 
+  const [languageMode, setLanguageMode] =
+    useState<LanguageMode>("id");
+
   const [inputMode, setInputMode] =
     useState<FormMode>("create");
 
@@ -1736,6 +1790,26 @@ export default function Dashboard({
     );
 
     applyTheme(mode);
+  }
+
+  function changeLanguage(
+    mode: LanguageMode,
+  ) {
+    setLanguageMode(mode);
+
+    localStorage.setItem(
+      "simi-language",
+      mode,
+    );
+
+    document.documentElement.lang =
+      mode === "system"
+        ? navigator.language
+          .toLowerCase()
+          .startsWith("en")
+          ? "en"
+          : "id"
+        : mode;
   }
 
   useEffect(() => {
@@ -1780,6 +1854,31 @@ export default function Dashboard({
         handleSystemThemeChange,
       );
     };
+  }, []);
+
+  useEffect(() => {
+    const savedLanguage =
+      localStorage.getItem("simi-language");
+
+    const initialLanguage: LanguageMode =
+      savedLanguage === "id" ||
+        savedLanguage === "en" ||
+        savedLanguage === "system"
+        ? savedLanguage
+        : "id";
+
+    document.documentElement.lang =
+      initialLanguage === "system"
+        ? navigator.language
+          .toLowerCase()
+          .startsWith("en")
+          ? "en"
+          : "id"
+        : initialLanguage;
+
+    window.setTimeout(() => {
+      setLanguageMode(initialLanguage);
+    }, 0);
   }, []);
 
   useEffect(() => {
@@ -2208,7 +2307,9 @@ export default function Dashboard({
           {view === "settings" ? (
             <Settings
               themeMode={themeMode}
+              languageMode={languageMode}
               onThemeChange={changeTheme}
+              onLanguageChange={changeLanguage}
               onBack={() => setView("home")}
             />
           ) : view === "input" ? (
