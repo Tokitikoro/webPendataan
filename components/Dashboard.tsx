@@ -1636,6 +1636,49 @@ function Settings({
   );
 }
 
+<section className="settingsPanel">
+  <div className="settingsSectionHead">
+    <h2>Bahasa Aplikasi</h2>
+
+    <p>
+      Pilih bahasa yang digunakan pada tampilan
+      SIMI Aqua.
+    </p>
+  </div>
+
+  <div className="settingsLanguageList">
+    <button
+      type="button"
+      className="settingsLanguageCard active"
+    >
+      <strong>Bahasa Indonesia</strong>
+      <small>
+        Gunakan Bahasa Indonesia
+      </small>
+    </button>
+
+    <button
+      type="button"
+      className="settingsLanguageCard"
+    >
+      <strong>English</strong>
+      <small>
+        Use English
+      </small>
+    </button>
+
+    <button
+      type="button"
+      className="settingsLanguageCard"
+    >
+      <strong>Otomatis</strong>
+      <small>
+        Mengikuti bahasa perangkat
+      </small>
+    </button>
+  </div>
+</section>
+
 type DashboardProps = {
   initial: Survey[];
   source: string;
