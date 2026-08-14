@@ -64,6 +64,36 @@ type LanguageMode =
   | "en"
   | "system";
 
+const translations = {
+  id: {
+    home: "Beranda",
+    dashboard: "Dashboard",
+    calendar: "Kalender",
+    manageData: "Kelola Data",
+    addData: "Tambah Data",
+    editData: "Edit Data",
+    settings: "Pengaturan",
+    accountSettings: "Pengaturan Akun",
+    logout: "Keluar",
+    searchPlaceholder:
+      "Cari kegiatan, kategori, atau tim...",
+  },
+
+  en: {
+    home: "Home",
+    dashboard: "Dashboard",
+    calendar: "Calendar",
+    manageData: "Manage Data",
+    addData: "Add Data",
+    editData: "Edit Data",
+    settings: "Settings",
+    accountSettings: "Account Settings",
+    logout: "Log Out",
+    searchPlaceholder:
+      "Search activities, categories, or teams...",
+  },
+} as const;
+
 function applyTheme(mode: ThemeMode) {
   const systemPrefersDark =
     window.matchMedia(
@@ -1769,6 +1799,12 @@ export default function Dashboard({
   const [languageMode, setLanguageMode] =
     useState<LanguageMode>("id");
 
+  const [resolvedLanguage, setResolvedLanguage] =
+    useState<"id" | "en">("id");
+
+  const text =
+    translations[resolvedLanguage];
+
   const [inputMode, setInputMode] =
     useState<FormMode>("create");
 
@@ -1795,14 +1831,7 @@ export default function Dashboard({
   function changeLanguage(
     mode: LanguageMode,
   ) {
-    setLanguageMode(mode);
-
-    localStorage.setItem(
-      "simi-language",
-      mode,
-    );
-
-    document.documentElement.lang =
+    const nextLanguage =
       mode === "system"
         ? navigator.language
           .toLowerCase()
@@ -1810,6 +1839,17 @@ export default function Dashboard({
           ? "en"
           : "id"
         : mode;
+
+    setLanguageMode(mode);
+    setResolvedLanguage(nextLanguage);
+
+    localStorage.setItem(
+      "simi-language",
+      mode,
+    );
+
+    document.documentElement.lang =
+      nextLanguage;
   }
 
   useEffect(() => {
@@ -1867,7 +1907,7 @@ export default function Dashboard({
         ? savedLanguage
         : "id";
 
-    document.documentElement.lang =
+    const nextLanguage =
       initialLanguage === "system"
         ? navigator.language
           .toLowerCase()
@@ -1876,8 +1916,12 @@ export default function Dashboard({
           : "id"
         : initialLanguage;
 
+    document.documentElement.lang =
+      nextLanguage;
+
     window.setTimeout(() => {
       setLanguageMode(initialLanguage);
+      setResolvedLanguage(nextLanguage);
     }, 0);
   }, []);
 
@@ -1999,7 +2043,9 @@ export default function Dashboard({
           aria-label="Buka Beranda"
         >
           <House />
-          <span className="menu-label">Beranda</span>
+          <span className="menu-label">
+            {text.home}
+          </span>
         </button>
 
         {/* DASHBOARD */}
@@ -2017,7 +2063,9 @@ export default function Dashboard({
           title="Dashboard"
         >
           <LayoutDashboard />
-          <span className="menu-label">Dashboard</span>
+          <span className="menu-label">
+            {text.dashboard}
+          </span>
         </button>
 
         {/* KALENDER */}
@@ -2035,7 +2083,9 @@ export default function Dashboard({
           title="Kalender"
         >
           <CalendarDays />
-          <span className="menu-label">Kalender</span>
+          <span className="menu-label">
+            {text.calendar}
+          </span>
         </button>
 
         {/* KELOLA DATA */}
@@ -2072,7 +2122,7 @@ export default function Dashboard({
               <Sheet />
 
               <span className="menu-label">
-                Kelola Data
+                {text.manageData}
               </span>
             </button>
 
@@ -2119,7 +2169,7 @@ export default function Dashboard({
                 }}
               >
                 <Plus />
-                <span>Tambah Data</span>
+                <span>{text.addData}</span>
               </button>
 
               <button
@@ -2139,7 +2189,7 @@ export default function Dashboard({
                 }}
               >
                 <Pencil />
-                <span>Edit Data</span>
+                <span>{text.editData}</span>
               </button>
             </div>
           )}
@@ -2167,7 +2217,7 @@ export default function Dashboard({
           <SettingsIcon />
 
           <span className="menu-label">
-            Pengaturan
+            {text.settings}
           </span>
         </button>
 
@@ -2203,7 +2253,7 @@ export default function Dashboard({
             <input
               value={searchQuery}
               onChange={(event) => setSearchQuery(event.target.value)}
-              placeholder="Cari kegiatan, kategori, atau tim..."
+              placeholder={text.searchPlaceholder}
             />
           </div>
 
@@ -2241,7 +2291,7 @@ export default function Dashboard({
                     setView("settings");
                   }}
                 >
-                  Pengaturan Akun
+                  {text.accountSettings}
                 </button>
 
                 <button
@@ -2296,7 +2346,7 @@ export default function Dashboard({
                     }
                   }}
                 >
-                  Keluar
+                  {text.logout}
                 </button>
               </div>
             )}
