@@ -5543,3 +5543,106 @@ aside:not(.open) .sidebarArrow {
     padding: 0 !important;
   }
 }
+
+/* ========================================
+   PILIHAN BAHASA APLIKASI
+======================================== */
+
+.settingsLanguageList {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.settingsLanguageCard {
+  width: 100%;
+  min-height: 70px;
+  padding: 14px 17px;
+  border: 1px solid #d8e8ed;
+  border-radius: 14px;
+  background: #f8fcfd;
+  color: #587384;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 4px;
+
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.settingsLanguageCard:hover {
+  color: #08758a;
+  border-color: #8fd5de;
+  background: #effafb;
+  transform: translateY(-1px);
+}
+
+.settingsLanguageCard strong,
+.settingsLanguageCard small {
+  display: block;
+}
+
+.settingsLanguageCard strong {
+  color: #123047;
+  font-size: 13px;
+}
+
+.settingsLanguageCard small {
+  color: #78909c;
+  font-size: 10px;
+}
+
+.settingsLanguageCard.active {
+  color: #ffffff;
+  border-color: transparent;
+  background: linear-gradient(120deg,
+      #0782b6,
+      #0db9b5);
+}
+
+.settingsLanguageCard.active strong {
+  color: #ffffff;
+}
+
+.settingsLanguageCard.active small {
+  color: #e7fbff;
+}
+
+:root[data-theme="dark"] .settingsLanguageCard {
+  color: #b6d0d9;
+  border-color: #254b5b;
+  background: #102f3d;
+}
+
+:root[data-theme="dark"] .settingsLanguageCard strong {
+  color: #edf8fa;
+}
+
+:root[data-theme="dark"] .settingsLanguageCard small {
+  color: #91adb7;
+}
+
+:root[data-theme="dark"] .settingsLanguageCard:hover {
+  border-color: #3e7588;
+  background: #153b49;
+}
+
+:root[data-theme="dark"] .settingsLanguageCard.active {
+  color: #ffffff;
+  border-color: transparent;
+  background: #0aa6b4;
+}
+
+:root[data-theme="dark"] .settingsLanguageCard.active strong,
+:root[data-theme="dark"] .settingsLanguageCard.active small {
+  color: #ffffff;
+}
