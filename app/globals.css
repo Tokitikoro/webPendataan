@@ -5456,40 +5456,17 @@ aside:not(.open) .sidebarArrow {
 
 @media screen and (max-width: 650px) {
   :root[data-theme="dark"] .tableWrap tbody td.target {
-    color: #d8edf7 !important;
-    background: #19445c !important;
+    color: #d7edf5 !important;
+    background: #1d4b63 !important;
   }
 
   :root[data-theme="dark"] .tableWrap tbody td.warn {
-    color: #392400 !important;
-    background: #e5a23f !important;
+    color: #ffe0a3 !important;
+    background: #815d20 !important;
   }
 
   :root[data-theme="dark"] .tableWrap tbody td.ok {
-    color: #ffffff !important;
-    background: #119b79 !important;
-  }
-}
-
-/* Status tabel tema Default dan Terang */
-
-@media screen and (max-width: 650px) {
-
-  :root[data-theme="default"] .tableWrap tbody td.target,
-  :root[data-theme="light"] .tableWrap tbody td.target {
-    color: #174f68 !important;
-    background: #dcecf8 !important;
-  }
-
-  :root[data-theme="default"] .tableWrap tbody td.warn,
-  :root[data-theme="light"] .tableWrap tbody td.warn {
-    color: #593200 !important;
-    background: #ffb44d !important;
-  }
-
-  :root[data-theme="default"] .tableWrap tbody td.ok,
-  :root[data-theme="light"] .tableWrap tbody td.ok {
-    color: #ffffff !important;
-    background: #17c69a !important;
+    color: #baf4df !important;
+    background: #11634f !important;
   }
 }
