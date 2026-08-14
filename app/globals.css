@@ -1,0 +1,5648 @@
+* {
+  box-sizing: border-box
+}
+
+body {
+  margin: 0;
+  background: #f3f8fb;
+  color: #123047;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif
+}
+
+.shell {
+  display: flex;
+  min-height: 100vh
+}
+
+aside {
+  position: fixed;
+  inset: 0 auto 0 0;
+  width: 76px;
+  background: #062d46;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 18px 11px;
+  gap: 12px;
+  color: #9ccbdd;
+  z-index: 30;
+  overflow: hidden;
+  transition:
+    width 0.3s ease,
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+/* Sidebar terbuka */
+aside.open {
+  width: 260px;
+  align-items: stretch;
+  box-shadow: 12px 0 35px rgba(6, 45, 70, 0.2);
+}
+
+.brand {
+  width: 46px;
+  height: 46px;
+  border-radius: 15px;
+  background: linear-gradient(135deg, #22d3c5, #1f96ef);
+  display: grid;
+  place-items: center;
+  color: white;
+  font-weight: 900;
+  margin-bottom: 20px;
+  box-shadow: 0 10px 25px #00b8d455
+}
+
+.brand span {
+  letter-spacing: -2px
+}
+
+.brand-wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  margin-bottom: 20px;
+}
+
+.brand-wrapper .brand {
+  flex: 0 0 46px;
+  margin-bottom: 0;
+}
+
+.brand-name {
+  max-width: 0;
+  opacity: 0;
+  overflow: hidden;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1.3;
+  white-space: nowrap;
+  transform: translateX(-8px);
+  transition:
+    max-width 0.3s ease,
+    opacity 0.2s ease,
+    transform 0.3s ease;
+}
+
+aside.open .brand-name {
+  max-width: 170px;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.brand-wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  margin-bottom: 20px;
+}
+
+.brand-wrapper .brand {
+  flex: 0 0 46px;
+  margin-bottom: 0;
+}
+
+.brand-name {
+  max-width: 0;
+  opacity: 0;
+  overflow: hidden;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1.3;
+  white-space: nowrap;
+  transform: translateX(-8px);
+  transition:
+    max-width 0.3s ease,
+    opacity 0.2s ease,
+    transform 0.3s ease;
+}
+
+.brand-name strong,
+.brand-name small {
+  display: block;
+}
+
+.brand-name strong {
+  color: #ffffff;
+  font-size: 15px;
+}
+
+.brand-name small {
+  margin-top: 2px;
+  color: #9ccbdd;
+  font-size: 10px;
+  font-weight: 500;
+}
+
+aside.open .brand-name {
+  max-width: 170px;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.brand-wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  margin-bottom: 20px;
+}
+
+.brand-wrapper .brand {
+  flex: 0 0 46px;
+  margin-bottom: 0;
+}
+
+.brand-name {
+  max-width: 0;
+  opacity: 0;
+  overflow: hidden;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1.3;
+  white-space: nowrap;
+  transform: translateX(-8px);
+  transition:
+    max-width 0.3s ease,
+    opacity 0.2s ease,
+    transform 0.3s ease;
+}
+
+aside.open .brand-name {
+  max-width: 170px;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.brand-wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  margin-bottom: 20px;
+}
+
+.brand-wrapper .brand {
+  flex: 0 0 46px;
+  margin-bottom: 0;
+}
+
+.brand-name {
+  max-width: 0;
+  opacity: 0;
+  overflow: hidden;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1.3;
+  white-space: nowrap;
+  transform: translateX(-8px);
+  transition:
+    max-width 0.3s ease,
+    opacity 0.2s ease,
+    transform 0.3s ease;
+}
+
+aside.open .brand-name {
+  max-width: 170px;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+aside button {
+  flex-shrink: 0;
+}
+
+/* Tombol saat sidebar terbuka */
+aside.open button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 14px;
+  padding: 0 14px;
+}
+
+/* Teks menu secara default disembunyikan */
+.menu-label {
+  max-width: 0;
+  opacity: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  pointer-events: none;
+  transform: translateX(-8px);
+  transition:
+    max-width 0.3s ease,
+    opacity 0.2s ease,
+    transform 0.3s ease;
+}
+
+/* Teks muncul ketika sidebar terbuka */
+aside.open .menu-label {
+  max-width: 170px;
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(0);
+}
+
+aside button,
+.icon {
+  border: 0;
+  background: transparent;
+  color: inherit;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  cursor: pointer
+}
+
+aside button:hover,
+aside button.active {
+  background: #0e5876;
+  color: white
+}
+
+.spacer {
+  flex: 1
+}
+
+/* Konten utama */
+main {
+  margin-left: 76px;
+  width: calc(100% - 76px);
+  transition:
+    margin-left 0.3s ease,
+    width 0.3s ease;
+}
+
+/* Konten ikut bergeser ketika sidebar terbuka */
+.shell.sidebar-open main {
+  margin-left: 260px;
+  width: calc(100% - 260px);
+}
+
+header {
+  height: 76px;
+  background: #fff;
+  border-bottom: 1px solid #dbe9ef;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0 26px;
+  position: sticky;
+  top: 0;
+  z-index: 2
+}
+
+.icon {
+  width: 42px;
+  height: 42px;
+  color: #46677b;
+  background: #f2f7f9
+}
+
+.search {
+  height: 44px;
+  max-width: 520px;
+  flex: 1;
+  background: #f1f7f9;
+  border: 1px solid #dcebef;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 14px;
+  color: #70a1b6
+}
+
+.search input {
+  width: 100%;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #123047;
+  font-size: 14px
+}
+
+.source {
+  margin-left: auto;
+  font-size: 12px;
+  color: #527185
+}
+
+.source span {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #1cc9a5;
+  margin-right: 7px
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: #d8f6f8;
+  color: #06798d;
+  font-weight: 800
+}
+
+.content {
+  padding: 26px;
+  max-width: 1800px;
+  margin: auto
+}
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(120deg, #075985, #0284c7 55%, #10bfc1);
+  color: white;
+  border-radius: 24px;
+  padding: 30px 34px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 18px 35px #087da327
+}
+
+.hero:after {
+  content: "";
+  position: absolute;
+  width: 260px;
+  height: 260px;
+  border: 55px solid #ffffff14;
+  border-radius: 50%;
+  right: -60px;
+  top: -90px
+}
+
+.eyebrow {
+  margin: 0 0 7px;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 1.3px;
+  color: #38d9d1
+}
+
+.hero h1 {
+  font-size: 30px;
+  margin: 0 0 7px
+}
+
+.hero p {
+  margin: 0;
+  color: #dffbff
+}
+
+.heroStat {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  z-index: 1;
+  padding-right: 45px
+}
+
+.heroStat svg {
+  width: 45px;
+  height: 45px
+}
+
+.heroStat b {
+  display: block;
+  font-size: 32px
+}
+
+.heroStat span {
+  font-size: 12px
+}
+
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin: 18px 0
+}
+
+.metrics article {
+  background: white;
+  border: 1px solid #dcebf0;
+  border-radius: 18px;
+  padding: 18px 20px;
+  box-shadow: 0 7px 20px #1a56730a
+}
+
+.metrics span,
+.metrics small {
+  display: block;
+  color: #6d8997
+}
+
+.metrics b {
+  display: block;
+  font-size: 29px;
+  margin: 6px 0;
+  color: #075d82
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 18px
+}
+
+.surveyCard {
+  background: white;
+  border: 1px solid #d9eaf0;
+  border-radius: 20px;
+  padding: 19px;
+  box-shadow: 0 8px 25px #0a60740b
+}
+
+.cardTop {
+  display: flex;
+  justify-content: space-between;
+  color: #03899e;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: .5px
+}
+
+.cardTop em {
+  font-style: normal;
+  background: #e8f8fa;
+  padding: 5px 8px;
+  border-radius: 8px
+}
+
+.surveyCard h3 {
+  font-size: 16px;
+  min-height: 42px;
+  margin: 14px 0
+}
+
+.big {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px
+}
+
+.big b {
+  font-size: 31px;
+  color: #064e72
+}
+
+.big small {
+  color: #708b99;
+  margin-bottom: 5px
+}
+
+.progress {
+  height: 9px;
+  background: #e5f2f5;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 12px 0
+}
+
+.progress i {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, #18c6ba, #1d9bea);
+  border-radius: 8px
+}
+
+.surveyCard footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: #708795
+}
+
+.surveyCard footer span {
+  padding: 5px 8px;
+  background: #edf3f6;
+  border-radius: 7px
+}
+
+.surveyCard footer .done {
+  background: #dcf9f2;
+  color: #087d68
+}
+
+.panel {
+  background: #fff;
+  border: 1px solid #dcebf0;
+  border-radius: 22px;
+  box-shadow: 0 8px 25px #0a60740b;
+  overflow: hidden
+}
+
+.panelHead {
+  padding: 20px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #e2eef2
+}
+
+.panelHead h2 {
+  margin: 0;
+  font-size: 19px
+}
+
+.soft,
+.calNav button {
+  border: 0;
+  background: #e6f7f9;
+  color: #08758a;
+  border-radius: 10px;
+  padding: 10px 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  cursor: pointer
+}
+
+.soft svg {
+  width: 16px
+}
+
+.tableWrap {
+  width: 100%;
+  max-height: 510px;
+  overflow-x: auto;
+  overflow-y: auto;
+}
+
+.tableWrap table {
+  width: 100%;
+  min-width: 1488px;
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 12px;
+}
+
+.tableWrap .col-kegiatan {
+  width: 390px;
+}
+
+.tableWrap .col-periode {
+  width: 90px;
+}
+
+.tableWrap .col-bulan {
+  width: 42px;
+}
+
+.tableWrap th,
+.tableWrap td {
+  padding: 10px 4px;
+  overflow: hidden;
+  text-align: center;
+  border-right: 1px solid #dfebef;
+  border-bottom: 1px solid #dfebef;
+}
+
+.tableWrap thead {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+.tableWrap th {
+  color: #28566c;
+  background: #e5f5f8;
+  font-size: 10px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.tableWrap thead tr:first-child th:first-child {
+  width: 390px;
+  min-width: 390px;
+  max-width: 390px;
+}
+
+.tableWrap thead tr:first-child th:nth-child(2) {
+  width: 90px;
+  min-width: 90px;
+  max-width: 90px;
+}
+
+.tableWrap thead tr:first-child th[colspan="2"] {
+  width: 84px;
+  min-width: 84px;
+  max-width: 84px;
+}
+
+.tableWrap thead tr:nth-child(2) th {
+  width: 42px;
+  min-width: 42px;
+  max-width: 42px;
+  padding: 8px 2px;
+}
+
+.tableWrap tbody td:first-child {
+  width: 390px;
+  min-width: 390px;
+  max-width: 390px;
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  text-align: left;
+  background: #ffffff;
+}
+
+.tableWrap tbody td:nth-child(2) {
+  width: 90px;
+  min-width: 90px;
+  max-width: 90px;
+}
+
+.tableWrap tbody td:nth-child(n + 3) {
+  width: 42px;
+  min-width: 42px;
+  max-width: 42px;
+  padding: 10px 2px;
+}
+
+.tableWrap td strong,
+.tableWrap td small {
+  display: block;
+}
+
+.tableWrap td small {
+  margin-top: 4px;
+  color: #79909c;
+  font-size: 10px;
+}
+
+.tableWrap .target {
+  background: #e8f3fc;
+  font-weight: 800;
+}
+
+.tableWrap .ok {
+  color: #ffffff;
+  background: #17c69a;
+  font-weight: 900;
+}
+
+.tableWrap .warn {
+  color: #593200;
+  background: #ffb44d;
+  font-weight: 900;
+}
+
+.calendarPanel {
+  min-height: 700px
+}
+
+.calNav {
+  display: flex;
+  gap: 8px
+}
+
+.calNav button svg {
+  width: 16px
+}
+
+.calendar {
+  padding: 18px
+}
+
+.week,
+.days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr)
+}
+
+.week b {
+  text-align: center;
+  padding: 12px;
+  color: #5a7a8b;
+  font-size: 12px
+}
+
+.day,
+.blank {
+  min-height: 105px;
+  border-right: 1px solid #e0edf1;
+  border-bottom: 1px solid #e0edf1;
+  padding: 8px
+}
+
+.day>span:first-child {
+  display: grid;
+  place-items: center;
+  width: 27px;
+  height: 27px;
+  font-size: 12px;
+}
+
+.day.today>span:first-child {
+  background: #0aaec1;
+  color: #ffffff;
+  border-radius: 9px;
+}
+
+.event {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 5px;
+  padding: 5px 6px;
+  background: #dcf8f5;
+  color: #087a70;
+  border-left: 3px solid #19c5a6;
+  border-radius: 5px;
+  font-style: normal;
+  font-size: 9px
+}
+
+.event.e1 {
+  background: #def1ff;
+  color: #096690;
+  border-left-color: #1c9aea
+}
+
+@media(max-width:1000px) {
+  .metrics {
+    grid-template-columns: repeat(2, 1fr)
+  }
+
+  .cards {
+    grid-template-columns: 1fr
+  }
+
+  .source {
+    display: none
+  }
+
+}
+
+@media (max-width: 650px) {
+  aside {
+    width: 60px;
+  }
+
+  aside.open {
+    width: 260px;
+    box-shadow: 12px 0 40px rgba(6, 45, 70, 0.35);
+  }
+
+  main {
+    margin-left: 60px;
+    width: calc(100% - 60px);
+  }
+
+  /* Di mobile, konten tidak ikut bergeser */
+  .shell.sidebar-open main {
+    margin-left: 60px;
+    width: calc(100% - 60px);
+  }
+
+  .content {
+    padding: 14px;
+  }
+
+  header {
+    padding: 0 12px;
+  }
+
+  .hero {
+    padding: 24px;
+  }
+
+  .heroStat {
+    display: none;
+  }
+
+  .metrics {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .search {
+    max-width: none;
+  }
+
+}
+
+aside button svg {
+  width: 22px;
+  height: 22px;
+  flex: 0 0 22px;
+}
+
+.sidebar-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  width: auto;
+  height: auto;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: rgba(3, 24, 38, 0.45);
+  backdrop-filter: blur(2px);
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease;
+}
+
+.sidebar-overlay.show {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* Tombol dan latar ikon tepat di tengah saat sidebar tertutup */
+aside:not(.open)>button {
+  width: 48px;
+  min-width: 48px;
+  height: 48px;
+  padding: 0;
+  margin-left: auto;
+  margin-right: auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Ikon tepat di tengah latar tombol */
+aside:not(.open)>button svg {
+  width: 22px;
+  height: 22px;
+  margin: 0;
+  flex: 0 0 22px;
+}
+
+/* Latar ikon aktif */
+aside:not(.open)>button.active {
+  background: #0e5876;
+  color: #ffffff;
+}
+
+/* Latar ikon ketika diarahkan mouse */
+aside:not(.open)>button:hover {
+  background: #0e5876;
+  color: #ffffff;
+}
+
+@media (min-width: 651px) {
+  .sidebar-overlay {
+    display: none;
+  }
+}
+
+/* ========================================
+   HALAMAN BERANDA
+======================================== */
+
+.homePage {
+  display: grid;
+  gap: 20px;
+}
+
+.homeHero {
+  min-height: 330px;
+  padding: 42px;
+  border-radius: 26px;
+  color: #ffffff;
+  background: linear-gradient(120deg, #075985, #0284c7 55%, #10bfc1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  box-shadow: 0 18px 35px rgba(8, 125, 163, 0.15);
+}
+
+.homeIntro {
+  max-width: 720px;
+}
+
+.homeHero .eyebrow {
+  color: #67f3e8;
+}
+
+.homeHero h1 {
+  margin: 0 0 14px;
+  font-size: clamp(32px, 5vw, 52px);
+  line-height: 1.08;
+  color: #ffffff;
+}
+
+.homeIntro>p:not(.eyebrow) {
+  max-width: 650px;
+  margin: 0;
+  color: #dffbff;
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+.homeAction {
+  min-height: 48px;
+  margin-top: 25px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 13px;
+  background: #ffffff;
+  color: #075d82;
+  font-family: inherit;
+  font-weight: 800;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease;
+}
+
+.homeAction:hover {
+  background: #e8fbff;
+  transform: translateY(-2px);
+}
+
+.homeAction svg {
+  width: 19px;
+  height: 19px;
+}
+
+/* Ringkasan capaian */
+
+.homeSummary {
+  min-width: 250px;
+  padding: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.13);
+  backdrop-filter: blur(10px);
+}
+
+.homeSummary span,
+.homeSummary strong,
+.homeSummary small {
+  display: block;
+}
+
+.homeSummary span {
+  color: #dffbff;
+  font-size: 12px;
+}
+
+.homeSummary strong {
+  margin: 8px 0;
+  color: #ffffff;
+  font-size: 48px;
+  line-height: 1;
+}
+
+.homeSummary small {
+  color: #dffbff;
+  line-height: 1.5;
+}
+
+/* Menu cepat */
+
+.homeQuickMenu {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.homeQuickMenu button {
+  width: 100%;
+  min-height: 110px;
+  padding: 20px;
+  border: 1px solid #d9eaf0;
+  border-radius: 19px;
+  background: #ffffff;
+  color: #123047;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 8px 25px rgba(10, 96, 116, 0.05);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.homeQuickMenu button:hover {
+  transform: translateY(-3px);
+  border-color: #8ddce5;
+  box-shadow: 0 14px 30px rgba(10, 96, 116, 0.12);
+}
+
+.homeQuickMenu button>svg {
+  width: 46px;
+  height: 46px;
+  padding: 11px;
+  border-radius: 14px;
+  color: #07859a;
+  background: #e7f8fa;
+  flex: 0 0 46px;
+}
+
+.homeQuickMenu button>span {
+  min-width: 0;
+}
+
+.homeQuickMenu span,
+.homeQuickMenu strong,
+.homeQuickMenu small {
+  display: block;
+}
+
+.homeQuickMenu strong {
+  margin-bottom: 5px;
+  color: #123047;
+  font-size: 15px;
+}
+
+.homeQuickMenu small {
+  color: #708b99;
+  line-height: 1.45;
+}
+
+/* Responsif */
+
+@media (max-width: 850px) {
+  .homeHero {
+    min-height: auto;
+    padding: 30px;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .homeSummary {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .homeQuickMenu {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 650px) {
+  .homeHero {
+    padding: 24px;
+    border-radius: 20px;
+  }
+
+  .homeHero h1 {
+    font-size: 32px;
+  }
+}
+
+.viewLoading {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: #f3f8fb;
+}
+
+.viewLoadingSpinner {
+  width: 38px;
+  height: 38px;
+  border: 4px solid #d8eaf0;
+  border-top-color: #0789a0;
+  border-radius: 50%;
+  animation: viewLoadingSpin 0.7s linear infinite;
+}
+
+@keyframes viewLoadingSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Tiga indikator Beranda */
+
+.homeIndicators {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.indicatorCard {
+  position: relative;
+  min-height: 245px;
+  padding: 23px;
+  overflow: hidden;
+  border: 1px solid #dcebf0;
+  border-radius: 21px;
+  background: #ffffff;
+  text-align: center;
+  box-shadow: 0 10px 28px rgba(10, 96, 116, 0.08);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.indicatorCard:hover {
+  transform: translateY(-4px);
+  border-color: #a9dfe7;
+  box-shadow: 0 17px 35px rgba(10, 96, 116, 0.14);
+}
+
+.indicatorCard::before {
+  position: absolute;
+  content: "";
+  width: 110px;
+  height: 110px;
+  top: -52px;
+  right: -48px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.06;
+}
+
+.indicatorIcon {
+  width: 55px;
+  height: 55px;
+  margin: 0 auto 15px;
+  border-radius: 17px;
+  display: grid;
+  place-items: center;
+}
+
+.indicatorIcon svg {
+  width: 29px;
+  height: 29px;
+}
+
+.indicatorBlue {
+  color: #0786c8;
+}
+
+.indicatorBlue .indicatorIcon {
+  background: #e1f4fc;
+}
+
+.indicatorGreen {
+  color: #0a9c78;
+}
+
+.indicatorGreen .indicatorIcon {
+  background: #def8ef;
+}
+
+.indicatorOrange {
+  color: #d97918;
+}
+
+.indicatorOrange .indicatorIcon {
+  background: #fff0dd;
+}
+
+.indicatorCard h3 {
+  min-height: 42px;
+  margin: 0 0 13px;
+  color: #073c68;
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.indicatorValue {
+  margin-bottom: 17px;
+}
+
+.indicatorValue strong {
+  display: block;
+  color: #425b6b;
+  font-size: 32px;
+  line-height: 1.1;
+}
+
+.indicatorValue>span {
+  display: block;
+  margin-top: 5px;
+  color: #78909c;
+  font-size: 12px;
+}
+
+.indicatorLabels {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding-top: 14px;
+  border-top: 1px solid #e5eef2;
+}
+
+.indicatorLabels>span {
+  color: #587384;
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.indicatorLabels svg {
+  width: 14px;
+  height: 14px;
+  flex: 0 0 14px;
+}
+
+/* Ikon periode */
+.indicatorLabels>span:first-child svg {
+  color: #0786c8;
+}
+
+/* Ikon sumber */
+.indicatorLabels>span:last-child svg {
+  color: #0a9c78;
+}
+
+@media (max-width: 900px) {
+  .homeIndicators {
+    grid-template-columns: 1fr;
+  }
+
+  .indicatorCard {
+    min-height: auto;
+  }
+}
+
+/* ========================================
+   FORM INPUT SPREADSHEET
+======================================== */
+
+.inputPanel {
+  overflow: hidden;
+  border: 1px solid #dcebf0;
+  border-radius: 22px;
+  background: #ffffff;
+  box-shadow: 0 10px 30px rgba(10, 96, 116, 0.08);
+}
+
+.inputPanelHead {
+  padding: 24px 26px;
+  border-bottom: 1px solid #e2eef2;
+  background:
+    linear-gradient(120deg,
+      #f8fdff,
+      #eefbfc);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.inputPanelHead h2 {
+  margin: 0 0 7px;
+  color: #123047;
+  font-size: 23px;
+}
+
+.inputPanelHead>div>p:last-child {
+  margin: 0;
+  color: #6d8997;
+  font-size: 13px;
+}
+
+.surveyInputForm {
+  padding: 26px;
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.surveyInputForm label {
+  min-width: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.surveyInputForm label>span {
+  color: #385d70;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.surveyInputForm input,
+.surveyInputForm select {
+  width: 100%;
+  min-height: 47px;
+  padding: 0 14px;
+  outline: 0;
+  border: 1px solid #d4e6ec;
+  border-radius: 12px;
+  background: #f9fcfd;
+  color: #123047;
+  font-family: inherit;
+  font-size: 14px;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.surveyInputForm input:focus,
+.surveyInputForm select:focus {
+  border-color: #18aabd;
+  background: #ffffff;
+  box-shadow:
+    0 0 0 4px rgba(24, 170, 189, 0.12);
+}
+
+.formWide {
+  grid-column: 1 / -1;
+}
+
+.formActions {
+  padding-top: 5px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.inputCancel,
+.inputSubmit {
+  min-height: 45px;
+  padding: 0 17px;
+  border: 0;
+  border-radius: 11px;
+  font-family: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.inputCancel {
+  color: #496a7d;
+  background: #eaf2f5;
+}
+
+.inputSubmit {
+  color: #ffffff;
+  background:
+    linear-gradient(120deg,
+      #0782b6,
+      #0db9b5);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.inputSubmit svg {
+  width: 18px;
+  height: 18px;
+}
+
+.inputCancel:disabled,
+.inputSubmit:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.formMessage {
+  grid-column: 1 / -1;
+  padding: 13px 15px;
+  border-radius: 11px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.formMessage.success {
+  color: #08765f;
+  background: #dcf9f2;
+}
+
+.formMessage.error {
+  color: #a03a30;
+  background: #ffebe8;
+}
+
+@media (max-width: 700px) {
+  .inputPanelHead {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .surveyInputForm {
+    padding: 18px;
+    grid-template-columns: 1fr;
+  }
+
+  .formWide {
+    grid-column: auto;
+  }
+
+  .formMessage {
+    grid-column: auto;
+  }
+
+  .formActions {
+    flex-direction: column-reverse;
+  }
+
+  .inputCancel,
+  .inputSubmit {
+    width: 100%;
+  }
+}
+
+/* ========================================
+   TAB TAMBAH DAN EDIT KEGIATAN
+======================================== */
+
+.surveyModeTabs {
+  padding: 18px 26px 0;
+  display: flex;
+  gap: 10px;
+  background: #ffffff;
+}
+
+.surveyModeTabs button {
+  min-height: 44px;
+  padding: 0 17px;
+  border: 1px solid #d5e7ed;
+  border-radius: 12px;
+  background: #f3f8fa;
+  color: #547284;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.surveyModeTabs button svg {
+  width: 17px;
+  height: 17px;
+}
+
+.surveyModeTabs button:hover {
+  color: #08798d;
+  border-color: #80d2dc;
+  background: #ecfafb;
+}
+
+.surveyModeTabs button.active {
+  color: #ffffff;
+  border-color: transparent;
+  background:
+    linear-gradient(120deg,
+      #0782b6,
+      #0db9b5);
+  box-shadow: none;
+}
+
+/* Pemilih kegiatan */
+
+.surveySelector {
+  margin: 18px 26px 0;
+  padding: 18px;
+  border: 1px solid #d9e9ee;
+  border-radius: 15px;
+  background: #f6fbfc;
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr) minmax(250px, 0.7fr);
+  align-items: end;
+  gap: 18px;
+}
+
+.surveySelector label {
+  display: grid;
+  gap: 8px;
+}
+
+.surveySelector label>span {
+  color: #385d70;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.surveySelector select {
+  width: 100%;
+  min-height: 47px;
+  padding: 0 14px;
+  outline: 0;
+  border: 1px solid #d4e6ec;
+  border-radius: 12px;
+  background: #ffffff;
+  color: #123047;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+.surveySelector select:focus {
+  border-color: #18aabd;
+  box-shadow:
+    0 0 0 4px rgba(24, 170, 189, 0.12);
+}
+
+.selectedSurveyInfo {
+  min-height: 47px;
+  padding: 9px 13px;
+  border-radius: 11px;
+  background: #e6f7f9;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.selectedSurveyInfo strong,
+.selectedSurveyInfo span {
+  display: block;
+}
+
+.selectedSurveyInfo strong {
+  overflow: hidden;
+  color: #075d82;
+  font-size: 13px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.selectedSurveyInfo span {
+  margin-top: 3px;
+  overflow: hidden;
+  color: #678695;
+  font-size: 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Kondisi input terkunci */
+
+.surveyInputForm input:disabled,
+.surveyInputForm select:disabled {
+  color: #8aa0aa;
+  background: #eef4f6;
+  cursor: not-allowed;
+  opacity: 0.75;
+}
+
+.surveyInputForm input[readonly] {
+  color: #56717f;
+  background: #eef4f6;
+  cursor: not-allowed;
+}
+
+.fieldHint {
+  color: #78909c;
+  font-size: 10px;
+  font-weight: 500;
+}
+
+/* Responsif */
+
+@media (max-width: 700px) {
+  .surveyModeTabs {
+    padding: 14px 18px 0;
+    display: grid;
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .surveyModeTabs button {
+    width: 100%;
+    padding: 0 10px;
+  }
+
+  .surveySelector {
+    margin: 14px 18px 0;
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ========================================
+   SUBMENU KELOLA DATA
+======================================== */
+
+.sidebarGroup {
+  width: 48px;
+  display: grid;
+  gap: 6px;
+}
+
+.sidebarGroupRow {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.sidebarManageButton {
+  flex-shrink: 0;
+}
+
+.sidebarArrow {
+  display: none;
+}
+
+.sidebarSubmenu {
+  display: none;
+}
+
+/* Sidebar terbuka */
+
+aside.open .sidebarGroup {
+  width: 100%;
+}
+
+aside.open .sidebarGroupRow {
+  width: 100%;
+  min-height: 48px;
+  padding-right: 5px;
+  border-radius: 14px;
+}
+
+aside.open .sidebarGroup.active .sidebarGroupRow {
+  background: #0e5876;
+  color: #ffffff;
+}
+
+aside.open .sidebarManageButton {
+  width: auto;
+  min-width: 0;
+  height: 48px;
+  padding: 0 14px;
+  margin: 0;
+  background: transparent;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 14px;
+}
+
+aside.open .sidebarManageButton:hover {
+  background: transparent;
+}
+
+aside.open .sidebarArrow {
+  width: 36px;
+  min-width: 36px;
+  height: 36px;
+  padding: 0;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  display: grid;
+  place-items: center;
+}
+
+aside.open .sidebarArrow:hover {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+aside.open .sidebarArrow svg {
+  width: 17px;
+  height: 17px;
+  transition: transform 0.25s ease;
+}
+
+aside.open .sidebarArrow.open svg {
+  transform: rotate(180deg);
+}
+
+/* Submenu */
+
+aside.open .sidebarSubmenu {
+  padding: 2px 0 3px 17px;
+  display: grid;
+  gap: 5px;
+}
+
+aside.open .sidebarSubmenu button {
+  width: 100%;
+  min-width: 0;
+  height: 40px;
+  padding: 0 12px;
+  border-radius: 11px;
+  background: transparent;
+  color: #9ccbdd;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 11px;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  text-align: left;
+}
+
+aside.open .sidebarSubmenu button:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+aside.open .sidebarSubmenu button.active {
+  color: #ffffff;
+  background: #0e5876;
+}
+
+aside.open .sidebarSubmenu button svg {
+  width: 17px;
+  height: 17px;
+  flex: 0 0 17px;
+}
+
+/* Sidebar tertutup tetap menampilkan ikon Kelola Data */
+
+aside:not(.open) .sidebarGroup {
+  width: 48px;
+}
+
+aside:not(.open) .sidebarManageButton {
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+}
+
+aside:not(.open) .sidebarGroup.active .sidebarManageButton {
+  color: #ffffff;
+  background: #0e5876;
+}
+
+aside:not(.open) .sidebarArrow,
+aside:not(.open) .sidebarSubmenu {
+  display: none;
+}
+
+/* Paksa tombol panah dan ikonnya benar-benar simetris */
+
+aside.open .sidebarArrow {
+  width: 32px;
+  min-width: 32px;
+  height: 32px;
+  min-height: 32px;
+
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  line-height: 0;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+aside.open .sidebarArrow>svg {
+  display: block;
+  width: 16px;
+  height: 16px;
+
+  margin: 0;
+  padding: 0;
+  flex: 0 0 16px;
+
+  position: static;
+  transform: translate(0, 0) rotate(0deg);
+  transform-origin: center;
+}
+
+aside.open .sidebarArrow.open>svg {
+  transform: translate(0, 0) rotate(180deg);
+}
+
+/* ========================================
+   SAMAKAN POSISI KELOLA DATA SAAT TERTUTUP
+======================================== */
+
+aside:not(.open) .sidebarGroup {
+  width: 48px;
+  height: 48px;
+  min-height: 48px;
+  margin: 0;
+  padding: 0;
+  gap: 0;
+  align-self: center;
+  display: block;
+}
+
+aside:not(.open) .sidebarGroupRow {
+  width: 48px;
+  height: 48px;
+  min-height: 48px;
+  margin: 0;
+  padding: 0;
+  border-radius: 14px;
+  display: block;
+  background: transparent;
+}
+
+aside:not(.open) .sidebarManageButton {
+  width: 48px;
+  min-width: 48px;
+  height: 48px;
+  min-height: 48px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 14px;
+  background: transparent;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Background aktif dipasang langsung pada tombol */
+aside:not(.open) .sidebarGroup.active .sidebarGroupRow {
+  background: transparent;
+}
+
+aside:not(.open) .sidebarGroup.active .sidebarManageButton {
+  color: #ffffff;
+  background: #0e5876;
+}
+
+/* Ikon Spreadsheet tepat di tengah background */
+aside:not(.open) .sidebarManageButton>svg {
+  width: 22px;
+  height: 22px;
+  margin: 0;
+  padding: 0;
+  flex: 0 0 22px;
+  display: block;
+  position: static;
+  transform: none;
+}
+
+/* Panah dan submenu benar-benar tidak memengaruhi ukuran */
+aside:not(.open) .sidebarArrow,
+aside:not(.open) .sidebarSubmenu {
+  display: none !important;
+}
+
+/* Hover Kelola Data saat sidebar tertutup */
+aside:not(.open) .sidebarManageButton:hover {
+  color: #ffffff;
+  background: #0e5876;
+}
+
+/* Hover Kelola Data saat sidebar terbuka */
+aside.open .sidebarGroup:not(.active) .sidebarGroupRow:hover {
+  color: #ffffff;
+  background: #0e5876;
+}
+
+/* Saat aktif, background tetap terlihat */
+aside.open .sidebarGroup.active .sidebarGroupRow,
+aside:not(.open) .sidebarGroup.active .sidebarManageButton {
+  color: #ffffff;
+  background: #0e5876;
+}
+
+/* ========================================
+   LABEL ACARA DAN TOMBOL EDIT
+======================================== */
+
+.calendarEventRow {
+  width: 100%;
+  min-width: 0;
+  min-height: 27px;
+  margin-top: 5px;
+  padding: 0 4px 0 7px;
+  overflow: hidden;
+  border-left: 3px solid #19c5a6;
+  border-radius: 5px;
+  background: #dcf8f5;
+  color: #087a70;
+
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 22px;
+  align-items: center;
+  gap: 3px;
+}
+
+.calendarEventRow.e1 {
+  border-left-color: #1c9aea;
+  background: #def1ff;
+  color: #096690;
+}
+
+.calendarEventRow>span {
+  display: block;
+  width: auto;
+  min-width: 0;
+  height: auto;
+  overflow: hidden;
+  white-space: nowrap;
+  text-align: left;
+  text-overflow: ellipsis;
+  font-size: 9px;
+  line-height: 1.4;
+  font-style: normal;
+}
+
+.calendarEventEditButton {
+  width: 22px;
+  min-width: 22px;
+  height: 22px;
+  padding: 0;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  color: currentColor;
+  cursor: pointer;
+
+  display: grid;
+  place-items: center;
+
+  opacity: 0;
+  transition:
+    opacity 0.2s ease,
+    background 0.2s ease;
+}
+
+.calendarEventEditButton svg {
+  width: 12px;
+  height: 12px;
+}
+
+.calendarEventRow:hover .calendarEventEditButton {
+  opacity: 1;
+}
+
+.calendarEventEditButton:hover {
+  background: rgba(255, 255, 255, 0.75);
+}
+
+@media (hover: none) {
+  .calendarEventEditButton {
+    opacity: 1;
+  }
+}
+
+/* ========================================
+   EDITOR LABEL DI ATAS KALENDER
+======================================== */
+
+.calendarLabelEditor {
+  margin: 16px 18px 0;
+  padding: 16px;
+  border: 1px solid #cfe5eb;
+  border-radius: 15px;
+  background: #f4fbfc;
+
+  display: grid;
+  grid-template-columns: minmax(220px, 0.7fr) minmax(350px, 1fr);
+  align-items: center;
+  gap: 18px;
+
+  box-shadow: 0 8px 22px rgba(7, 87, 116, 0.08);
+}
+
+.calendarLabelEditorInfo {
+  min-width: 0;
+}
+
+.calendarLabelEditorInfo strong,
+.calendarLabelEditorInfo small {
+  display: block;
+}
+
+.calendarLabelEditorInfo strong {
+  overflow: hidden;
+  color: #123047;
+  font-size: 14px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.calendarLabelEditorInfo small {
+  margin-top: 5px;
+  color: #6d8997;
+  font-size: 10px;
+  line-height: 1.4;
+}
+
+.calendarLabelEditorControl {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 8px;
+}
+
+.calendarLabelEditorControl input {
+  width: 100%;
+  min-width: 0;
+  height: 43px;
+  padding: 0 13px;
+  outline: 0;
+  border: 1px solid #cbdfe6;
+  border-radius: 11px;
+  background: #ffffff;
+  color: #123047;
+  font-family: inherit;
+  font-size: 13px;
+}
+
+.calendarLabelEditorControl input:focus {
+  border-color: #0aaec1;
+  box-shadow: 0 0 0 4px rgba(10, 174, 193, 0.12);
+}
+
+.calendarLabelCancel,
+.calendarLabelSave {
+  min-height: 43px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 10px;
+  font-family: inherit;
+  font-weight: 800;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.calendarLabelCancel {
+  color: #496a7d;
+  background: #e5eef2;
+}
+
+.calendarLabelSave {
+  color: #ffffff;
+  background: linear-gradient(120deg,
+      #0782b6,
+      #0db9b5);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+}
+
+.calendarLabelSave svg {
+  width: 15px;
+  height: 15px;
+}
+
+.calendarLabelCancel:disabled,
+.calendarLabelSave:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+@media (max-width: 850px) {
+  .calendarLabelEditor {
+    grid-template-columns: 1fr;
+  }
+
+  .calendarLabelEditorControl {
+    grid-template-columns: 1fr;
+  }
+
+  .calendarLabelCancel,
+  .calendarLabelSave {
+    width: 100%;
+  }
+}
+
+/* Tombol Tambah Acara pada Kalender */
+
+.calNav .addCalendarEvent {
+  padding: 10px 15px;
+  color: #ffffff;
+  background: linear-gradient(120deg,
+      #0782b6,
+      #0db9b5);
+  box-shadow: 0 6px 16px rgba(7, 130, 182, 0.18);
+}
+
+.calNav .addCalendarEvent:hover {
+  color: #ffffff;
+  background: linear-gradient(120deg,
+      #066f9d,
+      #0aa7a4);
+  transform: translateY(-1px);
+}
+
+.calNav .addCalendarEvent svg {
+  width: 16px;
+  height: 16px;
+}
+
+@media (max-width: 650px) {
+  .panelHead {
+    align-items: flex-start;
+    gap: 14px;
+    flex-direction: column;
+  }
+
+  .calNav {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .calNav .addCalendarEvent {
+    flex: 1;
+  }
+}
+
+/* ========================================
+   FORM TAMBAH ACARA DI KALENDER
+======================================== */
+
+.calendarAddEditor {
+  margin: 16px 18px 0;
+  padding: 16px;
+  border: 1px solid #cfe5eb;
+  border-radius: 15px;
+  background: #f4fbfc;
+
+  display: grid;
+  grid-template-columns:
+    minmax(200px, 0.5fr) minmax(500px, 1fr);
+  align-items: center;
+  gap: 18px;
+
+  box-shadow:
+    0 8px 22px rgba(7, 87, 116, 0.08);
+}
+
+.calendarAddEditorInfo {
+  min-width: 0;
+}
+
+.calendarAddEditorInfo strong,
+.calendarAddEditorInfo small {
+  display: block;
+}
+
+.calendarAddEditorInfo strong {
+  color: #123047;
+  font-size: 14px;
+}
+
+.calendarAddEditorInfo small {
+  margin-top: 5px;
+  color: #6d8997;
+  font-size: 10px;
+  line-height: 1.4;
+}
+
+.calendarAddEditorFields {
+  min-width: 0;
+  display: grid;
+  grid-template-columns:
+    minmax(190px, 1fr) 155px 48px auto auto;
+  align-items: center;
+  gap: 8px;
+}
+
+.calendarAddEditorFields input {
+  width: 100%;
+  min-width: 0;
+  height: 43px;
+  padding: 0 12px;
+  outline: 0;
+  border: 1px solid #cbdfe6;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #123047;
+  font-family: inherit;
+  font-size: 13px;
+}
+
+.calendarAddEditorFields input:focus {
+  border-color: #0aaec1;
+  box-shadow:
+    0 0 0 4px rgba(10, 174, 193, 0.12);
+}
+
+/* Kotak pemilih warna */
+
+.calendarAddEditorFields input[type="color"] {
+  width: 48px;
+  min-width: 48px;
+  padding: 4px;
+  cursor: pointer;
+}
+
+/* Tombol Batal dan Tambah Acara */
+
+.calendarAddEditorFields .calendarLabelCancel,
+.calendarAddEditorFields .calendarLabelSave {
+  width: auto;
+  min-height: 43px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 10px;
+  font-family: inherit;
+  font-weight: 800;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.calendarAddEditorFields .calendarLabelCancel {
+  color: #496a7d;
+  background: #e5eef2;
+}
+
+.calendarAddEditorFields .calendarLabelCancel:hover {
+  background: #d9e6eb;
+}
+
+.calendarAddEditorFields .calendarLabelSave {
+  color: #ffffff;
+  background: linear-gradient(120deg,
+      #0782b6,
+      #0db9b5);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+}
+
+.calendarAddEditorFields .calendarLabelSave:hover {
+  background: linear-gradient(120deg,
+      #066f9d,
+      #0aa7a4);
+}
+
+.calendarAddEditorFields .calendarLabelSave svg {
+  width: 15px;
+  height: 15px;
+}
+
+.calendarAddEditorFields button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Pesan hasil penyimpanan */
+
+.calendarAddMessage {
+  grid-column: 1 / -1;
+  padding: 10px 12px;
+  border-radius: 9px;
+  background: #dcf9f2;
+  color: #08765f;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+/* Responsif */
+
+@media (max-width: 1100px) {
+  .calendarAddEditor {
+    grid-template-columns: 1fr;
+  }
+
+  .calendarAddEditorFields {
+    grid-template-columns:
+      minmax(0, 1fr) 155px 48px auto auto;
+  }
+}
+
+@media (max-width: 750px) {
+  .calendarAddEditor {
+    margin: 14px;
+  }
+
+  .calendarAddEditorFields {
+    grid-template-columns: 1fr;
+  }
+
+  .calendarAddEditorFields input[type="color"],
+  .calendarAddEditorFields .calendarLabelCancel,
+  .calendarAddEditorFields .calendarLabelSave {
+    width: 100%;
+  }
+}
+
+.sidebarGroup,
+.sidebarGroupRow,
+.sidebarManageButton {
+  pointer-events: auto;
+}
+
+aside:not(.open) .sidebarManageButton {
+  position: relative;
+  z-index: 2;
+  cursor: pointer;
+}
+
+aside:not(.open) .sidebarArrow {
+  display: none !important;
+  pointer-events: none;
+}
+
+/* HP biasa maupun Chrome HP dalam mode desktop */
+@media screen and (max-width: 1100px) and (pointer: coarse) {
+  header {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 68px;
+    padding: 0 60px 0 10px;
+    gap: 8px;
+  }
+
+  header>.icon {
+    width: 40px;
+    min-width: 40px;
+    height: 40px;
+    flex: 0 0 40px;
+  }
+
+  header>.search {
+    width: auto;
+    min-width: 0;
+    max-width: none;
+    height: 40px;
+    flex: 1 1 auto;
+  }
+
+  header>.search input {
+    width: 100%;
+    min-width: 0;
+  }
+
+  header>.source {
+    display: none;
+  }
+
+  header>.avatar {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    left: auto;
+
+    display: grid;
+    place-items: center;
+
+    width: 40px;
+    min-width: 40px;
+    height: 40px;
+    margin: 0;
+
+    transform: translateY(-50%);
+    z-index: 50;
+  }
+}
+
+/* Header HP: batasi panjang kolom pencarian */
+@media screen and (max-width: 1100px) and (pointer: coarse) {
+  header {
+    position: sticky;
+    top: 0;
+    padding: 0 58px 0 10px;
+  }
+
+  header>.search {
+    width: 58%;
+    max-width: 360px;
+    min-width: 150px;
+    flex: 0 1 360px;
+    margin-right: auto;
+  }
+
+  header>.avatar {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    left: auto;
+    transform: translateY(-50%);
+  }
+}
+
+/* ========================================
+   TOMBOL TAMPILKAN LEBIH LANJUT
+======================================== */
+
+.surveyExpandActions {
+  margin: -2px 0 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.surveyExpandButton {
+  min-height: 44px;
+  padding: 0 18px;
+  border: 1px solid #b9dce6;
+  border-radius: 12px;
+  background: #ffffff;
+  color: #08758a;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow:
+    0 7px 18px rgba(7, 93, 130, 0.08);
+
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.surveyExpandButton:hover {
+  color: #ffffff;
+  border-color: transparent;
+  background: linear-gradient(120deg,
+      #0782b6,
+      #0db9b5);
+  transform: translateY(-1px);
+  box-shadow:
+    0 10px 24px rgba(7, 130, 182, 0.18);
+}
+
+.tableResultInfo {
+  display: block;
+  margin-top: 5px;
+  color: #78909c;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+@media (max-width: 650px) {
+  .surveyExpandActions {
+    margin-bottom: 14px;
+  }
+
+  .surveyExpandButton {
+    width: 100%;
+  }
+}
+
+/* Tombol tampilkan lebih lanjut khusus tabel */
+
+.tableExpandActions {
+  padding: 14px 18px 18px;
+  border-top: 1px solid #e2eef2;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #ffffff;
+}
+
+@media (max-width: 650px) {
+  .tableExpandActions .surveyExpandButton {
+    width: 100%;
+  }
+}
+
+/* ========================================
+   TOMBOL HAPUS KEGIATAN
+======================================== */
+
+.inputDelete {
+  min-height: 45px;
+  margin-right: 12px;
+  padding: 0 17px;
+  border: 1px solid #efb5b0;
+  border-radius: 11px;
+  background: #fff1ef;
+  color: #b83d32;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 800;
+  white-space: nowrap;
+  cursor: pointer;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.inputDelete svg {
+  width: 17px;
+  height: 17px;
+  flex: 0 0 17px;
+}
+
+.inputDelete:hover {
+  color: #ffffff;
+  border-color: #c94338;
+  background: #c94338;
+  transform: translateY(-1px);
+}
+
+.inputDelete:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+  transform: none;
+}
+
+/* Posisi tombol bawah form */
+
+.formActions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+/* Tampilan HP */
+
+@media (max-width: 700px) {
+  .formActions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .inputDelete,
+  .formActions .inputCancel,
+  .formActions .inputSubmit {
+    width: 100%;
+    margin-right: 0;
+  }
+}
+
+/* ========================================
+   SIDEBAR DAN FORM COMPACT UNTUK HP
+======================================== */
+
+@media screen and (max-width: 1100px) and (pointer: coarse) {
+
+  /* Sidebar diperkecil */
+  aside {
+    width: 52px;
+    padding: 12px 6px;
+    gap: 8px;
+  }
+
+  /* Logo BPS diperkecil */
+  aside .brand-wrapper {
+    width: 40px;
+    margin-bottom: 14px;
+    justify-content: center;
+  }
+
+  aside .brand {
+    width: 38px;
+    height: 38px;
+    flex: 0 0 38px;
+    margin: 0;
+    border-radius: 12px;
+    font-size: 11px;
+  }
+
+  aside .brand span {
+    letter-spacing: -1px;
+  }
+
+  /* Semua tombol sidebar */
+  aside:not(.open)>button,
+  aside:not(.open) .sidebarGroup,
+  aside:not(.open) .sidebarGroupRow,
+  aside:not(.open) .sidebarManageButton {
+    width: 38px;
+    min-width: 38px;
+    height: 38px;
+    min-height: 38px;
+    margin: 0 auto;
+    padding: 0;
+    border-radius: 11px;
+  }
+
+  aside:not(.open)>button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Ukuran ikon sidebar */
+  aside:not(.open)>button svg,
+  aside:not(.open) .sidebarManageButton>svg {
+    width: 19px;
+    height: 19px;
+    flex: 0 0 19px;
+    margin: 0;
+  }
+
+  /* Konten mengikuti lebar sidebar baru */
+  main {
+    width: calc(100% - 52px);
+    margin-left: 52px;
+  }
+
+  .shell.sidebar-open main {
+    width: calc(100% - 52px);
+    margin-left: 52px;
+  }
+
+  /* Header dibuat lebih ringkas */
+  header {
+    left: 0;
+    height: 60px;
+    padding: 0 52px 0 8px;
+    gap: 7px;
+  }
+
+  header>.icon {
+    width: 36px;
+    min-width: 36px;
+    height: 36px;
+    flex: 0 0 36px;
+    border-radius: 11px;
+  }
+
+  header>.icon svg {
+    width: 19px;
+    height: 19px;
+  }
+
+  header>.search {
+    width: min(62%, 280px);
+    min-width: 120px;
+    max-width: 280px;
+    height: 36px;
+    padding: 0 10px;
+    gap: 7px;
+    border-radius: 11px;
+    flex: 0 1 280px;
+  }
+
+  header>.search svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  header>.search input {
+    min-width: 0;
+    font-size: 12px;
+  }
+
+  header>.search input::placeholder {
+    font-size: 12px;
+  }
+
+  header>.source {
+    display: none;
+  }
+
+  header>.avatar {
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    left: auto;
+    width: 34px;
+    min-width: 34px;
+    height: 34px;
+    margin: 0;
+    font-size: 12px;
+    transform: translateY(-50%);
+  }
+
+  /* Ruang konten diperkecil */
+  .content {
+    width: 100%;
+    padding: 10px;
+  }
+
+  /* Panel form */
+  .inputPanel {
+    border-radius: 15px;
+  }
+
+  .inputPanelHead {
+    padding: 17px;
+    gap: 12px;
+  }
+
+  .inputPanelHead h2 {
+    font-size: 21px;
+  }
+
+  .inputPanelHead>div>p:last-child {
+    font-size: 12px;
+  }
+
+  /* Tab Tambah dan Edit */
+  .surveyModeTabs {
+    padding: 12px 12px 0;
+    gap: 7px;
+  }
+
+  .surveyModeTabs button {
+    min-height: 38px;
+    padding: 0 10px;
+    border-radius: 10px;
+    font-size: 11px;
+    gap: 6px;
+  }
+
+  .surveyModeTabs button svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  /* Form lebih ringkas */
+  .surveyInputForm {
+    padding: 14px;
+    gap: 14px;
+  }
+
+  .surveyInputForm label {
+    gap: 6px;
+  }
+
+  .surveyInputForm label>span {
+    font-size: 11px;
+  }
+
+  .surveyInputForm input,
+  .surveyInputForm select {
+    min-height: 41px;
+    padding: 0 11px;
+    border-radius: 10px;
+    font-size: 13px;
+  }
+
+  /* Tombol bawah */
+  .inputCancel,
+  .inputSubmit,
+  .inputDelete {
+    min-height: 41px;
+    padding: 0 12px;
+    font-size: 11px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  aside {
+    width: 46px;
+    padding: 10px 4px;
+  }
+
+  aside .brand-wrapper,
+  aside .brand {
+    width: 34px;
+  }
+
+  aside .brand {
+    height: 34px;
+    flex-basis: 34px;
+    font-size: 10px;
+  }
+
+  aside:not(.open)>button,
+  aside:not(.open) .sidebarGroup,
+  aside:not(.open) .sidebarGroupRow,
+  aside:not(.open) .sidebarManageButton {
+    width: 34px;
+    min-width: 34px;
+    height: 34px;
+    min-height: 34px;
+  }
+
+  aside:not(.open)>button svg,
+  aside:not(.open) .sidebarManageButton>svg {
+    width: 17px;
+    height: 17px;
+    flex-basis: 17px;
+  }
+
+  main,
+  .shell.sidebar-open main {
+    width: calc(100% - 46px);
+    margin-left: 46px;
+  }
+
+  header>.search {
+    width: 58%;
+    min-width: 105px;
+    max-width: 220px;
+  }
+
+  .content {
+    padding: 8px;
+  }
+}
+
+/* ========================================
+   LOGO BPS TEPAT DI TENGAH SIDEBAR HP
+======================================== */
+
+@media screen and (max-width: 1100px) and (pointer: coarse) {
+  aside:not(.open) .brand-wrapper {
+    width: 100%;
+    height: 40px;
+    min-height: 40px;
+    margin: 0 0 14px;
+    padding: 0;
+
+    display: grid;
+    place-items: center;
+    align-self: stretch;
+  }
+
+  aside:not(.open) .brand-wrapper .brand {
+    position: static;
+    width: 38px;
+    min-width: 38px;
+    height: 38px;
+    margin: 0;
+    padding: 0;
+    flex: none;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 12px;
+    transform: none;
+  }
+
+  aside:not(.open) .brand-wrapper .brand span {
+    display: block;
+    width: auto;
+    margin: 0;
+    padding: 0;
+
+    color: #ffffff;
+    font-size: 11px;
+    line-height: 1;
+    letter-spacing: -1px;
+    text-align: center;
+    transform: none;
+  }
+
+  aside:not(.open) .brand-name {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  aside:not(.open) .brand-wrapper {
+    height: 36px;
+    min-height: 36px;
+    margin-bottom: 12px;
+  }
+
+  aside:not(.open) .brand-wrapper .brand {
+    width: 34px;
+    min-width: 34px;
+    height: 34px;
+    border-radius: 10px;
+  }
+
+  aside:not(.open) .brand-wrapper .brand span {
+    font-size: 10px;
+    letter-spacing: -0.8px;
+  }
+}
+
+/* ========================================
+   PENYESUAIAN FINAL TAMPILAN HP
+======================================== */
+
+@media screen and (max-width: 480px) {
+
+  /* Sidebar lebih ramping */
+  aside {
+    width: 48px;
+    padding: 10px 4px;
+    gap: 8px;
+  }
+
+  aside:not(.open) .brand-wrapper {
+    width: 100%;
+    height: 36px;
+    min-height: 36px;
+    margin: 0 0 13px;
+    padding: 0;
+    display: grid;
+    place-items: center;
+  }
+
+  aside:not(.open) .brand-wrapper .brand {
+    width: 34px;
+    min-width: 34px;
+    height: 34px;
+    margin: 0;
+    padding: 0;
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+  }
+
+  aside:not(.open) .brand-wrapper .brand span {
+    margin: 0;
+    font-size: 9px;
+    line-height: 1;
+    letter-spacing: -0.7px;
+    text-align: center;
+    transform: none;
+  }
+
+  /* Tombol dan ikon sidebar */
+  aside:not(.open)>button,
+  aside:not(.open) .sidebarGroup,
+  aside:not(.open) .sidebarGroupRow,
+  aside:not(.open) .sidebarManageButton {
+    width: 34px;
+    min-width: 34px;
+    height: 34px;
+    min-height: 34px;
+    margin: 0 auto;
+    padding: 0;
+    border-radius: 10px;
+  }
+
+  aside:not(.open)>button svg,
+  aside:not(.open) .sidebarManageButton>svg {
+    width: 17px;
+    height: 17px;
+    flex: 0 0 17px;
+  }
+
+  /* Konten mengikuti sidebar yang lebih kecil */
+  main,
+  .shell.sidebar-open main {
+    width: calc(100% - 48px);
+    margin-left: 48px;
+  }
+
+  /* Header lebih ringkas */
+  header {
+    height: 58px;
+    padding: 0 48px 0 7px;
+    gap: 6px;
+  }
+
+  header>.icon {
+    width: 34px;
+    min-width: 34px;
+    height: 34px;
+    flex: 0 0 34px;
+  }
+
+  header>.search {
+    width: auto;
+    min-width: 0;
+    max-width: none;
+    height: 34px;
+    flex: 1 1 auto;
+    padding: 0 9px;
+  }
+
+  header>.search svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  header>.search input {
+    min-width: 0;
+    font-size: 11px;
+  }
+
+  header>.search input::placeholder {
+    font-size: 11px;
+  }
+
+  header>.avatar {
+    right: 7px;
+    width: 32px;
+    min-width: 32px;
+    height: 32px;
+    font-size: 11px;
+  }
+
+  /* Konten halaman */
+  .content {
+    padding: 8px;
+  }
+
+  /* Hero dibuat lebih ringkas */
+  .homeHero {
+    min-height: auto;
+    padding: 24px 20px;
+    gap: 22px;
+    border-radius: 18px;
+  }
+
+  .homeHero h1 {
+    margin-bottom: 12px;
+    font-size: 34px;
+    line-height: 1.08;
+  }
+
+  .homeIntro>p:not(.eyebrow) {
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
+  .homeAction {
+    min-height: 43px;
+    margin-top: 18px;
+    padding: 0 15px;
+    font-size: 12px;
+  }
+
+  .homeSummary {
+    width: 100%;
+    min-width: 0;
+    padding: 20px;
+    border-radius: 18px;
+  }
+
+  .homeSummary strong {
+    font-size: 42px;
+  }
+
+  /* Versi sidebar */
+  .sidebar-version {
+    font-size: 9px;
+  }
+}
+
+/* Ukuran judul Beranda khusus HP */
+@media screen and (max-width: 480px) {
+  .homeHero h1 {
+    margin-bottom: 10px;
+    font-size: 29px;
+    line-height: 1.12;
+  }
+}
+
+/* ========================================
+   MENU PROFIL
+======================================== */
+
+.profileMenu {
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.avatarButton {
+  width: 40px;
+  min-width: 40px;
+  height: 40px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: #d8f6f8;
+  color: #06798d;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+
+  display: grid;
+  place-items: center;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.avatarButton:hover {
+  background: #c5eff2;
+  transform: translateY(-1px);
+  box-shadow:
+    0 7px 18px rgba(7, 121, 141, 0.15);
+}
+
+.profileDropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  z-index: 100;
+
+  width: 220px;
+  padding: 8px;
+  border: 1px solid #d8e8ed;
+  border-radius: 14px;
+  background: #ffffff;
+
+  box-shadow:
+    0 18px 40px rgba(6, 45, 70, 0.18);
+
+  display: grid;
+  gap: 4px;
+}
+
+.profileDropdownIdentity {
+  padding: 11px 12px 13px;
+  border-bottom: 1px solid #e3eef2;
+}
+
+.profileDropdownIdentity strong,
+.profileDropdownIdentity small {
+  display: block;
+}
+
+.profileDropdownIdentity strong {
+  color: #123047;
+  font-size: 14px;
+}
+
+.profileDropdownIdentity small {
+  margin-top: 3px;
+  color: #78909c;
+  font-size: 11px;
+}
+
+.profileDropdown>button {
+  width: 100%;
+  min-height: 40px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  color: #385d70;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+}
+
+.profileDropdown>button:hover {
+  background: #edf8fa;
+  color: #08758a;
+}
+
+.profileDropdown .profileLogoutButton {
+  color: #b83d32;
+}
+
+.profileDropdown .profileLogoutButton:hover {
+  color: #ffffff;
+  background: #c94338;
+}
+
+@media screen and (max-width: 1100px) and (pointer: coarse) {
+  header>.profileMenu {
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    z-index: 50;
+    transform: translateY(-50%);
+  }
+
+  .avatarButton {
+    width: 34px;
+    min-width: 34px;
+    height: 34px;
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  header>.profileMenu {
+    right: 7px;
+  }
+
+  .avatarButton {
+    width: 32px;
+    min-width: 32px;
+    height: 32px;
+    font-size: 11px;
+  }
+
+  .profileDropdown {
+    width: 205px;
+  }
+}
+
+/* ========================================
+   HALAMAN LOGIN
+======================================== */
+
+.loginPage {
+  width: 100%;
+  min-height: 100vh;
+  padding: 24px;
+  background:
+    radial-gradient(circle at top right,
+      rgba(35, 211, 197, 0.22),
+      transparent 35%),
+    linear-gradient(135deg,
+      #062d46,
+      #075985 55%,
+      #0db9b5);
+
+  display: grid;
+  place-items: center;
+}
+
+.loginCard {
+  width: min(100%, 460px);
+  padding: 34px;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.97);
+
+  box-shadow:
+    0 28px 70px rgba(3, 29, 47, 0.28);
+}
+
+.loginBrand {
+  display: grid;
+  grid-template-columns: 58px 1fr;
+  align-items: center;
+  gap: 16px;
+}
+
+.loginLogo {
+  width: 58px;
+  height: 58px;
+  border-radius: 17px;
+  background:
+    linear-gradient(135deg,
+      #22d3c5,
+      #1f96ef);
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 900;
+
+  display: grid;
+  place-items: center;
+
+  box-shadow:
+    0 10px 25px rgba(0, 184, 212, 0.3);
+}
+
+.loginBrand h1 {
+  margin: 0 0 6px;
+  color: #123047;
+  font-size: 24px;
+}
+
+.loginBrand>div:last-child>p:last-child {
+  margin: 0;
+  color: #6d8997;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.loginForm {
+  margin-top: 28px;
+  display: grid;
+  gap: 17px;
+}
+
+.loginForm label {
+  display: grid;
+  gap: 8px;
+}
+
+.loginForm label>span {
+  color: #385d70;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.loginInput {
+  min-height: 48px;
+  padding: 0 13px;
+  border: 1px solid #d4e6ec;
+  border-radius: 12px;
+  background: #f8fcfd;
+  color: #70a1b6;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.loginInput:focus-within {
+  border-color: #18aabd;
+  background: #ffffff;
+  box-shadow:
+    0 0 0 4px rgba(24, 170, 189, 0.12);
+}
+
+.loginInput svg {
+  width: 18px;
+  height: 18px;
+}
+
+.loginInput input {
+  width: 100%;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #123047;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+.loginMessage {
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: #ffebe8;
+  color: #a03a30;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.loginSubmit {
+  min-height: 48px;
+  border: 0;
+  border-radius: 12px;
+  background:
+    linear-gradient(120deg,
+      #0782b6,
+      #0db9b5);
+  color: #ffffff;
+  font-family: inherit;
+  font-weight: 800;
+  cursor: pointer;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+}
+
+.loginSubmit svg {
+  width: 18px;
+  height: 18px;
+}
+
+.loginSubmit:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+.loginFooter {
+  display: block;
+  margin-top: 22px;
+  color: #78909c;
+  text-align: center;
+  font-size: 10px;
+}
+
+@media (max-width: 480px) {
+  .loginPage {
+    padding: 15px;
+  }
+
+  .loginCard {
+    padding: 24px 20px;
+    border-radius: 20px;
+  }
+
+  .loginBrand {
+    grid-template-columns: 48px 1fr;
+    gap: 12px;
+  }
+
+  .loginLogo {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    font-size: 12px;
+  }
+
+  .loginBrand h1 {
+    font-size: 20px;
+  }
+}
+
+.loginPasswordToggle {
+  width: 34px;
+  min-width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: #6f93a4;
+  cursor: pointer;
+
+  display: grid;
+  place-items: center;
+}
+
+.loginPasswordToggle:hover {
+  color: #08758a;
+  background: #e8f6f8;
+}
+
+.loginPasswordToggle svg {
+  width: 17px;
+  height: 17px;
+}
+
+/* ========================================
+   HALAMAN PENGATURAN TEMA
+======================================== */
+
+.settingsPage {
+  display: grid;
+  gap: 18px;
+}
+
+.settingsHead {
+  padding: 25px 27px;
+  border: 1px solid #dcebf0;
+  border-radius: 20px;
+  background: #ffffff;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+
+  box-shadow:
+    0 8px 25px rgba(10, 96, 116, 0.06);
+}
+
+.settingsHead h1 {
+  margin: 0 0 7px;
+  color: #123047;
+  font-size: 25px;
+}
+
+.settingsHead>div>p:last-child {
+  margin: 0;
+  color: #6d8997;
+  font-size: 13px;
+}
+
+.settingsBackButton {
+  min-height: 43px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 11px;
+  background: #eaf2f5;
+  color: #496a7d;
+  font-family: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.settingsBackButton:hover {
+  color: #08758a;
+  background: #dff3f6;
+}
+
+.settingsPanel {
+  padding: 25px;
+  border: 1px solid #dcebf0;
+  border-radius: 20px;
+  background: #ffffff;
+
+  box-shadow:
+    0 8px 25px rgba(10, 96, 116, 0.06);
+}
+
+.settingsSectionHead h2 {
+  margin: 0 0 6px;
+  color: #123047;
+  font-size: 19px;
+}
+
+.settingsSectionHead p {
+  margin: 0;
+  color: #6d8997;
+  font-size: 12px;
+}
+
+.settingsThemeGrid {
+  margin-top: 20px;
+
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+  gap: 13px;
+}
+
+.settingsThemeCard {
+  min-height: 100px;
+  padding: 17px;
+  border: 1px solid #d8e8ed;
+  border-radius: 15px;
+  background: #f8fcfd;
+  color: #587384;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.settingsThemeCard:hover {
+  color: #08758a;
+  border-color: #8fd5de;
+  background: #effafb;
+  transform: translateY(-2px);
+}
+
+.settingsThemeCard.active {
+  color: #ffffff;
+  border-color: transparent;
+  background:
+    linear-gradient(120deg,
+      #0782b6,
+      #0db9b5);
+
+  box-shadow:
+    0 10px 24px rgba(7, 130, 182, 0.2);
+}
+
+.settingsThemeCard>svg {
+  width: 40px;
+  height: 40px;
+  padding: 9px;
+  border-radius: 12px;
+  background: rgba(7, 130, 182, 0.1);
+  flex: 0 0 40px;
+}
+
+.settingsThemeCard.active>svg {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.settingsThemeCard span,
+.settingsThemeCard strong,
+.settingsThemeCard small {
+  display: block;
+}
+
+.settingsThemeCard strong {
+  margin-bottom: 5px;
+  color: #123047;
+  font-size: 14px;
+}
+
+.settingsThemeCard.active strong {
+  color: #ffffff;
+}
+
+.settingsThemeCard small {
+  color: #78909c;
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.settingsThemeCard.active small {
+  color: #e7fbff;
+}
+
+@media (max-width: 650px) {
+  .settingsHead {
+    padding: 19px;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .settingsBackButton {
+    width: 100%;
+  }
+
+  .settingsPanel {
+    padding: 18px;
+  }
+
+  .settingsThemeGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ========================================
+   TEMA DEFAULT
+======================================== */
+
+:root[data-theme="default"] {
+  color-scheme: light;
+}
+
+/*
+  Tema Default tidak membutuhkan override.
+  Tema ini memakai tampilan asli SIMI Aqua.
+*/
+
+
+/* ========================================
+   TEMA TERANG
+======================================== */
+
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+:root[data-theme="light"] body,
+:root[data-theme="light"] main,
+:root[data-theme="light"] .content {
+  color: #173441;
+  background: #ffffff;
+}
+
+:root[data-theme="light"] header {
+  background: #ffffff;
+  border-bottom-color: #e0e8ec;
+}
+
+:root[data-theme="light"] .search {
+  color: #6f96a7;
+  border-color: #dae5e9;
+  background: #f7fafb;
+}
+
+:root[data-theme="light"] .search input {
+  color: #173441;
+}
+
+:root[data-theme="light"] .panel,
+:root[data-theme="light"] .surveyCard,
+:root[data-theme="light"] .metrics article,
+:root[data-theme="light"] .indicatorCard,
+:root[data-theme="light"] .inputPanel,
+:root[data-theme="light"] .homeQuickMenu button,
+:root[data-theme="light"] .settingsHead,
+:root[data-theme="light"] .settingsPanel {
+  color: #173441;
+  border-color: #e0e8ec;
+  background: #ffffff;
+
+  box-shadow:
+    0 8px 24px rgba(20, 57, 74, 0.06);
+}
+
+:root[data-theme="light"] .panelHead,
+:root[data-theme="light"] .inputPanelHead {
+  border-bottom-color: #e2e9ed;
+  background: #ffffff;
+}
+
+:root[data-theme="light"] .surveySelector,
+:root[data-theme="light"] .calendarAddEditor,
+:root[data-theme="light"] .calendarLabelEditor {
+  border-color: #dce7eb;
+  background: #fafcfd;
+}
+
+:root[data-theme="light"] .surveyInputForm input,
+:root[data-theme="light"] .surveyInputForm select,
+:root[data-theme="light"] .surveySelector select,
+:root[data-theme="light"] .calendarAddEditorFields input,
+:root[data-theme="light"] .calendarLabelEditorControl input {
+  color: #173441;
+  border-color: #d6e3e8;
+  background: #ffffff;
+}
+
+/* ========================================
+   TEMA GELAP
+======================================== */
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+:root[data-theme="dark"] body,
+:root[data-theme="dark"] main,
+:root[data-theme="dark"] .content {
+  color: #e4f2f6;
+  background: #061923;
+}
+
+:root[data-theme="dark"] header {
+  background: #0a2532;
+  border-bottom-color: #1b3e4d;
+}
+
+:root[data-theme="dark"] .icon {
+  color: #a6c8d4;
+  background: #123441;
+}
+
+:root[data-theme="dark"] .search {
+  color: #84aeba;
+  border-color: #254957;
+  background: #102f3c;
+}
+
+:root[data-theme="dark"] .search input {
+  color: #edf8fa;
+}
+
+:root[data-theme="dark"] .search input::placeholder {
+  color: #7e9eaa;
+}
+
+:root[data-theme="dark"] .source {
+  color: #a5c0ca;
+}
+
+/* Panel dan kartu */
+
+:root[data-theme="dark"] .panel,
+:root[data-theme="dark"] .surveyCard,
+:root[data-theme="dark"] .metrics article,
+:root[data-theme="dark"] .indicatorCard,
+:root[data-theme="dark"] .inputPanel,
+:root[data-theme="dark"] .homeQuickMenu button,
+:root[data-theme="dark"] .settingsHead,
+:root[data-theme="dark"] .settingsPanel {
+  color: #e4f2f6;
+  border-color: #1c4050;
+  background: #0c2734;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+:root[data-theme="dark"] .panelHead,
+:root[data-theme="dark"] .inputPanelHead {
+  border-bottom-color: #1c4050;
+  background: #0d2b38;
+}
+
+:root[data-theme="dark"] .panelHead h2,
+:root[data-theme="dark"] .inputPanelHead h2,
+:root[data-theme="dark"] .surveyCard h3,
+:root[data-theme="dark"] .indicatorCard h3,
+:root[data-theme="dark"] .homeQuickMenu strong,
+:root[data-theme="dark"] .settingsHead h1,
+:root[data-theme="dark"] .settingsSectionHead h2 {
+  color: #edf8fa;
+}
+
+:root[data-theme="dark"] .settingsHead>div>p:last-child,
+:root[data-theme="dark"] .settingsSectionHead p {
+  color: #93afb9;
+}
+
+/* Pilihan tema */
+
+:root[data-theme="dark"] .settingsThemeCard {
+  color: #b6d0d9;
+  border-color: #254b5b;
+  background: #102f3d;
+}
+
+:root[data-theme="dark"] .settingsThemeCard:hover {
+  color: #ffffff;
+  border-color: #3e7588;
+  background: #153b49;
+}
+
+:root[data-theme="dark"] .settingsThemeCard strong {
+  color: #edf8fa;
+}
+
+:root[data-theme="dark"] .settingsThemeCard small {
+  color: #91adb7;
+}
+
+:root[data-theme="dark"] .settingsThemeCard>svg {
+  color: #79dce7;
+  background: #173e4c;
+}
+
+:root[data-theme="dark"] .settingsThemeCard.active {
+  color: #ffffff;
+  border-color: transparent;
+  background: linear-gradient(120deg,
+      #0782b6,
+      #0db9b5);
+}
+
+:root[data-theme="dark"] .settingsThemeCard.active strong {
+  color: #ffffff;
+}
+
+:root[data-theme="dark"] .settingsThemeCard.active small {
+  color: #e7fbff;
+}
+
+/* Form */
+
+:root[data-theme="dark"] .surveySelector,
+:root[data-theme="dark"] .selectedSurveyInfo,
+:root[data-theme="dark"] .calendarAddEditor,
+:root[data-theme="dark"] .calendarLabelEditor {
+  color: #e4f2f6;
+  border-color: #224858;
+  background: #102d39;
+}
+
+:root[data-theme="dark"] .surveyInputForm input,
+:root[data-theme="dark"] .surveyInputForm select,
+:root[data-theme="dark"] .surveySelector select,
+:root[data-theme="dark"] .calendarAddEditorFields input,
+:root[data-theme="dark"] .calendarLabelEditorControl input {
+  color: #edf8fa;
+  border-color: #254b5b;
+  background: #102f3d;
+}
+
+:root[data-theme="dark"] .surveyInputForm input::placeholder,
+:root[data-theme="dark"] .calendarAddEditorFields input::placeholder,
+:root[data-theme="dark"] .calendarLabelEditorControl input::placeholder {
+  color: #789aa7;
+}
+
+:root[data-theme="dark"] .surveyModeTabs {
+  background: #0c2734;
+}
+
+:root[data-theme="dark"] .surveyModeTabs button:not(.active) {
+  border: 1px solid #cfe3e7;
+  box-shadow: none;
+  outline: none;
+}
+
+/* Tabel */
+
+:root[data-theme="dark"] .tableWrap th {
+  color: #cee5ec;
+  border-color: #214350;
+  background: #153746;
+}
+
+:root[data-theme="dark"] .tableWrap td {
+  color: #d9edf2;
+  border-color: #214350;
+  background: #0c2734;
+}
+
+:root[data-theme="dark"] .tableWrap tbody td:first-child {
+  background: #0c2734;
+}
+
+:root[data-theme="dark"] .tableWrap .target {
+  color: #d9edff;
+  background: #17394f;
+}
+
+:root[data-theme="dark"] .tableExpandActions {
+  border-top-color: #214350;
+  background: #0c2734;
+}
+
+/* Kalender */
+
+:root[data-theme="dark"] .day,
+:root[data-theme="dark"] .blank {
+  color: #d9edf2;
+  border-color: #214350;
+  background: #0c2734;
+}
+
+:root[data-theme="dark"] .week b {
+  color: #a8c5d0;
+}
+
+/* Tombol */
+
+:root[data-theme="dark"] .inputCancel,
+:root[data-theme="dark"] .calendarLabelCancel,
+:root[data-theme="dark"] .settingsBackButton {
+  color: #c0d6de;
+  background: #183947;
+}
+
+:root[data-theme="dark"] .big b,
+:root[data-theme="dark"] .metrics b {
+  color: #71dce9;
+}
+
+:root[data-theme="dark"] .big small,
+:root[data-theme="dark"] .metrics span,
+:root[data-theme="dark"] .metrics small,
+:root[data-theme="dark"] .tableResultInfo,
+:root[data-theme="dark"] .fieldHint {
+  color: #91adb7;
+}
+
+/* ========================================
+   HERO KHUSUS TEMA GELAP
+======================================== */
+
+:root[data-theme="dark"] .homeHero,
+:root[data-theme="dark"] .hero {
+  background:
+    linear-gradient(120deg,
+      #08344a,
+      #07516b 55%,
+      #087f83);
+
+  box-shadow:
+    0 18px 35px rgba(0, 0, 0, 0.28);
+}
+
+:root[data-theme="dark"] .homeHero .eyebrow,
+:root[data-theme="dark"] .hero .eyebrow {
+  color: #62eae0;
+}
+
+:root[data-theme="dark"] .homeHero h1,
+:root[data-theme="dark"] .hero h1 {
+  color: #ffffff;
+}
+
+:root[data-theme="dark"] .homeIntro>p:not(.eyebrow),
+:root[data-theme="dark"] .hero p {
+  color: #d1edf2;
+}
+
+:root[data-theme="dark"] .homeSummary {
+  border-color: rgba(255, 255, 255, 0.16);
+  background: rgba(4, 28, 39, 0.28);
+}
+
+:root[data-theme="dark"] .homeAction {
+  color: #d9f7fa;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(6, 35, 48, 0.72);
+}
+
+:root[data-theme="dark"] .homeAction:hover {
+  color: #ffffff;
+  background: rgba(8, 56, 70, 0.9);
+}
+
+/* Label kalender khusus tema gelap */
+
+:root[data-theme="dark"] .calendarEventRow {
+  color: #9ce9df;
+  background: #124a4c;
+}
+
+:root[data-theme="dark"] .calendarEventRow.e1 {
+  color: #a8d8ee;
+  background: #173f56;
+}
+
+:root[data-theme="dark"] .calendarEventEditButton:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Triwulan, Tahunan, Belum, dan Selesai */
+
+:root[data-theme="dark"] .cardTop em {
+  color: #a8e5ec;
+  background: #174250;
+}
+
+:root[data-theme="dark"] .surveyCard footer span {
+  color: #b5cbd3;
+  background: #173743;
+}
+
+:root[data-theme="dark"] .surveyCard footer .done {
+  color: #8ce6d1;
+  background: #12483e;
+}
+
+:root[data-theme="dark"] .progress {
+  background: #244754;
+}
+
+/* ========================================
+   IKON INDIKATOR PADA TEMA GELAP
+======================================== */
+
+:root[data-theme="dark"] .indicatorBlue {
+  color: #4fc3f7;
+}
+
+:root[data-theme="dark"] .indicatorGreen {
+  color: #51d6ad;
+}
+
+:root[data-theme="dark"] .indicatorOrange {
+  color: #ffb45f;
+}
+
+/* Latar ikon dibuat gelap agar ikon terlihat */
+
+:root[data-theme="dark"] .indicatorBlue .indicatorIcon {
+  background: #153e54;
+}
+
+:root[data-theme="dark"] .indicatorGreen .indicatorIcon {
+  background: #123f38;
+}
+
+:root[data-theme="dark"] .indicatorOrange .indicatorIcon {
+  background: #4a3523;
+}
+
+/* Paksa warna SVG agar tidak tertimpa */
+
+:root[data-theme="dark"] .indicatorBlue .indicatorIcon svg {
+  color: #4fc3f7;
+  stroke: #4fc3f7;
+}
+
+:root[data-theme="dark"] .indicatorGreen .indicatorIcon svg {
+  color: #51d6ad;
+  stroke: #51d6ad;
+}
+
+:root[data-theme="dark"] .indicatorOrange .indicatorIcon svg {
+  color: #ffb45f;
+  stroke: #ffb45f;
+}
+
+/* ========================================
+   MENU CEPAT BERANDA PADA TEMA GELAP
+======================================== */
+
+:root[data-theme="dark"] .homeQuickMenu button>svg {
+  color: #55d9e7;
+  background: #153e4c;
+}
+
+:root[data-theme="dark"] .homeQuickMenu button:hover>svg {
+  color: #8cecf3;
+  background: #1b5060;
+}
+
+:root[data-theme="dark"] .homeQuickMenu button {
+  border-color: #214857;
+  background: #0c2734;
+}
+
+:root[data-theme="dark"] .homeQuickMenu button:hover {
+  border-color: #347184;
+  background: #102f3d;
+  box-shadow:
+    0 14px 30px rgba(0, 0, 0, 0.22);
+}
+
+:root[data-theme="dark"] .homeQuickMenu strong {
+  color: #edf8fa;
+}
+
+:root[data-theme="dark"] .homeQuickMenu small {
+  color: #91adb7;
+}
+
+/* ========================================
+   TEMA DEFAULT - AQUA LEMBUT
+======================================== */
+
+:root[data-theme="default"] .panel,
+:root[data-theme="default"] .surveyCard,
+:root[data-theme="default"] .metrics article,
+:root[data-theme="default"] .indicatorCard,
+:root[data-theme="default"] .inputPanel,
+:root[data-theme="default"] .homeQuickMenu button,
+:root[data-theme="default"] .settingsHead,
+:root[data-theme="default"] .settingsPanel {
+  border-color: #d1e7e8;
+
+  background: linear-gradient(135deg,
+      #f8fcfd 0%,
+      #f1fafa 50%,
+      #eaf7f5 100%);
+
+  box-shadow:
+    0 9px 25px rgba(7, 105, 115, 0.06);
+}
+
+:root[data-theme="default"] .surveyCard {
+  background: linear-gradient(135deg,
+      #f8fcfd 0%,
+      #f1fafa 50%,
+      #eaf7f5 100%);
+}
+
+:root[data-theme="default"] .surveyCard:hover {
+  border-color: #86d2d3;
+
+  background: linear-gradient(135deg,
+      #f4fbfc 0%,
+      #eaf8f7 50%,
+      #e1f4f1 100%);
+}
+
+:root[data-theme="default"] .metrics article {
+  background: linear-gradient(135deg,
+      #fbfdfe 0%,
+      #f3fafa 50%,
+      #edf8f6 100%);
+}
+
+:root[data-theme="default"] .cardTop em {
+  color: #08758a;
+
+  background: linear-gradient(135deg,
+      #e8f7f7,
+      #dcf3ee);
+}
+
+:root[data-theme="default"] .surveyCard footer span {
+  color: #587584;
+  background: #edf5f5;
+}
+
+:root[data-theme="default"] .surveyCard footer .done {
+  color: #08765f;
+
+  background: linear-gradient(135deg,
+      #dcf8f0,
+      #d1f3e7);
+}
+
+:root[data-theme="default"] .progress {
+  background: #dcefee;
+}
+
+:root[data-theme="default"] .progress i {
+  background: linear-gradient(90deg,
+      #18c6ba,
+      #1d9bea);
+}
+
+:root[data-theme="default"] .panelHead,
+:root[data-theme="default"] .inputPanelHead {
+  border-bottom-color: #d6e9ea;
+
+  background: linear-gradient(135deg,
+      #f9fcfd,
+      #edf8f6);
+}
+
+:root[data-theme="default"] .tableWrap th {
+  color: #285d68;
+
+  background: linear-gradient(135deg,
+      #e7f5f7,
+      #e1f3ef);
+}
+
+:root[data-theme="default"] .tableWrap td {
+  background: #f9fcfc;
+}
+
+:root[data-theme="default"] .tableWrap tbody td:first-child {
+  background: linear-gradient(90deg,
+      #f9fcfd,
+      #eff8f6);
+}
+
+:root[data-theme="default"] .day,
+:root[data-theme="default"] .blank {
+  border-color: #d8e9ea;
+
+  background: linear-gradient(135deg,
+      #fbfdfe 0%,
+      #f6fbfb 50%,
+      #eff8f6 100%);
+}
+
+/* ========================================
+   TEMA TERANG - KARTU PUTIH POLOS
+======================================== */
+
+:root[data-theme="light"] .panel,
+:root[data-theme="light"] .surveyCard,
+:root[data-theme="light"] .matrics article,
+:root[data-theme="light"] .indicatorCard,
+:root[data-theme="light"] .inputPanel,
+:root[data-theme="light"] .homeQuickMenu button,
+:root[data-theme="light"] .settingsHead,
+:root[data-theme="light"] .settingsPanel,
+:root[data-theme="light"] .settingsThemeCard,
+:root[data-theme="light"] .day,
+:root[data-theme="light"] .blank {
+  background: #ffffff;
+}
+
+:root[data-theme="light"] .panelHead,
+:root[data-theme="light"] .inputPanelHead {
+  background: #ffffff;
+}
+
+:root[data-theme="light"] .settingsThemeCard.active {
+  color: #ffffff;
+  border-color: transparent;
+
+  background:
+    linear-gradient(120deg,
+      #0782b6,
+      #0db9b5);
+}
+
+@media (max-width: 700px) {
+  .surveyModeTabs {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding: 12px;
+    gap: 8px;
+  }
+
+  .surveyModeTabs button {
+    width: 100%;
+  }
+}
+
+/* ========================================
+   BERSIHKAN BAYANGAN TAB TAMBAH DAN EDIT
+======================================== */
+
+.surveyModeTabs button {
+  outline: none;
+  box-shadow: none;
+  transform: none;
+}
+
+.surveyModeTabs button:hover {
+  box-shadow: none;
+  transform: none;
+}
+
+.surveyModeTabs button.active {
+  border-color: transparent;
+  outline: none;
+  box-shadow: none;
+  transform: none;
+}
+
+.surveyModeTabs button:not(.active) {
+  border-color: #cfe3e7;
+  outline: none;
+  box-shadow: none;
+}
+
+/* Tombol tab aktif tanpa sisi gelap */
+
+.surveyModeTabs button.active {
+  color: #ffffff;
+  border: 1px solid #0aa6b4;
+  outline: none;
+  background: #0aa6b4;
+  box-shadow: none;
+  transform: none;
+}
+
+/* ========================================
+   TOMBOL SEKUNDER TEMA DEFAULT
+======================================== */
+
+/* Tombol Kembali */
+
+:root[data-theme="default"] .inputCancel,
+:root[data-theme="default"] .settingsBackButton {
+  color: #24556a;
+  border: 1px solid #b9dce0;
+  background: #e7f3f4;
+  box-shadow: none;
+}
+
+:root[data-theme="default"] .inputCancel:hover,
+:root[data-theme="default"] .settingsBackButton:hover {
+  color: #ffffff;
+  border-color: #078da0;
+  background: #078da0;
+}
+
+/* Tombol Hari ini dan navigasi kalender */
+
+:root[data-theme="default"] .calNav button {
+  color: #086b7c;
+  border: 1px solid #b8dfe2;
+  background: #e3f4f5;
+  box-shadow: none;
+}
+
+:root[data-theme="default"] .calNav button:hover {
+  color: #ffffff;
+  border-color: #078da0;
+  background: #078da0;
+}
+
+/* Tombol Tambah Acara tetap menjadi aksi utama */
+
+:root[data-theme="default"] .calNav .addCalendarEvent {
+  color: #ffffff;
+  border-color: transparent;
+  background: linear-gradient(120deg,
+      #0782b6,
+      #0db9b5);
+}
+
+:root[data-theme="default"] .calNav .addCalendarEvent:hover {
+  color: #ffffff;
+  border-color: transparent;
+  background: linear-gradient(120deg,
+      #066f9d,
+      #0aa7a4);
+}
+
+:root[data-theme="default"] .formActions .inputCancel {
+  color: #24556a;
+  border: 1px solid #b9dce0;
+  background: #e7f3f4;
+}
+
+:root[data-theme="default"] .formActions .inputCancel:hover {
+  color: #ffffff;
+  border-color: #078da0;
+  background: #078da0;
+}
+
+/* ========================================
+   CERAHKAN DATA INDIKATOR TEMA GELAP
+======================================== */
+
+/* Angka utama */
+
+:root[data-theme="dark"] .indicatorValue strong {
+  color: #d8edf3;
+}
+
+/* Satuan Persen */
+
+:root[data-theme="dark"] .indicatorValue>span {
+  color: #9fc2cd;
+}
+
+/* Garis pemisah */
+
+:root[data-theme="dark"] .indicatorLabels {
+  border-top-color: #315766;
+}
+
+/* Tanggal dan Data BPS */
+
+:root[data-theme="dark"] .indicatorLabels>span {
+  color: #a6c5cf;
+}
+
+/* Ikon tanggal */
+
+:root[data-theme="dark"] .indicatorLabels>span:first-child svg {
+  color: #45c9f5;
+  stroke: #45c9f5;
+}
+
+/* Ikon Data BPS */
+
+:root[data-theme="dark"] .indicatorLabels>span:last-child svg {
+  color: #41d6a6;
+  stroke: #41d6a6;
+}
+
+/* ========================================
+   TOMBOL SEKUNDER PADA TEMA GELAP
+======================================== */
+
+/* Refresh */
+
+:root[data-theme="dark"] .soft {
+  color: #a9dce6;
+  border: 1px solid #285366;
+  background: #153847;
+  box-shadow: none;
+}
+
+:root[data-theme="dark"] .soft:hover {
+  color: #ffffff;
+  border-color: #168fa2;
+  background: #137f91;
+}
+
+:root[data-theme="dark"] .soft svg {
+  color: currentColor;
+  stroke: currentColor;
+}
+
+/* Navigasi kalender:
+   panah kiri, Hari ini, dan panah kanan */
+
+:root[data-theme="dark"] .calNav button:not(.addCalendarEvent) {
+  color: #a9dce6;
+  border: 1px solid #285366;
+  background: #153847;
+  box-shadow: none;
+}
+
+:root[data-theme="dark"] .calNav button:not(.addCalendarEvent):hover {
+  color: #ffffff;
+  border-color: #168fa2;
+  background: #137f91;
+}
+
+:root[data-theme="dark"] .calNav button:not(.addCalendarEvent) svg {
+  color: currentColor;
+  stroke: currentColor;
+}
+
+/* Tambah Acara tetap menjadi tombol utama */
+
+:root[data-theme="dark"] .calNav .addCalendarEvent {
+  color: #ffffff;
+  border: 1px solid transparent;
+  background: linear-gradient(120deg,
+      #0782b6,
+      #0db9b5);
+}
+
+:root[data-theme="dark"] .calNav .addCalendarEvent:hover {
+  color: #ffffff;
+  border-color: transparent;
+  background: linear-gradient(120deg,
+      #066f9d,
+      #0aa7a4);
+}
+
+/* Tab Tambah/Edit yang sedang tidak aktif */
+
+:root[data-theme="dark"] .surveyModeTabs button:not(.active) {
+  color: #b4d1da;
+  border: 1px solid #2b5261;
+  background: #153847;
+  box-shadow: none;
+}
+
+:root[data-theme="dark"] .surveyModeTabs button:not(.active):hover {
+  color: #ffffff;
+  border-color: #168fa2;
+  background: #176071;
+}
+
+/* Tab aktif tetap toska */
+
+:root[data-theme="dark"] .surveyModeTabs button.active {
+  color: #ffffff;
+  border: 1px solid transparent;
+  background: #0aa6b4;
+  box-shadow: none;
+}
+
+/* Tombol Kembali dan Batal */
+
+:root[data-theme="dark"] .inputCancel,
+:root[data-theme="dark"] .settingsBackButton,
+:root[data-theme="dark"] .calendarLabelCancel {
+  color: #b4d1da;
+  border: 1px solid #2b5261;
+  background: #153847;
+  box-shadow: none;
+}
+
+:root[data-theme="dark"] .inputCancel:hover,
+:root[data-theme="dark"] .settingsBackButton:hover,
+:root[data-theme="dark"] .calendarLabelCancel:hover {
+  color: #ffffff;
+  border-color: #168fa2;
+  background: #137f91;
+}
+
+/* Kondisi fokus agar tidak kembali putih */
+
+:root[data-theme="dark"] .soft:focus-visible,
+:root[data-theme="dark"] .calNav button:focus-visible,
+:root[data-theme="dark"] .surveyModeTabs button:focus-visible,
+:root[data-theme="dark"] .inputCancel:focus-visible,
+:root[data-theme="dark"] .settingsBackButton:focus-visible {
+  outline: 2px solid #4fd6e2;
+  outline-offset: 2px;
+}
+
+/* ========================================
+   JARAK TOMBOL AKSI FORM
+======================================== */
+
+.formActionsRight {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.formActionsRight .inputCancel,
+.formActionsRight .inputSubmit {
+  margin: 0;
+  flex: 0 0 auto;
+}
+
+.formActions {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.formActions:has(.inputDelete) {
+  justify-content: space-between;
+}
+
+@media (max-width: 700px) {
+
+  .formActions,
+  .formActionsRight {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 9px;
+  }
+
+  .formActionsRight .inputCancel,
+  .formActionsRight .inputSubmit,
+  .formActions .inputDelete {
+    width: 100%;
+    margin: 0;
+  }
+}
+
+/* ========================================
+   POSISI FINAL TOMBOL FORM
+======================================== */
+
+.formActions,
+.formActions:has(.inputDelete) {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.formActionsRight {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.formActions .inputDelete,
+.formActionsRight .inputCancel,
+.formActionsRight .inputSubmit {
+  margin: 0;
+  flex: 0 0 auto;
+}
+
+@media (max-width: 700px) {
+
+  .formActions,
+  .formActions:has(.inputDelete),
+  .formActionsRight {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 9px;
+  }
+
+  .formActions .inputDelete,
+  .formActionsRight .inputCancel,
+  .formActionsRight .inputSubmit {
+    width: 100%;
+    margin: 0;
+  }
+}
+
+/* Animasi tombol Refresh */
+
+.refreshSpin {
+  animation: refreshButtonSpin 0.75s linear infinite;
+}
+
+@keyframes refreshButtonSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.soft:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+/* ========================================
+   MOBILE COMPACT FINAL
+   Hanya untuk HP
+======================================== */
+
+@media screen and (max-width: 650px) and (pointer: coarse) {
+  /* Sidebar lebih ramping */
+
+  aside,
+  aside:not(.open) {
+    width: 44px;
+    padding: 8px 4px;
+    gap: 6px;
+  }
+
+  aside:not(.open) .brand-wrapper {
+    width: 100%;
+    height: 32px;
+    min-height: 32px;
+    margin: 0 0 8px;
+    padding: 0;
+  }
+
+  aside:not(.open) .brand-wrapper .brand {
+    width: 30px;
+    min-width: 30px;
+    height: 30px;
+    border-radius: 9px;
+    font-size: 8px;
+  }
+
+  aside:not(.open)>button,
+  aside:not(.open) .sidebarGroup,
+  aside:not(.open) .sidebarGroupRow,
+  aside:not(.open) .sidebarManageButton {
+    width: 32px;
+    min-width: 32px;
+    height: 32px;
+    min-height: 32px;
+    margin: 0 auto;
+    padding: 0;
+    border-radius: 9px;
+  }
+
+  aside:not(.open)>button svg,
+  aside:not(.open) .sidebarManageButton>svg {
+    width: 16px;
+    height: 16px;
+    flex: 0 0 16px;
+  }
+
+  .sidebar-version {
+    font-size: 8px;
+  }
+
+  /* Area utama mengikuti sidebar */
+
+  main,
+  .shell.sidebar-open main {
+    width: calc(100% - 44px);
+    margin-left: 44px;
+  }
+
+  /* Header dibuat lebih pendek */
+
+  header {
+    width: 100%;
+    height: 52px;
+    padding: 0 42px 0 6px;
+    gap: 5px;
+  }
+
+  header>.icon {
+    width: 31px;
+    min-width: 31px;
+    height: 31px;
+    flex: 0 0 31px;
+    border-radius: 9px;
+  }
+
+  header>.icon svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  header>.search {
+    width: auto;
+    min-width: 0;
+    max-width: none;
+    height: 32px;
+    padding: 0 8px;
+    gap: 6px;
+    flex: 1 1 auto;
+    border-radius: 10px;
+  }
+
+  header>.search svg {
+    width: 15px;
+    height: 15px;
+    flex: 0 0 15px;
+  }
+
+  header>.search input {
+    min-width: 0;
+    font-size: 10px;
+  }
+
+  header>.search input::placeholder {
+    font-size: 10px;
+  }
+
+  header>.profileMenu {
+    right: 6px;
+  }
+
+  .avatarButton {
+    width: 30px;
+    min-width: 30px;
+    height: 30px;
+    font-size: 10px;
+  }
+
+  /* Ruang halaman */
+
+  .content {
+    width: 100%;
+    padding: 7px;
+  }
+
+  .homePage {
+    gap: 10px;
+  }
+
+  /* Hero Beranda dibuat jauh lebih ringkas */
+
+  .homeHero {
+    min-height: 0;
+    padding: 18px 15px;
+    gap: 14px;
+    border-radius: 16px;
+    align-items: stretch;
+  }
+
+  .homeHero .eyebrow {
+    margin-bottom: 6px;
+    font-size: 8px;
+    letter-spacing: 1px;
+  }
+
+  .homeHero h1 {
+    margin: 0 0 8px;
+    font-size: 25px;
+    line-height: 1.08;
+  }
+
+  .homeIntro>p:not(.eyebrow) {
+    font-size: 11px;
+    line-height: 1.45;
+  }
+
+  .homeAction {
+    min-height: 36px;
+    margin-top: 12px;
+    padding: 0 12px;
+    border-radius: 10px;
+    font-size: 10px;
+    gap: 6px;
+  }
+
+  .homeAction svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  /* Ringkasan capaian dibuat horizontal dan pendek */
+
+  .homeSummary {
+    width: 100%;
+    min-width: 0;
+    padding: 13px 14px;
+    border-radius: 14px;
+  }
+
+  .homeSummary span {
+    font-size: 9px;
+  }
+
+  .homeSummary strong {
+    margin: 5px 0;
+    font-size: 32px;
+  }
+
+  .homeSummary small {
+    font-size: 9px;
+    line-height: 1.35;
+  }
+
+  /* Kartu indikator tidak lagi setinggi layar */
+
+  .homeIndicators {
+    gap: 9px;
+  }
+
+  .indicatorCard {
+    min-height: 0;
+    padding: 14px 12px;
+    border-radius: 15px;
+  }
+
+  .indicatorCard::before {
+    width: 70px;
+    height: 70px;
+    top: -34px;
+    right: -30px;
+  }
+
+  .indicatorIcon {
+    width: 38px;
+    height: 38px;
+    margin: 0 auto 9px;
+    border-radius: 11px;
+  }
+
+  .indicatorIcon svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .indicatorCard h3 {
+    min-height: 0;
+    margin: 0 0 8px;
+    font-size: 12px;
+    line-height: 1.3;
+  }
+
+  .indicatorValue {
+    margin-bottom: 9px;
+  }
+
+  .indicatorValue strong {
+    font-size: 25px;
+  }
+
+  .indicatorValue>span {
+    margin-top: 2px;
+    font-size: 9px;
+  }
+
+  .indicatorLabels {
+    gap: 4px;
+    padding-top: 8px;
+  }
+
+  .indicatorLabels>span {
+    font-size: 9px;
+    gap: 4px;
+  }
+
+  .indicatorLabels svg {
+    width: 11px;
+    height: 11px;
+    flex: 0 0 11px;
+  }
+
+  /* Menu cepat menjadi lebih pendek */
+
+  .homeQuickMenu {
+    gap: 8px;
+  }
+
+  .homeQuickMenu button {
+    min-height: 68px;
+    padding: 11px;
+    border-radius: 14px;
+    gap: 10px;
+  }
+
+  .homeQuickMenu button>svg {
+    width: 35px;
+    height: 35px;
+    padding: 8px;
+    border-radius: 10px;
+    flex: 0 0 35px;
+  }
+
+  .homeQuickMenu strong {
+    margin-bottom: 2px;
+    font-size: 11px;
+  }
+
+  .homeQuickMenu small {
+    font-size: 9px;
+    line-height: 1.35;
+  }
+
+  /* Panel Dashboard */
+
+  .hero {
+    padding: 17px 15px;
+    border-radius: 15px;
+  }
+
+  .hero h1 {
+    font-size: 21px;
+  }
+
+  .hero p {
+    font-size: 10px;
+    line-height: 1.4;
+  }
+
+  .metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 7px;
+    margin: 9px 0;
+  }
+
+  .metrics article {
+    padding: 11px;
+    border-radius: 13px;
+  }
+
+  .metrics span,
+  .metrics small {
+    font-size: 9px;
+  }
+
+  .metrics b {
+    margin: 3px 0;
+    font-size: 21px;
+  }
+
+  .cards {
+    gap: 8px;
+    margin-bottom: 9px;
+  }
+
+  .surveyCard {
+    padding: 12px;
+    border-radius: 14px;
+  }
+
+  .surveyCard h3 {
+    min-height: 0;
+    margin: 9px 0;
+    font-size: 12px;
+  }
+
+  .big b {
+    font-size: 23px;
+  }
+
+  .big small,
+  .surveyCard footer {
+    font-size: 9px;
+  }
+
+  /* Halaman Settings */
+
+  .settingsPage {
+    gap: 9px;
+  }
+
+  .settingsHead,
+  .settingsPanel {
+    padding: 14px;
+    border-radius: 15px;
+  }
+
+  .settingsHead {
+    gap: 10px;
+  }
+
+  .settingsHead h1 {
+    font-size: 19px;
+  }
+
+  .settingsHead>div>p:last-child {
+    font-size: 10px;
+  }
+
+  .settingsThemeGrid {
+    margin-top: 12px;
+    gap: 7px;
+  }
+
+  .settingsThemeCard {
+    min-height: 67px;
+    padding: 10px;
+    border-radius: 12px;
+    gap: 9px;
+  }
+
+  .settingsThemeCard>svg {
+    width: 32px;
+    height: 32px;
+    padding: 7px;
+    flex: 0 0 32px;
+  }
+
+  .settingsThemeCard strong {
+    font-size: 11px;
+  }
+
+  .settingsThemeCard small {
+    font-size: 9px;
+  }
+}
+
+/* ========================================
+   WARNA STATUS TABEL TEMA DEFAULT
+   Harus berada paling akhir globals.css
+======================================== */
+
+/* Target */
+
+:root[data-theme="default"] .tableWrap tbody td.target {
+  color: #174f68;
+  background: #dcecf8;
+  font-weight: 800;
+}
+
+/* Realisasi belum mencapai target */
+
+:root[data-theme="default"] .tableWrap tbody td.warn {
+  color: #593200;
+  background: #ffb44d;
+  font-weight: 900;
+}
+
+/* Realisasi sudah mencapai target */
+
+:root[data-theme="default"] .tableWrap tbody td.ok {
+  color: #ffffff;
+  background: #17c69a;
+  font-weight: 900;
+}
+
+/* ========================================
+   FIX SCROLL TABEL HP
+   Semua kolom bergerak bersama
+======================================== */
+
+@media screen and (max-width: 650px) {
+  .tableWrap {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+  }
+
+  /*
+   * Matikan sticky horizontal pada
+   * Kegiatan Survei dan Periode.
+   */
+  .tableWrap thead tr:first-child th:first-child,
+  .tableWrap thead tr:first-child th:nth-child(2),
+  .tableWrap tbody td:first-child,
+  .tableWrap tbody td:nth-child(2) {
+    position: static !important;
+    left: auto !important;
+    z-index: auto !important;
+  }
+
+  /* Lebar kolom kegiatan dan periode */
+
+  .tableWrap thead tr:first-child th:first-child,
+  .tableWrap tbody td:first-child {
+    width: 190px !important;
+    min-width: 190px !important;
+    max-width: 190px !important;
+  }
+
+  .tableWrap thead tr:first-child th:nth-child(2),
+  .tableWrap tbody td:nth-child(2) {
+    width: 68px !important;
+    min-width: 68px !important;
+    max-width: 68px !important;
+  }
+
+  /* Semua kolom bulan mengikuti satu tabel */
+
+  .tableWrap thead tr:first-child th[colspan="2"] {
+    width: 70px !important;
+    min-width: 70px !important;
+    max-width: 70px !important;
+  }
+
+  .tableWrap thead tr:nth-child(2) th,
+  .tableWrap tbody td:nth-child(n + 3) {
+    width: 35px !important;
+    min-width: 35px !important;
+    max-width: 35px !important;
+  }
+
+  /*
+   * Header vertikal tetap menempel saat
+   * digulir ke bawah, tetapi ikut bergerak
+   * saat tabel digeser ke kanan/kiri.
+   */
+
+  .tableWrap thead {
+    position: static !important;
+  }
+
+  .tableWrap thead th {
+    position: sticky !important;
+    top: 0;
+    z-index: 5;
+  }
+
+  .tableWrap thead tr:nth-child(2) th {
+    top: 29px;
+    z-index: 6;
+  }
+
+  /*
+   * Pastikan sel kiri memiliki latar jelas,
+   * tetapi tidak menutupi angka bulan.
+   */
+
+  .tableWrap tbody td:first-child,
+  .tableWrap tbody td:nth-child(2) {
+    background: inherit;
+  }
+}
+
+/* ========================================
+   RAPATKAN BARIS TABEL DI HP
+======================================== */
+
+@media screen and (max-width: 650px) {
+
+  .tableWrap th,
+  .tableWrap td {
+    height: auto !important;
+    min-height: 0 !important;
+    padding-top: 4px !important;
+    padding-bottom: 4px !important;
+    line-height: 1.15;
+  }
+
+  /* Baris isi tabel */
+  .tableWrap tbody tr {
+    height: 32px;
+  }
+
+  /* Nama kegiatan */
+  .tableWrap tbody td:first-child {
+    padding: 5px 6px !important;
+  }
+
+  .tableWrap tbody td:first-child strong {
+    margin: 0;
+    font-size: 9px;
+    line-height: 1.15;
+  }
+
+  .tableWrap tbody td:first-child small {
+    margin-top: 2px;
+    font-size: 7px;
+    line-height: 1.1;
+  }
+
+  /* Kolom periode */
+  .tableWrap tbody td:nth-child(2) {
+    padding: 4px 2px !important;
+    font-size: 8px;
+  }
+
+  /* Kolom angka bulanan */
+  .tableWrap tbody td:nth-child(n + 3) {
+    height: 32px !important;
+    padding: 3px 1px !important;
+    font-size: 9px;
+    line-height: 1;
+  }
+
+  /* Header bulan dan T/R */
+  .tableWrap thead th {
+    height: auto !important;
+    padding: 5px 2px !important;
+  }
+
+  .tableWrap thead tr:first-child th {
+    height: 28px;
+  }
+
+  .tableWrap thead tr:nth-child(2) th {
+    top: 28px;
+    height: 24px;
+    padding: 4px 1px !important;
+  }
+}
+
+/* ========================================
+   KOTAK ANGKA BULAN LEBIH KECIL DI HP
+======================================== */
+
+@media screen and (max-width: 650px) {
+
+  /* Baris tetap lega */
+  .tableWrap tbody tr,
+  .tableWrap tbody td {
+    height: 42px !important;
+  }
+
+  /* Sel angka tidak diberi background penuh */
+  .tableWrap tbody td.target,
+  .tableWrap tbody td.warn,
+  .tableWrap tbody td.ok {
+    padding: 0 2px !important;
+    background-color: transparent !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+
+    /* Kotak warna lebih pendek dari tinggi baris */
+
+    font-size: 10px;
+    line-height: 42px;
+    text-align: center;
+    vertical-align: middle;
+  }
+}
+
+/* ========================================
+   TABEL MOBILE FINAL
+   Header bulan sejajar dan warna konsisten
+======================================== */
+
+@media screen and (max-width: 650px) {
+  .tableWrap {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+  }
+
+  /*
+   * Total tabel:
+   * Kegiatan = 210px
+   * Periode  = 78px
+   * 24 kolom T/R x 38px
+   */
+  .tableWrap table {
+    width: 1200px !important;
+    min-width: 1200px !important;
+    table-layout: fixed !important;
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+
+  /* Kolom Kegiatan Survei */
+
+  .tableWrap col:first-child,
+  .tableWrap thead tr:first-child th:first-child,
+  .tableWrap tbody td:first-child {
+    width: 210px !important;
+    min-width: 210px !important;
+    max-width: 210px !important;
+  }
+
+  /* Kolom Periode */
+
+  .tableWrap col:nth-child(2),
+  .tableWrap thead tr:first-child th:nth-child(2),
+  .tableWrap tbody td:nth-child(2) {
+    width: 78px !important;
+    min-width: 78px !important;
+    max-width: 78px !important;
+  }
+
+  /* Semua kolom T dan R */
+
+  .tableWrap col:nth-child(n + 3),
+  .tableWrap thead tr:nth-child(2) th,
+  .tableWrap tbody td:nth-child(n + 3) {
+    width: 38px !important;
+    min-width: 38px !important;
+    max-width: 38px !important;
+  }
+
+  /* Satu bulan terdiri dari T + R = 76px */
+
+  .tableWrap thead tr:first-child th[colspan="2"] {
+    width: 76px !important;
+    min-width: 76px !important;
+    max-width: 76px !important;
+  }
+
+  /* Semua kolom berjalan bersama */
+
+  .tableWrap thead tr:first-child th:first-child,
+  .tableWrap thead tr:first-child th:nth-child(2),
+  .tableWrap tbody td:first-child,
+  .tableWrap tbody td:nth-child(2) {
+    position: static !important;
+    left: auto !important;
+    z-index: auto !important;
+  }
+
+  /* Ukuran header */
+
+  .tableWrap thead tr:first-child th {
+    height: 32px;
+    padding: 5px 2px !important;
+    font-size: 9px;
+    line-height: 1;
+    vertical-align: middle;
+  }
+
+  .tableWrap thead tr:nth-child(2) th {
+    height: 28px;
+    padding: 4px 1px !important;
+    font-size: 9px;
+    line-height: 1;
+    vertical-align: middle;
+  }
+
+  /* Tinggi baris isi */
+
+  .tableWrap tbody tr {
+    height: 44px;
+  }
+
+  .tableWrap tbody td {
+    height: 44px !important;
+    padding: 6px 2px !important;
+    font-size: 10px;
+    line-height: 1.15;
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  /* Nama kegiatan */
+
+  .tableWrap tbody td:first-child {
+    padding: 6px 7px !important;
+    text-align: left;
+  }
+
+  .tableWrap tbody td:first-child strong {
+    overflow: hidden;
+    margin: 0;
+    font-size: 10px;
+    line-height: 1.2;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .tableWrap tbody td:first-child small {
+    overflow: hidden;
+    margin-top: 2px;
+    font-size: 7px;
+    line-height: 1.1;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .tableWrap tbody td:nth-child(2) {
+    font-size: 8px;
+  }
+
+  /* Hilangkan eksperimen kotak kecil */
+
+  .tableWrap tbody td.target,
+  .tableWrap tbody td.warn,
+  .tableWrap tbody td.ok {
+    padding: 6px 2px !important;
+    border-radius: 0 !important;
+    background-image: none !important;
+    background-size: auto !important;
+    background-position: initial !important;
+    background-repeat: initial !important;
+    line-height: 1.15 !important;
+    font-weight: 900;
+  }
+}
+
+/* ========================================
+   WARNA STATUS TABEL TEMA GELAP
+======================================== */
+
+@media screen and (max-width: 650px) {
+  :root[data-theme="dark"] .tableWrap tbody td.target {
+    color: #d7edf5 !important;
+    background: #1d4b63 !important;
+  }
+
+  :root[data-theme="dark"] .tableWrap tbody td.warn {
+    color: #ffe0a3 !important;
+    background: #815d20 !important;
+  }
+
+  :root[data-theme="dark"] .tableWrap tbody td.ok {
+    color: #baf4df !important;
+    background: #11634f !important;
+  }
+}
+
+/* ========================================
+   STATUS TABEL TEMA GELAP
+   BERLAKU DI KOMPUTER DAN HP
+======================================== */
+
+:root[data-theme="dark"] .tableWrap tbody td.target {
+  color: #d7edf5 !important;
+  background: #1d4b63 !important;
+  font-weight: 800;
+}
+
+:root[data-theme="dark"] .tableWrap tbody td.warn {
+  color: #ffe0a3 !important;
+  background: #815d20 !important;
+  font-weight: 900;
+}
+
+:root[data-theme="dark"] .tableWrap tbody td.ok {
+  color: #baf4df !important;
+  background: #11634f !important;
+  font-weight: 900;
+}
+
+/* ========================================
+   HILANGKAN JARAK HEADER BULAN DAN T/R DI HP
+======================================== */
+
+@media screen and (max-width: 650px) {
+  .tableWrap table {
+    border-collapse: separate !important;
+    border-spacing: 0 !important;
+  }
+
+  /*
+   * Matikan sticky vertikal pada header HP.
+   * Semua bagian tabel tetap bergeser bersama.
+   */
+  .tableWrap thead,
+  .tableWrap thead tr,
+  .tableWrap thead th {
+    position: static !important;
+    top: auto !important;
+  }
+
+  /* Baris nama bulan */
+
+  .tableWrap thead tr:first-child th {
+    height: 32px !important;
+    padding: 5px 2px !important;
+    line-height: 1 !important;
+    vertical-align: middle;
+  }
+
+  /* Baris T dan R langsung menempel di bawah bulan */
+
+  .tableWrap thead tr:nth-child(2) th {
+    position: static !important;
+    top: auto !important;
+    height: 28px !important;
+    padding: 4px 1px !important;
+    line-height: 1 !important;
+    vertical-align: middle;
+  }
+
+  /* Hilangkan celah tambahan antarbaris header */
+
+  .tableWrap thead tr:first-child,
+  .tableWrap thead tr:nth-child(2) {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+}
+
+/* ========================================
+   PILIHAN BAHASA APLIKASI
+======================================== */
+
+.settingsLanguageList {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.settingsLanguageCard {
+  width: 100%;
+  min-height: 70px;
+  padding: 14px 17px;
+  border: 1px solid #d8e8ed;
+  border-radius: 14px;
+  background: #f8fcfd;
+  color: #587384;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 4px;
+
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.settingsLanguageCard:hover {
+  color: #08758a;
+  border-color: #8fd5de;
+  background: #effafb;
+  transform: translateY(-1px);
+}
+
+.settingsLanguageCard strong,
+.settingsLanguageCard small {
+  display: block;
+}
+
+.settingsLanguageCard strong {
+  color: #123047;
+  font-size: 13px;
+}
+
+.settingsLanguageCard small {
+  color: #78909c;
+  font-size: 10px;
+}
+
+.settingsLanguageCard.active {
+  color: #ffffff;
+  border-color: transparent;
+  background: linear-gradient(120deg,
+      #0782b6,
+      #0db9b5);
+}
+
+.settingsLanguageCard.active strong {
+  color: #ffffff;
+}
+
+.settingsLanguageCard.active small {
+  color: #e7fbff;
+}
+
+:root[data-theme="dark"] .settingsLanguageCard {
+  color: #b6d0d9;
+  border-color: #254b5b;
+  background: #102f3d;
+}
+
+:root[data-theme="dark"] .settingsLanguageCard strong {
+  color: #edf8fa;
+}
+
+:root[data-theme="dark"] .settingsLanguageCard small {
+  color: #91adb7;
+}
+
+:root[data-theme="dark"] .settingsLanguageCard:hover {
+  border-color: #3e7588;
+  background: #153b49;
+}
+
+:root[data-theme="dark"] .settingsLanguageCard.active {
+  color: #ffffff;
+  border-color: transparent;
+  background: #0aa6b4;
+}
+
+:root[data-theme="dark"] .settingsLanguageCard.active strong,
+:root[data-theme="dark"] .settingsLanguageCard.active small {
+  color: #ffffff;
+}
