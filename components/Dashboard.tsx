@@ -2053,9 +2053,6 @@ export default function Dashboard({
             setView("dashboard");
             setManageMenuOpen(false);
 
-            if (window.innerWidth <= 650) {
-              setSidebarOpen(false);
-            }
           }}
           title="Dashboard"
         >
@@ -2073,9 +2070,6 @@ export default function Dashboard({
             setView("calendar");
             setManageMenuOpen(false);
 
-            if (window.innerWidth <= 650) {
-              setSidebarOpen(false);
-            }
           }}
           title="Kalender"
         >
@@ -2159,9 +2153,6 @@ export default function Dashboard({
                   setInputMode("create");
                   setView("input");
 
-                  if (window.innerWidth <= 650) {
-                    setSidebarOpen(false);
-                  }
                 }}
               >
                 <Plus />
@@ -2179,9 +2170,6 @@ export default function Dashboard({
                   setInputMode("edit");
                   setView("input");
 
-                  if (window.innerWidth <= 650) {
-                    setSidebarOpen(false);
-                  }
                 }}
               >
                 <Pencil />
@@ -2203,9 +2191,6 @@ export default function Dashboard({
             setView("settings");
             setManageMenuOpen(false);
 
-            if (window.innerWidth <= 650) {
-              setSidebarOpen(false);
-            }
           }}
           title="Pengaturan"
           aria-label="Buka Pengaturan"
