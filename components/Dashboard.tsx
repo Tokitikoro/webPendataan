@@ -2035,9 +2035,6 @@ export default function Dashboard({
             setView("home");
             setManageMenuOpen(false);
 
-            if (window.innerWidth <= 650) {
-              setSidebarOpen(false);
-            }
           }}
           title="Beranda"
           aria-label="Buka Beranda"
@@ -2113,7 +2110,6 @@ export default function Dashboard({
                  */
                 if (window.innerWidth <= 650) {
                   setManageMenuOpen(false);
-                  setSidebarOpen(false);
                 }
               }}
               title="Kelola Data"
