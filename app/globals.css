@@ -5646,3 +5646,449 @@ aside:not(.open) .sidebarArrow {
 :root[data-theme="dark"] .settingsLanguageCard.active small {
   color: #ffffff;
 }
+
+/* ========================================
+   MODAL KONFIRMASI SIMPAN SPREADSHEET
+======================================== */
+
+.saveConfirmOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  padding: 20px;
+  background: rgba(2, 21, 31, 0.72);
+  backdrop-filter: blur(5px);
+
+  display: grid;
+  place-items: center;
+}
+
+.saveConfirmModal {
+  width: min(100%, 560px);
+  max-height: calc(100vh - 40px);
+  padding: 24px;
+  overflow-y: auto;
+  border: 1px solid #cfe5eb;
+  border-radius: 22px;
+  background: #ffffff;
+  color: #123047;
+
+  box-shadow:
+    0 28px 70px rgba(2, 24, 37, 0.35);
+}
+
+.saveConfirmIcon {
+  width: 52px;
+  height: 52px;
+  margin-bottom: 16px;
+  border-radius: 15px;
+  color: #ffffff;
+  background:
+    linear-gradient(135deg,
+      #0782b6,
+      #0db9b5);
+
+  display: grid;
+  place-items: center;
+}
+
+.saveConfirmIcon svg {
+  width: 25px;
+  height: 25px;
+}
+
+.saveConfirmContent h3 {
+  margin: 0 0 8px;
+  color: #123047;
+  font-size: 21px;
+}
+
+.saveConfirmContent>p:not(.eyebrow) {
+  margin: 0;
+  color: #6d8997;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.saveConfirmDetails {
+  margin: 20px 0 14px;
+  overflow: hidden;
+  border: 1px solid #dcebf0;
+  border-radius: 14px;
+}
+
+.saveConfirmDetails>div {
+  min-height: 44px;
+  padding: 10px 13px;
+  border-bottom: 1px solid #e3eef2;
+
+  display: grid;
+  grid-template-columns: 155px minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+}
+
+.saveConfirmDetails>div:last-child {
+  border-bottom: 0;
+}
+
+.saveConfirmDetails dt {
+  color: #78909c;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.saveConfirmDetails dd {
+  min-width: 0;
+  margin: 0;
+  overflow-wrap: anywhere;
+  color: #123047;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.saveConfirmWarning {
+  padding: 12px 14px;
+  border: 1px solid #f1cf94;
+  border-radius: 11px;
+  background: #fff7e8;
+  color: #8a5a13;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.saveConfirmActions {
+  margin-top: 20px;
+
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.saveConfirmCancel,
+.saveConfirmSubmit {
+  min-height: 44px;
+  padding: 0 17px;
+  border-radius: 11px;
+  font-family: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.saveConfirmCancel {
+  border: 1px solid #c7dce3;
+  background: #edf4f6;
+  color: #496a7d;
+}
+
+.saveConfirmCancel:hover {
+  background: #dfecef;
+}
+
+.saveConfirmSubmit {
+  border: 0;
+  color: #ffffff;
+  background:
+    linear-gradient(120deg,
+      #0782b6,
+      #0db9b5);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.saveConfirmSubmit:hover {
+  background:
+    linear-gradient(120deg,
+      #066f9d,
+      #0aa7a4);
+}
+
+.saveConfirmSubmit svg {
+  width: 17px;
+  height: 17px;
+}
+
+.saveConfirmCancel:disabled,
+.saveConfirmSubmit:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Tema gelap */
+
+:root[data-theme="dark"] .saveConfirmModal {
+  color: #e4f2f6;
+  border-color: #285366;
+  background: #0c2734;
+}
+
+:root[data-theme="dark"] .saveConfirmContent h3,
+:root[data-theme="dark"] .saveConfirmDetails dd {
+  color: #edf8fa;
+}
+
+:root[data-theme="dark"] .saveConfirmContent>p:not(.eyebrow),
+:root[data-theme="dark"] .saveConfirmDetails dt {
+  color: #91adb7;
+}
+
+:root[data-theme="dark"] .saveConfirmDetails {
+  border-color: #254b5b;
+}
+
+:root[data-theme="dark"] .saveConfirmDetails>div {
+  border-bottom-color: #254b5b;
+  background: #102f3d;
+}
+
+:root[data-theme="dark"] .saveConfirmWarning {
+  color: #ffd98a;
+  border-color: #6d5424;
+  background: #41351e;
+}
+
+:root[data-theme="dark"] .saveConfirmCancel {
+  color: #c0d6de;
+  border-color: #2b5261;
+  background: #153847;
+}
+
+/* HP */
+
+@media (max-width: 650px) {
+  .saveConfirmOverlay {
+    padding: 12px;
+  }
+
+  .saveConfirmModal {
+    max-height: calc(100vh - 24px);
+    padding: 18px;
+    border-radius: 17px;
+  }
+
+  .saveConfirmDetails>div {
+    grid-template-columns: 1fr;
+    gap: 3px;
+  }
+
+  .saveConfirmActions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .saveConfirmCancel,
+  .saveConfirmSubmit {
+    width: 100%;
+  }
+}
+
+.inputSubmit {
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    filter 0.15s ease,
+    opacity 0.15s ease;
+}
+
+.inputSubmit:hover:not(:disabled) {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+
+.inputSubmit:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.inputSubmit:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+.buttonSpinner {
+  animation: buttonSpinner 0.8s linear infinite;
+}
+
+@keyframes buttonSpinner {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ========================================
+   MODAL HAPUS - MERAH LEMBUT
+======================================== */
+
+.deleteMode {
+  background: rgba(2, 21, 31, 0.72);
+  backdrop-filter: blur(5px);
+}
+
+.deleteConfirmModal {
+  border-color: #d8756d;
+  box-shadow: 0 28px 70px rgba(2, 24, 37, 0.35);
+}
+
+.deleteConfirmIcon {
+  color: #ffffff;
+  background: linear-gradient(135deg,
+      #e7776f,
+      #cf5f58);
+  box-shadow: 0 9px 22px rgba(207, 95, 88, 0.18);
+}
+
+.deleteConfirmContent .eyebrow {
+  color: #f08b83;
+}
+
+.deleteConfirmContent h3 {
+  color: #f3b0aa;
+}
+
+.deleteConfirmDetails {
+  border-color: #365462;
+}
+
+.deleteConfirmDetails>div {
+  border-bottom-color: #365462;
+  background: #14333f;
+}
+
+.deleteConfirmDetails dt {
+  color: #9db7c0;
+}
+
+.deleteConfirmDetails dd {
+  color: #edf8fa;
+}
+
+.deleteConfirmWarning {
+  color: #f4c2bd;
+  border-color: #75514f;
+  background: #3c302f;
+}
+
+.deleteConfirmSubmit {
+  border: 1px solid transparent;
+  color: #ffffff;
+  background: linear-gradient(120deg,
+      #df726a,
+      #c85b54);
+  box-shadow: none;
+}
+
+.deleteConfirmSubmit:hover:not(:disabled) {
+  background: linear-gradient(120deg,
+      #d86961,
+      #bd514a);
+  filter: brightness(1.04);
+  transform: translateY(-1px);
+}
+
+.deleteConfirmSubmit:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+/* Tema terang/default */
+
+:root[data-theme="default"] .deleteConfirmContent h3,
+:root[data-theme="light"] .deleteConfirmContent h3 {
+  color: #9d413b;
+}
+
+:root[data-theme="default"] .deleteConfirmDetails,
+:root[data-theme="light"] .deleteConfirmDetails {
+  border-color: #eadbd9;
+}
+
+:root[data-theme="default"] .deleteConfirmDetails>div,
+:root[data-theme="light"] .deleteConfirmDetails>div {
+  border-bottom-color: #eee1df;
+  background: #ffffff;
+}
+
+:root[data-theme="default"] .deleteConfirmDetails dt,
+:root[data-theme="light"] .deleteConfirmDetails dt {
+  color: #7f7776;
+}
+
+:root[data-theme="default"] .deleteConfirmDetails dd,
+:root[data-theme="light"] .deleteConfirmDetails dd {
+  color: #412321;
+}
+
+:root[data-theme="default"] .deleteConfirmWarning,
+:root[data-theme="light"] .deleteConfirmWarning {
+  color: #934d47;
+  border-color: #efc5c1;
+  background: #fff5f4;
+}
+
+/* Tema gelap */
+
+:root[data-theme="dark"] .deleteConfirmModal {
+  border-color: #684a49;
+}
+
+:root[data-theme="dark"] .deleteConfirmContent .eyebrow {
+  color: #f08b83;
+}
+
+:root[data-theme="dark"] .deleteConfirmContent h3 {
+  color: #f3b0aa;
+}
+
+:root[data-theme="dark"] .deleteConfirmDetails {
+  border-color: #365462;
+}
+
+:root[data-theme="dark"] .deleteConfirmDetails>div {
+  border-bottom-color: #365462;
+  background: #14333f;
+}
+
+:root[data-theme="dark"] .deleteConfirmDetails dt {
+  color: #9db7c0;
+}
+
+:root[data-theme="dark"] .deleteConfirmDetails dd {
+  color: #edf8fa;
+}
+
+:root[data-theme="dark"] .deleteConfirmWarning {
+  color: #f4c2bd;
+  border-color: #75514f;
+  background: #3c302f;
+}
+
+.inputReset {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.inputReset svg {
+  width: 17px;
+  height: 17px;
+  flex: 0 0 17px;
+  margin: 0;
+  transform: none;
+}
