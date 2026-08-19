@@ -4665,3 +4665,1742 @@ aside:not(.open) .sidebarArrow {
   cursor: wait;
   opacity: 0.7;
 }
+
+/* ========================================
+   MOBILE COMPACT FINAL
+   Hanya untuk HP
+======================================== */
+
+@media screen and (max-width: 650px) and (pointer: coarse) {
+  /* Sidebar lebih ramping */
+
+  aside,
+  aside:not(.open) {
+    width: 44px;
+    padding: 8px 4px;
+    gap: 6px;
+  }
+
+  aside:not(.open) .brand-wrapper {
+    width: 100%;
+    height: 32px;
+    min-height: 32px;
+    margin: 0 0 8px;
+    padding: 0;
+  }
+
+  aside:not(.open) .brand-wrapper .brand {
+    width: 30px;
+    min-width: 30px;
+    height: 30px;
+    border-radius: 9px;
+    font-size: 8px;
+  }
+
+  aside:not(.open)>button,
+  aside:not(.open) .sidebarGroup,
+  aside:not(.open) .sidebarGroupRow,
+  aside:not(.open) .sidebarManageButton {
+    width: 32px;
+    min-width: 32px;
+    height: 32px;
+    min-height: 32px;
+    margin: 0 auto;
+    padding: 0;
+    border-radius: 9px;
+  }
+
+  aside:not(.open)>button svg,
+  aside:not(.open) .sidebarManageButton>svg {
+    width: 16px;
+    height: 16px;
+    flex: 0 0 16px;
+  }
+
+  .sidebar-version {
+    font-size: 8px;
+  }
+
+  /* Area utama mengikuti sidebar */
+
+  main,
+  .shell.sidebar-open main {
+    width: calc(100% - 44px);
+    margin-left: 44px;
+  }
+
+  /* Header dibuat lebih pendek */
+
+  header {
+    width: 100%;
+    height: 52px;
+    padding: 0 42px 0 6px;
+    gap: 5px;
+  }
+
+  header>.icon {
+    width: 31px;
+    min-width: 31px;
+    height: 31px;
+    flex: 0 0 31px;
+    border-radius: 9px;
+  }
+
+  header>.icon svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  header>.search {
+    width: auto;
+    min-width: 0;
+    max-width: none;
+    height: 32px;
+    padding: 0 8px;
+    gap: 6px;
+    flex: 1 1 auto;
+    border-radius: 10px;
+  }
+
+  header>.search svg {
+    width: 15px;
+    height: 15px;
+    flex: 0 0 15px;
+  }
+
+  header>.search input {
+    min-width: 0;
+    font-size: 10px;
+  }
+
+  header>.search input::placeholder {
+    font-size: 10px;
+  }
+
+  header>.profileMenu {
+    right: 6px;
+  }
+
+  .avatarButton {
+    width: 30px;
+    min-width: 30px;
+    height: 30px;
+    font-size: 10px;
+  }
+
+  /* Ruang halaman */
+
+  .content {
+    width: 100%;
+    padding: 7px;
+  }
+
+  .homePage {
+    gap: 10px;
+  }
+
+  /* Hero Beranda dibuat jauh lebih ringkas */
+
+  .homeHero {
+    min-height: 0;
+    padding: 18px 15px;
+    gap: 14px;
+    border-radius: 16px;
+    align-items: stretch;
+  }
+
+  .homeHero .eyebrow {
+    margin-bottom: 6px;
+    font-size: 8px;
+    letter-spacing: 1px;
+  }
+
+  .homeHero h1 {
+    margin: 0 0 8px;
+    font-size: 25px;
+    line-height: 1.08;
+  }
+
+  .homeIntro>p:not(.eyebrow) {
+    font-size: 11px;
+    line-height: 1.45;
+  }
+
+  .homeAction {
+    min-height: 36px;
+    margin-top: 12px;
+    padding: 0 12px;
+    border-radius: 10px;
+    font-size: 10px;
+    gap: 6px;
+  }
+
+  .homeAction svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  /* Ringkasan capaian dibuat horizontal dan pendek */
+
+  .homeSummary {
+    width: 100%;
+    min-width: 0;
+    padding: 13px 14px;
+    border-radius: 14px;
+  }
+
+  .homeSummary span {
+    font-size: 9px;
+  }
+
+  .homeSummary strong {
+    margin: 5px 0;
+    font-size: 32px;
+  }
+
+  .homeSummary small {
+    font-size: 9px;
+    line-height: 1.35;
+  }
+
+  /* Kartu indikator tidak lagi setinggi layar */
+
+  .homeIndicators {
+    gap: 9px;
+  }
+
+  .indicatorCard {
+    min-height: 0;
+    padding: 14px 12px;
+    border-radius: 15px;
+  }
+
+  .indicatorCard::before {
+    width: 70px;
+    height: 70px;
+    top: -34px;
+    right: -30px;
+  }
+
+  .indicatorIcon {
+    width: 38px;
+    height: 38px;
+    margin: 0 auto 9px;
+    border-radius: 11px;
+  }
+
+  .indicatorIcon svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .indicatorCard h3 {
+    min-height: 0;
+    margin: 0 0 8px;
+    font-size: 12px;
+    line-height: 1.3;
+  }
+
+  .indicatorValue {
+    margin-bottom: 9px;
+  }
+
+  .indicatorValue strong {
+    font-size: 25px;
+  }
+
+  .indicatorValue>span {
+    margin-top: 2px;
+    font-size: 9px;
+  }
+
+  .indicatorLabels {
+    gap: 4px;
+    padding-top: 8px;
+  }
+
+  .indicatorLabels>span {
+    font-size: 9px;
+    gap: 4px;
+  }
+
+  .indicatorLabels svg {
+    width: 11px;
+    height: 11px;
+    flex: 0 0 11px;
+  }
+
+  /* Menu cepat menjadi lebih pendek */
+
+  .homeQuickMenu {
+    gap: 8px;
+  }
+
+  .homeQuickMenu button {
+    min-height: 68px;
+    padding: 11px;
+    border-radius: 14px;
+    gap: 10px;
+  }
+
+  .homeQuickMenu button>svg {
+    width: 35px;
+    height: 35px;
+    padding: 8px;
+    border-radius: 10px;
+    flex: 0 0 35px;
+  }
+
+  .homeQuickMenu strong {
+    margin-bottom: 2px;
+    font-size: 11px;
+  }
+
+  .homeQuickMenu small {
+    font-size: 9px;
+    line-height: 1.35;
+  }
+
+  /* Panel Dashboard */
+
+  .hero {
+    padding: 17px 15px;
+    border-radius: 15px;
+  }
+
+  .hero h1 {
+    font-size: 21px;
+  }
+
+  .hero p {
+    font-size: 10px;
+    line-height: 1.4;
+  }
+
+  .metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 7px;
+    margin: 9px 0;
+  }
+
+  .metrics article {
+    padding: 11px;
+    border-radius: 13px;
+  }
+
+  .metrics span,
+  .metrics small {
+    font-size: 9px;
+  }
+
+  .metrics b {
+    margin: 3px 0;
+    font-size: 21px;
+  }
+
+  .cards {
+    gap: 8px;
+    margin-bottom: 9px;
+  }
+
+  .surveyCard {
+    padding: 12px;
+    border-radius: 14px;
+  }
+
+  .surveyCard h3 {
+    min-height: 0;
+    margin: 9px 0;
+    font-size: 12px;
+  }
+
+  .big b {
+    font-size: 23px;
+  }
+
+  .big small,
+  .surveyCard footer {
+    font-size: 9px;
+  }
+
+  /* Halaman Settings */
+
+  .settingsPage {
+    gap: 9px;
+  }
+
+  .settingsHead,
+  .settingsPanel {
+    padding: 14px;
+    border-radius: 15px;
+  }
+
+  .settingsHead {
+    gap: 10px;
+  }
+
+  .settingsHead h1 {
+    font-size: 19px;
+  }
+
+  .settingsHead>div>p:last-child {
+    font-size: 10px;
+  }
+
+  .settingsThemeGrid {
+    margin-top: 12px;
+    gap: 7px;
+  }
+
+  .settingsThemeCard {
+    min-height: 67px;
+    padding: 10px;
+    border-radius: 12px;
+    gap: 9px;
+  }
+
+  .settingsThemeCard>svg {
+    width: 32px;
+    height: 32px;
+    padding: 7px;
+    flex: 0 0 32px;
+  }
+
+  .settingsThemeCard strong {
+    font-size: 11px;
+  }
+
+  .settingsThemeCard small {
+    font-size: 9px;
+  }
+}
+
+/* ========================================
+   WARNA STATUS TABEL TEMA DEFAULT
+   Harus berada paling akhir globals.css
+======================================== */
+
+/* Target */
+
+:root[data-theme="default"] .tableWrap tbody td.target {
+  color: #174f68;
+  background: #dcecf8;
+  font-weight: 800;
+}
+
+/* Realisasi belum mencapai target */
+
+:root[data-theme="default"] .tableWrap tbody td.warn {
+  color: #593200;
+  background: #ffb44d;
+  font-weight: 900;
+}
+
+/* Realisasi sudah mencapai target */
+
+:root[data-theme="default"] .tableWrap tbody td.ok {
+  color: #ffffff;
+  background: #17c69a;
+  font-weight: 900;
+}
+
+/* ========================================
+   FIX SCROLL TABEL HP
+   Semua kolom bergerak bersama
+======================================== */
+
+@media screen and (max-width: 650px) {
+  .tableWrap {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+  }
+
+  /*
+   * Matikan sticky horizontal pada
+   * Kegiatan Survei dan Periode.
+   */
+  .tableWrap thead tr:first-child th:first-child,
+  .tableWrap thead tr:first-child th:nth-child(2),
+  .tableWrap tbody td:first-child,
+  .tableWrap tbody td:nth-child(2) {
+    position: static !important;
+    left: auto !important;
+    z-index: auto !important;
+  }
+
+  /* Lebar kolom kegiatan dan periode */
+
+  .tableWrap thead tr:first-child th:first-child,
+  .tableWrap tbody td:first-child {
+    width: 190px !important;
+    min-width: 190px !important;
+    max-width: 190px !important;
+  }
+
+  .tableWrap thead tr:first-child th:nth-child(2),
+  .tableWrap tbody td:nth-child(2) {
+    width: 68px !important;
+    min-width: 68px !important;
+    max-width: 68px !important;
+  }
+
+  /* Semua kolom bulan mengikuti satu tabel */
+
+  .tableWrap thead tr:first-child th[colspan="2"] {
+    width: 70px !important;
+    min-width: 70px !important;
+    max-width: 70px !important;
+  }
+
+  .tableWrap thead tr:nth-child(2) th,
+  .tableWrap tbody td:nth-child(n + 3) {
+    width: 35px !important;
+    min-width: 35px !important;
+    max-width: 35px !important;
+  }
+
+  /*
+   * Header vertikal tetap menempel saat
+   * digulir ke bawah, tetapi ikut bergerak
+   * saat tabel digeser ke kanan/kiri.
+   */
+
+  .tableWrap thead {
+    position: static !important;
+  }
+
+  .tableWrap thead th {
+    position: sticky !important;
+    top: 0;
+    z-index: 5;
+  }
+
+  .tableWrap thead tr:nth-child(2) th {
+    top: 29px;
+    z-index: 6;
+  }
+
+  /*
+   * Pastikan sel kiri memiliki latar jelas,
+   * tetapi tidak menutupi angka bulan.
+   */
+
+  .tableWrap tbody td:first-child,
+  .tableWrap tbody td:nth-child(2) {
+    background: inherit;
+  }
+}
+
+/* ========================================
+   RAPATKAN BARIS TABEL DI HP
+======================================== */
+
+@media screen and (max-width: 650px) {
+
+  .tableWrap th,
+  .tableWrap td {
+    height: auto !important;
+    min-height: 0 !important;
+    padding-top: 4px !important;
+    padding-bottom: 4px !important;
+    line-height: 1.15;
+  }
+
+  /* Baris isi tabel */
+  .tableWrap tbody tr {
+    height: 32px;
+  }
+
+  /* Nama kegiatan */
+  .tableWrap tbody td:first-child {
+    padding: 5px 6px !important;
+  }
+
+  .tableWrap tbody td:first-child strong {
+    margin: 0;
+    font-size: 9px;
+    line-height: 1.15;
+  }
+
+  .tableWrap tbody td:first-child small {
+    margin-top: 2px;
+    font-size: 7px;
+    line-height: 1.1;
+  }
+
+  /* Kolom periode */
+  .tableWrap tbody td:nth-child(2) {
+    padding: 4px 2px !important;
+    font-size: 8px;
+  }
+
+  /* Kolom angka bulanan */
+  .tableWrap tbody td:nth-child(n + 3) {
+    height: 32px !important;
+    padding: 3px 1px !important;
+    font-size: 9px;
+    line-height: 1;
+  }
+
+  /* Header bulan dan T/R */
+  .tableWrap thead th {
+    height: auto !important;
+    padding: 5px 2px !important;
+  }
+
+  .tableWrap thead tr:first-child th {
+    height: 28px;
+  }
+
+  .tableWrap thead tr:nth-child(2) th {
+    top: 28px;
+    height: 24px;
+    padding: 4px 1px !important;
+  }
+}
+
+/* ========================================
+   KOTAK ANGKA BULAN LEBIH KECIL DI HP
+======================================== */
+
+@media screen and (max-width: 650px) {
+
+  /* Baris tetap lega */
+  .tableWrap tbody tr,
+  .tableWrap tbody td {
+    height: 42px !important;
+  }
+
+  /* Sel angka tidak diberi background penuh */
+  .tableWrap tbody td.target,
+  .tableWrap tbody td.warn,
+  .tableWrap tbody td.ok {
+    padding: 0 2px !important;
+    background-color: transparent !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+
+    /* Kotak warna lebih pendek dari tinggi baris */
+
+    font-size: 10px;
+    line-height: 42px;
+    text-align: center;
+    vertical-align: middle;
+  }
+}
+
+/* ========================================
+   TABEL MOBILE FINAL
+   Header bulan sejajar dan warna konsisten
+======================================== */
+
+@media screen and (max-width: 650px) {
+  .tableWrap {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+  }
+
+  /*
+   * Total tabel:
+   * Kegiatan = 210px
+   * Periode  = 78px
+   * 24 kolom T/R x 38px
+   */
+  .tableWrap table {
+    width: 1200px !important;
+    min-width: 1200px !important;
+    table-layout: fixed !important;
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+
+  /* Kolom Kegiatan Survei */
+
+  .tableWrap col:first-child,
+  .tableWrap thead tr:first-child th:first-child,
+  .tableWrap tbody td:first-child {
+    width: 210px !important;
+    min-width: 210px !important;
+    max-width: 210px !important;
+  }
+
+  /* Kolom Periode */
+
+  .tableWrap col:nth-child(2),
+  .tableWrap thead tr:first-child th:nth-child(2),
+  .tableWrap tbody td:nth-child(2) {
+    width: 78px !important;
+    min-width: 78px !important;
+    max-width: 78px !important;
+  }
+
+  /* Semua kolom T dan R */
+
+  .tableWrap col:nth-child(n + 3),
+  .tableWrap thead tr:nth-child(2) th,
+  .tableWrap tbody td:nth-child(n + 3) {
+    width: 38px !important;
+    min-width: 38px !important;
+    max-width: 38px !important;
+  }
+
+  /* Satu bulan terdiri dari T + R = 76px */
+
+  .tableWrap thead tr:first-child th[colspan="2"] {
+    width: 76px !important;
+    min-width: 76px !important;
+    max-width: 76px !important;
+  }
+
+  /* Semua kolom berjalan bersama */
+
+  .tableWrap thead tr:first-child th:first-child,
+  .tableWrap thead tr:first-child th:nth-child(2),
+  .tableWrap tbody td:first-child,
+  .tableWrap tbody td:nth-child(2) {
+    position: static !important;
+    left: auto !important;
+    z-index: auto !important;
+  }
+
+  /* Ukuran header */
+
+  .tableWrap thead tr:first-child th {
+    height: 32px;
+    padding: 5px 2px !important;
+    font-size: 9px;
+    line-height: 1;
+    vertical-align: middle;
+  }
+
+  .tableWrap thead tr:nth-child(2) th {
+    height: 28px;
+    padding: 4px 1px !important;
+    font-size: 9px;
+    line-height: 1;
+    vertical-align: middle;
+  }
+
+  /* Tinggi baris isi */
+
+  .tableWrap tbody tr {
+    height: 44px;
+  }
+
+  .tableWrap tbody td {
+    height: 44px !important;
+    padding: 6px 2px !important;
+    font-size: 10px;
+    line-height: 1.15;
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  /* Nama kegiatan */
+
+  .tableWrap tbody td:first-child {
+    padding: 6px 7px !important;
+    text-align: left;
+  }
+
+  .tableWrap tbody td:first-child strong {
+    overflow: hidden;
+    margin: 0;
+    font-size: 10px;
+    line-height: 1.2;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .tableWrap tbody td:first-child small {
+    overflow: hidden;
+    margin-top: 2px;
+    font-size: 7px;
+    line-height: 1.1;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .tableWrap tbody td:nth-child(2) {
+    font-size: 8px;
+  }
+
+  /* Hilangkan eksperimen kotak kecil */
+
+  .tableWrap tbody td.target,
+  .tableWrap tbody td.warn,
+  .tableWrap tbody td.ok {
+    padding: 6px 2px !important;
+    border-radius: 0 !important;
+    background-image: none !important;
+    background-size: auto !important;
+    background-position: initial !important;
+    background-repeat: initial !important;
+    line-height: 1.15 !important;
+    font-weight: 900;
+  }
+}
+
+/* ========================================
+   WARNA STATUS TABEL TEMA GELAP
+======================================== */
+
+@media screen and (max-width: 650px) {
+  :root[data-theme="dark"] .tableWrap tbody td.target {
+    color: #d7edf5 !important;
+    background: #1d4b63 !important;
+  }
+
+  :root[data-theme="dark"] .tableWrap tbody td.warn {
+    color: #ffe0a3 !important;
+    background: #815d20 !important;
+  }
+
+  :root[data-theme="dark"] .tableWrap tbody td.ok {
+    color: #baf4df !important;
+    background: #11634f !important;
+  }
+}
+
+/* ========================================
+   STATUS TABEL TEMA GELAP
+   BERLAKU DI KOMPUTER DAN HP
+======================================== */
+
+:root[data-theme="dark"] .tableWrap tbody td.target {
+  color: #d7edf5 !important;
+  background: #1d4b63 !important;
+  font-weight: 800;
+}
+
+:root[data-theme="dark"] .tableWrap tbody td.warn {
+  color: #ffe0a3 !important;
+  background: #815d20 !important;
+  font-weight: 900;
+}
+
+:root[data-theme="dark"] .tableWrap tbody td.ok {
+  color: #baf4df !important;
+  background: #11634f !important;
+  font-weight: 900;
+}
+
+/* ========================================
+   HILANGKAN JARAK HEADER BULAN DAN T/R DI HP
+======================================== */
+
+@media screen and (max-width: 650px) {
+  .tableWrap table {
+    border-collapse: separate !important;
+    border-spacing: 0 !important;
+  }
+
+  /*
+   * Matikan sticky vertikal pada header HP.
+   * Semua bagian tabel tetap bergeser bersama.
+   */
+  .tableWrap thead,
+  .tableWrap thead tr,
+  .tableWrap thead th {
+    position: static !important;
+    top: auto !important;
+  }
+
+  /* Baris nama bulan */
+
+  .tableWrap thead tr:first-child th {
+    height: 32px !important;
+    padding: 5px 2px !important;
+    line-height: 1 !important;
+    vertical-align: middle;
+  }
+
+  /* Baris T dan R langsung menempel di bawah bulan */
+
+  .tableWrap thead tr:nth-child(2) th {
+    position: static !important;
+    top: auto !important;
+    height: 28px !important;
+    padding: 4px 1px !important;
+    line-height: 1 !important;
+    vertical-align: middle;
+  }
+
+  /* Hilangkan celah tambahan antarbaris header */
+
+  .tableWrap thead tr:first-child,
+  .tableWrap thead tr:nth-child(2) {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+}
+
+/* ========================================
+   PILIHAN BAHASA APLIKASI
+======================================== */
+
+.settingsLanguageList {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.settingsLanguageCard {
+  width: 100%;
+  min-height: 70px;
+  padding: 14px 17px;
+  border: 1px solid #d8e8ed;
+  border-radius: 14px;
+  background: #f8fcfd;
+  color: #587384;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 4px;
+
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.settingsLanguageCard:hover {
+  color: #08758a;
+  border-color: #8fd5de;
+  background: #effafb;
+  transform: translateY(-1px);
+}
+
+.settingsLanguageCard strong,
+.settingsLanguageCard small {
+  display: block;
+}
+
+.settingsLanguageCard strong {
+  color: #123047;
+  font-size: 13px;
+}
+
+.settingsLanguageCard small {
+  color: #78909c;
+  font-size: 10px;
+}
+
+.settingsLanguageCard.active {
+  color: #ffffff;
+  border-color: transparent;
+  background: linear-gradient(120deg,
+      #0782b6,
+      #0db9b5);
+}
+
+.settingsLanguageCard.active strong {
+  color: #ffffff;
+}
+
+.settingsLanguageCard.active small {
+  color: #e7fbff;
+}
+
+:root[data-theme="dark"] .settingsLanguageCard {
+  color: #b6d0d9;
+  border-color: #254b5b;
+  background: #102f3d;
+}
+
+:root[data-theme="dark"] .settingsLanguageCard strong {
+  color: #edf8fa;
+}
+
+:root[data-theme="dark"] .settingsLanguageCard small {
+  color: #91adb7;
+}
+
+:root[data-theme="dark"] .settingsLanguageCard:hover {
+  border-color: #3e7588;
+  background: #153b49;
+}
+
+:root[data-theme="dark"] .settingsLanguageCard.active {
+  color: #ffffff;
+  border-color: transparent;
+  background: #0aa6b4;
+}
+
+:root[data-theme="dark"] .settingsLanguageCard.active strong,
+:root[data-theme="dark"] .settingsLanguageCard.active small {
+  color: #ffffff;
+}
+
+/* ========================================
+   MODAL KONFIRMASI SIMPAN SPREADSHEET
+======================================== */
+
+.saveConfirmOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  padding: 20px;
+  background: rgba(2, 21, 31, 0.72);
+  backdrop-filter: blur(5px);
+
+  display: grid;
+  place-items: center;
+}
+
+.saveConfirmModal {
+  width: min(100%, 560px);
+  max-height: calc(100vh - 40px);
+  padding: 24px;
+  overflow-y: auto;
+  border: 1px solid #cfe5eb;
+  border-radius: 22px;
+  background: #ffffff;
+  color: #123047;
+
+  box-shadow:
+    0 28px 70px rgba(2, 24, 37, 0.35);
+}
+
+.saveConfirmIcon {
+  width: 52px;
+  height: 52px;
+  margin-bottom: 16px;
+  border-radius: 15px;
+  color: #ffffff;
+  background:
+    linear-gradient(135deg,
+      #0782b6,
+      #0db9b5);
+
+  display: grid;
+  place-items: center;
+}
+
+.saveConfirmIcon svg {
+  width: 25px;
+  height: 25px;
+}
+
+.saveConfirmContent h3 {
+  margin: 0 0 8px;
+  color: #123047;
+  font-size: 21px;
+}
+
+.saveConfirmContent>p:not(.eyebrow) {
+  margin: 0;
+  color: #6d8997;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.saveConfirmDetails {
+  margin: 20px 0 14px;
+  overflow: hidden;
+  border: 1px solid #dcebf0;
+  border-radius: 14px;
+}
+
+.saveConfirmDetails>div {
+  min-height: 44px;
+  padding: 10px 13px;
+  border-bottom: 1px solid #e3eef2;
+
+  display: grid;
+  grid-template-columns: 155px minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+}
+
+.saveConfirmDetails>div:last-child {
+  border-bottom: 0;
+}
+
+.saveConfirmDetails dt {
+  color: #78909c;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.saveConfirmDetails dd {
+  min-width: 0;
+  margin: 0;
+  overflow-wrap: anywhere;
+  color: #123047;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.saveConfirmWarning {
+  padding: 12px 14px;
+  border: 1px solid #f1cf94;
+  border-radius: 11px;
+  background: #fff7e8;
+  color: #8a5a13;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.saveConfirmActions {
+  margin-top: 20px;
+
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.saveConfirmCancel,
+.saveConfirmSubmit {
+  min-height: 44px;
+  padding: 0 17px;
+  border-radius: 11px;
+  font-family: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.saveConfirmCancel {
+  border: 1px solid #c7dce3;
+  background: #edf4f6;
+  color: #496a7d;
+}
+
+.saveConfirmCancel:hover {
+  background: #dfecef;
+}
+
+.saveConfirmSubmit {
+  border: 0;
+  color: #ffffff;
+  background:
+    linear-gradient(120deg,
+      #0782b6,
+      #0db9b5);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.saveConfirmSubmit:hover {
+  background:
+    linear-gradient(120deg,
+      #066f9d,
+      #0aa7a4);
+}
+
+.saveConfirmSubmit svg {
+  width: 17px;
+  height: 17px;
+}
+
+.saveConfirmCancel:disabled,
+.saveConfirmSubmit:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Tema gelap */
+
+:root[data-theme="dark"] .saveConfirmModal {
+  color: #e4f2f6;
+  border-color: #285366;
+  background: #0c2734;
+}
+
+:root[data-theme="dark"] .saveConfirmContent h3,
+:root[data-theme="dark"] .saveConfirmDetails dd {
+  color: #edf8fa;
+}
+
+:root[data-theme="dark"] .saveConfirmContent>p:not(.eyebrow),
+:root[data-theme="dark"] .saveConfirmDetails dt {
+  color: #91adb7;
+}
+
+:root[data-theme="dark"] .saveConfirmDetails {
+  border-color: #254b5b;
+}
+
+:root[data-theme="dark"] .saveConfirmDetails>div {
+  border-bottom-color: #254b5b;
+  background: #102f3d;
+}
+
+:root[data-theme="dark"] .saveConfirmWarning {
+  color: #ffd98a;
+  border-color: #6d5424;
+  background: #41351e;
+}
+
+:root[data-theme="dark"] .saveConfirmCancel {
+  color: #c0d6de;
+  border-color: #2b5261;
+  background: #153847;
+}
+
+/* HP */
+
+@media (max-width: 650px) {
+  .saveConfirmOverlay {
+    padding: 12px;
+  }
+
+  .saveConfirmModal {
+    max-height: calc(100vh - 24px);
+    padding: 18px;
+    border-radius: 17px;
+  }
+
+  .saveConfirmDetails>div {
+    grid-template-columns: 1fr;
+    gap: 3px;
+  }
+
+  .saveConfirmActions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .saveConfirmCancel,
+  .saveConfirmSubmit {
+    width: 100%;
+  }
+}
+
+.inputSubmit {
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    filter 0.15s ease,
+    opacity 0.15s ease;
+}
+
+.inputSubmit:hover:not(:disabled) {
+  filter: brightness(1.08);
+  transform: translateY(-1px);
+}
+
+.inputSubmit:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+.inputSubmit:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+.buttonSpinner {
+  animation: buttonSpinner 0.8s linear infinite;
+}
+
+@keyframes buttonSpinner {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ========================================
+   MODAL HAPUS - MERAH LEMBUT
+======================================== */
+
+.deleteMode {
+  background: rgba(2, 21, 31, 0.72);
+  backdrop-filter: blur(5px);
+}
+
+.deleteConfirmModal {
+  border-color: #d8756d;
+  box-shadow: 0 28px 70px rgba(2, 24, 37, 0.35);
+}
+
+.deleteConfirmIcon {
+  color: #ffffff;
+  background: linear-gradient(135deg,
+      #e7776f,
+      #cf5f58);
+  box-shadow: 0 9px 22px rgba(207, 95, 88, 0.18);
+}
+
+.deleteConfirmContent .eyebrow {
+  color: #f08b83;
+}
+
+.deleteConfirmContent h3 {
+  color: #f3b0aa;
+}
+
+.deleteConfirmDetails {
+  border-color: #365462;
+}
+
+.deleteConfirmDetails>div {
+  border-bottom-color: #365462;
+  background: #14333f;
+}
+
+.deleteConfirmDetails dt {
+  color: #9db7c0;
+}
+
+.deleteConfirmDetails dd {
+  color: #edf8fa;
+}
+
+.deleteConfirmWarning {
+  color: #f4c2bd;
+  border-color: #75514f;
+  background: #3c302f;
+}
+
+.deleteConfirmSubmit {
+  border: 1px solid transparent;
+  color: #ffffff;
+  background: linear-gradient(120deg,
+      #df726a,
+      #c85b54);
+  box-shadow: none;
+}
+
+.deleteConfirmSubmit:hover:not(:disabled) {
+  background: linear-gradient(120deg,
+      #d86961,
+      #bd514a);
+  filter: brightness(1.04);
+  transform: translateY(-1px);
+}
+
+.deleteConfirmSubmit:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+/* Tema terang/default */
+
+:root[data-theme="default"] .deleteConfirmContent h3,
+:root[data-theme="light"] .deleteConfirmContent h3 {
+  color: #9d413b;
+}
+
+:root[data-theme="default"] .deleteConfirmDetails,
+:root[data-theme="light"] .deleteConfirmDetails {
+  border-color: #eadbd9;
+}
+
+:root[data-theme="default"] .deleteConfirmDetails>div,
+:root[data-theme="light"] .deleteConfirmDetails>div {
+  border-bottom-color: #eee1df;
+  background: #ffffff;
+}
+
+:root[data-theme="default"] .deleteConfirmDetails dt,
+:root[data-theme="light"] .deleteConfirmDetails dt {
+  color: #7f7776;
+}
+
+:root[data-theme="default"] .deleteConfirmDetails dd,
+:root[data-theme="light"] .deleteConfirmDetails dd {
+  color: #412321;
+}
+
+:root[data-theme="default"] .deleteConfirmWarning,
+:root[data-theme="light"] .deleteConfirmWarning {
+  color: #934d47;
+  border-color: #efc5c1;
+  background: #fff5f4;
+}
+
+/* Tema gelap */
+
+:root[data-theme="dark"] .deleteConfirmModal {
+  border-color: #684a49;
+}
+
+:root[data-theme="dark"] .deleteConfirmContent .eyebrow {
+  color: #f08b83;
+}
+
+:root[data-theme="dark"] .deleteConfirmContent h3 {
+  color: #f3b0aa;
+}
+
+:root[data-theme="dark"] .deleteConfirmDetails {
+  border-color: #365462;
+}
+
+:root[data-theme="dark"] .deleteConfirmDetails>div {
+  border-bottom-color: #365462;
+  background: #14333f;
+}
+
+:root[data-theme="dark"] .deleteConfirmDetails dt {
+  color: #9db7c0;
+}
+
+:root[data-theme="dark"] .deleteConfirmDetails dd {
+  color: #edf8fa;
+}
+
+:root[data-theme="dark"] .deleteConfirmWarning {
+  color: #f4c2bd;
+  border-color: #75514f;
+  background: #3c302f;
+}
+
+.inputReset {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.inputReset svg {
+  width: 17px;
+  height: 17px;
+  flex: 0 0 17px;
+  margin: 0;
+  transform: none;
+}
+
+/* ========================================
+   RIWAYAT AKTIVITAS
+======================================== */
+
+.historyPage {
+  display: grid;
+  gap: 18px;
+}
+
+.historyHead {
+  padding: 25px 27px;
+  border: 1px solid #dcebf0;
+  border-radius: 20px;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  box-shadow:
+    0 8px 25px rgba(10, 96, 116, 0.06);
+}
+
+.historyHead h1 {
+  margin: 0 0 7px;
+  color: #123047;
+  font-size: 25px;
+}
+
+.historyHead>div>p:last-child {
+  margin: 0;
+  color: #6d8997;
+  font-size: 13px;
+}
+
+.historyPanel {
+  min-height: 420px;
+  padding: 25px;
+  border: 1px solid #dcebf0;
+  border-radius: 20px;
+  background: #ffffff;
+  box-shadow:
+    0 8px 25px rgba(10, 96, 116, 0.06);
+}
+
+.historyEmpty {
+  min-height: 360px;
+  color: #78909c;
+  text-align: center;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 8px;
+}
+
+.historyEmpty svg {
+  width: 46px;
+  height: 46px;
+  margin-bottom: 6px;
+  padding: 11px;
+  border-radius: 14px;
+  color: #07859a;
+  background: #e7f8fa;
+}
+
+.historyEmpty strong {
+  color: #385d70;
+  font-size: 15px;
+}
+
+.historyEmpty span {
+  font-size: 12px;
+}
+
+/* Tema default */
+
+:root[data-theme="default"] .historyHead,
+:root[data-theme="default"] .historyPanel {
+  border-color: #d1e7e8;
+  background: linear-gradient(135deg,
+      #f8fcfd,
+      #f1fafa 50%,
+      #eaf7f5);
+}
+
+/* Tema gelap */
+
+:root[data-theme="dark"] .historyHead,
+:root[data-theme="dark"] .historyPanel {
+  color: #e4f2f6;
+  border-color: #1c4050;
+  background: #0c2734;
+}
+
+:root[data-theme="dark"] .historyHead h1,
+:root[data-theme="dark"] .historyEmpty strong {
+  color: #edf8fa;
+}
+
+:root[data-theme="dark"] .historyHead>div>p:last-child,
+:root[data-theme="dark"] .historyEmpty {
+  color: #91adb7;
+}
+
+:root[data-theme="dark"] .historyEmpty svg {
+  color: #55d9e7;
+  background: #153e4c;
+}
+
+@media (max-width: 650px) {
+  .historyHead {
+    padding: 18px;
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .historyPanel {
+    min-height: 320px;
+    padding: 16px;
+  }
+
+  .historyEmpty {
+    min-height: 280px;
+  }
+}
+
+.historyList {
+  display: grid;
+  gap: 12px;
+}
+
+.historyItem {
+  padding: 16px;
+  border: 1px solid #d6e8ed;
+  border-radius: 15px;
+  background: #f8fcfd;
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr);
+  align-items: start;
+  gap: 14px;
+}
+
+.historyItemIcon {
+  width: 44px;
+  height: 44px;
+  border-radius: 13px;
+  color: #08758a;
+  background: #e3f5f7;
+  display: grid;
+  place-items: center;
+}
+
+.historyItemIcon svg {
+  width: 19px;
+  height: 19px;
+}
+
+.historyItem.created .historyItemIcon {
+  color: #08765f;
+  background: #dcf9f2;
+}
+
+.historyItem.deleted .historyItemIcon {
+  color: #ad443b;
+  background: #fff0ee;
+}
+
+.historyItemContent {
+  min-width: 0;
+}
+
+.historyItemTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.historyItemTop strong {
+  color: #08758a;
+  font-size: 12px;
+}
+
+.historyItemTop time {
+  color: #78909c;
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+.historyItemContent h3 {
+  margin: 6px 0 4px;
+  color: #123047;
+  font-size: 15px;
+}
+
+.historyItemContent p {
+  margin: 0;
+  color: #6d8997;
+  font-size: 11px;
+}
+
+.historyItemContent>small {
+  display: block;
+  margin-top: 9px;
+  color: #78909c;
+  font-size: 10px;
+}
+
+.historyValues {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.historyValues span {
+  padding: 5px 8px;
+  border-radius: 8px;
+  color: #496a7d;
+  background: #eaf2f5;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+/* Tema gelap */
+
+:root[data-theme="dark"] .historyItem {
+  border-color: #254b5b;
+  background: #102f3d;
+}
+
+:root[data-theme="dark"] .historyItemContent h3 {
+  color: #edf8fa;
+}
+
+:root[data-theme="dark"] .historyItemContent p,
+:root[data-theme="dark"] .historyItemContent>small,
+:root[data-theme="dark"] .historyItemTop time {
+  color: #91adb7;
+}
+
+:root[data-theme="dark"] .historyValues span {
+  color: #bcd3dc;
+  background: #183947;
+}
+
+@media (max-width: 650px) {
+  .historyItem {
+    padding: 13px;
+    grid-template-columns: 38px minmax(0, 1fr);
+    gap: 10px;
+  }
+
+  .historyItemIcon {
+    width: 38px;
+    height: 38px;
+  }
+
+  .historyItemTop {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 4px;
+  }
+}
+
+/* ========================================
+   IKON RIWAYAT AKTIVITAS - TEMA GELAP
+======================================== */
+
+:root[data-theme="dark"] .historyItemIcon {
+  color: #66dce7;
+  background: #164250;
+  border: 1px solid #285968;
+}
+
+:root[data-theme="dark"] .historyItemIcon svg {
+  color: currentColor;
+  stroke: currentColor;
+}
+
+/* Ikon tambah */
+:root[data-theme="dark"] .historyItem.created .historyItemIcon {
+  color: #67dfbd;
+  background: #123f38;
+  border-color: #246051;
+}
+
+/* Ikon edit */
+:root[data-theme="dark"] .historyItem.updated .historyItemIcon {
+  color: #62d9e6;
+  background: #153e4c;
+  border-color: #285968;
+}
+
+/* Ikon hapus */
+:root[data-theme="dark"] .historyItem.deleted .historyItemIcon {
+  color: #f0a29b;
+  background: #442c2b;
+  border-color: #704845;
+}
+
+.historyItemIcon {
+  transition:
+    color 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.historyItem:hover .historyItemIcon {
+  transform: translateY(-1px);
+}

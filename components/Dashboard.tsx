@@ -20,6 +20,7 @@ import {
   ChevronRight,
   Database,
   House,
+  History,
   LayoutDashboard,
   Menu,
   Monitor,
@@ -59,6 +60,560 @@ type ThemeMode =
   | "dark"
   | "system";
 
+type LanguageMode =
+  | "id"
+  | "en"
+  | "system";
+
+const translations = {
+  id: {
+    home: "Beranda",
+    dashboard: "Dashboard",
+    calendar: "Kalender",
+    manageData: "Kelola Data",
+    addData: "Tambah Data",
+    editData: "Edit Data",
+    settings: "Pengaturan",
+    accountSettings: "Pengaturan Akun",
+    logout: "Keluar",
+    of: "dari",
+    searchPlaceholder:
+      "Cari kegiatan, kategori, atau tim...",
+
+    settingsEyebrow: "PENGATURAN",
+    settingsTitle: "Pengaturan Tampilan",
+    settingsDescription:
+      "Atur tema dan bahasa yang digunakan pada SIMI Aqua.",
+    back: "Kembali",
+
+    themeTitle: "Tema Aplikasi",
+    themeDescription:
+      "Pengaturan tema akan tersimpan pada perangkat yang sedang digunakan.",
+
+    themeDefault: "Default",
+    themeDefaultDescription:
+      "Tampilan asli SIMI Aqua",
+
+    themeLight: "Terang",
+    themeLightDescription:
+      "Tampilan putih dan cerah",
+
+    themeDark: "Gelap",
+    themeDarkDescription:
+      "Nyaman digunakan pada malam hari",
+
+    themeSystem: "Ikuti Sistem",
+    themeSystemDescription:
+      "Mengikuti tema perangkat",
+
+    languageTitle: "Bahasa Aplikasi",
+    languageDescription:
+      "Pilih bahasa yang digunakan pada tampilan SIMI Aqua.",
+
+    languageIndonesian: "Bahasa Indonesia",
+    languageIndonesianDescription:
+      "Gunakan Bahasa Indonesia",
+
+    languageEnglish: "English",
+    languageEnglishDescription:
+      "Gunakan Bahasa Inggris",
+
+    languageAutomatic: "Otomatis",
+    languageAutomaticDescription:
+      "Mengikuti bahasa perangkat",
+
+
+
+    homeEyebrow: "SELAMAT DATANG",
+    homeTitle: "Sistem Monitoring Survei",
+    homeDescription:
+      "Kelola kegiatan, pantau target dan realisasi, serta lihat agenda survei dalam satu sistem terpadu.",
+    openDashboard: "Buka Dashboard",
+    overallAchievement: "Capaian keseluruhan",
+    targetRealized: "target telah terealisasi",
+
+    economicGrowth: "Pertumbuhan Ekonomi",
+    povertyPercentage: "Persentase Penduduk Miskin",
+    unemploymentRate: "Tingkat Pengangguran Terbuka",
+    percent: "Persen",
+    bpsData: "Data BPS",
+
+    dashboardDescription:
+      "Lihat target dan realisasi survei",
+    calendarDescription:
+      "Lihat agenda kegiatan survei",
+    spreadsheet: "Spreadsheet",
+    spreadsheetDescription:
+      "Kelola data monitoring",
+
+
+
+    dashboardEyebrow: "SISTEM MONITORING TERPADU",
+    dashboardTitle: "Ringkasan Kegiatan Survei",
+    dashboardSubtitle:
+      "Pantau target, realisasi, dan agenda dari satu dashboard.",
+    totalTarget: "Total Target",
+    realizationLabel: "Realisasi",
+    activeActivities: "Kegiatan Aktif",
+    remainingTarget: "Sisa Target",
+    allPeriods: "Seluruh Periode",
+    collectedData: "Data Terkumpul",
+    acrossCategories: "Lintas Kategori",
+    needsFollowUp: "Perlu Ditindaklanjuti",
+    monthlyMonitoring: "MONITORING BULANAN",
+    targetAndRealization: "Target dan Realisasi",
+    quarterTwo2026: "Triwulan II 2026",
+    march2026: "Maret 2026",
+    february2026: "Februari 2026",
+
+    notYet: "Belum",
+    completed: "Selesai",
+    targetWord: "target",
+
+    surveyActivity: "Kegiatan survei",
+
+    overallAchievementLabel:
+      "Capaian Keseluruhan",
+
+    showingResults:
+      "Menampilkan",
+
+    fromResults:
+      "dari",
+
+    activitiesLabel:
+      "Kegiatan",
+
+    monthShortNames: [
+      "JAN",
+      "FEB",
+      "MAR",
+      "APR",
+      "MEI",
+      "JUN",
+      "JUL",
+      "AGU",
+      "SEP",
+      "OKT",
+      "NOV",
+      "DES",
+    ],
+
+    calendarEyebrow: "AGENDA KEGIATAN",
+    calendarHeading: "Kalender",
+    addEvent: "Tambah Acara",
+    today: "Hari ini",
+    previousMonth: "Bulan sebelumnya",
+    nextMonth: "Bulan berikutnya",
+
+    calendarMonths: [
+      "Januari",
+      "Februari",
+      "Maret",
+      "April",
+      "Mei",
+      "Juni",
+      "Juli",
+      "Agustus",
+      "September",
+      "Oktober",
+      "November",
+      "Desember",
+    ],
+
+    calendarDays: [
+      "Min",
+      "Sen",
+      "Sel",
+      "Rab",
+      "Kam",
+      "Jum",
+      "Sab",
+    ],
+
+    addEventEyebrow: "TAMBAH ACARA",
+    newCalendarEvent: "Acara Kalender Baru",
+    eventFormDescription:
+      "Isi nama, tanggal, dan warna acara.",
+    eventNamePlaceholder: "Nama acara",
+    chooseEventColor: "Pilih warna acara",
+    cancel: "Batal",
+    saving: "Menyimpan...",
+    editEventLabel: "EDIT LABEL ACARA",
+    eventLabelPlaceholder: "Nama label acara",
+    updateLabel: "Perbarui Label",
+
+    manageEyebrow: "KELOLA SPREADSHEET",
+    manageTitle: "Kelola Kegiatan Survei",
+    manageDescription:
+      "Tambahkan kegiatan baru atau perbarui kegiatan yang sudah ada.",
+
+    addActivity: "Tambah Kegiatan",
+    editActivity: "Edit Kegiatan",
+    selectActivityToEdit:
+      "Pilih kegiatan yang akan diedit",
+    selectActivity: "Pilih kegiatan",
+
+    activityId: "ID Kegiatan",
+    activityIdExample:
+      "Contoh: s1 akan disimpan di baris s2",
+    activityIdHint:
+      "ID tidak dapat diubah saat mengedit.",
+
+    categoryLabel: "Kategori",
+    categoryExample:
+      "Contoh: STATISTIK SOSIAL",
+
+    activityName: "Nama kegiatan",
+    activityNamePlaceholder:
+      "Nama kegiatan survei",
+
+    periodLabel: "Periode",
+    choosePeriod: "Pilih periode",
+
+    monthly: "Bulanan",
+    quarterly: "Triwulan",
+    semester: "Semester",
+    annual: "Tahunan",
+    subround: "Subround",
+
+    ownerLabel: "Penanggung jawab",
+    ownerExample: "Contoh: Tim Produksi",
+
+    recordingMonth: "Bulan pencatatan",
+    targetLabel: "Target",
+    realizationInputLabel: "Realisasi",
+
+    deleteActivity: "Hapus Kegiatan",
+    deleting: "Menghapus...",
+    cancelEdit: "Batal Edit",
+
+    saveChanges: "Simpan Perubahan",
+    saveToSpreadsheet:
+      "Simpan ke Spreadsheet",
+
+    saveFailed:
+      "Data gagal disimpan",
+
+    updateSuccess:
+      "Perubahan berhasil disimpan",
+
+    createSuccess:
+      "Kegiatan baru berhasil ditambahkan",
+
+    genericError:
+      "Terjadi kesalahan",
+
+    targetRealizationRequired:
+      "Target dan realisasi wajib diisi",
+
+    deleteConfirmation: (
+      name: string,
+    ) =>
+      `Hapus kegiatan "${name}"?\n\n` +
+      "Seluruh target dan realisasi kegiatan ini akan ikut dihapus. " +
+      "Tindakan ini tidak dapat dibatalkan.",
+
+    createConfirmation: (
+      id: string,
+      name: string,
+    ) => {
+      const rowNumber =
+        Number(id.replace(/^s/i, "")) + 1;
+
+      return (
+        `Simpan kegiatan baru?\n\n` +
+        `ID: ${id}\n` +
+        `Nama: ${name}\n` +
+        `Baris Spreadsheet: ${rowNumber}\n\n` +
+        "Pastikan baris tersebut tidak berisi kegiatan lain."
+      );
+    },
+
+    editConfirmation: (
+      id: string,
+      name: string,
+    ) =>
+      `Simpan perubahan kegiatan?\n\n` +
+      `ID: ${id}\n` +
+      `Nama: ${name}\n\n` +
+      "Data lama pada Spreadsheet akan diperbarui.",
+
+    resetForm: "Reset Form",
+    activityHistory: "Riwayat Aktivitas",
+  },
+
+  en: {
+    home: "Home",
+    dashboard: "Dashboard",
+    calendar: "Calendar",
+    manageData: "Manage Data",
+    addData: "Add Data",
+    editData: "Edit Data",
+    settings: "Settings",
+    accountSettings: "Account Settings",
+    logout: "Log Out",
+    of: "of",
+    searchPlaceholder:
+      "Search activities, categories, or teams...",
+
+    settingsEyebrow: "SETTINGS",
+    settingsTitle: "Display Settings",
+    settingsDescription:
+      "Configure the theme and language used in SIMI Aqua.",
+    back: "Back",
+
+    themeTitle: "Application Theme",
+    themeDescription:
+      "Theme settings will be saved on the current device.",
+
+    themeDefault: "Default",
+    themeDefaultDescription:
+      "Original SIMI Aqua appearance",
+
+    themeLight: "Light",
+    themeLightDescription:
+      "Clean and bright appearance",
+
+    themeDark: "Dark",
+    themeDarkDescription:
+      "Comfortable for use at night",
+
+    themeSystem: "Use System Theme",
+    themeSystemDescription:
+      "Follow the device theme",
+
+    languageTitle: "Application Language",
+    languageDescription:
+      "Choose the language used in SIMI Aqua.",
+
+    languageIndonesian: "Bahasa Indonesia",
+    languageIndonesianDescription:
+      "Use Indonesian",
+
+    languageEnglish: "English",
+    languageEnglishDescription:
+      "Use English",
+
+    languageAutomatic: "Automatic",
+    languageAutomaticDescription:
+      "Follow the device language",
+
+
+
+    homeEyebrow: "WELCOME",
+    homeTitle: "Survey Monitoring System",
+    homeDescription: "Manage activities, monitor targets and realizations, and view survey schedules in one integrated system.",
+    openDashboard: "Open Dashboard",
+    overallAchievement: "Overall achievement",
+    targetRealized: "targets have been realized",
+
+    economicGrowth: "Economic Growth",
+    povertyPercentage: "Percentage of People in Poverty",
+    unemploymentRate: "Open Unemployment Rate",
+    percent: "Percent",
+    bpsData: "BPS Data",
+
+    dashboardDescription: "View survey targets and realizations",
+    calendarDescription: "View the survey activity schedule",
+    spreadsheet: "Spreadsheet",
+    spreadsheetDescription: "Manage monitoring data",
+
+    dashboardEyebrow: "INTEGRATED MONITORING SYSTEM",
+    dashboardTitle: "Survey Activity Summary",
+    dashboardSubtitle: "Monitor targets, realizations, and schedules from one dashboard.",
+    totalTarget: "Total Target",
+    realizationLabel: "Realization",
+    activeActivities: "Active Activities",
+    remainingTarget: "Remaining Target",
+    allPeriods: "All Periods",
+    collectedData: "Collected Data",
+    acrossCategories: "Across Categories",
+    needsFollowUp: "Needs Follow-up",
+    monthlyMonitoring: "MONTHLY MONITORING",
+    targetAndRealization: "Target and Realization",
+    quarterTwo2026: "Quarter II 2026",
+    march2026: "March 2026",
+    february2026: "February 2026",
+
+    notYet: "Remaining",
+    completed: "Completed",
+    targetWord: "targets",
+
+    surveyActivity: "Survey activity",
+
+    overallAchievementLabel:
+      "Overall Achievement",
+
+    showingResults:
+      "Showing",
+
+    fromResults:
+      "of",
+
+    activitiesLabel:
+      "Activities",
+
+    monthShortNames: [
+      "JAN",
+      "FEB",
+      "MAR",
+      "APR",
+      "MAY",
+      "JUN",
+      "JUL",
+      "AUG",
+      "SEP",
+      "OCT",
+      "NOV",
+      "DEC",
+    ],
+
+    calendarEyebrow: "ACTIVITY AGENDA",
+    calendarHeading: "Calendar",
+    addEvent: "Add Event",
+    today: "Today",
+    previousMonth: "Previous month",
+    nextMonth: "Next month",
+
+    calendarMonths: [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ],
+
+    calendarDays: [
+      "Sun",
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat",
+    ],
+
+    addEventEyebrow: "ADD EVENT",
+    newCalendarEvent: "New Calendar Event",
+    eventFormDescription:
+      "Enter the event name, date, and color.",
+    eventNamePlaceholder: "Event name",
+    chooseEventColor: "Choose event color",
+    cancel: "Cancel",
+    saving: "Saving...",
+    editEventLabel: "EDIT EVENT LABEL",
+    eventLabelPlaceholder: "Event label name",
+    updateLabel: "Update Label",
+
+    manageEyebrow: "MANAGE SPREADSHEET",
+    manageTitle: "Manage Survey Activities",
+    manageDescription:
+      "Add new activities or update existing activities.",
+
+    addActivity: "Add Activity",
+    editActivity: "Edit Activity",
+    selectActivityToEdit:
+      "Select an activity to edit",
+    selectActivity: "Select an activity",
+
+    activityId: "Activity ID",
+    activityIdExample:
+      "Example: s1 will be saved in row 2",
+    activityIdHint:
+      "The ID cannot be changed while editing.",
+
+    categoryLabel: "Category",
+    categoryExample:
+      "Example: SOCIAL STATISTICS",
+
+    activityName: "Activity name",
+    activityNamePlaceholder:
+      "Survey activity name",
+
+    periodLabel: "Period",
+    choosePeriod: "Select a period",
+
+    monthly: "Monthly",
+    quarterly: "Quarterly",
+    semester: "Semester",
+    annual: "Annual",
+    subround: "Subround",
+
+    ownerLabel: "Person in charge",
+    ownerExample: "Example: Production Team",
+
+    recordingMonth: "Recording month",
+    targetLabel: "Target",
+    realizationInputLabel: "Realization",
+
+    deleteActivity: "Delete Activity",
+    deleting: "Deleting...",
+    cancelEdit: "Cancel Editing",
+
+    saveChanges: "Save Changes",
+    saveToSpreadsheet:
+      "Save to Spreadsheet",
+
+    saveFailed:
+      "Failed to save data",
+
+    updateSuccess:
+      "Changes saved successfully",
+
+    createSuccess:
+      "New activity added successfully",
+
+    genericError:
+      "An error occurred",
+
+    targetRealizationRequired:
+      "Target and realization are required",
+
+    deleteConfirmation: (
+      name: string,
+    ) =>
+      `Delete activity "${name}"?\n\n` +
+      "All targets and realizations for this activity will also be deleted. " +
+      "This action cannot be undone.",
+
+    createConfirmation: (
+      id: string,
+      name: string,
+    ) => {
+      const rowNumber =
+        Number(id.replace(/^s/i, "")) + 1;
+
+      return (
+        `Save the new activity?\n\n` +
+        `ID: ${id}\n` +
+        `Name: ${name}\n` +
+        `Spreadsheet row: ${rowNumber}\n\n` +
+        "Make sure the row does not contain another activity."
+      );
+    },
+
+    editConfirmation: (
+      id: string,
+      name: string,
+    ) =>
+      `Save activity changes?\n\n` +
+      `ID: ${id}\n` +
+      `Name: ${name}\n\n` +
+      "The existing Spreadsheet data will be updated.",
+
+    resetForm: "Reset Form",
+    activityHistory: "Activity History",
+  },
+} as const;
+
 function applyTheme(mode: ThemeMode) {
   const systemPrefersDark =
     window.matchMedia(
@@ -94,10 +649,32 @@ function sum(survey: Survey) {
 
 type CalendarProps = {
   surveys: Survey[];
+  text: TranslationText;
 };
+
+function translatePeriod(
+  period: string,
+  language: "id" | "en",
+) {
+  if (language === "id") {
+    return period;
+  }
+
+  const periodTranslations: Record<string, string> = {
+    Bulanan: "Monthly",
+    Triwulan: "Quarterly",
+    Semester: "Semester",
+    Tahunan: "Annual",
+    Subround: "Subround",
+    Agenda: "Agenda",
+  };
+
+  return periodTranslations[period] ?? period;
+}
 
 function Calendar({
   surveys,
+  text,
 }: CalendarProps) {
   const [cursor, setCursor] = useState(new Date());
 
@@ -216,14 +793,27 @@ function Calendar({
         message?: string;
       };
 
-      if (!response.ok || !result.success) {
+      if (
+        !response.ok ||
+        !result.success
+      ) {
         throw new Error(
-          result.message ?? "Nama acara gagal diperbarui",
+          result.message ??
+          text.saveFailed,
         );
       }
 
-      setEditingEventId(null);
-      setEditingEventName("");
+      saveAuditLog({
+        action: "updated",
+        surveyId: survey.id,
+        surveyName: newName,
+        category: survey.category,
+        owner: survey.owner,
+        monthIndex,
+        target: monthData.target,
+        realization: monthData.realization,
+        user: "JK",
+      });
 
       window.location.reload();
     } catch (error) {
@@ -343,9 +933,14 @@ function Calendar({
     <section className="panel calendarPanel">
       <div className="panelHead">
         <div>
-          <p className="eyebrow">AGENDA KEGIATAN</p>
+          <p className="eyebrow">
+            {text.calendarEyebrow}
+          </p>
+
           <h2>
-            Kalender {months[monthIndex]} {year}
+            {text.calendarHeading}{" "}
+            {text.calendarMonths[monthIndex]}{" "}
+            {year}
           </h2>
         </div>
 
@@ -367,25 +962,28 @@ function Calendar({
             }}
           >
             <Plus />
-            Tambah Acara
+            {text.addEvent}
           </button>
 
           <button
             type="button"
             onClick={goToPreviousMonth}
-            aria-label="Bulan sebelumnya"
+            aria-label={text.previousMonth}
           >
             <ChevronLeft />
           </button>
 
-          <button type="button" onClick={goToCurrentMonth}>
-            Hari ini
+          <button
+            type="button"
+            onClick={goToCurrentMonth}
+          >
+            {text.today}
           </button>
 
           <button
             type="button"
             onClick={goToNextMonth}
-            aria-label="Bulan berikutnya"
+            aria-label={text.nextMonth}
           >
             <ChevronRight />
           </button>
@@ -396,13 +994,15 @@ function Calendar({
         <div className="calendarAddEditor">
           <div className="calendarAddEditorInfo">
             <p className="eyebrow">
-              TAMBAH ACARA
+              {text.addEventEyebrow}
             </p>
 
-            <strong>Acara Kalender Baru</strong>
+            <strong>
+              {text.newCalendarEvent}
+            </strong>
 
             <small>
-              Isi nama, tanggal, dan warna acara.
+              {text.eventFormDescription}
             </small>
           </div>
 
@@ -422,7 +1022,7 @@ function Calendar({
                   setAddingEvent(false);
                 }
               }}
-              placeholder="Nama acara"
+              placeholder={text.eventNamePlaceholder}
               autoFocus
               disabled={savingNewEvent}
             />
@@ -442,7 +1042,7 @@ function Calendar({
               onChange={(event) =>
                 setNewEventColor(event.target.value)
               }
-              title="Pilih warna acara"
+              title={text.chooseEventColor}
               disabled={savingNewEvent}
             />
 
@@ -455,7 +1055,7 @@ function Calendar({
               }}
               disabled={savingNewEvent}
             >
-              Batal
+              {text.cancel}
             </button>
 
             <button
@@ -473,8 +1073,8 @@ function Calendar({
               <Plus />
 
               {savingNewEvent
-                ? "Menyimpan..."
-                : "Tambah Acara"}
+                ? text.saving
+                : text.addEvent}
             </button>
           </div>
 
@@ -490,7 +1090,7 @@ function Calendar({
         <div className="calendarLabelEditor">
           <div className="calendarLabelEditorInfo">
             <p className="eyebrow">
-              EDIT LABEL ACARA
+              {text.editEventLabel}
             </p>
 
             <strong>
@@ -543,7 +1143,7 @@ function Calendar({
               onClick={cancelEditingEvent}
               disabled={savingEventId !== null}
             >
-              Batal
+              {text.cancel}
             </button>
 
             <button
@@ -567,8 +1167,8 @@ function Calendar({
               <Pencil />
 
               {savingEventId
-                ? "Menyimpan..."
-                : "Update Label"}
+                ? text.saving
+                : text.updateLabel}
             </button>
           </div>
         </div>
@@ -576,8 +1176,10 @@ function Calendar({
 
       <div className="calendar">
         <div className="week">
-          {["Min", "Sen", "Sel", "Rab", "Kam", "Jum", "Sab"].map((day) => (
-            <b key={day}>{day}</b>
+          {text.calendarDays.map((day) => (
+            <b key={day}>
+              {day}
+            </b>
           ))}
         </div>
 
@@ -632,6 +1234,7 @@ type HomeProps = {
   percentage: number;
   totalTarget: number;
   realization: number;
+  text: TranslationText;
   onOpenDashboard: () => void;
   onOpenCalendar: () => void;
   onOpenSpreadsheet: () => void;
@@ -641,6 +1244,7 @@ function Home({
   percentage,
   totalTarget,
   realization,
+  text,
   onOpenDashboard,
   onOpenCalendar,
   onOpenSpreadsheet,
@@ -649,14 +1253,13 @@ function Home({
     <section className="homePage">
       <div className="homeHero">
         <div className="homeIntro">
-          <p className="eyebrow">SELAMAT DATANG</p>
-
-          <h1>Sistem Monitoring Survei</h1>
-
-          <p>
-            Kelola kegiatan, pantau target dan realisasi, serta lihat agenda
-            survei dalam satu sistem terpadu.
+          <p className="eyebrow">
+            {text.homeEyebrow}
           </p>
+
+          <h1>{text.homeTitle}</h1>
+
+          <p>{text.homeDescription}</p>
 
           <button
             type="button"
@@ -664,17 +1267,22 @@ function Home({
             onClick={onOpenDashboard}
           >
             <LayoutDashboard />
-            Buka Dashboard
+            {text.openDashboard}
           </button>
         </div>
 
         <div className="homeSummary">
-          <span>Capaian keseluruhan</span>
+          <span>
+            {text.overallAchievement}
+          </span>
+
           <strong>{percentage}%</strong>
 
           <small>
-            {realization} dari {totalTarget} target telah terealisasi
+            {realization} {text.of} {totalTarget}{" "}
+            {text.targetRealized}
           </small>
+
         </div>
       </div>
 
@@ -684,22 +1292,22 @@ function Home({
             <TrendingUp />
           </div>
 
-          <h3>Pertumbuhan Ekonomi</h3>
+          <h3>{text.economicGrowth}</h3>
 
           <div className="indicatorValue">
             <strong>5,45</strong>
-            <span>Persen</span>
+            <span>{text.percent}</span>
           </div>
 
           <div className="indicatorLabels">
             <span>
               <CalendarClock />
-              Triwulan II 2026
+              {text.quarterTwo2026}
             </span>
 
             <span>
               <Database />
-              Data BPS
+              {text.bpsData}
             </span>
           </div>
         </article>
@@ -709,22 +1317,22 @@ function Home({
             <TrendingDown />
           </div>
 
-          <h3>Persentase Penduduk Miskin</h3>
+          <h3>{text.povertyPercentage}</h3>
 
           <div className="indicatorValue">
             <strong>8,07</strong>
-            <span>Persen</span>
+            <span>{text.percent}</span>
           </div>
 
           <div className="indicatorLabels">
             <span>
               <CalendarClock />
-              Maret 2026
+              {text.march2026}
             </span>
 
             <span>
               <Database />
-              Data BPS
+              {text.bpsData}
             </span>
           </div>
         </article>
@@ -734,22 +1342,22 @@ function Home({
             <BriefcaseBusiness />
           </div>
 
-          <h3>Tingkat Pengangguran Terbuka</h3>
+          <h3>{text.unemploymentRate}</h3>
 
           <div className="indicatorValue">
             <strong>4,68</strong>
-            <span>Persen</span>
+            <span>{text.percent}</span>
           </div>
 
           <div className="indicatorLabels">
             <span>
               <CalendarClock />
-              Februari 2026
+              {text.february2026}
             </span>
 
             <span>
               <Database />
-              Data BPS
+              {text.bpsData}
             </span>
           </div>
         </article>
@@ -760,8 +1368,9 @@ function Home({
           <LayoutDashboard />
 
           <span>
-            <strong>Dashboard</strong>
-            <small>Lihat target dan realisasi survei</small>
+            <strong>{text.dashboard}</strong>
+            <small> {text.dashboardDescription}
+            </small>
           </span>
         </button>
 
@@ -769,8 +1378,9 @@ function Home({
           <CalendarDays />
 
           <span>
-            <strong>Kalender</strong>
-            <small>Lihat agenda kegiatan survei</small>
+            <strong>{text.calendar}</strong>
+            <small>{text.calendarDescription}
+            </small>
           </span>
         </button>
 
@@ -781,8 +1391,9 @@ function Home({
           <Sheet />
 
           <span>
-            <strong>Spreadsheet</strong>
-            <small>Kelola data monitoring</small>
+            <strong>{text.spreadsheet}</strong>
+            <small>{text.spreadsheetDescription}
+            </small>
           </span>
         </button>
       </div>
@@ -792,18 +1403,83 @@ function Home({
 
 type FormMode = "create" | "edit";
 
+type AuditAction = "created" | "updated" | "deleted";
+
+type AuditLog = {
+  id: string;
+  action: AuditAction;
+  surveyId: string;
+  surveyName: string;
+  category: string;
+  owner: string;
+  monthIndex?: number;
+  target?: number;
+  realization?: number;
+  timestamp: string;
+  user: string;
+};
+
+function saveAuditLog(
+  log: Omit<AuditLog, "id" | "timestamp">,
+) {
+  const storageKey = "simi-audit-logs";
+
+  try {
+    const storedValue =
+      localStorage.getItem(storageKey);
+
+    const currentLogs: AuditLog[] =
+      storedValue
+        ? (JSON.parse(storedValue) as AuditLog[])
+        : [];
+
+    const newLog: AuditLog = {
+      ...log,
+      id:
+        typeof crypto.randomUUID === "function"
+          ? crypto.randomUUID()
+          : `${Date.now()}-${Math.random()}`,
+      timestamp: new Date().toISOString(),
+    };
+
+    localStorage.setItem(
+      storageKey,
+      JSON.stringify(
+        [newLog, ...currentLogs].slice(0, 200),
+      ),
+    );
+
+    window.dispatchEvent(
+      new CustomEvent("simi-audit-updated"),
+    );
+  } catch (error) {
+    console.error(
+      "Gagal menyimpan audit log:",
+      error,
+    );
+  }
+}
+
 type SurveyInputProps = {
   surveys: Survey[];
   formMode: FormMode;
-  onFormModeChange: (mode: FormMode) => void;
+  text: TranslationText;
+
+  onFormModeChange: (
+    mode: FormMode,
+  ) => void;
+
   onCancel: () => void;
+  onDataChanged: () => void;
 };
 
 function SurveyInput({
   surveys,
   formMode,
+  text,
   onFormModeChange,
   onCancel,
+  onDataChanged,
 }: SurveyInputProps) {
 
   const [selectedSurveyId, setSelectedSurveyId] =
@@ -832,6 +1508,12 @@ function SurveyInput({
   const [message, setMessage] = useState("");
   const [success, setSuccess] = useState(false);
 
+  const [confirmSaveOpen, setConfirmSaveOpen] =
+    useState(false);
+
+  const [confirmDeleteOpen, setConfirmDeleteOpen] =
+    useState(false);
+
   const selectedSurvey = useMemo(() => {
     return (
       surveys.find(
@@ -849,10 +1531,12 @@ function SurveyInput({
     setPeriod("");
     setOwner("");
     setMonthIndex(new Date().getMonth());
-    setTarget("");
-    setRealization("");
+    setTarget("0");
+    setRealization("0");
     setMessage("");
     setSuccess(false);
+    setConfirmSaveOpen(false);
+    setConfirmDeleteOpen(false);
   }
 
   function changeMode(mode: FormMode) {
@@ -918,30 +1602,66 @@ function SurveyInput({
     }
   }
 
-  async function handleSubmit(
+  function handleSubmit(
     event: FormEvent<HTMLFormElement>,
   ) {
     event.preventDefault();
+
+    setMessage("");
+    setSuccess(false);
 
     if (
       formMode === "edit" &&
       !selectedSurveyId
     ) {
-      setSuccess(false);
+      setMessage(text.selectActivityToEdit);
+      return;
+    }
+
+    if (
+      !id.trim() ||
+      !category.trim() ||
+      !name.trim() ||
+      !period.trim() ||
+      !owner.trim()
+    ) {
       setMessage(
-        "Pilih kegiatan yang akan diedit",
+        "Semua informasi kegiatan wajib diisi.",
       );
       return;
     }
 
     if (
-      target === "" ||
-      realization === ""
+      target.trim() === "" ||
+      realization.trim() === ""
     ) {
-      setSuccess(false);
       setMessage(
-        "Target dan realisasi wajib diisi",
+        text.targetRealizationRequired,
       );
+      return;
+    }
+
+    const targetNumber = Number(target);
+    const realizationNumber =
+      Number(realization);
+
+    if (
+      !Number.isFinite(targetNumber) ||
+      !Number.isFinite(realizationNumber) ||
+      targetNumber < 0 ||
+      realizationNumber < 0
+    ) {
+      setMessage(
+        "Target dan realisasi harus berupa angka nol atau lebih.",
+      );
+      return;
+    }
+
+    setConfirmSaveOpen(true);
+  }
+
+  async function confirmAndSave() {
+    if (submitting) {
       return;
     }
 
@@ -966,8 +1686,7 @@ function SurveyInput({
             owner: owner.trim(),
             monthIndex,
             target: Number(target),
-            realization:
-              Number(realization),
+            realization: Number(realization),
           }),
         },
       );
@@ -988,14 +1707,16 @@ function SurveyInput({
       };
 
       try {
-        result = JSON.parse(responseText) as {
+        result = JSON.parse(
+          responseText,
+        ) as {
           success?: boolean;
           message?: string;
           action?: "created" | "updated";
         };
       } catch {
         console.error(
-          "Respons server:",
+          "Respons server bukan JSON:",
           responseText,
         );
 
@@ -1010,41 +1731,56 @@ function SurveyInput({
       ) {
         throw new Error(
           result.message ??
-          "Data gagal disimpan",
+          text.saveFailed,
         );
       }
 
+      const auditAction: AuditAction =
+        result.action === "updated"
+          ? "updated"
+          : "created";
+
+      saveAuditLog({
+        action: auditAction,
+        surveyId: id.trim(),
+        surveyName: name.trim(),
+        category: category.trim(),
+        owner: owner.trim(),
+        monthIndex,
+        target: Number(target),
+        realization: Number(realization),
+        user: "JK",
+      });
+
+      setConfirmSaveOpen(false);
       setSuccess(true);
 
       setMessage(
         result.message ??
-        (result.action === "updated"
-          ? "Perubahan berhasil disimpan"
-          : "Kegiatan baru berhasil ditambahkan"),
+        (auditAction === "updated"
+          ? text.updateSuccess
+          : text.createSuccess),
       );
 
-      localStorage.setItem(
-        "simi-last-view",
-        "dashboard",
-      );
-
-      window.setTimeout(() => {
-        window.location.reload();
-      }, 1000);
+      onDataChanged();
     } catch (error) {
+      console.error(
+        "Gagal menyimpan kegiatan:",
+        error,
+      );
+
       setSuccess(false);
 
       setMessage(
         error instanceof Error
           ? error.message
-          : "Terjadi kesalahan",
+          : text.genericError,
       );
     } finally {
       setSubmitting(false);
     }
   }
-
-  async function handleDeleteSurvey() {
+  function openDeleteConfirmation() {
     if (!selectedSurvey) {
       setSuccess(false);
       setMessage(
@@ -1053,13 +1789,14 @@ function SurveyInput({
       return;
     }
 
-    const confirmed = window.confirm(
-      `Hapus kegiatan "${selectedSurvey.name}"?\n\n` +
-      "Seluruh target dan realisasi kegiatan ini akan ikut dihapus. " +
-      "Tindakan ini tidak dapat dibatalkan.",
-    );
+    setMessage("");
+    setSuccess(false);
+    setConfirmDeleteOpen(true);
+  }
 
-    if (!confirmed) {
+
+  async function handleDeleteSurvey() {
+    if (!selectedSurvey || deleting) {
       return;
     }
 
@@ -1073,8 +1810,7 @@ function SurveyInput({
         {
           method: "DELETE",
           headers: {
-            "Content-Type":
-              "application/json",
+            "Content-Type": "application/json",
           },
           body: JSON.stringify({
             id: selectedSurvey.id,
@@ -1087,40 +1823,70 @@ function SurveyInput({
 
       if (!responseText.trim()) {
         throw new Error(
-          `Server tidak memberikan respons (${response.status})`,
+          `Server tidak memberikan respons(${response.status})`,
         );
       }
 
-      const result = JSON.parse(
-        responseText,
-      ) as {
+      let result: {
         success?: boolean;
         message?: string;
       };
 
-      if (!response.ok || !result.success) {
+      try {
+        result = JSON.parse(
+          responseText,
+        ) as {
+          success?: boolean;
+          message?: string;
+        };
+      } catch {
+        console.error(
+          "Respons hapus bukan JSON:",
+          responseText,
+        );
+
+        throw new Error(
+          `Respons server bukan JSON(${response.status})`,
+        );
+      }
+
+      if (
+        !response.ok ||
+        !result.success
+      ) {
         throw new Error(
           result.message ??
           "Kegiatan gagal dihapus",
         );
       }
 
+      saveAuditLog({
+        action: "deleted",
+        surveyId: selectedSurvey.id,
+        surveyName: selectedSurvey.name,
+        category: selectedSurvey.category,
+        owner: selectedSurvey.owner,
+        user: "JK",
+      });
+
+      setConfirmDeleteOpen(false);
       setSuccess(true);
+
       setMessage(
         result.message ??
         "Kegiatan berhasil dihapus",
       );
 
-      localStorage.setItem(
-        "simi-last-view",
-        "dashboard",
+      clearForm();
+      onDataChanged();
+    } catch (error) {
+      console.error(
+        "Gagal menghapus kegiatan:",
+        error,
       );
 
-      window.setTimeout(() => {
-        window.location.reload();
-      }, 900);
-    } catch (error) {
       setSuccess(false);
+
       setMessage(
         error instanceof Error
           ? error.message
@@ -1131,7 +1897,8 @@ function SurveyInput({
     }
   }
 
-  const isEditing = formMode === "edit";
+  const isEditing =
+    formMode === "edit";
 
   const formDisabled =
     isEditing && !selectedSurvey;
@@ -1141,23 +1908,21 @@ function SurveyInput({
       <div className="inputPanelHead">
         <div>
           <p className="eyebrow">
-            KELOLA SPREADSHEET
+            {text.manageEyebrow}
           </p>
 
-          <h2>Kelola Kegiatan Survei</h2>
+          <h2>{text.manageTitle}</h2>
 
-          <p>
-            Tambahkan kegiatan baru atau
-            perbarui kegiatan yang sudah ada.
-          </p>
+          <p>{text.manageDescription}</p>
         </div>
 
         <button
           type="button"
           className="inputCancel"
           onClick={onCancel}
+          disabled={submitting || deleting}
         >
-          Kembali
+          {text.back}
         </button>
       </div>
 
@@ -1172,9 +1937,10 @@ function SurveyInput({
           onClick={() =>
             changeMode("create")
           }
+          disabled={submitting || deleting}
         >
           <Plus />
-          Tambah Kegiatan
+          {text.addActivity}
         </button>
 
         <button
@@ -1187,9 +1953,10 @@ function SurveyInput({
           onClick={() =>
             changeMode("edit")
           }
+          disabled={submitting || deleting}
         >
           <Pencil />
-          Edit Kegiatan
+          {text.editActivity}
         </button>
       </div>
 
@@ -1197,7 +1964,7 @@ function SurveyInput({
         <div className="surveySelector">
           <label>
             <span>
-              Pilih kegiatan yang akan diedit
+              {text.selectActivityToEdit}
             </span>
 
             <select
@@ -1207,9 +1974,10 @@ function SurveyInput({
                   event.target.value,
                 )
               }
+              disabled={submitting || deleting}
             >
               <option value="">
-                Pilih kegiatan
+                {text.selectActivity}
               </option>
 
               {surveys.map((survey) => (
@@ -1244,14 +2012,14 @@ function SurveyInput({
         onSubmit={handleSubmit}
       >
         <label>
-          <span>ID Kegiatan</span>
+          <span>{text.activityId}</span>
 
           <input
             value={id}
             onChange={(event) =>
               setId(event.target.value)
             }
-            placeholder="Contoh: s6"
+            placeholder={text.activityIdExample}
             readOnly={isEditing}
             disabled={formDisabled}
             required
@@ -1260,14 +2028,13 @@ function SurveyInput({
           {isEditing &&
             selectedSurvey && (
               <small className="fieldHint">
-                ID tidak dapat diubah saat
-                mengedit.
+                {text.activityIdHint}
               </small>
             )}
         </label>
 
         <label>
-          <span>Kategori</span>
+          <span>{text.categoryLabel}</span>
 
           <input
             value={category}
@@ -1276,28 +2043,30 @@ function SurveyInput({
                 event.target.value,
               )
             }
-            placeholder="Contoh: STATISTIK SOSIAL"
+            placeholder={text.categoryExample}
             disabled={formDisabled}
             required
           />
         </label>
 
         <label className="formWide">
-          <span>Nama kegiatan</span>
+          <span>{text.activityName}</span>
 
           <input
             value={name}
             onChange={(event) =>
               setName(event.target.value)
             }
-            placeholder="Nama kegiatan survei"
+            placeholder={
+              text.activityNamePlaceholder
+            }
             disabled={formDisabled}
             required
           />
         </label>
 
         <label>
-          <span>Periode</span>
+          <span>{text.periodLabel}</span>
 
           <select
             value={period}
@@ -1310,49 +2079,47 @@ function SurveyInput({
             required
           >
             <option value="">
-              Pilih periode
+              {text.choosePeriod}
             </option>
 
             <option value="Bulanan">
-              Bulanan
+              {text.monthly}
             </option>
 
             <option value="Triwulan">
-              Triwulan
+              {text.quarterly}
             </option>
 
             <option value="Semester">
-              Semester
+              {text.semester}
             </option>
 
             <option value="Tahunan">
-              Tahunan
+              {text.annual}
             </option>
 
             <option value="Subround">
-              Subround
+              {text.subround}
             </option>
           </select>
         </label>
 
         <label>
-          <span>Penanggung jawab</span>
+          <span>{text.ownerLabel}</span>
 
           <input
             value={owner}
             onChange={(event) =>
-              setOwner(
-                event.target.value,
-              )
+              setOwner(event.target.value)
             }
-            placeholder="Contoh: Tim Produksi"
+            placeholder={text.ownerExample}
             disabled={formDisabled}
             required
           />
         </label>
 
         <label>
-          <span>Bulan pencatatan</span>
+          <span>{text.recordingMonth}</span>
 
           <select
             value={monthIndex}
@@ -1365,21 +2132,19 @@ function SurveyInput({
             }
             disabled={formDisabled}
           >
-            {months.map(
-              (month, index) => (
-                <option
-                  value={index}
-                  key={month}
-                >
-                  {month}
-                </option>
-              ),
-            )}
+            {months.map((month, index) => (
+              <option
+                value={index}
+                key={month}
+              >
+                {text.calendarMonths[index]}
+              </option>
+            ))}
           </select>
         </label>
 
         <label>
-          <span>Target</span>
+          <span>{text.targetLabel}</span>
 
           <input
             type="number"
@@ -1397,7 +2162,9 @@ function SurveyInput({
         </label>
 
         <label>
-          <span>Realisasi</span>
+          <span>
+            {text.realizationInputLabel}
+          </span>
 
           <input
             type="number"
@@ -1431,33 +2198,30 @@ function SurveyInput({
             <button
               type="button"
               className="inputDelete"
-              onClick={() =>
-                void handleDeleteSurvey()
-              }
+              onClick={openDeleteConfirmation}
               disabled={submitting || deleting}
             >
-              <Trash2 />
+              {deleting ? (
+                <RefreshCw className="buttonSpinner" />
+              ) : (
+                <Trash2 />
+              )}
 
               {deleting
-                ? "Menghapus..."
-                : "Hapus Kegiatan"}
+                ? text.deleting
+                : text.deleteActivity}
             </button>
           )}
 
           <div className="formActionsRight">
             <button
               type="button"
-              className="inputCancel"
+              className="inputCancel inputReset"
               disabled={submitting || deleting}
-              onClick={
-                isEditing
-                  ? clearForm
-                  : onCancel
-              }
+              onClick={clearForm}
             >
-              {isEditing
-                ? "Batal Edit"
-                : "Batal"}
+              <RefreshCw />
+              {text.resetForm}
             </button>
 
             <button
@@ -1468,35 +2232,323 @@ function SurveyInput({
                 deleting ||
                 formDisabled
               }
+              aria-busy={submitting}
             >
-              {isEditing ? (
+              {submitting ? (
+                <RefreshCw className="buttonSpinner" />
+              ) : isEditing ? (
                 <Pencil />
               ) : (
                 <Sheet />
               )}
 
               {submitting
-                ? "Menyimpan..."
+                ? text.saving
                 : isEditing
-                  ? "Simpan Perubahan"
-                  : "Simpan ke Spreadsheet"}
+                  ? text.saveChanges
+                  : text.saveToSpreadsheet}
             </button>
           </div>
         </div>
       </form>
+
+      {confirmSaveOpen && (
+        <div
+          className="saveConfirmOverlay"
+          role="presentation"
+          onMouseDown={(event) => {
+            if (
+              event.target ===
+              event.currentTarget &&
+              !submitting
+            ) {
+              setConfirmSaveOpen(false);
+            }
+          }}
+        >
+          <div
+            className="saveConfirmModal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="save-confirm-title"
+            onMouseDown={(event) => {
+              event.stopPropagation();
+            }}
+          >
+            <div className="saveConfirmIcon">
+              {isEditing ? (
+                <Pencil />
+              ) : (
+                <Sheet />
+              )}
+            </div>
+
+            <div className="saveConfirmContent">
+              <p className="eyebrow">
+                KONFIRMASI PENYIMPANAN
+              </p>
+
+              <h3 id="save-confirm-title">
+                {isEditing
+                  ? "Simpan perubahan kegiatan?"
+                  : "Simpan kegiatan baru?"}
+              </h3>
+
+              <p>
+                Periksa kembali data sebelum
+                disimpan ke Spreadsheet.
+              </p>
+            </div>
+
+            <dl className="saveConfirmDetails">
+              <div>
+                <dt>ID Kegiatan</dt>
+                <dd>{id.trim()}</dd>
+              </div>
+
+              <div>
+                <dt>Nama Kegiatan</dt>
+                <dd>{name.trim()}</dd>
+              </div>
+
+              <div>
+                <dt>Kategori</dt>
+                <dd>{category.trim()}</dd>
+              </div>
+
+              <div>
+                <dt>Periode</dt>
+                <dd>{period.trim()}</dd>
+              </div>
+
+              <div>
+                <dt>Penanggung Jawab</dt>
+                <dd>{owner.trim()}</dd>
+              </div>
+
+              <div>
+                <dt>Bulan Pencatatan</dt>
+                <dd>
+                  {
+                    text.calendarMonths[
+                    monthIndex
+                    ]
+                  }
+                </dd>
+              </div>
+
+              <div>
+                <dt>Target</dt>
+                <dd>{Number(target)}</dd>
+              </div>
+
+              <div>
+                <dt>Realisasi</dt>
+                <dd>
+                  {Number(realization)}
+                </dd>
+              </div>
+
+              {!isEditing && (
+                <div>
+                  <dt>Baris Spreadsheet</dt>
+                  <dd>
+                    {Number(
+                      id
+                        .trim()
+                        .replace(/^s/i, ""),
+                    ) + 1}
+                  </dd>
+                </div>
+              )}
+            </dl>
+
+            <div className="saveConfirmWarning">
+              {isEditing
+                ? "Data lama pada Spreadsheet akan diperbarui."
+                : "Pastikan ID dan baris Spreadsheet belum digunakan oleh kegiatan lain."}
+            </div>
+
+            <div className="saveConfirmActions">
+              <button
+                type="button"
+                className="saveConfirmCancel"
+                onClick={() =>
+                  setConfirmSaveOpen(false)
+                }
+                disabled={submitting}
+              >
+                {text.cancel}
+              </button>
+
+              <button
+                type="button"
+                className="saveConfirmSubmit"
+                onClick={() =>
+                  void confirmAndSave()
+                }
+                disabled={submitting}
+              >
+                {submitting ? (
+                  <RefreshCw className="buttonSpinner" />
+                ) : isEditing ? (
+                  <Pencil />
+                ) : (
+                  <Sheet />
+                )}
+
+                {submitting
+                  ? text.saving
+                  : isEditing
+                    ? text.saveChanges
+                    : text.saveToSpreadsheet}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {confirmDeleteOpen && selectedSurvey && (
+        <div
+          className="saveConfirmOverlay deleteMode"
+          role="presentation"
+          onMouseDown={(event) => {
+            if (
+              event.target === event.currentTarget &&
+              !deleting
+            ) {
+              setConfirmDeleteOpen(false);
+            }
+          }}
+        >
+          <div
+            className="saveConfirmModal deleteConfirmModal"
+            role="alertdialog"
+            aria-modal="true"
+            aria-labelledby="delete-confirm-title"
+            aria-describedby="delete-confirm-description"
+            onMouseDown={(event) => {
+              event.stopPropagation();
+            }}
+          >
+            <div className="saveConfirmIcon deleteConfirmIcon">
+              <Trash2 />
+            </div>
+
+            <div className="saveConfirmContent deleteConfirmContent">
+              <p className="eyebrow">
+                KONFIRMASI PENGHAPUSAN
+              </p>
+
+              <h3 id="delete-confirm-title">
+                Hapus kegiatan ini?
+              </h3>
+
+              <p id="delete-confirm-description">
+                Kegiatan yang dihapus tidak dapat
+                dipulihkan kembali.
+              </p>
+            </div>
+
+            <dl className="saveConfirmDetails deleteConfirmDetails">
+              <div>
+                <dt>ID Kegiatan</dt>
+                <dd>{selectedSurvey.id}</dd>
+              </div>
+
+              <div>
+                <dt>Nama Kegiatan</dt>
+                <dd>{selectedSurvey.name}</dd>
+              </div>
+
+              <div>
+                <dt>Kategori</dt>
+                <dd>{selectedSurvey.category}</dd>
+              </div>
+
+              <div>
+                <dt>Penanggung Jawab</dt>
+                <dd>{selectedSurvey.owner}</dd>
+              </div>
+
+              <div>
+                <dt>Periode</dt>
+                <dd>{selectedSurvey.period}</dd>
+              </div>
+            </dl>
+
+            <div className="saveConfirmWarning deleteConfirmWarning">
+              <strong>Perhatian:</strong>{" "}
+              seluruh target dan realisasi kegiatan
+              ini akan ikut dihapus dari Spreadsheet.
+              Tindakan ini tidak dapat dibatalkan.
+            </div>
+
+            <div className="saveConfirmActions">
+              <button
+                type="button"
+                className="saveConfirmCancel"
+                onClick={() => {
+                  setConfirmDeleteOpen(false);
+                }}
+                disabled={deleting}
+              >
+                {text.cancel}
+              </button>
+
+              <button
+                type="button"
+                className="saveConfirmSubmit deleteConfirmSubmit"
+                onClick={() => {
+                  void handleDeleteSurvey();
+                }}
+                disabled={deleting}
+                aria-busy={deleting}
+              >
+                {deleting ? (
+                  <RefreshCw className="buttonSpinner" />
+                ) : (
+                  <Trash2 />
+                )}
+
+                {deleting
+                  ? text.deleting
+                  : text.deleteActivity}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
     </section>
   );
 }
 
+type TranslationText =
+  (typeof translations)[keyof typeof translations];
+
 type SettingsProps = {
   themeMode: ThemeMode;
-  onThemeChange: (mode: ThemeMode) => void;
+  languageMode: LanguageMode;
+  text: TranslationText;
+
+  onThemeChange: (
+    mode: ThemeMode,
+  ) => void;
+
+  onLanguageChange: (
+    mode: LanguageMode,
+  ) => void;
+
   onBack: () => void;
 };
 
 function Settings({
   themeMode,
+  languageMode,
+  text,
   onThemeChange,
+  onLanguageChange,
   onBack,
 }: SettingsProps) {
   return (
@@ -1504,14 +2556,13 @@ function Settings({
       <div className="settingsHead">
         <div>
           <p className="eyebrow">
-            PENGATURAN
+            {text.settingsEyebrow}
           </p>
 
-          <h1>Pengaturan Tampilan</h1>
+          <h1>{text.settingsTitle}</h1>
 
           <p>
-            Pilih tema yang ingin digunakan pada
-            SIMI Aqua.
+            {text.settingsDescription}
           </p>
         </div>
 
@@ -1520,17 +2571,16 @@ function Settings({
           className="settingsBackButton"
           onClick={onBack}
         >
-          Kembali
+          {text.back}
         </button>
       </div>
 
       <section className="settingsPanel">
         <div className="settingsSectionHead">
-          <h2>Tema Aplikasi</h2>
+          <h2>{text.themeTitle}</h2>
 
           <p>
-            Pengaturan tema akan tersimpan pada
-            perangkat yang sedang digunakan.
+            {text.themeDescription}
           </p>
         </div>
 
@@ -1552,9 +2602,12 @@ function Settings({
             <LayoutDashboard />
 
             <span>
-              <strong>Default</strong>
+              <strong>
+                {text.themeDefault}
+              </strong>
+
               <small>
-                Tampilan asli SIMI Aqua
+                {text.themeDefaultDescription}
               </small>
             </span>
           </button>
@@ -1576,9 +2629,12 @@ function Settings({
             <Sun />
 
             <span>
-              <strong>Terang</strong>
+              <strong>
+                {text.themeLight}
+              </strong>
+
               <small>
-                Tampilan putih dan cerah
+                {text.themeLightDescription}
               </small>
             </span>
           </button>
@@ -1600,9 +2656,12 @@ function Settings({
             <Moon />
 
             <span>
-              <strong>Gelap</strong>
+              <strong>
+                {text.themeDark}
+              </strong>
+
               <small>
-                Nyaman digunakan pada malam hari
+                {text.themeDarkDescription}
               </small>
             </span>
           </button>
@@ -1624,13 +2683,292 @@ function Settings({
             <Monitor />
 
             <span>
-              <strong>Ikuti Sistem</strong>
+              <strong>
+                {text.themeSystem}
+              </strong>
+
               <small>
-                Mengikuti tema perangkat
+                {text.themeSystemDescription}
               </small>
             </span>
           </button>
         </div>
+      </section>
+
+      <section className="settingsPanel">
+        <div className="settingsSectionHead">
+          <h2>{text.languageTitle}</h2>
+
+          <p>
+            {text.languageDescription}
+          </p>
+        </div>
+
+        <div className="settingsLanguageList">
+          <button
+            type="button"
+            className={
+              languageMode === "id"
+                ? "settingsLanguageCard active"
+                : "settingsLanguageCard"
+            }
+            onClick={() =>
+              onLanguageChange("id")
+            }
+            aria-pressed={
+              languageMode === "id"
+            }
+          >
+            <strong>
+              {text.languageIndonesian}
+            </strong>
+
+            <small>
+              {text.languageIndonesianDescription}
+            </small>
+          </button>
+
+          <button
+            type="button"
+            className={
+              languageMode === "en"
+                ? "settingsLanguageCard active"
+                : "settingsLanguageCard"
+            }
+            onClick={() =>
+              onLanguageChange("en")
+            }
+            aria-pressed={
+              languageMode === "en"
+            }
+          >
+            <strong>
+              {text.languageEnglish}
+            </strong>
+
+            <small>
+              {text.languageEnglishDescription}
+            </small>
+          </button>
+
+          <button
+            type="button"
+            className={
+              languageMode === "system"
+                ? "settingsLanguageCard active"
+                : "settingsLanguageCard"
+            }
+            onClick={() =>
+              onLanguageChange("system")
+            }
+            aria-pressed={
+              languageMode === "system"
+            }
+          >
+            <strong>
+              {text.languageAutomatic}
+            </strong>
+
+            <small>
+              {text.languageAutomaticDescription}
+            </small>
+          </button>
+        </div>
+      </section>
+    </section>
+  );
+}
+
+type ActivityHistoryProps = {
+  text: TranslationText;
+  onBack: () => void;
+};
+
+function ActivityHistory({
+  text,
+  onBack,
+}: ActivityHistoryProps) {
+  const [logs, setLogs] =
+    useState<AuditLog[]>([]);
+
+  function loadLogs() {
+    try {
+      const savedLogs = JSON.parse(
+        localStorage.getItem(
+          "simi-audit-logs",
+        ) ?? "[]",
+      ) as AuditLog[];
+
+      setLogs(savedLogs);
+    } catch (error) {
+      console.error(
+        "Gagal membaca riwayat aktivitas:",
+        error,
+      );
+
+      setLogs([]);
+    }
+  }
+
+  useEffect(() => {
+    loadLogs();
+
+    function handleAuditUpdate() {
+      loadLogs();
+    }
+
+    window.addEventListener(
+      "simi-audit-updated",
+      handleAuditUpdate,
+    );
+
+    window.addEventListener(
+      "storage",
+      handleAuditUpdate,
+    );
+
+    return () => {
+      window.removeEventListener(
+        "simi-audit-updated",
+        handleAuditUpdate,
+      );
+
+      window.removeEventListener(
+        "storage",
+        handleAuditUpdate,
+      );
+    };
+  }, []);
+
+  function getActionLabel(
+    action: AuditAction,
+  ) {
+    if (action === "created") {
+      return "Menambahkan";
+    }
+
+    if (action === "updated") {
+      return "Memperbarui";
+    }
+
+    return "Menghapus";
+  }
+
+  function formatDate(timestamp: string) {
+    return new Intl.DateTimeFormat(
+      "id-ID",
+      {
+        dateStyle: "medium",
+        timeStyle: "short",
+      },
+    ).format(new Date(timestamp));
+  }
+
+  return (
+    <section className="historyPage">
+      <div className="historyHead">
+        <div>
+          <p className="eyebrow">
+            AUDIT DATA
+          </p>
+
+          <h1>{text.activityHistory}</h1>
+
+          <p>
+            Lihat catatan penambahan,
+            perubahan, dan penghapusan data.
+          </p>
+        </div>
+
+        <button
+          type="button"
+          className="settingsBackButton"
+          onClick={onBack}
+        >
+          {text.back}
+        </button>
+      </div>
+
+      <section className="historyPanel">
+        {logs.length === 0 ? (
+          <div className="historyEmpty">
+            <History />
+
+            <strong>
+              Belum ada riwayat aktivitas
+            </strong>
+
+            <span>
+              Aktivitas baru akan ditampilkan
+              setelah data berhasil disimpan,
+              diperbarui, atau dihapus.
+            </span>
+          </div>
+        ) : (
+          <div className="historyList">
+            {logs.map((log) => (
+              <article
+                className={`historyItem ${log.action}`}
+                key={log.id}
+              >
+                <div className="historyItemIcon">
+                  {log.action === "deleted" ? (
+                    <Trash2 />
+                  ) : log.action === "created" ? (
+                    <Plus />
+                  ) : (
+                    <Pencil />
+                  )}
+                </div>
+
+                <div className="historyItemContent">
+                  <div className="historyItemTop">
+                    <strong>
+                      {getActionLabel(log.action)}{" "}
+                      kegiatan
+                    </strong>
+
+                    <time dateTime={log.timestamp}>
+                      {formatDate(log.timestamp)}
+                    </time>
+                  </div>
+
+                  <h3>{log.surveyName}</h3>
+
+                  <p>
+                    ID: {log.surveyId}
+                    {" · "}
+                    {log.category}
+                    {" · "}
+                    {log.owner}
+                  </p>
+
+                  {log.monthIndex !== undefined && (
+                    <div className="historyValues">
+                      <span>
+                        Bulan:{" "}
+                        {months[log.monthIndex]}
+                      </span>
+
+                      <span>
+                        Target: {log.target ?? 0}
+                      </span>
+
+                      <span>
+                        Realisasi:{" "}
+                        {log.realization ?? 0}
+                      </span>
+                    </div>
+                  )}
+
+                  <small>
+                    Oleh: {log.user}
+                  </small>
+                </div>
+              </article>
+            ))}
+          </div>
+        )}
       </section>
     </section>
   );
@@ -1640,7 +2978,6 @@ type DashboardProps = {
   initial: Survey[];
   source: string;
 };
-
 
 export default function Dashboard({
   initial,
@@ -1652,12 +2989,13 @@ export default function Dashboard({
     useTransition();
 
   const [view, setView] = useState<
-    "home" |
-    "dashboard" |
-    "calendar" |
-    "input" |
-    "settings" |
-    null
+    | "home"
+    | "dashboard"
+    | "calendar"
+    | "input"
+    | "history"
+    | "settings"
+    | null
   >(null);
 
   const [searchQuery, setSearchQuery] =
@@ -1671,6 +3009,15 @@ export default function Dashboard({
 
   const [themeMode, setThemeMode] =
     useState<ThemeMode>("default");
+
+  const [languageMode, setLanguageMode] =
+    useState<LanguageMode>("id");
+
+  const [resolvedLanguage, setResolvedLanguage] =
+    useState<"id" | "en">("id");
+
+  const text =
+    translations[resolvedLanguage];
 
   const [inputMode, setInputMode] =
     useState<FormMode>("create");
@@ -1693,6 +3040,30 @@ export default function Dashboard({
     );
 
     applyTheme(mode);
+  }
+
+  function changeLanguage(
+    mode: LanguageMode,
+  ) {
+    const nextLanguage =
+      mode === "system"
+        ? navigator.language
+          .toLowerCase()
+          .startsWith("en")
+          ? "en"
+          : "id"
+        : mode;
+
+    setLanguageMode(mode);
+    setResolvedLanguage(nextLanguage);
+
+    localStorage.setItem(
+      "simi-language",
+      mode,
+    );
+
+    document.documentElement.lang =
+      nextLanguage;
   }
 
   useEffect(() => {
@@ -1737,6 +3108,35 @@ export default function Dashboard({
         handleSystemThemeChange,
       );
     };
+  }, []);
+
+  useEffect(() => {
+    const savedLanguage =
+      localStorage.getItem("simi-language");
+
+    const initialLanguage: LanguageMode =
+      savedLanguage === "id" ||
+        savedLanguage === "en" ||
+        savedLanguage === "system"
+        ? savedLanguage
+        : "id";
+
+    const nextLanguage =
+      initialLanguage === "system"
+        ? navigator.language
+          .toLowerCase()
+          .startsWith("en")
+          ? "en"
+          : "id"
+        : initialLanguage;
+
+    document.documentElement.lang =
+      nextLanguage;
+
+    window.setTimeout(() => {
+      setLanguageMode(initialLanguage);
+      setResolvedLanguage(nextLanguage);
+    }, 0);
   }, []);
 
   useEffect(() => {
@@ -1824,7 +3224,7 @@ export default function Dashboard({
   }
 
   return (
-    <div className={`shell ${sidebarOpen ? "sidebar-open" : ""}`}>
+    <div className={`shell ${sidebarOpen ? "sidebar-open" : ""} `}>
       <aside
         id="dashboard-sidebar"
         className={sidebarOpen ? "open" : ""}
@@ -1849,15 +3249,14 @@ export default function Dashboard({
             setView("home");
             setManageMenuOpen(false);
 
-            if (window.innerWidth <= 650) {
-              setSidebarOpen(false);
-            }
           }}
           title="Beranda"
           aria-label="Buka Beranda"
         >
           <House />
-          <span className="menu-label">Beranda</span>
+          <span className="menu-label">
+            {text.home}
+          </span>
         </button>
 
         {/* DASHBOARD */}
@@ -1868,14 +3267,13 @@ export default function Dashboard({
             setView("dashboard");
             setManageMenuOpen(false);
 
-            if (window.innerWidth <= 650) {
-              setSidebarOpen(false);
-            }
           }}
           title="Dashboard"
         >
           <LayoutDashboard />
-          <span className="menu-label">Dashboard</span>
+          <span className="menu-label">
+            {text.dashboard}
+          </span>
         </button>
 
         {/* KALENDER */}
@@ -1886,20 +3284,19 @@ export default function Dashboard({
             setView("calendar");
             setManageMenuOpen(false);
 
-            if (window.innerWidth <= 650) {
-              setSidebarOpen(false);
-            }
           }}
           title="Kalender"
         >
           <CalendarDays />
-          <span className="menu-label">Kalender</span>
+          <span className="menu-label">
+            {text.calendar}
+          </span>
         </button>
 
         {/* KELOLA DATA */}
         <div
           className={`sidebarGroup ${view === "input" ? "active" : ""
-            }`}
+            } `}
         >
           <div className="sidebarGroupRow">
             <button
@@ -1921,7 +3318,6 @@ export default function Dashboard({
                  */
                 if (window.innerWidth <= 650) {
                   setManageMenuOpen(false);
-                  setSidebarOpen(false);
                 }
               }}
               title="Kelola Data"
@@ -1930,14 +3326,14 @@ export default function Dashboard({
               <Sheet />
 
               <span className="menu-label">
-                Kelola Data
+                {text.manageData}
               </span>
             </button>
 
             <button
               type="button"
               className={`sidebarArrow ${manageMenuOpen ? "open" : ""
-                }`}
+                } `}
               onClick={() => {
                 if (!sidebarOpen) {
                   setSidebarOpen(true);
@@ -1971,13 +3367,10 @@ export default function Dashboard({
                   setInputMode("create");
                   setView("input");
 
-                  if (window.innerWidth <= 650) {
-                    setSidebarOpen(false);
-                  }
                 }}
               >
                 <Plus />
-                <span>Tambah Data</span>
+                <span>{text.addData}</span>
               </button>
 
               <button
@@ -1991,17 +3384,40 @@ export default function Dashboard({
                   setInputMode("edit");
                   setView("input");
 
-                  if (window.innerWidth <= 650) {
-                    setSidebarOpen(false);
-                  }
                 }}
               >
                 <Pencil />
-                <span>Edit Data</span>
+                <span>{text.editData}</span>
               </button>
             </div>
           )}
         </div>
+
+        {/* RIWAYAT AKTIVITAS */}
+        <button
+          type="button"
+          className={
+            view === "history"
+              ? "active"
+              : ""
+          }
+          onClick={() => {
+            setView("history");
+            setManageMenuOpen(false);
+
+            if (window.innerWidth <= 650) {
+              setSidebarOpen(false);
+            }
+          }}
+          title={text.activityHistory}
+          aria-label={text.activityHistory}
+        >
+          <History />
+
+          <span className="menu-label">
+            {text.activityHistory}
+          </span>
+        </button>
 
         {/* PENGATURAN */}
         <button
@@ -2015,9 +3431,6 @@ export default function Dashboard({
             setView("settings");
             setManageMenuOpen(false);
 
-            if (window.innerWidth <= 650) {
-              setSidebarOpen(false);
-            }
           }}
           title="Pengaturan"
           aria-label="Buka Pengaturan"
@@ -2025,7 +3438,7 @@ export default function Dashboard({
           <SettingsIcon />
 
           <span className="menu-label">
-            Pengaturan
+            {text.settings}
           </span>
         </button>
 
@@ -2061,7 +3474,7 @@ export default function Dashboard({
             <input
               value={searchQuery}
               onChange={(event) => setSearchQuery(event.target.value)}
-              placeholder="Cari kegiatan, kategori, atau tim..."
+              placeholder={text.searchPlaceholder}
             />
           </div>
 
@@ -2099,7 +3512,7 @@ export default function Dashboard({
                     setView("settings");
                   }}
                 >
-                  Pengaturan Akun
+                  {text.accountSettings}
                 </button>
 
                 <button
@@ -2154,7 +3567,7 @@ export default function Dashboard({
                     }
                   }}
                 >
-                  Keluar
+                  {text.logout}
                 </button>
               </div>
             )}
@@ -2162,24 +3575,37 @@ export default function Dashboard({
         </header>
 
         <div className="content">
-          {view === "settings" ? (
+          {view === "history" ? (
+            <ActivityHistory
+              text={text}
+              onBack={() => setView("dashboard")}
+            />
+          ) : view === "settings" ? (
             <Settings
               themeMode={themeMode}
+              languageMode={languageMode}
               onThemeChange={changeTheme}
+              onLanguageChange={changeLanguage}
               onBack={() => setView("home")}
+              text={text}
             />
           ) : view === "input" ? (
             <SurveyInput
               surveys={initial}
               formMode={inputMode}
+              text={text}
               onFormModeChange={setInputMode}
               onCancel={() => setView("dashboard")}
+              onDataChanged={() => {
+                router.refresh();
+              }}
             />
           ) : view === "home" ? (
             <Home
               percentage={percentage}
               totalTarget={totals.t}
               realization={totals.r}
+              text={text}
               onOpenDashboard={() => setView("dashboard")}
               onOpenCalendar={() => setView("calendar")}
               onOpenSpreadsheet={() => {
@@ -2190,16 +3616,18 @@ export default function Dashboard({
               }}
             />
           ) : view === "calendar" ? (
-            <Calendar surveys={filtered} />
+            <Calendar
+              surveys={filtered}
+              text={text}
+            />
           ) : (
             <>
               <section className="hero">
                 <div>
-                  <p className="eyebrow">SISTEM MONITORING TERPADU</p>
-                  <h1>Ringkasan Kegiatan Survei</h1>
-                  <p>
-                    Pantau target, realisasi, dan agenda dari satu dashboard.
-                  </p>
+                  <p className="eyebrow">{text.dashboardEyebrow} </p>
+                  <h1>{text.dashboardTitle}</h1>
+                  <p>{text.dashboardSubtitle}</p>
+
                 </div>
 
                 <div className="heroStat">
@@ -2207,36 +3635,47 @@ export default function Dashboard({
 
                   <div>
                     <b>{percentage}%</b>
-                    <span>Capaian keseluruhan</span>
+
+                    <span>
+                      {text.overallAchievementLabel}
+                    </span>
                   </div>
                 </div>
               </section>
 
               <section className="metrics">
                 <article>
-                  <span>Total target</span>
+                  <span>{text.totalTarget}</span>
                   <b>{totals.t}</b>
-                  <small>Seluruh periode</small>
+                  <small>{text.allPeriods}</small>
                 </article>
 
                 <article>
-                  <span>Realisasi</span>
+                  <span>{text.realizationLabel}</span>
                   <b>{totals.r}</b>
-                  <small>Data terkumpul</small>
+                  <small>{text.collectedData}</small>
                 </article>
 
                 <article>
-                  <span>Kegiatan aktif</span>
+                  <span>{text.activeActivities}</span>
                   <b>{filtered.length}</b>
-                  <small>Lintas kategori</small>
+                  <small>{text.acrossCategories}</small>
                 </article>
 
                 <article>
-                  <span>Sisa target</span>
-                  <b>{Math.max(0, totals.t - totals.r)}</b>
-                  <small>Perlu ditindaklanjuti</small>
+                  <span>{text.remainingTarget}</span>
+
+                  <b>
+                    {Math.max(
+                      0,
+                      totals.t - totals.r,
+                    )}
+                  </b>
+
+                  <small>{text.needsFollowUp}</small>
                 </article>
               </section>
+
 
               <section className="cards">
                 {cards.map((survey) => {
@@ -2259,7 +3698,12 @@ export default function Dashboard({
                     >
                       <div className="cardTop">
                         <span>{survey.category}</span>
-                        <em>{survey.period}</em>
+                        <em>
+                          {translatePeriod(
+                            survey.period,
+                            resolvedLanguage,
+                          )}
+                        </em>
                       </div>
 
                       <h3>{survey.name}</h3>
@@ -2268,21 +3712,22 @@ export default function Dashboard({
                         <b>{surveyPercentage}%</b>
 
                         <small>
-                          {surveyTotal.r} dari {surveyTotal.t} target
+                          {surveyTotal.r} {text.of}{" "}
+                          {surveyTotal.t} {text.targetWord}
                         </small>
                       </div>
 
                       <div className="progress">
                         <i
                           style={{
-                            width: `${surveyPercentage}%`,
+                            width: `${surveyPercentage}% `,
                           }}
                         />
                       </div>
 
                       <footer>
                         <span>
-                          Belum:{" "}
+                          {text.notYet}:{" "}
                           {Math.max(
                             0,
                             surveyTotal.t - surveyTotal.r,
@@ -2290,7 +3735,7 @@ export default function Dashboard({
                         </span>
 
                         <span className="done">
-                          Selesai: {surveyTotal.r}
+                          {text.completed}: {surveyTotal.r}
                         </span>
                       </footer>
                     </article>
@@ -2310,7 +3755,7 @@ export default function Dashboard({
                   >
                     {showAllCards
                       ? "Tampilkan lebih sedikit"
-                      : `Tampilkan lebih lanjut (${hiddenSurveyCount})`}
+                      : `Tampilkan lebih lanjut(${hiddenSurveyCount})`}
                   </button>
                 </div>
               )}
@@ -2319,14 +3764,17 @@ export default function Dashboard({
                 <div className="panelHead">
                   <div>
                     <p className="eyebrow">
-                      MONITORING BULANAN
+                      {text.monthlyMonitoring}
                     </p>
 
-                    <h2>Target dan Realisasi</h2>
+                    <h2>{text.targetAndRealization}</h2>
 
                     <small className="tableResultInfo">
-                      Menampilkan {visibleTableSurveys.length} dari{" "}
-                      {filtered.length} kegiatan
+                      {text.showingResults}{" "}
+                      {visibleTableSurveys.length}{" "}
+                      {text.fromResults}{" "}
+                      {filtered.length}{" "}
+                      {text.activitiesLabel}
                     </small>
                   </div>
                   <button
@@ -2366,11 +3814,11 @@ export default function Dashboard({
 
                       {months.flatMap((month) => [
                         <col
-                          key={`${month}-target-column`}
+                          key={`${month} -target - column`}
                           style={{ width: "42px" }}
                         />,
                         <col
-                          key={`${month}-realization-column`}
+                          key={`${month} -realization - column`}
                           style={{ width: "42px" }}
                         />,
                       ])}
@@ -2378,10 +3826,15 @@ export default function Dashboard({
 
                     <thead>
                       <tr>
-                        <th rowSpan={2}>Kegiatan survei</th>
-                        <th rowSpan={2}>Periode</th>
+                        <th rowSpan={2}>
+                          {text.surveyActivity}
+                        </th>
 
-                        {months.map((month) => (
+                        <th rowSpan={2}>
+                          {text.periodLabel}
+                        </th>
+
+                        {months.map((month, index) => (
                           <th
                             colSpan={2}
                             key={month}
@@ -2391,7 +3844,7 @@ export default function Dashboard({
                               maxWidth: "84px",
                             }}
                           >
-                            {month.slice(0, 3)}
+                            {text.monthShortNames[index]}
                           </th>
                         ))}
                       </tr>
@@ -2399,7 +3852,7 @@ export default function Dashboard({
                       <tr>
                         {months.flatMap((month) => [
                           <th
-                            key={`${month}-target-header`}
+                            key={`${month} -target - header`}
                             style={{
                               width: "42px",
                               minWidth: "42px",
@@ -2410,7 +3863,7 @@ export default function Dashboard({
                           </th>,
 
                           <th
-                            key={`${month}-realization-header`}
+                            key={`${month} -realization - header`}
                             style={{
                               width: "42px",
                               minWidth: "42px",
@@ -2434,11 +3887,16 @@ export default function Dashboard({
                             </small>
                           </td>
 
-                          <td>{survey.period}</td>
+                          <td>
+                            {translatePeriod(
+                              survey.period,
+                              resolvedLanguage,
+                            )}
+                          </td>
 
                           {survey.months.flatMap((month, index) => [
                             <td
-                              key={`${survey.id}-${index}-target`}
+                              key={`${survey.id} -${index} -target`}
                               className={
                                 month.target > 0 ? "target" : ""
                               }
@@ -2447,7 +3905,7 @@ export default function Dashboard({
                             </td>,
 
                             <td
-                              key={`${survey.id}-${index}-realization`}
+                              key={`${survey.id} -${index} -realization`}
                               className={
                                 month.realization > 0
                                   ? month.realization >= month.target
@@ -2477,7 +3935,7 @@ export default function Dashboard({
                     >
                       {showAllTable
                         ? "Tampilkan lebih sedikit"
-                        : `Tampilkan lebih lanjut (${hiddenSurveyCount})`}
+                        : `Tampilkan lebih lanjut(${hiddenSurveyCount})`}
                     </button>
                   </div>
                 )}

@@ -37,8 +37,17 @@ export async function getSurveys(): Promise<{
     });
 
     if (!res.ok) {
+      const errorText = await res.text();
+
+      console.error("Gagal membaca Spreadsheet", {
+        status: res.status,
+        statusText: res.statusText,
+        url,
+        response: errorText.slice(0, 500),
+      });
+
       throw new Error(
-        "Spreadsheet tidak dapat dibaca",
+        `Spreadsheet tidak dapat dibaca (${res.status} ${res.statusText})`,
       );
     }
 

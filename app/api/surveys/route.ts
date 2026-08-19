@@ -18,6 +18,31 @@ type AddSurveyPayload = {
     realization?: number;
 };
 
+function getRowNumberFromId(id: string) {
+    const match = id
+        .trim()
+        .match(/^s(\d+)$/i);
+
+    if (!match) {
+        throw new Error(
+            "ID harus menggunakan format s diikuti angka, contoh: s30",
+        );
+    }
+
+    const idNumber = Number(match[1]);
+
+    if (
+        !Number.isInteger(idNumber) ||
+        idNumber < 1
+    ) {
+        throw new Error(
+            "Nomor ID harus lebih besar dari 0",
+        );
+    }
+
+    return idNumber + 1;
+}
+
 export async function POST(request: Request) {
     try {
         const appsScriptUrl =
