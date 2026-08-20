@@ -6,13 +6,32 @@ import {
     sessionCookieOptions,
 } from "@/lib/auth";
 
+import {
+    authenticateUser,
+} from "@/lib/users";
+
 type LoginPayload = {
     username?: string;
     password?: string;
 };
 
-export async function POST(request: Request) {
+export async function POST(
+    request: Request,
+) {
     try {
+        if (!process.env.AUTH_SECRET) {
+            return NextResponse.json(
+                {
+                    success: false,
+                    message:
+                        "Konfigurasi autentikasi belum lengkap",
+                },
+                {
+                    status: 500,
+                },
+            );
+        }
+
         const body =
             (await request.json()) as LoginPayload;
 
@@ -22,33 +41,26 @@ export async function POST(request: Request) {
         const password =
             body.password ?? "";
 
-        const adminUsername =
-            process.env.ADMIN_USERNAME?.trim();
-
-        const adminPassword =
-            process.env.ADMIN_PASSWORD;
-
-        if (
-            !adminUsername ||
-            !adminPassword ||
-            !process.env.AUTH_SECRET
-        ) {
+        if (!username || !password) {
             return NextResponse.json(
                 {
                     success: false,
                     message:
-                        "Konfigurasi login belum lengkap",
+                        "Username dan password wajib diisi",
                 },
                 {
-                    status: 500,
+                    status: 400,
                 },
             );
         }
 
-        if (
-            username !== adminUsername ||
-            password !== adminPassword
-        ) {
+        const user =
+            await authenticateUser(
+                username,
+                password,
+            );
+
+        if (!user) {
             return NextResponse.json(
                 {
                     success: false,
@@ -62,12 +74,14 @@ export async function POST(request: Request) {
         }
 
         const token =
-            await createSessionToken(username);
+            await createSessionToken(user);
 
-        const response = NextResponse.json({
-            success: true,
-            message: "Login berhasil",
-        });
+        const response =
+            NextResponse.json({
+                success: true,
+                message: "Login berhasil",
+                user,
+            });
 
         response.cookies.set(
             SESSION_COOKIE_NAME,
@@ -76,7 +90,12 @@ export async function POST(request: Request) {
         );
 
         return response;
-    } catch {
+    } catch (error) {
+        console.error(
+            "Gagal memproses login:",
+            error,
+        );
+
         return NextResponse.json(
             {
                 success: false,

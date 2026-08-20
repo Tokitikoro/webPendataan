@@ -18,31 +18,6 @@ type AddSurveyPayload = {
     realization?: number;
 };
 
-function getRowNumberFromId(id: string) {
-    const match = id
-        .trim()
-        .match(/^s(\d+)$/i);
-
-    if (!match) {
-        throw new Error(
-            "ID harus menggunakan format s diikuti angka, contoh: s30",
-        );
-    }
-
-    const idNumber = Number(match[1]);
-
-    if (
-        !Number.isInteger(idNumber) ||
-        idNumber < 1
-    ) {
-        throw new Error(
-            "Nomor ID harus lebih besar dari 0",
-        );
-    }
-
-    return idNumber + 1;
-}
-
 export async function POST(request: Request) {
     try {
         const appsScriptUrl =
@@ -54,16 +29,6 @@ export async function POST(request: Request) {
         console.log(
             "SHEET_WRITE_TOKEN tersedia:",
             Boolean(writeToken),
-        );
-
-        console.log(
-            "Panjang SHEET_WRITE_TOKEN:",
-            writeToken?.length,
-        );
-
-        console.log(
-            "URL Apps Script:",
-            appsScriptUrl,
         );
 
         if (!appsScriptUrl || !writeToken) {
@@ -183,8 +148,7 @@ export async function POST(request: Request) {
         );
 
         console.log("Status Apps Script:", response.status);
-        console.log("Respons Apps Script:", responseText);
-
+        
         let result: {
             success?: boolean;
             message?: string;
@@ -282,8 +246,7 @@ type DeleteSurveyPayload = {
 export async function DELETE(request: Request) {
     try {
         const appsScriptUrl =
-            process.env.GOOGLE_APPS_SCRIPT_WRITE_URL?.trim() ||
-            process.env.GOOGLE_SHEET_CSV_URL?.trim();
+            process.env.GOOGLE_APPS_SCRIPT_WRITE_URL?.trim();
 
         const writeToken =
             process.env.SHEET_WRITE_TOKEN?.trim();
