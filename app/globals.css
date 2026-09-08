@@ -6404,3 +6404,134 @@ aside:not(.open) .sidebarArrow {
 .historyItem:hover .historyItemIcon {
   transform: translateY(-1px);
 }
+
+/* ========================================
+   DROPDOWN PROFIL - TEMA GELAP
+======================================== */
+
+:root[data-theme="dark"] .profileDropdown {
+  color: #e8f4f7;
+  border: 1px solid #285264;
+  background: #0d2d3a;
+  box-shadow:
+    0 18px 45px rgba(0, 10, 18, 0.42);
+}
+
+:root[data-theme="dark"] .profileDropdownIdentity {
+  border-bottom-color: #284d5c;
+}
+
+:root[data-theme="dark"] .profileDropdownIdentity strong {
+  color: #f0f8fa;
+}
+
+:root[data-theme="dark"] .profileDropdownIdentity small {
+  color: #91adb7;
+}
+
+:root[data-theme="dark"] .profileDropdown button {
+  color: #c5dce3;
+  background: transparent;
+}
+
+:root[data-theme="dark"] .profileDropdown button:hover {
+  color: #ffffff;
+  background: #173d4b;
+}
+
+:root[data-theme="dark"] .profileDropdown .profileLogoutButton {
+  color: #f2a49d;
+}
+
+:root[data-theme="dark"] .profileDropdown .profileLogoutButton:hover {
+  color: #ffc0ba;
+  background: #442c2b;
+}
+
+/* ========================================
+   DROPDOWN PROFIL - TEMA DEFAULT
+======================================== */
+
+:root[data-theme="default"] .profileDropdown {
+  color: #123047;
+  border: 1px solid #bcdfe5;
+  background: linear-gradient(145deg,
+      #f7fcfd,
+      #eaf8f7);
+  box-shadow:
+    0 18px 45px rgba(10, 76, 94, 0.18);
+}
+
+:root[data-theme="default"] .profileDropdownIdentity {
+  border-bottom-color: #cce4e8;
+}
+
+:root[data-theme="default"] .profileDropdownIdentity strong {
+  color: #123047;
+}
+
+:root[data-theme="default"] .profileDropdownIdentity small {
+  color: #6c8c99;
+}
+
+:root[data-theme="default"] .profileDropdown button {
+  color: #315f70;
+  background: transparent;
+}
+
+:root[data-theme="default"] .profileDropdown button:hover {
+  color: #075f71;
+  background: #dff4f3;
+}
+
+:root[data-theme="default"] .profileDropdown .profileLogoutButton {
+  color: #c84f47;
+}
+
+:root[data-theme="default"] .profileDropdown .profileLogoutButton:hover {
+  color: #a73d36;
+  background: #fff0ee;
+}
+
+/* ========================================
+   DROPDOWN PROFIL - TEMA TERANG
+======================================== */
+
+:root[data-theme="light"] .profileDropdown {
+  color: #123047;
+  border: 1px solid #d6e5ea;
+  background: #ffffff;
+  box-shadow:
+    0 18px 45px rgba(18, 48, 71, 0.14);
+}
+
+:root[data-theme="light"] .profileDropdownIdentity {
+  border-bottom-color: #e1ebee;
+}
+
+:root[data-theme="light"] .profileDropdownIdentity strong {
+  color: #123047;
+}
+
+:root[data-theme="light"] .profileDropdownIdentity small {
+  color: #78909c;
+}
+
+:root[data-theme="light"] .profileDropdown button {
+  color: #365f70;
+  background: transparent;
+}
+
+:root[data-theme="light"] .profileDropdown button:hover {
+  color: #123047;
+  background: #f0f6f8;
+}
+
+:root[data-theme="light"] .profileDropdown .profileLogoutButton {
+  color: #c9473f;
+}
+
+:root[data-theme="light"] .profileDropdown .profileLogoutButton:hover {
+  color: #a93630;
+  background: #fff1ef;
+}
