@@ -1523,6 +1523,28 @@ function SurveyInput({
     );
   }, [selectedSurveyId, surveys]);
 
+  const existingSurvey = useMemo(() => {
+    const normalizedId =
+      id.trim().toLowerCase();
+
+    if (
+      formMode !== "create" ||
+      normalizedId === ""
+    ) {
+      return null;
+    }
+
+    return (
+      surveys.find(
+        (survey) =>
+          survey.id
+            .trim()
+            .toLowerCase() ===
+          normalizedId,
+      ) ?? null
+    );
+  }, [formMode, id, surveys]);
+
   function clearForm() {
     setSelectedSurveyId("");
     setId("");
@@ -2791,70 +2813,70 @@ function ActivityHistory({
   const [logs, setLogs] =
     useState<AuditLog[]>([]);
 
- async function loadLogs() {
-  try {
-    const response = await fetch(
-      "/api/audit-logs",
-      {
-        cache: "no-store",
-        credentials: "same-origin",
-      },
-    );
-
-    const result = await response.json();
-
-    if (!response.ok || !result.success) {
-      throw new Error(
-        result.message ??
-          "Riwayat aktivitas gagal dimuat",
+  async function loadLogs() {
+    try {
+      const response = await fetch(
+        "/api/audit-logs",
+        {
+          cache: "no-store",
+          credentials: "same-origin",
+        },
       );
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(
+          result.message ??
+          "Riwayat aktivitas gagal dimuat",
+        );
+      }
+
+      setLogs(
+        result.logs.map(
+          (log: {
+            id: string;
+            timestamp: string;
+            action: AuditAction;
+            surveyId: string;
+            surveyName: string;
+            category: string;
+            owner: string;
+            monthIndex: number | null;
+            targetAfter: number | null;
+            realizationAfter: number | null;
+            displayName: string;
+            username: string;
+          }) => ({
+            id: log.id,
+            timestamp: log.timestamp,
+            action: log.action,
+            surveyId: log.surveyId,
+            surveyName: log.surveyName,
+            category: log.category,
+            owner: log.owner,
+            monthIndex:
+              log.monthIndex ?? undefined,
+            target:
+              log.targetAfter ?? 0,
+            realization:
+              log.realizationAfter ?? 0,
+            user:
+              log.displayName ||
+              log.username ||
+              "-",
+          }),
+        ),
+      );
+    } catch (error) {
+      console.error(
+        "Gagal membaca riwayat aktivitas:",
+        error,
+      );
+
+      setLogs([]);
     }
-
-    setLogs(
-  result.logs.map(
-    (log: {
-      id: string;
-      timestamp: string;
-      action: AuditAction;
-      surveyId: string;
-      surveyName: string;
-      category: string;
-      owner: string;
-      monthIndex: number | null;
-      targetAfter: number | null;
-      realizationAfter: number | null;
-      displayName: string;
-      username: string;
-    }) => ({
-      id: log.id,
-      timestamp: log.timestamp,
-      action: log.action,
-      surveyId: log.surveyId,
-      surveyName: log.surveyName,
-      category: log.category,
-      owner: log.owner,
-      monthIndex:
-        log.monthIndex ?? undefined,
-      target:
-        log.targetAfter ?? 0,
-      realization:
-        log.realizationAfter ?? 0,
-      user:
-        log.displayName ||
-        log.username ||
-        "-",
-    }),
-  ),
-);
-  } catch (error) {
-    console.error(
-      "Gagal membaca riwayat aktivitas:",
-      error,
-    );
-
-    setLogs([]);
   }
-}
 
   useEffect(() => {
     loadLogs();
