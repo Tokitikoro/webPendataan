@@ -2791,24 +2791,70 @@ function ActivityHistory({
   const [logs, setLogs] =
     useState<AuditLog[]>([]);
 
-  function loadLogs() {
-    try {
-      const savedLogs = JSON.parse(
-        localStorage.getItem(
-          "simi-audit-logs",
-        ) ?? "[]",
-      ) as AuditLog[];
+ async function loadLogs() {
+  try {
+    const response = await fetch(
+      "/api/audit-logs",
+      {
+        cache: "no-store",
+        credentials: "same-origin",
+      },
+    );
 
-      setLogs(savedLogs);
-    } catch (error) {
-      console.error(
-        "Gagal membaca riwayat aktivitas:",
-        error,
+    const result = await response.json();
+
+    if (!response.ok || !result.success) {
+      throw new Error(
+        result.message ??
+          "Riwayat aktivitas gagal dimuat",
       );
-
-      setLogs([]);
     }
+
+    setLogs(
+  result.logs.map(
+    (log: {
+      id: string;
+      timestamp: string;
+      action: AuditAction;
+      surveyId: string;
+      surveyName: string;
+      category: string;
+      owner: string;
+      monthIndex: number | null;
+      targetAfter: number | null;
+      realizationAfter: number | null;
+      displayName: string;
+      username: string;
+    }) => ({
+      id: log.id,
+      timestamp: log.timestamp,
+      action: log.action,
+      surveyId: log.surveyId,
+      surveyName: log.surveyName,
+      category: log.category,
+      owner: log.owner,
+      monthIndex:
+        log.monthIndex ?? undefined,
+      target:
+        log.targetAfter ?? 0,
+      realization:
+        log.realizationAfter ?? 0,
+      user:
+        log.displayName ||
+        log.username ||
+        "-",
+    }),
+  ),
+);
+  } catch (error) {
+    console.error(
+      "Gagal membaca riwayat aktivitas:",
+      error,
+    );
+
+    setLogs([]);
   }
+}
 
   useEffect(() => {
     loadLogs();
