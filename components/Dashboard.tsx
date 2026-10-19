@@ -317,8 +317,9 @@ const translations = {
     createConfirmation: (
       id: string,
       name: string,
-      rowNumber: number,
     ) => {
+      const rowNumber =
+        Number(id.replace(/^s/i, "")) + 1;
 
       return (
         `Simpan kegiatan baru?\n\n` +
@@ -1510,6 +1511,9 @@ function SurveyInput({
   const [confirmSaveOpen, setConfirmSaveOpen] =
     useState(false);
 
+  const [showOverwriteWarning, setShowOverwriteWarning] =
+    useState(false);
+
   const [confirmDeleteOpen, setConfirmDeleteOpen] =
     useState(false);
 
@@ -1676,6 +1680,14 @@ function SurveyInput({
         "Target dan realisasi harus berupa angka nol atau lebih.",
       );
       return;
+    }
+
+    if (existingSurvey) {
+
+      setShowOverwriteWarning(true);
+
+      return;
+
     }
 
     setConfirmSaveOpen(true);
@@ -2427,6 +2439,42 @@ function SurveyInput({
             </div>
           </div>
         </div>
+      )}
+
+      {showOverwriteWarning && existingSurvey && (
+
+        <div className="saveConfirmOverlay">
+
+          <div className="saveConfirmModal">
+
+            <div className="saveConfirmIcon">
+
+              <Sheet />
+
+            </div>
+            <div className="saveConfirmContent">
+
+              <p className="eyebrow">PERINGATAN DATA SUDAH ADA</p>
+
+              <h3>Timpa kegiatan lama?</h3>
+
+              <p>ID {existingSurvey.id} sudah memiliki data di Spreadsheet.</p>
+
+            </div>
+            <div className="saveConfirmWarning">
+              Data lama akan diganti dengan data baru.
+            </div>
+            <div className="saveConfirmActions">
+              <button type="button" className="saveConfirmCancel" onClick={() => setShowOverwriteWarning(false)}>
+                Batal
+              </button>
+              <button type="button" className="saveConfirmSubmit" onClick={() => { setShowOverwriteWarning(false); setConfirmSaveOpen(true); }}>
+                Ya, Timpa Data
+              </button>
+            </div>
+          </div>
+        </div>
+
       )}
 
       {confirmDeleteOpen && selectedSurvey && (
