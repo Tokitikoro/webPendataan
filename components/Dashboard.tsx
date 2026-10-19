@@ -317,9 +317,8 @@ const translations = {
     createConfirmation: (
       id: string,
       name: string,
+      rowNumber: number,
     ) => {
-      const rowNumber =
-        Number(id.replace(/^s/i, "")) + 1;
 
       return (
         `Simpan kegiatan baru?\n\n` +
