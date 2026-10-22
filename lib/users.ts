@@ -1,3 +1,5 @@
+import { prisma } from "@/lib/prisma";
+
 import type {
     SessionUser,
     UserRole,
@@ -129,75 +131,6 @@ async function verifyPasswordHash(
     );
 }
 
-function loadUsers() {
-    const rawUsers =
-        process.env.APP_USERS_JSON;
-
-    if (!rawUsers) {
-        throw new Error(
-            "APP_USERS_JSON belum dikonfigurasi",
-        );
-    }
-
-    const parsedUsers =
-        JSON.parse(rawUsers) as unknown;
-
-    if (!Array.isArray(parsedUsers)) {
-        throw new Error(
-            "Format APP_USERS_JSON tidak valid",
-        );
-    }
-
-    const users: StoredUser[] = [];
-
-    for (const item of parsedUsers) {
-        if (
-            typeof item !== "object" ||
-            item === null
-        ) {
-            continue;
-        }
-
-        const candidate =
-            item as Record<string, unknown>;
-
-        if (
-            typeof candidate.username !==
-            "string" ||
-            candidate.username.trim() === "" ||
-            typeof candidate.displayName !==
-            "string" ||
-            candidate.displayName.trim() === "" ||
-            typeof candidate.passwordHash !==
-            "string" ||
-            candidate.passwordHash.trim() === "" ||
-            !isUserRole(candidate.role)
-        ) {
-            continue;
-        }
-
-        users.push({
-            username:
-                candidate.username
-                    .trim()
-                    .toLowerCase(),
-            displayName:
-                candidate.displayName.trim(),
-            passwordHash:
-                candidate.passwordHash.trim(),
-            role: candidate.role,
-        });
-    }
-
-    if (users.length === 0) {
-        throw new Error(
-            "Tidak ada akun yang valid pada APP_USERS_JSON",
-        );
-    }
-
-    return users;
-}
-
 export async function authenticateUser(
     username: string,
     password: string,
@@ -205,17 +138,9 @@ export async function authenticateUser(
     const normalizedUsername =
         username.trim().toLowerCase();
 
-    const users = loadUsers();
+   const user = await prisma.user.findUnique({ where: { username: normalizedUsername, }, });
 
-    const user = users.find(
-        (item) =>
-            item.username ===
-            normalizedUsername,
-    );
-
-    if (!user) {
-        return null;
-    }
+    if (!user || !user.active || !isUserRole(user.role)) { return null; }
 
     const passwordValid =
         await verifyPasswordHash(
@@ -226,6 +151,15 @@ export async function authenticateUser(
     if (!passwordValid) {
         return null;
     }
+
+    await prisma.user.update({
+  where: {
+    id: user.id,
+  },
+  data: {
+    lastLoginAt: new Date(),
+  },
+});
 
     return {
         username: user.username,

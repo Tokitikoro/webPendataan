@@ -6535,3 +6535,338 @@ aside:not(.open) .sidebarArrow {
   color: #a93630;
   background: #fff1ef;
 }
+
+/* =========================================================
+   PROFIL & KEAMANAN
+========================================================= */
+
+.settingsPage:has(.accountUsername) {
+  width: 100%;
+  max-width: 1100px;
+  margin: 28px auto 0;
+  margin-top: 28px;
+  padding: 28px;
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  background:
+    linear-gradient(135deg,
+      color-mix(in srgb, var(--surface) 96%, transparent),
+      color-mix(in srgb, var(--surface-soft) 92%, transparent));
+  box-shadow: 0 18px 45px rgba(4, 24, 43, 0.08);
+}
+
+.settingsPage:has(.accountUsername)>.settingsBackButton {
+  width: auto;
+  min-width: 110px;
+  margin: 0 0 28px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 11px 20px;
+  border-radius: 12px;
+}
+
+.settingsPage:has(.accountUsername)>.eyebrow {
+  margin: 0 0 8px;
+  color: #20c9c3;
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.13em;
+}
+
+.settingsPage:has(.accountUsername)>h1 {
+  margin: 0;
+  color: var(--text);
+  font-size: clamp(1.85rem, 4vw, 2.6rem);
+  line-height: 1.15;
+}
+
+.settingsPage:has(.accountUsername)>h1+p {
+  margin: 12px 0 28px;
+  color: var(--muted);
+  font-size: 0.98rem;
+  line-height: 1.7;
+}
+
+/* Avatar/inisial JK */
+.settingsPage:has(.accountUsername)>.settingsPanel {
+  width: 92px;
+  height: 92px;
+  margin: 4px 0 18px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 26px;
+  color: #ffffff;
+  background: linear-gradient(135deg, #19c5a6, #1c9aea);
+  box-shadow: 0 14px 30px rgba(25, 197, 166, 0.25);
+  font-size: 1.65rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+}
+
+/* Nama pengguna */
+.settingsPage:has(.accountUsername)>h2 {
+  margin: 0 0 5px;
+  color: var(--text);
+  font-size: 1.5rem;
+  line-height: 1.2;
+}
+
+/* Username */
+.settingsPage:has(.accountUsername)>.accountUsername {
+  margin: 0 0 10px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+/* Role */
+.settingsPage:has(.accountUsername)>.accountRole {
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+  padding: 7px 13px;
+  border: 1px solid rgba(25, 197, 166, 0.3);
+  border-radius: 999px;
+  color: #12a991;
+  background: rgba(25, 197, 166, 0.12);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+/* Judul Keamanan Akun dan Informasi Sesi */
+.settingsPage:has(.accountUsername)>h3 {
+  margin: 0;
+  padding-top: 24px;
+  color: var(--text);
+  font-size: 1.08rem;
+}
+
+.settingsPage:has(.accountUsername)>h3::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 1px;
+  margin-bottom: 24px;
+  background: var(--border);
+}
+
+/* Tombol Ubah Password */
+.settingsPage:has(.accountUsername)>.settingsBackButton:not(:first-child) {
+  width: auto;
+  min-width: 175px;
+  margin: 16px 10px 8px 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 18px;
+  border: 1px solid rgba(28, 154, 234, 0.35);
+  border-radius: 12px;
+  color: #1687c9;
+  background: rgba(28, 154, 234, 0.11);
+  font-weight: 800;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+.settingsPage:has(.accountUsername)>.settingsBackButton:not(:first-child):hover {
+  transform: translateY(-2px);
+  border-color: #1c9aea;
+  background: rgba(28, 154, 234, 0.18);
+}
+
+/* Tombol Keluar dari Semua Perangkat */
+.settingsPage:has(.accountUsername)>.inputDelete {
+  width: auto;
+  min-width: 235px;
+  margin: 16px 0 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 18px;
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  border-radius: 12px;
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.1);
+  font-weight: 800;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+.settingsPage:has(.accountUsername)>.inputDelete:hover {
+  transform: translateY(-2px);
+  border-color: #ef4444;
+  background: rgba(239, 68, 68, 0.17);
+}
+
+/* Informasi login terakhir */
+.settingsPage:has(.accountUsername)>h3+p {
+  position: relative;
+  margin: 16px 0 0;
+  padding: 16px 18px 16px 46px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  color: var(--muted);
+  background: var(--surface-soft);
+  line-height: 1.6;
+}
+
+.settingsPage:has(.accountUsername)>h3+p::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 19px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: #19c5a6;
+  box-shadow: 0 0 0 5px rgba(25, 197, 166, 0.14);
+  transform: translateY(-50%);
+}
+
+/* Mode gelap */
+html[data-theme="dark"] .settingsPage:has(.accountUsername) {
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.24);
+}
+
+html[data-theme="dark"] .settingsPage:has(.accountUsername)>.accountRole {
+  color: #43dfc3;
+  border-color: rgba(67, 223, 195, 0.25);
+  background: rgba(25, 197, 166, 0.11);
+}
+
+/* Tampilan HP */
+@media (max-width: 650px) {
+  .settingsPage:has(.accountUsername) {
+    padding: 20px;
+    border-radius: 18px;
+  }
+
+  .settingsPage:has(.accountUsername)>.settingsBackButton:first-child {
+    width: 100%;
+    margin: 0 0 24px;
+  }
+
+  .settingsPage:has(.accountUsername)>.settingsPanel {
+    width: 78px;
+    height: 78px;
+    border-radius: 22px;
+    font-size: 1.4rem;
+  }
+
+  .settingsPage:has(.accountUsername)>.settingsBackButton:not(:first-child),
+  .settingsPage:has(.accountUsername)>.inputDelete {
+    width: 100%;
+    margin: 10px 0 0;
+  }
+
+  .settingsPage:has(.accountUsername)>h3 {
+    margin-top: 8px;
+  }
+}
+
+/* Membuat halaman Profil & Keamanan lebih ringkas */
+.settingsPage:has(.accountUsername) {
+  padding: 24px 28px;
+}
+
+.settingsPage:has(.accountUsername)>h1+p {
+  margin-bottom: 20px;
+}
+
+.settingsPage:has(.accountUsername)>.settingsPanel {
+  width: 76px;
+  height: 76px;
+  margin-bottom: 12px;
+  border-radius: 22px;
+  font-size: 1.4rem;
+}
+
+.settingsPage:has(.accountUsername)>h2 {
+  margin-bottom: 2px;
+}
+
+.settingsPage:has(.accountUsername)>.accountUsername {
+  margin-bottom: 8px;
+}
+
+.settingsPage:has(.accountUsername)>.accountRole {
+  margin-bottom: 12px;
+}
+
+.settingsPage:has(.accountUsername)>h3 {
+  padding-top: 14px;
+}
+
+.settingsPage:has(.accountUsername)>h3::before {
+  margin-bottom: 14px;
+}
+
+.settingsPage:has(.accountUsername)>.settingsBackButton:not(:first-child),
+.settingsPage:has(.accountUsername)>.inputDelete {
+  margin-top: 10px;
+}
+
+.settingsPage:has(.accountUsername)>h3+p {
+  margin-top: 10px;
+}
+
+/* Override akhir agar Profil & Keamanan tidak memanjang */
+.settingsPage:has(.accountUsername) {
+  display: block;
+  min-height: auto;
+  height: auto;
+  padding: 28px;
+}
+
+.settingsPage:has(.accountUsername)>* {
+  flex: none;
+}
+
+.settingsPage:has(.accountUsername)>.accountRole {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.settingsPage:has(.accountUsername)>h3 {
+  margin-top: 18px;
+  padding-top: 18px;
+}
+
+.settingsPage:has(.accountUsername)>.settingsBackButton:not(:first-child) {
+  width: fit-content;
+  min-width: 180px;
+  margin: 14px 10px 0 0;
+}
+
+.settingsPage:has(.accountUsername)>.inputDelete {
+  width: fit-content;
+  min-width: 240px;
+  margin: 14px 0 0;
+}
+
+.settingsPage:has(.accountUsername)>h3+p {
+  max-width: 520px;
+}
+
+.settingsPage:has(.accountUsername) {
+  max-width: 1050px;
+  margin: 28px auto;
+  padding: 32px;
+  border: 1px solid rgba(74, 184, 220, 0.22);
+  border-radius: 24px;
+  background: #082330;
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
+}

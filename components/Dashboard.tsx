@@ -1517,6 +1517,8 @@ function SurveyInput({
   const [confirmDeleteOpen, setConfirmDeleteOpen] =
     useState(false);
 
+  const [headerUser, setHeaderUser] = useState<{ displayName: string } | null>(null);
+
   const selectedSurvey = useMemo(() => {
     return (
       surveys.find(
@@ -2596,6 +2598,57 @@ function SurveyInput({
 type TranslationText =
   (typeof translations)[keyof typeof translations];
 
+function AccountSecurity({ onBack }: { onBack: () => void }) {
+  const [accountUser, setAccountUser] = useState<{
+    username: string;
+    displayName: string;
+    role: string;
+    lastLoginAt: string | null;
+  } | null>(null);
+
+  useEffect(() => {
+
+    async function loadAccountUser() {
+      const response = await fetch("/api/auth/me", {
+        cache: "no-store",
+      });
+
+      if (!response.ok) {
+        return;
+      }
+
+      const result = await response.json();
+
+      if (result.success && result.user) {
+
+        setAccountUser(result.user);
+      }
+    }
+    void loadAccountUser();
+
+  }, []);
+  return (
+    <section className="settingsPage">
+      <button type="button" className="settingsBackButton" onClick={onBack}>Kembali</button>
+      <p className="eyebrow">AKUN PENGGUNA</p>
+      <h1>Profil & Keamanan</h1>
+      <p>Kelola Informasi Akun, Password, Dan Sesi Login.</p>
+      <div className="settingsPanel">{accountUser?.displayName ? ((accountUser.displayName.match(/[A-Z]/g) ?? []).slice(0, 2).join("") || accountUser.displayName.charAt(0).toUpperCase()) : "..."}</div>
+      <h2>{accountUser?.role ? accountUser.role.charAt(0).toUpperCase() + accountUser.role.slice(1) : "Memuat..."}</h2>
+      <p className="accountUsername">@{accountUser?.username ?? "memuat"}</p>
+      <span className="accountRole">{accountUser?.role ?? "Memuat..."}</span>
+      <h3>Keamanan Akun</h3>
+      <button type="button" className="settingsBackButton">Ubah Password</button>
+      <button type="button" className="inputDelete">Keluar Dari Semua Perangkat</button>
+      <h3>Informasi Sesi</h3>
+      <p>Login terakhir:{" "}
+        {accountUser?.lastLoginAt ? new Intl.DateTimeFormat("id-ID", {
+          dateStyle: "medium", timeStyle: "short",
+        }).format(new Date(accountUser.lastLoginAt)) : "Belum tersedia"}</p>
+    </section>
+  );
+}
+
 type SettingsProps = {
   themeMode: ThemeMode;
   languageMode: LanguageMode;
@@ -3100,6 +3153,33 @@ export default function Dashboard({
 }: DashboardProps) {
   const router = useRouter();
 
+  const [headerUser, setHeaderUser] = useState<{ displayName: string; role: string } | null>(null);
+
+  const [previousView, setPreviousView] = useState<"home" | "dashboard" | "calendar" | "input" | "history" | "settings">("home");
+
+  useEffect(() => {
+    async function loadHeaderUser() {
+      const response = await fetch("/api/auth/me", {
+        cache: "no-store",
+      });
+
+      if (!response.ok) {
+        return;
+      }
+
+      const result = await response.json();
+
+      if (result.success && result.user) {
+        setHeaderUser({
+          displayName: result.user.displayName,
+          role: result.user.role,
+        });
+      }
+    }
+
+    void loadHeaderUser();
+  }, []);
+
   const [refreshing, startRefresh] =
     useTransition();
 
@@ -3110,6 +3190,7 @@ export default function Dashboard({
     | "input"
     | "history"
     | "settings"
+    | "account"
     | null
   >(null);
 
@@ -3256,24 +3337,17 @@ export default function Dashboard({
 
   useEffect(() => {
     const savedView = localStorage.getItem("simi-last-view");
-
-    if (
-      savedView === "home" ||
-      savedView === "dashboard" ||
-      savedView === "calendar"
-    ) {
-      setView(savedView);
+    if (savedView) {
+      setView(savedView as typeof view);
     } else {
       setView("home");
     }
+
   }, []);
 
   useEffect(() => {
     if (
-      view === "home" ||
-      view === "dashboard" ||
-      view === "calendar"
-    ) {
+      view !== null) {
       localStorage.setItem("simi-last-view", view);
     }
   }, [view]);
@@ -3610,21 +3684,22 @@ export default function Dashboard({
               aria-label="Buka menu akun"
               aria-expanded={profileMenuOpen}
             >
-              JK
+              RC
             </button>
 
             {profileMenuOpen && (
               <div className="profileDropdown">
                 <div className="profileDropdownIdentity">
-                  <strong>JK</strong>
-                  <small>Administrator</small>
+                  <strong>{headerUser?.displayName ?? "Memuat..."}</strong>
+                  <small>{headerUser?.role ? headerUser.role.charAt(0).toUpperCase() + headerUser.role.slice(1) : "Memuat..."}</small>
                 </div>
 
                 <button
                   type="button"
                   onClick={() => {
                     setProfileMenuOpen(false);
-                    setView("settings");
+                    setPreviousView(view === "account" || view === null ? "home" : view);
+                    setView("account");
                   }}
                 >
                   {text.accountSettings}
@@ -3695,6 +3770,8 @@ export default function Dashboard({
               text={text}
               onBack={() => setView("dashboard")}
             />
+          ) : view === "account" ? (
+            <AccountSecurity onBack={() => setView(previousView)} />
           ) : view === "settings" ? (
             <Settings
               themeMode={themeMode}

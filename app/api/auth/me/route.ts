@@ -8,6 +8,8 @@ import {
     verifySessionToken,
 } from "@/lib/auth";
 
+import { prisma } from "@/lib/prisma";
+
 export async function GET(
     request: NextRequest,
 ) {
@@ -32,6 +34,16 @@ export async function GET(
         );
     }
 
+    const databaseUser = await prisma.user.findUnique({
+        where: {
+            username: session.username,
+        },
+        select: {
+            lastLoginAt: true,
+        },
+    });
+
+
     return NextResponse.json({
         success: true,
         user: {
@@ -39,6 +51,7 @@ export async function GET(
             displayName:
                 session.displayName,
             role: session.role,
+            lastLoginAt: databaseUser?.lastLoginAt?.toISOString() ?? null,
         },
     });
 }
