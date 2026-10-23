@@ -27,3 +27,6 @@ Thumbs.db
 
 # Deployment
 .vercel/
+
+
+database-backups/
