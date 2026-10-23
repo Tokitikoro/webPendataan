@@ -6870,3 +6870,347 @@ html[data-theme="dark"] .settingsPage:has(.accountUsername)>.accountRole {
     0 20px 50px rgba(0, 0, 0, 0.22),
     inset 0 1px 0 rgba(255, 255, 255, 0.03);
 }
+
+/* =========================================================
+   PROFIL & KEAMANAN - FINAL
+========================================================= */
+
+.settingsPage:has(.accountUsername) {
+  display: block;
+  width: 100%;
+  max-width: 1050px;
+  min-height: auto;
+  margin: 28px auto;
+  padding: 32px;
+  border-radius: 24px;
+  transition:
+    color 0.25s ease,
+    background 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+/* Tombol kembali */
+.settingsPage:has(.accountUsername)>.settingsBackButton:first-child {
+  width: auto;
+  min-width: 110px;
+  margin: 0 0 28px auto;
+  padding: 11px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+}
+
+/* Label AKUN PENGGUNA */
+.settingsPage:has(.accountUsername)>.eyebrow {
+  margin: 0 0 8px;
+  color: #0db9b5;
+  font-size: 0.76rem;
+  font-weight: 900;
+  letter-spacing: 0.13em;
+}
+
+/* Judul halaman */
+.settingsPage:has(.accountUsername)>h1 {
+  margin: 0;
+  font-size: clamp(1.85rem, 4vw, 2.6rem);
+  line-height: 1.15;
+}
+
+/* Deskripsi halaman */
+.settingsPage:has(.accountUsername)>h1+p {
+  margin: 12px 0 20px;
+  font-size: 0.98rem;
+  line-height: 1.7;
+}
+
+/* Avatar inisial */
+.settingsPage:has(.accountUsername)>.settingsPanel {
+  width: 76px;
+  height: 76px;
+  margin: 4px 0 12px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 22px;
+  color: #ffffff;
+  background:
+    linear-gradient(135deg,
+      #19c5a6,
+      #1c9aea);
+  box-shadow:
+    0 14px 30px rgba(25, 197, 166, 0.25);
+  font-size: 1.4rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+}
+
+/* Nama pengguna */
+.settingsPage:has(.accountUsername)>h2 {
+  margin: 0 0 2px;
+  font-size: 1.5rem;
+  line-height: 1.2;
+}
+
+/* Username */
+.settingsPage:has(.accountUsername)>.accountUsername {
+  margin: 0 0 8px;
+  font-size: 0.95rem;
+}
+
+/* Badge role */
+.settingsPage:has(.accountUsername)>.accountRole {
+  width: fit-content;
+  margin-bottom: 20px;
+  padding: 7px 13px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(25, 197, 166, 0.3);
+  border-radius: 999px;
+  color: #0a9b83;
+  background: rgba(25, 197, 166, 0.12);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: capitalize;
+}
+
+/* Judul Keamanan dan Informasi Sesi */
+.settingsPage:has(.accountUsername)>h3 {
+  margin: 18px 0 0;
+  padding-top: 18px;
+  font-size: 1.08rem;
+}
+
+.settingsPage:has(.accountUsername)>h3::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 1px;
+  margin-bottom: 14px;
+}
+
+/* Tombol Ubah Password */
+.settingsPage:has(.accountUsername)>.settingsBackButton:not(:first-child) {
+  width: fit-content;
+  min-width: 180px;
+  margin: 14px 10px 0 0;
+  padding: 12px 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(28, 154, 234, 0.35);
+  border-radius: 12px;
+  color: #1687c9;
+  background: rgba(28, 154, 234, 0.11);
+  font-weight: 800;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+.settingsPage:has(.accountUsername)>.settingsBackButton:not(:first-child):hover {
+  transform: translateY(-2px);
+  border-color: #1c9aea;
+  background: rgba(28, 154, 234, 0.18);
+}
+
+/* Tombol Keluar dari Semua Perangkat */
+.settingsPage:has(.accountUsername)>.inputDelete {
+  width: fit-content;
+  min-width: 240px;
+  margin: 14px 0 0;
+  padding: 12px 18px;
+}
+
+/* Informasi login terakhir */
+.settingsPage:has(.accountUsername)>h3+p {
+  position: relative;
+  max-width: 520px;
+  margin: 10px 0 0;
+  padding: 16px 18px 16px 46px;
+  border-radius: 14px;
+  line-height: 1.6;
+}
+
+.settingsPage:has(.accountUsername)>h3+p::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 19px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: #19c5a6;
+  box-shadow:
+    0 0 0 5px rgba(25, 197, 166, 0.14);
+  transform: translateY(-50%);
+}
+
+/* =========================================================
+   TEMA DEFAULT - AQUA LEMBUT
+========================================================= */
+
+:root[data-theme="default"] .settingsPage:has(.accountUsername) {
+  color: #123047;
+  border: 1px solid #d1e7e8;
+  background:
+    linear-gradient(135deg,
+      #f8fcfd 0%,
+      #f1fafa 50%,
+      #eaf7f5 100%);
+  box-shadow:
+    0 9px 25px rgba(7, 105, 115, 0.08);
+}
+
+:root[data-theme="default"] .settingsPage:has(.accountUsername) h1,
+:root[data-theme="default"] .settingsPage:has(.accountUsername) h2,
+:root[data-theme="default"] .settingsPage:has(.accountUsername) h3 {
+  color: #123047;
+}
+
+:root[data-theme="default"] .settingsPage:has(.accountUsername)>h1+p,
+:root[data-theme="default"] .settingsPage:has(.accountUsername)>.accountUsername {
+  color: #6d8997;
+}
+
+:root[data-theme="default"] .settingsPage:has(.accountUsername)>h3::before {
+  background: #d1e7e8;
+}
+
+:root[data-theme="default"] .settingsPage:has(.accountUsername)>h3+p {
+  color: #496a7d;
+  border: 1px solid #cfe5e7;
+  background:
+    linear-gradient(135deg,
+      #f6fbfc,
+      #eaf7f5);
+}
+
+/* =========================================================
+   TEMA TERANG - PUTIH BERSIH
+========================================================= */
+
+:root[data-theme="light"] .settingsPage:has(.accountUsername) {
+  color: #173441;
+  border: 1px solid #e0e8ec;
+  background: #ffffff;
+  box-shadow:
+    0 8px 24px rgba(20, 57, 74, 0.08);
+}
+
+:root[data-theme="light"] .settingsPage:has(.accountUsername) h1,
+:root[data-theme="light"] .settingsPage:has(.accountUsername) h2,
+:root[data-theme="light"] .settingsPage:has(.accountUsername) h3 {
+  color: #173441;
+}
+
+:root[data-theme="light"] .settingsPage:has(.accountUsername)>h1+p,
+:root[data-theme="light"] .settingsPage:has(.accountUsername)>.accountUsername {
+  color: #6d8997;
+}
+
+:root[data-theme="light"] .settingsPage:has(.accountUsername)>h3::before {
+  background: #e0e8ec;
+}
+
+:root[data-theme="light"] .settingsPage:has(.accountUsername)>h3+p {
+  color: #4e6b78;
+  border: 1px solid #dce7eb;
+  background: #f7fafb;
+}
+
+/* =========================================================
+   TEMA GELAP
+========================================================= */
+
+:root[data-theme="dark"] .settingsPage:has(.accountUsername) {
+  color: #e4f2f6;
+  border: 1px solid #1c4050;
+  background: #0c2734;
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.25);
+}
+
+:root[data-theme="dark"] .settingsPage:has(.accountUsername) h1,
+:root[data-theme="dark"] .settingsPage:has(.accountUsername) h2,
+:root[data-theme="dark"] .settingsPage:has(.accountUsername) h3 {
+  color: #edf8fa;
+}
+
+:root[data-theme="dark"] .settingsPage:has(.accountUsername)>h1+p,
+:root[data-theme="dark"] .settingsPage:has(.accountUsername)>.accountUsername {
+  color: #91adb7;
+}
+
+:root[data-theme="dark"] .settingsPage:has(.accountUsername)>.accountRole {
+  color: #67dfbd;
+  border-color: #246051;
+  background: #123f38;
+}
+
+:root[data-theme="dark"] .settingsPage:has(.accountUsername)>h3::before {
+  background: #254b5b;
+}
+
+:root[data-theme="dark"] .settingsPage:has(.accountUsername)>h3+p {
+  color: #bcd3dc;
+  border: 1px solid #254b5b;
+  background: #102f3d;
+}
+
+:root[data-theme="dark"] .settingsPage:has(.accountUsername)>.settingsBackButton:not(:first-child) {
+  color: #a9dce6;
+  border-color: #285366;
+  background: #153847;
+}
+
+:root[data-theme="dark"] .settingsPage:has(.accountUsername)>.settingsBackButton:not(:first-child):hover {
+  color: #ffffff;
+  border-color: #168fa2;
+  background: #137f91;
+}
+
+/* =========================================================
+   PROFIL & KEAMANAN - HP
+========================================================= */
+
+@media screen and (max-width: 650px) {
+  .settingsPage:has(.accountUsername) {
+    margin: 12px auto;
+    padding: 18px;
+    border-radius: 18px;
+  }
+
+  .settingsPage:has(.accountUsername)>.settingsBackButton:first-child {
+    width: 100%;
+    margin: 0 0 20px;
+  }
+
+  .settingsPage:has(.accountUsername)>.settingsPanel {
+    width: 68px;
+    height: 68px;
+    border-radius: 19px;
+    font-size: 1.2rem;
+  }
+
+  .settingsPage:has(.accountUsername)>h1 {
+    font-size: 1.75rem;
+  }
+
+  .settingsPage:has(.accountUsername)>.settingsBackButton:not(:first-child),
+  .settingsPage:has(.accountUsername)>.inputDelete {
+    width: 100%;
+    min-width: 0;
+    margin: 9px 0 0;
+  }
+
+  .settingsPage:has(.accountUsername)>h3+p {
+    max-width: none;
+  }
+}
