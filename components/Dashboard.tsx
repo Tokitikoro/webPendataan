@@ -2634,7 +2634,7 @@ function AccountSecurity({ onBack }: { onBack: () => void }) {
       <h1>Profil & Keamanan</h1>
       <p>Kelola Informasi Akun, Password, Dan Sesi Login.</p>
       <div className="settingsPanel">{accountUser?.displayName ? ((accountUser.displayName.match(/[A-Z]/g) ?? []).slice(0, 2).join("") || accountUser.displayName.charAt(0).toUpperCase()) : "..."}</div>
-      <h2>{accountUser?.role ? accountUser.role.charAt(0).toUpperCase() + accountUser.role.slice(1) : "Memuat..."}</h2>
+      <h2>{accountUser?.displayName ? accountUser.role.charAt(0).toUpperCase() + accountUser.role.slice(1) : "Memuat..."}</h2>
       <p className="accountUsername">@{accountUser?.username ?? "memuat"}</p>
       <span className="accountRole">{accountUser?.role ?? "Memuat..."}</span>
       <h3>Keamanan Akun</h3>
