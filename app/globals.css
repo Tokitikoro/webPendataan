@@ -7214,3 +7214,33 @@ html[data-theme="dark"] .settingsPage:has(.accountUsername)>.accountRole {
     max-width: none;
   }
 }
+
+.changePasswordField {
+  display: grid;
+  gap: 7px;
+  margin-top: 15px;
+}
+
+.changePasswordField>span {
+  color: inherit;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.changePasswordField>input {
+  width: 100%;
+  min-height: 45px;
+  padding: 0 13px;
+  border: 1px solid #315566;
+  border-radius: 11px;
+  outline: none;
+  background: #173744;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+.changePasswordField>input:focus {
+  border-color: #23c6cc;
+  box-shadow: 0 0 0 4px rgba(35, 198, 204, 0.12);
+}

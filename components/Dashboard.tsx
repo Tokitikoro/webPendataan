@@ -2606,6 +2606,56 @@ function AccountSecurity({ onBack }: { onBack: () => void }) {
     lastLoginAt: string | null;
   } | null>(null);
 
+  const [changePasswordOpen, setChangePasswordOpen] = useState(false);
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [changingPassword, setChangingPassword] = useState(false);
+  const [changePasswordMessage, setChangePasswordMessage] = useState("");
+
+  async function handleChangePassword() {
+    if (changingPassword) {
+      return;
+    }
+
+    setChangingPassword(true);
+    setChangePasswordMessage("");
+
+    try {
+      const response = await fetch("/api/auth/change-password", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+
+        body: JSON.stringify({
+          currentPassword,
+          newPassword,
+          confirmPassword,
+        }),
+      });
+
+      const result = await response.json();
+      if (!response.ok || !result.success) {
+        throw new Error(
+          result.message ?? "Password gagal diubah",
+        );
+      }
+
+      window.alert(result.message);
+      window.location.replace("/login");
+    } catch (error) {
+      setChangePasswordMessage(
+        error instanceof Error
+          ? error.message
+          : "Password gagal diubah",
+      );
+
+    } finally {
+      setChangingPassword(false);
+    }
+  }
+
   useEffect(() => {
 
     async function loadAccountUser() {
@@ -2638,13 +2688,81 @@ function AccountSecurity({ onBack }: { onBack: () => void }) {
       <p className="accountUsername">@{accountUser?.username ?? "memuat"}</p>
       <span className="accountRole">{accountUser?.role ?? "Memuat..."}</span>
       <h3>Keamanan Akun</h3>
-      <button type="button" className="settingsBackButton">Ubah Password</button>
+      <button
+        type="button"
+        className="settingsBackButton"
+        onClick={() => {
+          setChangePasswordMessage("");
+          setCurrentPassword("");
+          setNewPassword("");
+          setConfirmPassword("");
+          setChangePasswordOpen(true);
+        }}
+      >Ubah Password</button>
       <button type="button" className="inputDelete">Keluar Dari Semua Perangkat</button>
       <h3>Informasi Sesi</h3>
       <p>Login terakhir:{" "}
         {accountUser?.lastLoginAt ? new Intl.DateTimeFormat("id-ID", {
           dateStyle: "medium", timeStyle: "short",
         }).format(new Date(accountUser.lastLoginAt)) : "Belum tersedia"}</p>
+
+      {changePasswordOpen && (
+        <div className="saveConfirmOverlay">
+          <div className="saveConfirmModal">
+            <p className="eyebrow">KEAMANAN AKUN</p>
+            <h3>Ubah Password</h3>
+            <p>Masukkan Password Lama Dan Password Baru</p>
+            <label className="changePasswordField">
+              <span>Password Lama</span>
+              <input
+                type="password"
+                value={currentPassword}
+                onChange={(event) => setCurrentPassword(event.target.value)}
+                autoComplete="current-password"
+                disabled={changingPassword} />
+            </label>
+            <label className="changePasswordField">
+              <span>Password Baru</span>
+              <input
+                type="password"
+                value={newPassword}
+                onChange={(event) => setNewPassword(event.target.value)}
+                autoComplete="new-password"
+                disabled={changingPassword} />
+            </label>
+            <label className="changePasswordField">
+              <span>Konfirmasi Password Baru</span>
+              <input
+                type="password"
+                value={confirmPassword}
+                onChange={(event) => setConfirmPassword(event.target.value)}
+                autoComplete="new-password"
+                disabled={changingPassword} />
+            </label>
+
+            {changePasswordMessage && (
+              <div className="formMessage error">
+
+                {changePasswordMessage}</div>
+            )}
+
+            <div className="saveConfirmActions">
+              <button type="button"
+                className="saveConfirmCancel"
+                disabled={changingPassword}
+                onClick={() => setChangePasswordOpen(false)}>
+                Batal</button>
+              <button type="button"
+                className="saveConfirmSubmit"
+                disabled={changingPassword}
+                onClick={() => void handleChangePassword()}>
+                {changingPassword ? "Menyimpan..." : "Ubah Password"}</button>
+
+            </div>
+          </div>
+        </div>
+      )
+      }
     </section>
   );
 }

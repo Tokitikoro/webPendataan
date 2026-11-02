@@ -69,7 +69,7 @@ function constantTimeEqual(
     return difference === 0;
 }
 
-async function verifyPasswordHash(
+export async function verifyPasswordHash(
     password: string,
     storedHash: string,
 ) {
@@ -129,6 +129,50 @@ async function verifyPasswordHash(
         new Uint8Array(derivedBits),
         expectedHash,
     );
+}
+
+export async function createPasswordHash(password: string) {
+
+const iterations = 210_000;
+
+const salt = crypto.getRandomValues(new Uint8Array(32));
+
+const passwordKey = await crypto.subtle.importKey(
+
+"raw",
+
+new TextEncoder().encode(password),
+
+"PBKDF2",
+
+false,
+
+["deriveBits"],
+
+);
+
+const derivedBits = await crypto.subtle.deriveBits(
+{
+name: "PBKDF2",
+hash: "SHA-256",
+salt,
+iterations,
+},
+passwordKey,
+256,
+);
+
+const hash = new Uint8Array(derivedBits);
+const saltHex = Array.from(salt)
+
+.map((byte) => byte.toString(16).padStart(2, "0"))
+.join("");
+
+const hashHex = Array.from(hash)
+
+.map((byte) => byte.toString(16).padStart(2, "0"))
+.join("");
+return "pbkdf2-sha256:" + iterations + ":" + saltHex + ":" + hashHex;
 }
 
 export async function authenticateUser(
