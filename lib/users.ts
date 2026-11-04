@@ -209,5 +209,6 @@ export async function authenticateUser(
         username: user.username,
         displayName: user.displayName,
         role: user.role,
+        sessionVersion: user.sessionVersion,
     };
 }

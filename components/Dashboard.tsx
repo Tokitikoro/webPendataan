@@ -2612,9 +2612,12 @@ function AccountSecurity({ onBack }: { onBack: () => void }) {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [changingPassword, setChangingPassword] = useState(false);
   const [changePasswordMessage, setChangePasswordMessage] = useState("");
+  const [logoutAllOpen, setLogoutAllOpen] = useState(false);
+  const [logoutAllLoading, setLogoutAllLoading] = useState(false);
 
   async function handleChangePassword() {
     if (changingPassword) {
+
       return;
     }
 
@@ -2654,6 +2657,41 @@ function AccountSecurity({ onBack }: { onBack: () => void }) {
     } finally {
       setChangingPassword(false);
     }
+  }
+
+  async function handleLogoutAll() {
+    setLogoutAllLoading(true);
+    try {
+      const response = await fetch(
+        "/api/auth/logout-all",
+        {
+          method: "POST",
+          credentials: "same-origin",
+          cache: "no-store",
+        },
+      );
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(
+          result.message ??
+          "Gagal mengeluarkan semua perangkat",
+        );
+      }
+
+      window.location.replace("/login");
+    } catch (error) {
+      window.alert(
+        error instanceof Error
+          ? error.message
+          : "Gagal mengeluarkan semua perangkat",
+      );
+    }
+    finally {
+      setLogoutAllLoading(false);
+    }
+
   }
 
   useEffect(() => {
@@ -2699,7 +2737,8 @@ function AccountSecurity({ onBack }: { onBack: () => void }) {
           setChangePasswordOpen(true);
         }}
       >Ubah Password</button>
-      <button type="button" className="inputDelete">Keluar Dari Semua Perangkat</button>
+      <button type="button" className="inputDelete"
+        onClick={() => setLogoutAllOpen(true)}>Keluar Dari Semua Perangkat</button>
       <h3>Informasi Sesi</h3>
       <p>Login terakhir:{" "}
         {accountUser?.lastLoginAt ? new Intl.DateTimeFormat("id-ID", {
@@ -2757,6 +2796,30 @@ function AccountSecurity({ onBack }: { onBack: () => void }) {
                 disabled={changingPassword}
                 onClick={() => void handleChangePassword()}>
                 {changingPassword ? "Menyimpan..." : "Ubah Password"}</button>
+
+            </div>
+          </div>
+        </div>
+      )
+      }
+      {logoutAllOpen && (
+        <div className="saveConfirmOverlay deleteMode">
+          <div className="saveConfirmModal deleteConfirmModal">
+            <p className="eyebrow">KEAMANAN AKUN</p>
+            <h3>Keluar dari Semua Perangkat?</h3>
+            <p>Semua sesi login akun ini akan dihentikan, termasuk perangkat yang sedang digunakan.</p>
+            <div className="saveConfirmActions">
+              {/* Tombol Batal */}
+              <button className="saveConfirmCancel"
+                disabled={logoutAllLoading}
+                onClick={() => setLogoutAllOpen(false)}>
+                Batal</button>
+              {/* Tombol Keluar Semua Perangkat */}
+              <button className="saveConfirmSubmit deleteConfirmSubmit"
+                disabled={logoutAllLoading}
+                onClick={() => void handleLogoutAll()}>
+                {logoutAllLoading ? "Mengeluarkan..." : "Keluar Semua Perangkat"}
+              </button>
 
             </div>
           </div>

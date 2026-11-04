@@ -1,3 +1,5 @@
+import { prisma } from "@/lib/prisma";
+
 export const SESSION_COOKIE_NAME =
   "simi-session";
 
@@ -13,6 +15,7 @@ export type SessionPayload = {
   username: string;
   displayName: string;
   role: UserRole;
+  sessionVersion: number;
   expiresAt: number;
 };
 
@@ -99,6 +102,7 @@ export async function createSessionToken(
     username: user.username,
     displayName: user.displayName,
     role: user.role,
+    sessionVersion: user.sessionVersion,
     expiresAt:
       Math.floor(Date.now() / 1000) +
       SESSION_DURATION_SECONDS,
@@ -184,6 +188,7 @@ export async function verifySessionToken(
       return null;
     }
 
+
     const payload = JSON.parse(
       decodeBase64Url(
         encodedPayload,
@@ -198,6 +203,7 @@ export async function verifySessionToken(
         "string" ||
       payload.displayName.trim() === "" ||
       !isUserRole(payload.role) ||
+      typeof payload.sessionVersion !== "number" ||
       typeof payload.expiresAt !==
         "number" ||
       payload.expiresAt <=
@@ -206,12 +212,31 @@ export async function verifySessionToken(
       return null;
     }
 
+    const databaseUser = await prisma.user.findUnique({
+  where: {
+    username: payload.username.trim().toLowerCase(),
+  },
+  select: {
+    active: true,
+    sessionVersion: true,
+  },
+});
+
+if (
+  !databaseUser ||
+  !databaseUser.active ||
+  databaseUser.sessionVersion !== payload.sessionVersion
+) {
+  return null;
+}
+
     return {
       username:
         payload.username.trim(),
       displayName:
         payload.displayName.trim(),
       role: payload.role,
+      sessionVersion: payload.sessionVersion,
       expiresAt: payload.expiresAt,
     };
   } catch {
