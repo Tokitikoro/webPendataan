@@ -99,6 +99,7 @@ export async function createSessionToken(
   user: SessionUser,
 ) {
   const payload: SessionPayload = {
+    id: user.id,
     username: user.username,
     displayName: user.displayName,
     role: user.role,
@@ -217,6 +218,7 @@ export async function verifySessionToken(
     username: payload.username.trim().toLowerCase(),
   },
   select: {
+    id: true,
     active: true,
     sessionVersion: true,
   },
@@ -231,6 +233,7 @@ if (
 }
 
     return {
+      id: databaseUser.id,
       username:
         payload.username.trim(),
       displayName:
