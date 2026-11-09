@@ -208,6 +208,7 @@ export async function authenticateUser(
     return {
         username: user.username,
         displayName: user.displayName,
+        id: user.id,
         role: user.role,
         sessionVersion: user.sessionVersion,
     };

@@ -11,13 +11,13 @@ export type UserRole =
   | "operator"
   | "viewer";
 
-export type SessionPayload = {
-  username: string;
-  displayName: string;
-  role: UserRole;
-  sessionVersion: number;
-  expiresAt: number;
-};
+export type SessionPayload = { 
+  id: number; 
+  username: string; 
+  displayName: string; 
+  role: UserRole; 
+  sessionVersion: number; 
+  expiresAt: number; };
 
 export type SessionUser = Omit<
   SessionPayload,

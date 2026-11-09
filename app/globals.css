@@ -7244,3 +7244,103 @@ html[data-theme="dark"] .settingsPage:has(.accountUsername)>.accountRole {
   border-color: #23c6cc;
   box-shadow: 0 0 0 4px rgba(35, 198, 204, 0.12);
 }
+
+.loginHistoryList {
+  margin-top: 8px;
+}
+
+.loginHistoryToggle {
+  width: 100%;
+  max-width: 520px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+  border: 1px solid rgba(80, 190, 220, 0.35);
+  border-radius: 10px;
+  background: rgba(12, 55, 72, 0.65);
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.loginHistoryToggle:hover:not(:disabled) {
+  background: rgba(18, 72, 92, 0.8);
+  border-color: rgba(80, 190, 220, 0.65);
+}
+
+.loginHistoryToggle:disabled {
+  cursor: default;
+  opacity: 0.7;
+}
+
+.loginHistoryDropdown {
+  width: 100%;
+  max-width: 720px;
+  max-height: 320px;
+  overflow-y: auto;
+  margin-top: 10px;
+  padding-right: 6px;
+}
+
+.loginHistoryItem {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 8px;
+  padding: 12px 14px;
+  border: 1px solid rgba(80, 190, 220, 0.25);
+  border-radius: 10px;
+  background: rgba(7, 40, 54, 0.55);
+  overflow-wrap: anywhere;
+}
+
+.loginHistoryItem strong {
+  color: #ffffff;
+}
+
+.loginHistoryItem span {
+  color: #d7f4fa;
+  font-weight: 600;
+}
+
+.loginHistoryItem small {
+  color: #9fc4ce;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.loginHistoryList>p {
+  margin-top: 16px;
+  margin-bottom: 0;
+}
+
+.loginHistoryDropdown::-webkit-scrollbar {
+  width: 7px;
+}
+
+.loginHistoryDropdown::-webkit-scrollbar-thumb {
+  background: rgba(80, 190, 220, 0.45);
+  border-radius: 999px;
+}
+
+.loginHistoryDropdown::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+@media (max-width: 640px) {
+
+  .loginHistoryToggle,
+  .loginHistoryDropdown {
+    max-width: 100%;
+  }
+
+  .loginHistoryItem {
+    padding: 11px 12px;
+  }
+}

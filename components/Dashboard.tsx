@@ -2613,7 +2613,11 @@ function AccountSecurity({ onBack }: { onBack: () => void }) {
   const [changingPassword, setChangingPassword] = useState(false);
   const [changePasswordMessage, setChangePasswordMessage] = useState("");
   const [logoutAllOpen, setLogoutAllOpen] = useState(false);
+  type LoginHistoryItem = { id: number; loggedInAt: string; ipAddress: string | null; userAgent: string | null; };
+  const [loginHistories, setLoginHistories] = useState<LoginHistoryItem[]>([]); const [loginHistoriesLoading, setLoginHistoriesLoading] = useState(true);
   const [logoutAllLoading, setLogoutAllLoading] = useState(false);
+  const [loginHistoryOpen, setLoginHistoryOpen] = useState(false);
+
 
   async function handleChangePassword() {
     if (changingPassword) {
@@ -2712,7 +2716,22 @@ function AccountSecurity({ onBack }: { onBack: () => void }) {
         setAccountUser(result.user);
       }
     }
+
+    async function loadLoginHistories() {
+      try {
+        const response = await fetch("/api/auth/login-history", { cache: "no-store", });
+
+        const result = await response.json();
+
+        if (response.ok && result.success) {
+          setLoginHistories(result.histories ?? []);
+        }
+
+
+      } catch (error) { console.error("Gagal mengambil riwayat login:", error); } finally { setLoginHistoriesLoading(false); }
+    }
     void loadAccountUser();
+    void loadLoginHistories();
 
   }, []);
   return (
@@ -2740,10 +2759,84 @@ function AccountSecurity({ onBack }: { onBack: () => void }) {
       <button type="button" className="inputDelete"
         onClick={() => setLogoutAllOpen(true)}>Keluar Dari Semua Perangkat</button>
       <h3>Informasi Sesi</h3>
-      <p>Login terakhir:{" "}
-        {accountUser?.lastLoginAt ? new Intl.DateTimeFormat("id-ID", {
-          dateStyle: "medium", timeStyle: "short",
-        }).format(new Date(accountUser.lastLoginAt)) : "Belum tersedia"}</p>
+      <div className="loginHistoryList">
+        <button
+          type="button"
+          className="loginHistoryToggle"
+          onClick={() =>
+            setLoginHistoryOpen((current) => !current)
+          }
+          disabled={
+            loginHistoriesLoading ||
+            loginHistories.length === 0
+          }
+        >
+          <span>
+            {loginHistoriesLoading
+              ? "Memuat riwayat sesi..."
+              : loginHistories.length > 0
+                ? "Tercatat " +
+                loginHistories.length +
+                " sesi dalam 24 jam terakhir"
+                : "Belum ada riwayat sesi dalam 24 jam terakhir"}
+          </span>
+
+          {loginHistories.length > 0 && (
+            <span>
+              {loginHistoryOpen ? "▲" : "▼"}
+            </span>
+          )}
+        </button>
+
+        {loginHistoryOpen &&
+          loginHistories.length > 0 && (
+            <div className="loginHistoryDropdown">
+              {loginHistories.map((history, index) => (
+                <div
+                  className="loginHistoryItem"
+                  key={history.id}
+                >
+                  <strong>
+                    Sesi {index + 1}
+                  </strong>
+
+                  <span>
+                    {new Intl.DateTimeFormat("id-ID", {
+                      dateStyle: "medium",
+                      timeStyle: "medium",
+                      timeZone: "Asia/Pontianak",
+                    }).format(
+                      new Date(history.loggedInAt),
+                    )}
+                  </span>
+
+                  <small>
+                    IP: {history.ipAddress === "::1" || history.ipAddress === "127.0.0.1" ? "Perangkat lokal" : history.ipAddress || "Tidak tersedia"}
+                  </small>
+
+                  <small>
+                    Perangkat:{" "}
+                    {history.userAgent ||
+                      "Tidak tersedia"}
+                  </small>
+                </div>
+              ))}
+            </div>
+          )}
+
+        <p>
+          Login terakhir:{" "}
+          {accountUser?.lastLoginAt
+            ? new Intl.DateTimeFormat("id-ID", {
+              dateStyle: "medium",
+              timeStyle: "short",
+              timeZone: "Asia/Pontianak",
+            }).format(
+              new Date(accountUser.lastLoginAt),
+            )
+            : "Belum tersedia"}
+        </p>
+      </div>
 
       {changePasswordOpen && (
         <div className="saveConfirmOverlay">
@@ -2803,8 +2896,8 @@ function AccountSecurity({ onBack }: { onBack: () => void }) {
       )
       }
       {logoutAllOpen && (
-        <div className="saveConfirmOverlay deleteMode">
-          <div className="saveConfirmModal deleteConfirmModal">
+        <div className="saveConfirmOverlay deleteMode" onClick={() => !logoutAllLoading && setLogoutAllOpen(false)}>
+          <div className="saveConfirmModal deleteConfirmModal" onClick={(event) => event.stopPropagation()}>
             <p className="eyebrow">KEAMANAN AKUN</p>
             <h3>Keluar dari Semua Perangkat?</h3>
             <p>Semua sesi login akun ini akan dihentikan, termasuk perangkat yang sedang digunakan.</p>
@@ -3335,6 +3428,9 @@ export default function Dashboard({
   const router = useRouter();
 
   const [headerUser, setHeaderUser] = useState<{ displayName: string; role: string } | null>(null);
+
+  const [loginHistoryOpen, setLoginHistoryOpen] =
+    useState(false);
 
   const [previousView, setPreviousView] = useState<"home" | "dashboard" | "calendar" | "input" | "history" | "settings">("home");
 

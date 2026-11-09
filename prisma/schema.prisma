@@ -3,22 +3,35 @@ generator client {
 }
 
 datasource db {
- provider = "mysql"
- url = env("DATABASE_URL")
- }
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
 
 model User {
-  id             Int      @id @default(autoincrement())
-  username       String   @unique @db.VarChar(100)
-  displayName    String   @db.VarChar(150)
-  role           String   @default("operator") @db.VarChar(30)
-  passwordHash   String   @db.Text
-  passwordSalt   String   @db.VarChar(255)
-  active         Boolean  @default(true)
-  sessionVersion Int      @default(1)
+  id             Int            @id @default(autoincrement())
+  username       String         @unique @db.VarChar(100)
+  displayName    String         @db.VarChar(150)
+  role           String         @default("operator") @db.VarChar(30)
+  passwordHash   String         @db.Text
+  passwordSalt   String         @db.VarChar(255)
+  active         Boolean        @default(true)
+  sessionVersion Int            @default(1)
   lastLoginAt    DateTime?
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+  loginHistories LoginHistory[]
 
   @@map("users")
+}
+
+model LoginHistory {
+  id         Int      @id @default(autoincrement())
+  userId     Int
+  loggedInAt DateTime @default(now())
+  ipAddress  String?  @db.VarChar(45)
+  userAgent  String?  @db.Text
+  user       User     @relation(fields: [userId], references: [id])
+
+  @@index([userId, loggedInAt])
+  @@map("login_histories")
 }

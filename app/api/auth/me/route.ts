@@ -34,15 +34,49 @@ export async function GET(
         );
     }
 
-    const databaseUser = await prisma.user.findUnique({
-        where: {
-            username: session.username,
-        },
-        select: {
-            lastLoginAt: true,
-        },
-    });
+    const twentyFourHoursAgo = new Date(
+        Date.now() - 24 * 60 * 60 * 1000,
+    );
 
+    const databaseUser =
+        await prisma.user.findUnique({
+            where: {
+                username: session.username,
+            },
+            select: {
+                lastLoginAt: true,
+                loginHistories: {
+                    where: {
+                        loggedInAt: {
+                            gte: twentyFourHoursAgo,
+                        },
+                    },
+                    orderBy: {
+                        loggedInAt: "desc",
+                    },
+                    take: 10,
+                    select: {
+                        id: true,
+                        loggedInAt: true,
+                        ipAddress: true,
+                        userAgent: true,
+                    },
+                },
+            },
+        });
+
+    if (!databaseUser) {
+        return NextResponse.json(
+            {
+                success: false,
+                message:
+                    "Pengguna tidak ditemukan",
+            },
+            {
+                status: 404,
+            },
+        );
+    }
 
     return NextResponse.json({
         success: true,
@@ -51,7 +85,21 @@ export async function GET(
             displayName:
                 session.displayName,
             role: session.role,
-            lastLoginAt: databaseUser?.lastLoginAt?.toISOString() ?? null,
+            lastLoginAt:
+                databaseUser.lastLoginAt?.toISOString() ??
+                null,
+            loginHistories:
+                databaseUser.loginHistories.map(
+                    (history) => ({
+                        id: history.id,
+                        loggedInAt:
+                            history.loggedInAt.toISOString(),
+                        ipAddress:
+                            history.ipAddress,
+                        userAgent:
+                            history.userAgent,
+                    }),
+                ),
         },
     });
 }
