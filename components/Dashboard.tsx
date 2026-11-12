@@ -2598,6 +2598,18 @@ function SurveyInput({
 type TranslationText =
   (typeof translations)[keyof typeof translations];
 
+function getDeviceName(userAgent: string | null) {
+  if (!userAgent) return "Tidak tersedia";
+
+  let browser = "Browser"; let system = "perangkat tidak dikenal";
+
+  if (userAgent.includes("Edg/")) { browser = "Microsoft Edge"; } else if (userAgent.includes("OPR/") || userAgent.includes("Opera/")) { browser = "Opera"; } else if (userAgent.includes("Firefox/")) { browser = "Firefox"; } else if (userAgent.includes("Chrome/")) { browser = "Google Chrome"; } else if (userAgent.includes("Safari/")) { browser = "Safari"; }
+
+  if (userAgent.includes("Windows")) { system = "Windows"; } else if (userAgent.includes("Android")) { system = "Android"; } else if (userAgent.includes("iPhone") || userAgent.includes("iPad")) { system = "iPhone/iPad"; } else if (userAgent.includes("Macintosh")) { system = "macOS"; } else if (userAgent.includes("Linux")) { system = "Linux"; }
+
+  return browser + " di " + system;
+}
+
 function AccountSecurity({ onBack }: { onBack: () => void }) {
   const [accountUser, setAccountUser] = useState<{
     username: string;
@@ -2816,13 +2828,14 @@ function AccountSecurity({ onBack }: { onBack: () => void }) {
 
                   <small>
                     Perangkat:{" "}
-                    {history.userAgent ||
-                      "Tidak tersedia"}
+                    {getDeviceName(history.userAgent)}
                   </small>
                 </div>
               ))}
             </div>
           )}
+
+        <p className="loginHistoryNote" >Riwayat sesi akan dihapus otomatis setelah 24 jam.</p>
 
         <p>
           Login terakhir:{" "}
