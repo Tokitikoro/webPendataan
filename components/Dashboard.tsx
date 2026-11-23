@@ -2626,6 +2626,8 @@ function AccountSecurity({ onBack }: { onBack: () => void }) {
   const [changePasswordMessage, setChangePasswordMessage] = useState("");
   const [logoutAllOpen, setLogoutAllOpen] = useState(false);
   type LoginHistoryItem = { id: number; loggedInAt: string; ipAddress: string | null; userAgent: string | null; };
+  const [clearHistoryOpen, setClearHistoryOpen] = useState(false);
+  const [clearHistoryLoading, setClearHistoryLoading] = useState(false);
   const [loginHistories, setLoginHistories] = useState<LoginHistoryItem[]>([]); const [loginHistoriesLoading, setLoginHistoriesLoading] = useState(true);
   const [logoutAllLoading, setLogoutAllLoading] = useState(false);
   const [loginHistoryOpen, setLoginHistoryOpen] = useState(false);
@@ -2708,6 +2710,28 @@ function AccountSecurity({ onBack }: { onBack: () => void }) {
       setLogoutAllLoading(false);
     }
 
+  }
+
+  async function handleClearHistory() {
+    if (clearHistoryLoading) { return; }
+
+    setClearHistoryLoading(true);
+
+    try {
+      const response = await fetch("/api/auth/login-history/clear", { method: "DELETE", });
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        alert(result.message || "Gagal menghapus riwayat sesi");
+        return;
+      }
+
+      setLoginHistories([]);
+      setClearHistoryOpen(false);
+
+
+    } catch (error) { console.error("Gagal menghapus riwayat sesi:", error); alert("Terjadi kesalahan saat menghapus riwayat sesi"); } finally { setClearHistoryLoading(false); }
   }
 
   useEffect(() => {
@@ -2835,6 +2859,7 @@ function AccountSecurity({ onBack }: { onBack: () => void }) {
             </div>
           )}
 
+        <button type="button" className="inputDelete" disabled={clearHistoryLoading || loginHistories.length === 0} onClick={() => setClearHistoryOpen(true)} style={{ marginTop: "12px", marginBottom: "0px" }}>Hapus Riwayat Sesi</button>
         <p className="loginHistoryNote" >Riwayat sesi akan dihapus otomatis setelah 24 jam.</p>
 
         <p>
@@ -2932,6 +2957,17 @@ function AccountSecurity({ onBack }: { onBack: () => void }) {
         </div>
       )
       }
+      {clearHistoryOpen && (
+        < div className="saveConfirmOverlay deleteMode" >
+          < div className="saveConfirmModal deleteConfirmModal" ><p className="eyebrow">INFORMASI SESI</p><h3 >Hapus Riwayat Sesi?</h3>
+            <p>Semua catatan login dalam 24 jam terakhir akan dihapus. Akun tidak akan keluar dari perangkat.</p>
+            < div className="saveConfirmActions" >
+              <button className="saveConfirmCancel" onClick={() => setClearHistoryOpen(false)}>Batal</button>
+              <button className="saveConfirmSubmit deleteConfirmSubmit" onClick={() => void handleClearHistory()}>{clearHistoryLoading ? "Menghapus..." : "Hapus Riwayat"}</button>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

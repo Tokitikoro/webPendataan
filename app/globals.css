@@ -7292,7 +7292,7 @@ html[data-theme="dark"] .settingsPage:has(.accountUsername)>.accountRole {
   display: flex;
   flex-direction: column;
   gap: 6px;
-  margin-bottom: 8px;
+  margin-bottom: 0px;
   padding: 12px 14px;
   border: 1px solid rgba(80, 190, 220, 0.25);
   border-radius: 10px;
