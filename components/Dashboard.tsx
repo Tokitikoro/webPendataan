@@ -2627,8 +2627,17 @@ function AccountSecurity({ onBack }: { onBack: () => void }) {
   const [logoutAllOpen, setLogoutAllOpen] = useState(false);
   type LoginHistoryItem = { id: number; loggedInAt: string; ipAddress: string | null; userAgent: string | null; };
   const [clearHistoryOpen, setClearHistoryOpen] = useState(false);
+  const [clearHistoryPin, setClearHistoryPin] = useState("");
+  const [currentHistoryPin, setCurrentHistoryPin] = useState("");
+  const [clearHistoryMessage, setClearHistoryMessage] = useState("");
   const [clearHistoryLoading, setClearHistoryLoading] = useState(false);
-  const [loginHistories, setLoginHistories] = useState<LoginHistoryItem[]>([]); const [loginHistoriesLoading, setLoginHistoriesLoading] = useState(true);
+  const [setPinOpen, setSetPinOpen] = useState(false);
+  const [newHistoryPin, setNewHistoryPin] = useState("");
+  const [confirmHistoryPin, setConfirmHistoryPin] = useState("");
+  const [setPinLoading, setSetPinLoading] = useState(false);
+  const [setPinMessage, setSetPinMessage] = useState("");
+  const [loginHistories, setLoginHistories] = useState<LoginHistoryItem[]>([]);
+  const [loginHistoriesLoading, setLoginHistoriesLoading] = useState(true);
   const [logoutAllLoading, setLogoutAllLoading] = useState(false);
   const [loginHistoryOpen, setLoginHistoryOpen] = useState(false);
 
@@ -2712,26 +2721,59 @@ function AccountSecurity({ onBack }: { onBack: () => void }) {
 
   }
 
-  async function handleClearHistory() {
-    if (clearHistoryLoading) { return; }
+  async function handleSetHistoryPin() {
+    if (setPinLoading) { return; }
 
-    setClearHistoryLoading(true);
+    setSetPinMessage("");
+
+    if (!/^\d{4}$/.test(newHistoryPin)) { setSetPinMessage("PIN harus terdiri dari tepat 4 angka"); return; }
+
+    if (newHistoryPin !== confirmHistoryPin) { setSetPinMessage("Konfirmasi PIN tidak sama"); return; }
+
+    setSetPinLoading(true);
 
     try {
-      const response = await fetch("/api/auth/login-history/clear", { method: "DELETE", });
+      const response = await fetch("/api/auth/history-pin", {
+        method: "POST", headers: { "Content-Type": "application/json", }, body: JSON.stringify({
+          oldPin: currentHistoryPin,
+          newPin: newHistoryPin,
+        }),
+      });
 
       const result = await response.json();
 
       if (!response.ok || !result.success) {
-        alert(result.message || "Gagal menghapus riwayat sesi");
+        setSetPinMessage(
+          result.message || "Gagal menyimpan PIN",
+        );
         return;
       }
 
+      setNewHistoryPin("");
+      setConfirmHistoryPin("");
+      setSetPinOpen(false);
+
+    } catch (error) { console.error("Gagal menyimpan PIN riwayat:", error); setSetPinMessage("Terjadi kesalahan saat menyimpan PIN"); } finally { setSetPinLoading(false); }
+  }
+
+  async function handleClearHistory() {
+    if (clearHistoryLoading) { return; }
+
+    setClearHistoryMessage("");
+    setClearHistoryLoading(true);
+
+    try {
+      const response = await fetch("/api/auth/login-history/clear", { method: "DELETE", headers: { "Content-Type": "application/json", }, body: JSON.stringify({ pin: clearHistoryPin, }), });
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) { setClearHistoryMessage(result.message || "Gagal menghapus riwayat sesi",); return; }
+
       setLoginHistories([]);
       setClearHistoryOpen(false);
+      setClearHistoryPin("");
 
-
-    } catch (error) { console.error("Gagal menghapus riwayat sesi:", error); alert("Terjadi kesalahan saat menghapus riwayat sesi"); } finally { setClearHistoryLoading(false); }
+    } catch (error) { console.error("Gagal menghapus riwayat sesi:", error); setClearHistoryMessage("Terjadi kesalahan saat menghapus riwayat sesi"); } finally { setClearHistoryLoading(false); }
   }
 
   useEffect(() => {
@@ -2860,6 +2902,7 @@ function AccountSecurity({ onBack }: { onBack: () => void }) {
           )}
 
         <button type="button" className="inputDelete" disabled={clearHistoryLoading || loginHistories.length === 0} onClick={() => setClearHistoryOpen(true)} style={{ marginTop: "12px", marginBottom: "0px" }}>Hapus Riwayat Sesi</button>
+        <button type="button" className="settingsBackButton" onClick={() => { setSetPinMessage(""); setNewHistoryPin(""); setConfirmHistoryPin(""); setSetPinOpen(true); }}>Atur PIN 4 Digit</button>
         <p className="loginHistoryNote" >Riwayat sesi akan dihapus otomatis setelah 24 jam.</p>
 
         <p>
@@ -2958,15 +3001,98 @@ function AccountSecurity({ onBack }: { onBack: () => void }) {
       )
       }
       {clearHistoryOpen && (
-        < div className="saveConfirmOverlay deleteMode" >
-          < div className="saveConfirmModal deleteConfirmModal" ><p className="eyebrow">INFORMASI SESI</p><h3 >Hapus Riwayat Sesi?</h3>
+        <div className="saveConfirmOverlay deleteMode">
+          <div className="saveConfirmModal deleteConfirmModal"><p className="eyebrow">INFORMASI SESI</p><h3>Hapus Riwayat Sesi?</h3>
             <p>Semua catatan login dalam 24 jam terakhir akan dihapus. Akun tidak akan keluar dari perangkat.</p>
-            < div className="saveConfirmActions" >
+            <label className="changePasswordField"><span>PIN 4 Digit</span><input type="password" inputMode="numeric" maxLength={4} value={clearHistoryPin} onChange={(event) => setClearHistoryPin(event.target.value.replace(/\D/g, "").slice(0, 4))} placeholder="Masukkan 4 angka"
+              autoComplete="off"
+              disabled={clearHistoryLoading} /></label>
+            {clearHistoryMessage && (<div className="formMessage error">{clearHistoryMessage}</div>)}
+            <div className="saveConfirmActions">
               <button className="saveConfirmCancel" onClick={() => setClearHistoryOpen(false)}>Batal</button>
               <button className="saveConfirmSubmit deleteConfirmSubmit" onClick={() => void handleClearHistory()}>{clearHistoryLoading ? "Menghapus..." : "Hapus Riwayat"}</button>
             </div>
           </div>
         </div>
+      )}
+      {setPinOpen && (
+        <div className="saveConfirmOverlay">
+          <div className="saveConfirmModal">
+
+            <h3>Atur PIN 4 Digit</h3>
+
+            <p>PIN ini digunakan untuk menghapus riwayat sesi login.</p>
+
+            {setPinMessage && (
+              <div className="formMessage error">
+                {setPinMessage}
+              </div>
+            )}
+
+
+            <label className="changePasswordField">
+              <span>PIN Lama</span>
+
+              <input
+                type="password"
+                inputMode="numeric"
+                maxLength={4}
+                value={currentHistoryPin}
+                onChange={(event) =>
+                  setCurrentHistoryPin(
+                    event.target.value.replace(/\D/g, "").slice(0, 4)
+                  )
+                }
+                placeholder="Masukkan PIN Lama"
+                autoComplete="off"
+                disabled={setPinLoading}
+              />
+            </label>
+
+            <label className="changePasswordField">
+              <span>PIN Baru</span>
+
+              <input
+                type="password"
+                inputMode="numeric"
+                maxLength={4}
+                value={newHistoryPin}
+                onChange={(event) =>
+                  setNewHistoryPin(
+                    event.target.value.replace(/\D/g, "").slice(0, 4)
+                  )
+                }
+                placeholder="Masukkan 4 angka"
+                autoComplete="off"
+                disabled={setPinLoading}
+              />
+            </label>
+
+            <label className="changePasswordField">
+              <span>Konfirmasi PIN</span>
+
+              <input
+                type="password"
+                inputMode="numeric"
+                maxLength={4}
+                value={confirmHistoryPin}
+                onChange={(event) =>
+                  setConfirmHistoryPin(
+                    event.target.value.replace(/\D/g, "").slice(0, 4)
+                  )
+                }
+                placeholder="Konfirmasi 4 angka"
+                autoComplete="off"
+                disabled={setPinLoading}
+              />
+            </label>
+            <div className="saveConfirmActions">
+              <button className="saveConfirmCancel" onClick={() => setSetPinOpen(false)}>Batal</button>
+              <button className="saveConfirmSubmit" onClick={() => void handleSetHistoryPin()}>Simpan PIN</button>
+            </div>
+          </div>
+        </div>
+
       )}
     </section>
   );

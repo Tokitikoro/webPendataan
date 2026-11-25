@@ -4,9 +4,15 @@ import { SESSION_COOKIE_NAME, verifySessionToken, } from "@/lib/auth";
 
 import { prisma } from "@/lib/prisma";
 
-import { createPasswordHash } from "@/lib/users";
+import {
+  createPasswordHash,
+  verifyPasswordHash,
+} from "@/lib/users";
  
-type PinPayload = { pin?: string; };
+type PinPayload = {
+  oldPin?: string;
+  newPin?: string;
+};
 
 export async function POST(request: NextRequest) { try { const token = request.cookies.get(SESSION_COOKIE_NAME)?.value; const session = await verifySessionToken(token);
 
@@ -18,16 +24,45 @@ if (!session) {
 }
 
 const body = (await request.json()) as PinPayload;
-const pin = body.pin?.trim() ?? "";
+const oldPin = body.oldPin?.trim() ?? "";
+const newPin = body.newPin?.trim() ?? "";
 
-if (!/^\d{4}$/.test(pin)) {
+if (!/^\d{4}$/.test(newPin)) {
   return NextResponse.json(
     { success: false, message: "PIN harus terdiri dari tepat 4 angka" },
     { status: 400 },
   );
 }
 
-const historyPinHash = await createPasswordHash(pin);
+const user = await prisma.user.findUnique({
+  where: {
+    id: session.id,
+  },
+  select: {
+    historyPinHash: true,
+  },
+});
+
+if (user?.historyPinHash) {
+    const pinValid = await verifyPasswordHash(
+    oldPin,
+    user.historyPinHash,
+  );
+
+    if (!pinValid) {
+    return NextResponse.json(
+      {
+        success: false,
+        message: "PIN lama tidak sesuai",
+      },
+      {
+        status: 401,
+      },
+    );
+  }
+}
+
+const historyPinHash = await createPasswordHash(newPin);
 
 await prisma.user.update({
   where: {
